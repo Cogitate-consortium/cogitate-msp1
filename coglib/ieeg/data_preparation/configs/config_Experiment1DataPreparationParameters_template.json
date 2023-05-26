@@ -1,0 +1,28 @@
+{
+    "raw_root": "C:\\Users\\alexander.lepauvre\\Seafile\\TWCF_Project\\ECoG_Patients\\XNAT ingestion\\COGITATEProject", # The directory directly above the Raw folder for data
+    "BIDS_root": "C:\\Users\\alexander.lepauvre\\Documents\\CoG_Der\\BIDS", # where you want your BIDS to be saved.
+    "ecog_files_naming": "*Dur*",
+    "ecog_files_extension": ".EDF",
+    "beh_files_naming": "*RawDur*",
+    "beh_files_extension": ".csv",
+    "elec_loc": "*coor_MNI*",
+    "elec_loc_extension": ".txt",
+    "anat_regions_naming": "*AnatomicalRegions",
+    "anat_regions_extension": ".txt",
+    "elec_naming_conventions": { # Set the keys to the naming convention for your files (before electrode reconstruction is carried out)
+        "G": "ecog", # surface
+        "L": "ecog",
+        "S": "ecog",
+        "SG": "eeg",
+        "EKG": "ecg",
+        "D": "seeg", # stereo
+        "DC": "misc"
+    },
+    "ref_rate_ms": 16.67,
+    "session": "V1",
+    "task_name": "Dur",
+    "line_freq": 60,
+    "HPC": false,
+    "debug": false,
+    "show_check_plots": false
+}

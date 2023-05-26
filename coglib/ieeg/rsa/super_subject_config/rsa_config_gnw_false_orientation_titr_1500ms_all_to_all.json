@@ -1,0 +1,281 @@
+{
+  "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+  "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+  "session": "V1",
+  "task_name": "Dur",
+  "preprocessing_folder": "epoching",
+  "preprocess_steps": "desbadcharej_notfil_lapref",
+  "njobs": 16,
+  "aseg": "aparc.a2009s+aseg",
+  "montage_space": "T1",
+  "rois": {
+    "gnw": [
+      "ctx_lh_G_and_S_cingul-Ant",
+      "ctx_rh_G_and_S_cingul-Ant",
+      "ctx_lh_G_and_S_cingul-Mid-Ant",
+      "ctx_rh_G_and_S_cingul-Mid-Ant",
+      "ctx_lh_G_and_S_cingul-Mid-Post",
+      "ctx_rh_G_and_S_cingul-Mid-Post",
+      "ctx_lh_G_front_inf-Opercular",
+      "ctx_rh_G_front_inf-Opercular",
+      "ctx_lh_G_front_inf-Orbital",
+      "ctx_rh_G_front_inf-Orbital",
+      "ctx_lh_G_front_inf-Triangul",
+      "ctx_rh_G_front_inf-Triangul",
+      "ctx_lh_G_front_middle",
+      "ctx_rh_G_front_middle",
+      "ctx_lh_Lat_Fis-ant-Horizont",
+      "ctx_rh_Lat_Fis-ant-Horizont",
+      "ctx_lh_Lat_Fis-ant-Vertical",
+      "ctx_rh_Lat_Fis-ant-Vertical",
+      "ctx_lh_S_front_inf",
+      "ctx_rh_S_front_inf",
+      "ctx_lh_S_front_middle",
+      "ctx_rh_S_front_middle",
+      "ctx_lh_S_front_sup",
+      "ctx_rh_S_front_sup"
+    ]
+  },
+  "analysis_parameters": {
+  "gnw_false_orientation_titr_1500ms_all_to_all": {
+      "signal": "high_gamma",
+      "baseline_correction": null,
+      "baseline_time": [-0.375, -0.125],
+      "crop_time": [-0.3, 2],
+      "channel_types": {"seeg": true, "ecog": true},
+      "conditions": [
+        "stimulus onset/false/Center/Irrelevant/1500ms",
+        "stimulus onset/false/Left/Irrelevant/1500ms",
+        "stimulus onset/false/Right/Irrelevant/1500ms",
+        "stimulus onset/false/Center/Relevant non-target/1500ms",
+        "stimulus onset/false/Left/Relevant non-target/1500ms",
+        "stimulus onset/false/Right/Relevant non-target/1500ms"
+      ],
+      "n_resampling": 100,
+      "store_intermediate": false,
+      "subtract_evoked": false,
+      "regress_evoked": false,
+      "equate_offset": false,
+      "equate_offset_dict": {
+        "1500ms": {
+          "excise_onset": 1.0,
+          "excise_offset": 1.5
+        },
+        "1000ms": {
+          "excise_onset": 1.5,
+          "excise_offset": 2
+        }
+      },
+      "epo_onset_offset": [-0.3, 1.5],
+      "min_n_channels": 5,
+      "n_features": null,
+      "feat_sel_diag": true,
+      "n_folds": null,
+      "baseline_time_win": [-0.3, 0],
+      "onset_time_win": [0.05, 0.35],
+      "binning_ms": 20,
+      "rsa_condition": "orientation",
+      "groups_condition": null,
+      "regress_groups": false,
+      "between_within_group": false,
+      "n_repeat": 2,
+      "equalize_trials": false,
+      "method": "all_to_all_within_vs_between",
+      "metric": "correlation",
+      "zscore": false,
+      "n_perm": 1024,
+      "rsa_stat_test_options": ["sliding_histogram_pval", "cluster_based_test"],
+      "rsa_stat_test": "cluster_based_test",
+      "sliding_histogram_pval_param": {
+        "p_value_thresh": 0.05,
+        "fdr_correction": "fdr_bh"
+      },
+      "cluster_based_test_param": {
+        "z_threshold": 1.5,
+        "adjacency": null,
+        "tail": 1,
+        "max_step": null,
+        "exclude": null,
+        "t_power": 1,
+        "step_down_p": 0.05,
+        "do_zscore": true,
+        "p_value_thresh": 0.05
+      },
+      "correlation_methods": ["kendall", "semi-partial"],
+      "theories_predictions": [
+        {
+          "iit":
+          {
+            "predicted_vals": [1],
+            "x": [
+              [
+                0.25,
+                1.5
+              ]
+            ],
+            "y": [
+              [
+                0.25,
+                1.5
+              ]
+            ]
+          },
+          "gnw":
+          {
+            "predicted_vals": [1, 1, 1, 1],
+            "x": [
+              [
+                0.25,
+                0.5
+              ],
+              [
+                0.25,
+                0.5
+              ],
+              [
+                1.75,
+                2.0
+              ],
+              [
+                1.75,
+                2.0
+              ]
+            ],
+            "y": [
+              [
+                0.25,
+                0.5
+              ],
+              [
+                1.75,
+                2.0
+              ],
+              [
+                0.25,
+                0.5
+              ],
+              [
+                1.75,
+                2.0
+              ]
+            ]
+          }
+        },
+        {
+          "iit": {
+            "predicted_vals": [
+              1
+            ],
+            "x": [
+              [
+                0.25,
+                1.5
+              ]
+            ],
+            "y": [
+              [
+                0.25,
+                1.5
+              ]
+            ]
+          },
+          "gnw_no_offset": {
+            "predicted_vals": [
+              1
+            ],
+            "x": [
+              [
+                0.25,
+                0.5
+              ]
+            ],
+            "y": [
+              [
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        }
+    ],
+    "matrix_subsampling_coordinates": {
+      "200ms": {
+        "x": [
+          [
+            0.3,
+            0.5
+          ],
+          [
+            0.8,
+            1
+          ],
+          [
+            1.3,
+            1.5
+          ],
+          [
+            1.8,
+            2.0
+          ]
+        ],
+        "y": [
+          [
+            0.3,
+            0.5
+          ],
+          [
+            0.8,
+            1
+          ],
+          [
+            1.3,
+            1.5
+          ],
+          [
+            1.8,
+            2.0
+          ]
+        ]
+      },
+      "250ms": {
+        "x": [
+          [
+            0.25,
+            0.5
+          ],
+          [
+            0.75,
+            1
+          ],
+          [
+            1.25,
+            1.5
+          ],
+          [
+            1.75,
+            2.0
+          ]
+        ],
+        "y": [
+          [
+            0.25,
+            0.5
+          ],
+          [
+            0.75,
+            1
+          ],
+          [
+            1.25,
+            1.5
+          ],
+          [
+            1.75,
+            2.0
+          ]
+        ]
+      }
+    }
+    }
+  }
+}

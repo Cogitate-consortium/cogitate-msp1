@@ -1,0 +1,61 @@
+{
+    "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+    "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+    "session": "V1",
+    "task_name": "Dur",
+    "preprocessing_folder": "epoching",
+    "preprocess_steps": "desbadcharej_notfil_lapref",
+    "montage_space": "T1",
+    "aseg": "aparc.a2009s+aseg",
+    "rois": {
+        "gnw": [
+            "ctx_lh_G_and_S_cingul-Ant",
+            "ctx_rh_G_and_S_cingul-Ant",
+            "ctx_lh_G_and_S_cingul-Mid-Ant",
+            "ctx_rh_G_and_S_cingul-Mid-Ant",
+            "ctx_lh_G_and_S_cingul-Mid-Post",
+            "ctx_rh_G_and_S_cingul-Mid-Post",
+            "ctx_lh_G_front_inf-Opercular",
+            "ctx_rh_G_front_inf-Opercular",
+            "ctx_lh_G_front_inf-Orbital",
+            "ctx_rh_G_front_inf-Orbital",
+            "ctx_lh_G_front_inf-Triangul",
+            "ctx_rh_G_front_inf-Triangul",
+            "ctx_lh_G_front_middle",
+            "ctx_rh_G_front_middle",
+            "ctx_lh_Lat_Fis-ant-Horizont",
+            "ctx_rh_Lat_Fis-ant-Horizont",
+            "ctx_lh_Lat_Fis-ant-Vertical",
+            "ctx_rh_Lat_Fis-ant-Vertical",
+            "ctx_lh_S_front_inf",
+            "ctx_rh_S_front_inf",
+            "ctx_lh_S_front_middle",
+            "ctx_rh_S_front_middle",
+            "ctx_lh_S_front_sup",
+            "ctx_rh_S_front_sup"
+        ]
+    },
+    "n_jobs": 8,
+    "debug": false,
+    "fig_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/visual_responsiveness/sub-super/ses-V1/ieeg/figure/high_gamma_wilcoxon_onset_activation_no_fdr/desbadcharej_notfil_manbadcharej_lapref",
+    "analysis_parameters": {
+        "onset_offset_high_gamma_gnw_face_tr": {
+            "signal": "high_gamma",
+            "select_vis_resp": false,
+            "vis_resp_folder": "high_gamma_wilcoxon_onset_activation_no_fdr",
+            "visual_responsiveness_folder": "broadband_task_relevant_zscore",
+            "multitaper_parameters": null,
+            "baseline_correction": null,
+            "baseline_time": [-0.375, -0.125],
+            "crop_time": [-0.3, 2],
+            "conditions": ["stimulus onset/face/Relevant non-target", "stimulus offset/face/Relevant non-target"],
+            "baseline_window": [-0.2, 0.0],
+            "test_window": [0.3, 0.5],
+            "stat_test": "t-test",
+            "alpha": 0.05,
+            "alternative": "greater",
+            "dur_thresh": 0.02,
+            "fdr_method": null
+        }
+    }
+}

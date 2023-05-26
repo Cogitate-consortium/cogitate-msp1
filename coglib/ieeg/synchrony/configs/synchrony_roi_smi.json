@@ -1,0 +1,203 @@
+{
+    "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+    "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+    "session": "V1",
+    "task_name": "Dur",
+    "preprocessing_folder": "epoching",
+    "preprocess_steps": "desbadcharej_notfil_lapref",
+    "montage_space": "T1",
+    "aseg": "aparc.a2009s+aseg",
+    "rois": {
+        "iit": [
+            "V1v",
+            "V1d",
+            "V2v",
+            "V2d"
+        ],
+        "gnw": [
+            "ctx_lh_G_and_S_cingul-Ant",
+            "ctx_rh_G_and_S_cingul-Ant",
+            "ctx_lh_G_and_S_cingul-Mid-Ant",
+            "ctx_rh_G_and_S_cingul-Mid-Ant",
+            "ctx_lh_G_and_S_cingul-Mid-Post",
+            "ctx_rh_G_and_S_cingul-Mid-Post",
+            "ctx_lh_G_front_inf-Opercular",
+            "ctx_rh_G_front_inf-Opercular",
+            "ctx_lh_G_front_inf-Orbital",
+            "ctx_rh_G_front_inf-Orbital",
+            "ctx_lh_G_front_inf-Triangul",
+            "ctx_rh_G_front_inf-Triangul",
+            "ctx_lh_G_front_middle",
+            "ctx_rh_G_front_middle",
+            "ctx_lh_Lat_Fis-ant-Horizont",
+            "ctx_rh_Lat_Fis-ant-Horizont",
+            "ctx_lh_Lat_Fis-ant-Vertical",
+            "ctx_rh_Lat_Fis-ant-Vertical",
+            "ctx_lh_S_front_inf",
+            "ctx_rh_S_front_inf",
+            "ctx_lh_S_front_middle",
+            "ctx_rh_S_front_middle",
+            "ctx_lh_S_front_sup",
+            "ctx_rh_S_front_sup"
+        ]
+    },
+    "n_jobs": 8,
+    "debug": false,
+    "fig_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/visual_responsiveness/sub-super/ses-V1/ieeg/figure/high_gamma_wilcoxon_onset_activation_no_fdr/desbadcharej_notfil_manbadcharej_lapref",
+    "classifier_n_jobs": 3,
+    "permutation_n_jobs": 64,
+    "analysis_parameters": {   
+        "category_faces_objects_synchrony_smi_tau1": {
+            "signal": "broadband",
+            "subtract_evoked": null,
+            "regress_evoked": false,
+            "method": "smi",
+            "method_params": {
+                "smi": {"kernel": 3, "tau": 1}
+            },
+            "select_vis_resp": false,
+            "category_selectivity_folder": ["high_gamma_dprime_test_ti_400ms", "high_gamma_dprime_test_tr_400ms"],
+            "baseline_correction": null,
+            "crop_time": [-0.3, 2],
+            "conditions": [
+                "stimulus onset/face/1500ms/Irrelevant",
+                "stimulus onset/object/1500ms/Irrelevant",
+                "stimulus onset/face/1000ms/Irrelevant",
+                "stimulus onset/object/1000ms/Irrelevant",
+                "stimulus onset/face/1500ms/Relevant non-target",
+                "stimulus onset/object/1500ms/Relevant non-target",
+                "stimulus onset/face/1000ms/Relevant non-target",
+                "stimulus onset/object/1000ms/Relevant non-target"
+                ],
+            "baseline_window": [-0.325, -0.125],
+            "activation_windows": {
+                "gnw": [[0.3, 0.5]],
+                "iit": [[0.3, 0.5], [0.8, 1], [1.3, 1.5]]
+            },
+            "binning_parameters": {
+                "do_binning": true,
+                "downsample": 50, 
+                "bins_duration_ms": null,
+                "overlapping": false,
+                "average": true
+            },
+            "n_permutations": 1000,
+            "cluster_p_value": 0.05,
+            "significance_p_value": 0.05    
+        },
+        "category_faces_objects_synchrony_smi_tau2": {
+            "signal": "broadband",
+            "subtract_evoked": null,
+            "regress_evoked": false,
+            "method": "smi",
+            "method_params": {
+                "smi": {"kernel": 3, "tau": 2}
+            },
+            "select_vis_resp": false,
+            "category_selectivity_folder": ["high_gamma_dprime_test_ti_400ms", "high_gamma_dprime_test_tr_400ms"],
+            "baseline_correction": null,
+            "crop_time": [-0.3, 2],
+            "conditions": [
+                "stimulus onset/face/1500ms/Irrelevant",
+                "stimulus onset/object/1500ms/Irrelevant",
+                "stimulus onset/face/1000ms/Irrelevant",
+                "stimulus onset/object/1000ms/Irrelevant",
+                "stimulus onset/face/1500ms/Relevant non-target",
+                "stimulus onset/object/1500ms/Relevant non-target",
+                "stimulus onset/face/1000ms/Relevant non-target",
+                "stimulus onset/object/1000ms/Relevant non-target"
+                ],
+            "baseline_window": [-0.325, -0.125],
+            "activation_windows": {
+                "gnw": [[0.3, 0.5]],
+                "iit": [[0.3, 0.5], [0.8, 1], [1.3, 1.5]]
+            },
+            "binning_parameters": {
+                "do_binning": true,
+                "downsample": 50, 
+                "bins_duration_ms": null,
+                "overlapping": false,
+                "average": true
+            },
+            "n_permutations": 1000,
+            "cluster_p_value": 0.05,
+            "significance_p_value": 0.05    
+        },
+        "category_faces_objects_synchrony_smi_tau4": {
+            "signal": "broadband",
+            "subtract_evoked": null,
+            "regress_evoked": false,
+            "method": "smi",
+            "method_params": {
+                "smi": {"kernel": 3, "tau": 4}
+            },
+            "select_vis_resp": false,
+            "category_selectivity_folder": ["high_gamma_dprime_test_ti_400ms", "high_gamma_dprime_test_tr_400ms"],
+            "baseline_correction": null,
+            "crop_time": [-0.3, 2],
+            "conditions": [
+                "stimulus onset/face/1500ms/Irrelevant",
+                "stimulus onset/object/1500ms/Irrelevant",
+                "stimulus onset/face/1000ms/Irrelevant",
+                "stimulus onset/object/1000ms/Irrelevant",
+                "stimulus onset/face/1500ms/Relevant non-target",
+                "stimulus onset/object/1500ms/Relevant non-target",
+                "stimulus onset/face/1000ms/Relevant non-target",
+                "stimulus onset/object/1000ms/Relevant non-target"
+                ],
+            "baseline_window": [-0.325, -0.125],
+            "activation_windows": {
+                "gnw": [[0.3, 0.5]],
+                "iit": [[0.3, 0.5], [0.8, 1], [1.3, 1.5]]
+            },
+            "binning_parameters": {
+                "do_binning": true,
+                "downsample": 50, 
+                "bins_duration_ms": null,
+                "overlapping": false,
+                "average": true
+            },
+            "n_permutations": 1000,
+            "cluster_p_value": 0.05,
+            "significance_p_value": 0.05    
+        },
+        "category_faces_objects_synchrony_smi_tau8": {
+            "signal": "broadband",
+            "subtract_evoked": null,
+            "regress_evoked": false,
+            "method": "smi",
+            "method_params": {
+                "smi": {"kernel": 3, "tau": 8}
+            },
+            "select_vis_resp": false,
+            "category_selectivity_folder": ["high_gamma_dprime_test_ti_400ms", "high_gamma_dprime_test_tr_400ms"],
+            "baseline_correction": null,
+            "crop_time": [-0.3, 2],
+            "conditions": [
+                "stimulus onset/face/1500ms/Irrelevant",
+                "stimulus onset/object/1500ms/Irrelevant",
+                "stimulus onset/face/1000ms/Irrelevant",
+                "stimulus onset/object/1000ms/Irrelevant",
+                "stimulus onset/face/1500ms/Relevant non-target",
+                "stimulus onset/object/1500ms/Relevant non-target",
+                "stimulus onset/face/1000ms/Relevant non-target",
+                "stimulus onset/object/1000ms/Relevant non-target"
+                ],
+            "baseline_window": [-0.325, -0.125],
+            "activation_windows": {
+                "gnw": [[0.3, 0.5]],
+                "iit": [[0.3, 0.5], [0.8, 1], [1.3, 1.5]]
+            },
+            "binning_parameters": {
+                "do_binning": true,
+                "downsample": 50, 
+                "bins_duration_ms": null,
+                "overlapping": false,
+                "average": true
+            },
+            "n_permutations": 1000,
+            "cluster_p_value": 0.05,
+            "significance_p_value": 0.05    
+        }	
+    }
+}

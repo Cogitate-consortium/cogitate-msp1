@@ -1,0 +1,198 @@
+{
+  "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+  "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+  "session": "V1",
+  "task_name": "Dur",
+  "preprocessing_folder": "epoching",
+  "preprocess_steps": "desbadcharej_notfil_lapref",
+  "njobs": 16,
+  "aseg": "aparc+aseg",
+  "rois": {
+    "retinotopic": [
+      "ctx-lh-lateraloccipital",
+      "ctx-lh-cuneus",
+      "ctx-lh-pericalcarine",
+      "ctx-rh-lateraloccipital",
+      "ctx-rh-cuneus",
+      "ctx-rh-pericalcarine"
+    ],
+    "parietal": [
+      "ctx-lh-isthmuscingulate",
+      "ctx-lh-precuneus",
+      "ctx-lh-inferiorparietal",
+      "ctx-lh-superiorparietal",
+      "ctx-lh-supramarginal",
+      "ctx-rh-isthmuscingulate",
+      "ctx-rh-precuneus",
+      "ctx-rh-inferiorparietal",
+      "ctx-rh-superiorparietal",
+      "ctx-rh-supramarginal"
+    ],
+    "ventral_temporal": [
+      "ctx-lh-inferiortemporal",
+      "ctx-lh-lingual",
+      "ctx-lh-fusiform",
+      "ctx-lh-parahippocampal",
+      "ctx-lh-entorhinal",
+      "ctx-rh-inferiortemporal",
+      "ctx-rh-lingual",
+      "ctx-rh-fusiform",
+      "ctx-rh-parahippocampal",
+      "ctx-rh-entorhinal"
+    ],
+    "temporal": [
+      "ctx-lh-middletemporal",
+      "ctx-lh-bankssts",
+      "ctx-lh-superiortemporal",
+      "ctx-lh-temporalpole",
+      "ctx-rh-middletemporal",
+      "ctx-rh-bankssts",
+      "ctx-rh-superiortemporal",
+      "ctx-rh-temporalpole"
+    ],
+    "frontal": [
+      "ctx-lh-caudalmiddlefrontal",
+      "ctx-lh-superiorfrontal",
+      "ctx-lh-parsopercularis",
+      "ctx-lh-rostralmiddlefrontal",
+      "ctx-lh-parstriangularis",
+      "ctx-lh-parsorbitalis",
+      "ctx-lh-lateralorbitofrontal",
+      "ctx-lh-medialorbitofrontal",
+      "ctx-lh-orbitofrontal",
+      "ctx-lh-frontalpole",
+      "ctx-lh-medialorbitofrontal",
+      "ctx-lh-rostralanteriorcingulate",
+      "ctx-lh-caudalanteriorcingulate",
+      "ctx-rh-caudalmiddlefrontal",
+      "ctx-rh-superiorfrontal",
+      "ctx-rh-parsopercularis",
+      "ctx-rh-rostralmiddlefrontal",
+      "ctx-rh-parstriangularis",
+      "ctx-rh-parsorbitalis",
+      "ctx-rh-lateralorbitofrontal",
+      "ctx-rh-medialorbitofrontal",
+      "ctx-rh-orbitofrontal",
+      "ctx-rh-frontalpole",
+      "ctx-rh-medialorbitofrontal",
+      "ctx-rh-rostralanteriorcingulate",
+      "ctx-rh-caudalanteriorcingulate"
+    ]
+  },
+  "analysis_parameters": {
+    "high_gamma_wilcoxon_onset_bayes_t_test": {
+      "signal": "high_gamma",
+      "baseline_correction": null,
+      "baseline_time": [-0.375, -0.125],
+      "crop_time": [-0.3, 2],
+      "multitaper_parameters": null,
+      "do_zscore": true,
+      "conditions": ["stimulus onset/Irrelevant", "stimulus onset/Relevant non-target"],
+      "baseline_window": [
+        -0.300,
+        0
+      ],
+      "test_window": [
+        0.050,
+        0.350
+      ],
+      "scal": 1e0,
+      "fdr_correction": null,
+      "supported_tests_comment": ["t_test", "wilcoxon_signed_rank", "wilcoxon_rank_sum",
+        "sustained_zscore", "cluster_based", "bayes_t_test"],
+      "test": "bayes_t_test",
+      "sustained_zscore": {
+        "metric": null,
+        "z_thresh": 5,
+        "dur_thresh": 0.05,
+        "alternative": "two_tailed"
+      },
+      "t_test": {
+        "metric": "mean",
+        "p_val": 0.05,
+        "alternative": "greater",
+        "remove_outliers": false
+      },
+      "bayes_t_test": {
+        "metric": "mean",
+        "p_val": 0.05,
+        "alternative": "two-sided",
+        "remove_outliers": false
+      },
+      "wilcoxon_signed_rank": {
+        "metric": "auc",
+        "p_val": 0.05,
+        "alternative": "two-sided",
+        "remove_outliers": false
+      },
+      "wilcoxon_rank_sum": {
+        "metric": "auc",
+        "p_val": 0.05,
+        "alternative": "two-sided",
+        "remove_outliers": false
+      },
+      "cluster_based": {
+        "metric": null,
+        "p_val": 0.05,
+        "n_perm": 1048,
+        "alternative": "greater"
+      },
+      "evoked_raster_parameters": {
+            "sort_conditions": [
+              "duration",
+              "category",
+              "identity"
+            ],
+            "order":  {"duration": ["1500ms", "1000ms", "500ms"]},
+            "v_lines": [
+                0,
+                0.5,
+                1.0,
+                1.5
+            ],
+            "vmin": 0.5,
+            "vmax": 2.5,
+            "ylabel": "gain",
+            "scaling": 1,
+            "sigma": 10,
+            "cmap_center": 1.0
+      },
+      "raster_parameters": {
+            "conds_1": ["Relevant non-target", "Irrelevant"],
+            "conds_2": ["500ms", "1000ms", "1500ms"],
+            "sort_conditions": [
+                "category",
+                "identity"
+            ],
+            "order": {
+              "category": ["face", "object", "letter", "false"]
+            },
+            "v_lines": [
+                0,
+                0.5,
+                1.0,
+                1.5
+            ],
+            "vmin": 0,
+            "vmax": 2.5,
+            "cbar_label": "gain",
+            "scaling": 1,
+            "sigma": 10,
+            "cmap_center": 1.0
+      },
+      "evoked_parameters": {
+            "conds_1": ["Relevant non-target", "Irrelevant"],
+            "conds_2": ["500ms", "1000ms", "1500ms"],
+            "conds_3": ["face", "object", "letter", "false"],
+            "v_lines": [
+                0,
+                0.5,
+                1.0,
+                1.5
+            ],
+            "ylabel": "gain",
+            "scaling": 1
+      }
+    }
+  }
+}

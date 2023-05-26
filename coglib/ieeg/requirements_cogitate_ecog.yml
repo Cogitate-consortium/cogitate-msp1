@@ -1,0 +1,50 @@
+name: cogitate_ecog
+channels:
+- conda-forge
+dependencies:
+- python=3.9
+- pip
+- numpy=1.21.4
+- scipy
+- matplotlib
+- matplotlib-venn
+- numba
+- pandas=1.3.4
+- xlrd
+- scikit-learn
+- h5py
+- pillow
+- statsmodels
+- jupyter
+- joblib
+- psutil
+- numexpr
+- imageio
+- tqdm
+- spyder-kernels>=1.10.0
+- imageio-ffmpeg>=0.4.1
+- vtk>=9.0.1
+- pyvista=0.32.1
+- pyvistaqt=0.9
+- qdarkstyle
+- darkdetect
+- mayavi
+- PySurfer
+- dipy
+- nibabel
+- nilearn
+- python-picard
+- pyqt!=5.15.3
+- mne=0.24.0
+- mffpy>=0.5.7
+- ipywidgets
+- mne-bids=0.7
+- mne-connectivity
+- pybv>=0.5.0
+- reportlab
+- statsmodels
+- pingouin
+- ptitprince
+- pip:
+  - ipyvtklink
+  - git+https://github.com/nice-tools/nice.git

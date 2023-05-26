@@ -1,0 +1,191 @@
+{
+    "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+    "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+    "session": "V1",
+    "task_name": "Dur",
+    "preprocessing_folder": "epoching",
+    "preprocess_steps": "desbadcharej_notfil_lapref",
+    "montage_space": "T1",
+    "aseg": "aparc.a2009s+aseg",
+    "rois": {
+        "gnw": [
+            "ctx_lh_G_and_S_cingul-Ant",
+            "ctx_rh_G_and_S_cingul-Ant",
+            "ctx_lh_G_and_S_cingul-Mid-Ant",
+            "ctx_rh_G_and_S_cingul-Mid-Ant",
+            "ctx_lh_G_and_S_cingul-Mid-Post",
+            "ctx_rh_G_and_S_cingul-Mid-Post",
+            "ctx_lh_G_front_inf-Opercular",
+            "ctx_rh_G_front_inf-Opercular",
+            "ctx_lh_G_front_inf-Orbital",
+            "ctx_rh_G_front_inf-Orbital",
+            "ctx_lh_G_front_inf-Triangul",
+            "ctx_rh_G_front_inf-Triangul",
+            "ctx_lh_G_front_middle",
+            "ctx_rh_G_front_middle",
+            "ctx_lh_Lat_Fis-ant-Horizont",
+            "ctx_rh_Lat_Fis-ant-Horizont",
+            "ctx_lh_Lat_Fis-ant-Vertical",
+            "ctx_rh_Lat_Fis-ant-Vertical",
+            "ctx_lh_S_front_inf",
+            "ctx_rh_S_front_inf",
+            "ctx_lh_S_front_middle",
+            "ctx_rh_S_front_middle",
+            "ctx_lh_S_front_sup",
+            "ctx_rh_S_front_sup"
+        ]
+    },
+    "n_jobs": 8,
+    "debug": false,
+    "fig_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/visual_responsiveness/sub-super/ses-V1/ieeg/figure/high_gamma_wilcoxon_onset_activation_no_fdr/desbadcharej_notfil_manbadcharej_lapref",
+    "analysis_parameters": {
+        "alpha_gnw_ti": {
+            "signal": "broadband",
+            "select_vis_resp": false,
+            "vis_resp_folder": "high_gamma_wilcoxon_onset_activation_no_fdr",
+            "visual_responsiveness_folder": "broadband_task_relevant_zscore",
+            "baseline_correction": null,
+            "multitaper_parameters": {
+                "method": "wavelet",
+                "freq_range": [8, 14],
+                "step": 1,
+                "n_cycle_denom": 3.33,
+                "time_bandwidth": 2.0,
+                "baseline_mode": "ratio",
+                "baseline_win": [-0.750, -0.250]
+            },
+            "baseline_time": [-0.375, -0.125],
+            "crop_time": [-0.3, 2],
+            "moving_average_ms": null,
+            "conditions": "stimulus onset/Irrelevant",
+            "metric": "auc",
+            "scal": 1e0,
+            "time_bins": {
+                "0.8_1.0": [
+                    0.8,
+                    1.0
+                ],
+                "1.3_1.5": [
+                    1.3,
+                    1.5
+                ],
+                "1.8_2.0": [
+                    1.8,
+                    2.0
+                ]
+            },
+            "lmm_parameters": {
+                "test": "linear_mixed_model",
+                "package": "lmer",
+                "p_value": 0.01,
+                "fdr_correction": false,
+                "model_selection_criterion": "bic",
+                "time_bins": [
+                    "0.8_1.0",
+                    "1.3_1.5",
+                    "1.8_2.0"
+                ],
+                "models": {
+                    "null_model": {
+                        "model": "value ~ 1 + (1|epoch)",
+                        "re_formula": null
+                    },
+                    "time_win": {
+                        "model": "value ~ time_bin + (1|epoch)",
+                        "re_formula": null
+                    },
+                    "duration": {
+                        "model": "value ~ duration + (1|epoch)",
+                        "re_formula": null
+                    },
+                    "time_win_dur": {
+                        "model": "value ~ time_bin + duration + (1|epoch)",
+                        "re_formula": null
+                    },
+                    "time_win_dur_iit": {
+                        "model": "value ~ time_bin + duration + iit_predictors + (1|epoch)",
+                        "re_formula": null
+                    },
+                    "time_win_dur_gnw": {
+                        "model": "value ~ time_bin + duration + gnw_predictors + (1|epoch)",
+                        "re_formula": null
+                    },
+                    "time_win_dur_cate_iit": {
+                        "model": "value ~ time_bin + duration + category*iit_predictors + (1|epoch)",
+                        "re_formula": null
+                    },
+                    "time_win_dur_cate_gnw": {
+                        "model": "value ~ time_bin + duration + category*gnw_predictors + (1|epoch)",
+                        "re_formula": null
+                    }
+                },
+                "additional_predictors": {
+                    "iit_predictors": {
+                        "0.8_1.0/500ms": "decativated",
+                        "1.3_1.5/500ms": "decativated",
+                        "1.8_2.0/500ms": "decativated",
+                        "0.8_1.0/1000ms": "ativated",
+                        "1.3_1.5/1000ms": "decativated",
+                        "1.8_2.0/1000ms": "decativated",
+                        "0.8_1.0/1500ms": "ativated",
+                        "1.3_1.5/1500ms": "ativated",
+                        "1.8_2.0/1500ms": "decativated"
+                    },
+                    "gnw_predictors": {
+                        "0.8_1.0/500ms": "ativated",
+                        "1.3_1.5/500ms": "decativated",
+                        "1.8_2.0/500ms": "decativated",
+                        "0.8_1.0/1000ms": "decativated",
+                        "1.3_1.5/1000ms": "ativated",
+                        "1.8_2.0/1000ms": "decativated",
+                        "0.8_1.0/1500ms": "decativated",
+                        "1.3_1.5/1500ms": "decativated",
+                        "1.8_2.0/1500ms": "ativated"
+                    }
+                }
+            },
+            "raster_parameters": {
+                "conds_1": ["Irrelevant"],
+                "conds_2": ["500ms", "1000ms", "1500ms"],
+                "sort_conditions": [
+                    "category",
+                    "identity"
+                ],
+                "order": {
+                    "category": ["face", "object", "letter", "false"]
+                },
+                "v_lines": [
+                    0,
+                    0.5,
+                    1.0,
+                    1.5
+                ],
+                "vmin": 0,
+                "vmax": 5,
+                "cbar_label": "gain",
+                "sigma": 10,
+                "cmap_center": 1.0
+            },
+            "evoked_parameters": {
+                "conds_1": ["Irrelevant"],
+                "conds_2": ["500ms", "1000ms", "1500ms"],
+                "conds_3": ["face", "object", "letter", "false"],
+                "v_lines": [
+                    0,
+                    0.5,
+                    1.0,
+                    1.5
+                ],
+                "ylabel": "gain"
+            },
+            "boxplot_parameters": {
+                "conds_1": ["Irrelevant"],
+                "conds_2": ["500ms", "1000ms", "1500ms"],
+                "conds_3": ["face", "object", "letter", "false"],
+                "boxes_conditions": "time_bin",
+                "boxes_order": ["0.8_1.0", "1.3_1.5", "1.8_2.0"],
+                "ylabel": "ratio"
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+    "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+    "ecog_files_naming": "*Dur*",
+    "ecog_files_extension": ".EDF",
+    "beh_files_naming": "*RawDur*",
+    "beh_files_extension": ".csv",
+    "channels_description_file": null,
+    "elec_loc": {
+        "T1": "*coor_T1*",
+        "MNI": "*coor_MNI*"
+    },
+    "elec_loc_root": "",
+    "elec_loc_extension": ".txt",
+    "additional_channel_conv": {
+        "DC": "misc",
+        "EKG": "ecg",
+        "ECG": "ecg",
+        "C": "eeg",
+        "G": "ecog",
+        "L": "ecog",
+        "S": "ecog",
+        "SG": "eeg",
+        "D": "seeg"
+    },
+    "ref_rate_ms": 16.67,
+    "session": "V1",
+    "task_name": "Dur",
+    "data_type": "ieeg",
+    "line_freq": 60,
+    "HPC": false,
+    "debug": false,
+    "show_check_plots": false
+}

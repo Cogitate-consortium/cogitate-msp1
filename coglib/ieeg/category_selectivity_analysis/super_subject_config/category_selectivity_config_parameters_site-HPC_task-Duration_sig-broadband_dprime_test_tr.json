@@ -1,0 +1,146 @@
+{
+  "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+  "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+  "session": "V1",
+  "task_name": "Dur",
+  "preprocessing_folder": "epoching",
+  "preprocess_steps": "desbadcharej_notfil_lapref",
+  "njobs": 16,
+  "aseg": "aparc+aseg",
+  "rois": {
+    "retinotopic": [
+      "ctx-lh-lateraloccipital",
+      "ctx-lh-cuneus",
+      "ctx-lh-pericalcarine",
+      "ctx-lh-lateraloccipital",
+      "ctx-lh-cuneus",
+      "ctx-lh-pericalcarine"
+    ],
+    "parietal": [
+      "ctx-lh-isthmuscingulate",
+      "ctx-lh-precuneus",
+      "ctx-lh-inferiorparietal",
+      "ctx-lh-superiorparietal",
+      "ctx-lh-supramarginal",
+      "ctx-lh-isthmuscingulate",
+      "ctx-lh-precuneus",
+      "ctx-lh-inferiorparietal",
+      "ctx-lh-superiorparietal",
+      "ctx-lh-supramarginal"
+    ],
+    "temporal": [
+      "ctx-lh-inferiortemporal",
+      "ctx-lh-middletemporal",
+      "ctx-lh-bankssts",
+      "ctx-lh-superiortemporal",
+      "ctx-lh-lingual",
+      "ctx-lh-fusiform",
+      "ctx-lh-parahippocampal",
+      "ctx-lh-temporalpole",
+      "ctx-lh-entorhinal",
+      "ctx-lh-inferiortemporal",
+      "ctx-lh-middletemporal",
+      "ctx-lh-bankssts",
+      "ctx-lh-superiortemporal",
+      "ctx-lh-lingual",
+      "ctx-lh-fusiform",
+      "ctx-lh-parahippocampal",
+      "ctx-lh-temporalpole",
+      "ctx-lh-entorhinal"
+    ],
+    "frontal": [
+      "ctx-lh-caudalmiddlefrontal",
+      "ctx-lh-superiorfrontal",
+      "ctx-lh-parsopercularis",
+      "ctx-lh-rostralmiddlefrontal",
+      "ctx-lh-parstriangularis",
+      "ctx-lh-parsorbitalis",
+      "ctx-lh-lateralorbitofrontal",
+      "ctx-lh-medialorbitofrontal",
+      "ctx-lh-orbitofrontal",
+      "ctx-lh-frontalpole",
+      "ctx-lh-medialorbitofrontal",
+      "ctx-lh-rostralanteriorcingulate",
+      "ctx-lh-caudalanteriorcingulate",
+      "ctx-lh-caudalmiddlefrontal",
+      "ctx-lh-superiorfrontal",
+      "ctx-lh-parsopercularis",
+      "ctx-lh-rostralmiddlefrontal",
+      "ctx-lh-parstriangularis",
+      "ctx-lh-parsorbitalis",
+      "ctx-lh-lateralorbitofrontal",
+      "ctx-lh-medialorbitofrontal",
+      "ctx-lh-orbitofrontal",
+      "ctx-lh-frontalpole",
+      "ctx-lh-medialorbitofrontal",
+      "ctx-lh-rostralanteriorcingulate",
+      "ctx-lh-caudalanteriorcingulate"
+    ]
+  },
+  "analysis_parameters": {
+    "broadband_dprime_test_tr": {
+      "signal": "broadband",
+      "baseline_correction": null,
+      "baseline_time": [-0.375, -0.125],
+      "crop_time": [-0.3, 2],
+      "conditions": ["stimulus onset/Relevant non-target"],
+      "select_vis_resp": false,
+      "vis_resp_folder": null,
+      "multitaper_parameters": null,
+      "test_window": [
+        0.050,
+        0.400
+      ],
+      "p_val": 0.0125,
+      "fdr_correction": null,
+      "supported_tests_comment": ["highest_vs_all", "highest_vs_second", "dprime_test"],
+      "test": "dprime_test",
+      "dprime_param": {
+        "n_perm": 10000,
+        "tail": 1
+      },
+      "metric": "ptp",
+      "scal": 10e6,
+      "to_compare": "category",
+      "stats_fun": null,
+      "evoked_parameters": {
+            "conditions": ["face", "object", "letter", "false"],
+            "v_lines": [
+                0,
+                0.5,
+                1.0,
+                1.5
+            ],
+            "ylabel": "Amp (\u03BCV)",
+            "scaling": 10e6
+      },
+      "boxplot_parameters": {
+            "boxes_condition": "condition",
+            "boxes_order": ["face", "object", "letter", "false"],
+            "xlabel": "category",
+            "ylabel": "Amp (\u03BCV)"
+      },
+      "raster_parameters": {
+            "subplots_cond": ["500ms", "1000ms", "1500ms"],
+            "sort_conditions": [
+              "identity"
+            ],
+            "v_lines": [
+                0,
+                0.5,
+                1.0,
+                1.5
+            ],
+            "vmin": 0,
+            "midpoint": 1,
+            "vmax": 5,
+            "cbar_label": "Amp (\u03BCV)"
+      },
+      "barplot_parameters":{
+        "group_condition": "identity",
+        "time_win": [0.2, 0.5],
+        "ylabel": "Amp (\u03BCV)"
+      }
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+    "raw_root": "C:\\Users\\alexander.lepauvre\\Seafile\\TWCF_Project\\ECoG_Patients\\XNAT ingestion\\COGITATEProject",
+    "BIDS_root": "C:\\Users\\alexander.lepauvre\\Documents\\GitHub\\ECoG\\Preprocessing\\test\\bids\\",
+    "ref_rate_ms": 16.67,
+    "session": "V1",
+    "task_name": "TEST",
+    "show_check_plots": 0,
+    "njobs": 4,
+    "debug": false,
+    "save_intermediary_steps": true,
+    "preprocessing_steps": [
+        "notch_filtering",
+        "high_gamma_computations",
+        "manual_bad_channels_rejection",
+        "car",
+        "manual_bad_channels_rejection",
+        "epoching",
+        "automated_artifact_detection"
+    ],
+    "notch_filtering": {
+        "broadband": {
+            "channel_types": {
+                "ecog":  true,
+                "seeg":  true,
+                "exclude": "bads"
+            },
+            "frequency": 60,
+            "remove_harmonics": true,
+            "filter_type": "fir",
+            "cutoff_lowpass_bw": 63,
+            "cutoff_highpass_bw": 57
+        }
+    },
+    "automated_bad_channels_rejection": {
+        "broadband": {
+            "channel_types": {
+                "ecog":  true,
+                "seeg":  true,
+                "exclude": "bads"
+            },
+            "max_range": 2000,
+            "segment_duration": 1,
+            "segment_proportion_cutoff": 0.1,
+            "noise_estimation_parameters": {
+                "conditions": [
+                    [
+                        "Face",
+                        "Object",
+                        "Letter",
+                        "False"
+                    ],
+                    [
+                        "Center",
+                        "Left",
+                        "Right"
+                    ],
+                    [
+                        "Short",
+                        "Intermediate",
+                        "Long"
+                    ],
+                    [
+                        "Target",
+                        "Task_relevant",
+                        "Task_irrelevant"
+                    ]
+                ],
+                "events_not_to_epoch": [
+                    "Fixation",
+                    "Jitter",
+                    "response_FA",
+                    "response_Hit"
+                ],
+                "epoch_start_end": [
+                    -0.5,
+                    2.0
+                ]
+            }
+        }
+    },
+    "manual_bad_channels_rejection": {
+        "high_gamma": {
+            "channel_types": "all",
+            "method": "manual"
+        }
+    },
+    "car": {
+        "broadband": {
+            "reference_channel_types": {
+                "ecog":  true,
+                "seeg":  true,
+                "exclude": "bads"
+            },
+            "target_channel_types": {
+                "ecog":  true,
+                "seeg":  true,
+                "exclude": "bads"
+            }
+        }
+    },
+    "high_gamma_computations": {
+        "signal_name": "high_gamma",
+        "source_signal": "broadband",
+        "computation_parameters": {
+            "frequency_range": [
+                70,
+                150
+            ],
+            "bands_width": 10
+        }
+    },
+    "manual_artifact_detection": {
+        "broadband": {
+            "channel_types": "all",
+            "method": "manual"
+        },
+        "high_gamma": {
+            "channel_types": "all",
+            "method": "manual"
+        }
+    },
+    "epoching": {
+        "broadband": {
+            "picks": "all",
+            "tmin": -0.5,
+            "tmax": 2,
+            "baseline": [null, 0.0],
+            "events_not_to_epoch": [
+                "Fixation",
+                "Jitter",
+                "response_FA",
+                "response_Hit"
+            ],
+            "reject_by_annotation": true,
+            "meta_data_column": ["category", "identity", "task_relevance", "duration", "orientation", "response"]
+        },
+        "high_gamma": {
+            "picks": "all",
+            "tmin": -0.5,
+            "tmax": 2,
+            "baseline": null,
+            "events_not_to_epoch": [
+                "Fixation",
+                "Jitter",
+                "response_FA",
+                "response_Hit"
+            ],
+            "reject_by_annotation": true,
+            "meta_data_column": ["category", "identity", "task_relevance", "duration", "orientation", "response"]
+        }
+    },
+    "automated_artifact_detection": {
+        "broadband": {
+            "method": "automated",
+            "automated_artifact_rejection_parameters": {
+                "trial_proportion_cutoff": 0.1,
+                "standard_deviation_cutoff": 4,
+                "channel_types": {
+                    "seeg": true,
+                    "ecog": true
+                },
+                "aggregation_function": "ptp"
+            }
+        },
+        "high_gamma": {
+            "method": "automated",
+            "automated_artifact_rejection_parameters": {
+                "trial_proportion_cutoff": 0.1,
+                "standard_deviation_cutoff": 4,
+                "channel_types": {
+                    "seeg": true,
+                    "ecog": true
+                },
+                "aggregation_function": "auc"
+            }
+        }
+    }
+}

@@ -1,0 +1,721 @@
+Group,ROI,event type,task relevance,Category,identity,Duration,orientation,MVP times,Amplitude_sequence,Activation,Random phase
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.3-0.5; 0.8-1.0],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.3-0.5; 1.3-1.5],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.3-0.5; 1.8-2.0],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.3-0.5; 0.8-1.0],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.3-0.5; 1.3-1.5],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.3-0.5; 1.8-2.0],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.3-0.5; 0.8-1.0],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.3-0.5; 1.3-1.5],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.3-0.5; 1.8-2.0],0,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Center,[0.3-0.5; 0.8-1.0],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Center,[0.3-0.5; 1.3-1.5],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Center,[0.3-0.5; 1.8-2.0],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Left,[0.3-0.5; 0.8-1.0],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Left,[0.3-0.5; 1.3-1.5],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Left,[0.3-0.5; 1.8-2.0],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Right,[0.3-0.5; 0.8-1.0],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Right,[0.3-0.5; 1.3-1.5],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Right,[0.3-0.5; 1.8-2.0],1,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.3-0.5],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.3-1.0],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.3-1.5],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.3-0.5],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.3-1.0],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.3-1.5],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.3-0.5],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.3-1.0],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.3-1.5],0,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Center,[0.3-0.5],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Center,[0.3-1.0],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Center,[0.3-1.5],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Left,[0.3-0.5],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Left,[0.3-1.0],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Left,[0.3-1.5],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Right,[0.3-0.5],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Right,[0.3-1.0],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Right,[0.3-1.5],1,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Right,[0.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.3-0.5; 0.8-1.0],3,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.3-0.5; 1.3-1.5],3,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.3-0.5; 1.8-2.0],3,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.3-0.5; 0.8-1.0],4,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.3-0.5; 1.3-1.5],4,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.3-0.5; 1.8-2.0],4,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.3-0.5; 0.8-1.0],5,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.3-0.5; 1.3-1.5],5,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.3-0.5; 1.8-2.0],5,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Center,[0.3-0.5; 0.8-1.0],3,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Center,[0.3-0.5; 1.3-1.5],3,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Center,[0.3-0.5; 1.8-2.0],3,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Left,[0.3-0.5; 0.8-1.0],4,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Left,[0.3-0.5; 1.3-1.5],4,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Left,[0.3-0.5; 1.8-2.0],4,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,500ms,Right,[0.3-0.5; 0.8-1.0],5,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1000ms,Right,[0.3-0.5; 1.3-1.5],5,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,object,object_01,1500ms,Right,[0.3-0.5; 1.8-2.0],5,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,letter,letter_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.3-0.5],3,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.3-1.0],3,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.3-1.5],3,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.3-0.5],4,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.3-1.0],4,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.3-1.5],4,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.3-0.5],5,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.3-1.0],5,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.3-1.5],5,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Center,[0.3-0.5],3,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Center,[0.3-1.0],3,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Center,[0.3-1.5],3,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Left,[0.3-0.5],4,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Left,[0.3-1.0],4,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Left,[0.3-1.5],4,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,500ms,Right,[0.3-0.5],5,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1000ms,Right,[0.3-1.0],5,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,object,object_01,1500ms,Right,[0.3-1.5],5,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,letter,letter_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Irrelevant,FALSE,FALSE_01,1500ms,Right,[0.3-1.5],2,None,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.05-0.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.05-1.0],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.05-1.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.05-0.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.05-1.0],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.05-1.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.05-0.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.05-1.0],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.05-1.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,face,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Center,[0.05-0.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Center,[0.05-1.0],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Center,[0.05-1.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Left,[0.05-0.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Left,[0.05-1.0],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Left,[0.05-1.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,500ms,Right,[0.05-0.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1000ms,Right,[0.05-1.0],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,object,face_01,1500ms,Right,[0.05-1.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,letter,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Irrelevant,FALSE,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.3-0.5; 0.8-1.0],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.3-0.5; 1.3-1.5],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.3-0.5; 1.8-2.0],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.3-0.5; 0.8-1.0],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.3-0.5; 1.3-1.5],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.3-0.5; 1.8-2.0],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.3-0.5; 0.8-1.0],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.3-0.5; 1.3-1.5],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.3-0.5; 1.8-2.0],0,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Center,[0.3-0.5; 0.8-1.0],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Center,[0.3-0.5; 1.3-1.5],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Center,[0.3-0.5; 1.8-2.0],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Left,[0.3-0.5; 0.8-1.0],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Left,[0.3-0.5; 1.3-1.5],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Left,[0.3-0.5; 1.8-2.0],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Right,[0.3-0.5; 0.8-1.0],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Right,[0.3-0.5; 1.3-1.5],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Right,[0.3-0.5; 1.8-2.0],1,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_category,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.3-0.5],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.3-1.0],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.3-1.5],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.3-0.5],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.3-1.0],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.3-1.5],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.3-0.5],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.3-1.0],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.3-1.5],0,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Center,[0.3-0.5],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Center,[0.3-1.0],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Center,[0.3-1.5],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Left,[0.3-0.5],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Left,[0.3-1.0],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Left,[0.3-1.5],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Right,[0.3-0.5],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Right,[0.3-1.0],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Right,[0.3-1.5],1,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_category,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Right,[0.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.3-0.5; 0.8-1.0],3,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.3-0.5; 1.3-1.5],3,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.3-0.5; 1.8-2.0],3,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.3-0.5; 0.8-1.0],4,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.3-0.5; 1.3-1.5],4,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.3-0.5; 1.8-2.0],4,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.3-0.5; 0.8-1.0],5,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.3-0.5; 1.3-1.5],5,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.3-0.5; 1.8-2.0],5,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_face_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Center,[0.3-0.5; 0.8-1.0],3,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Center,[0.3-0.5; 1.3-1.5],3,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Center,[0.3-0.5; 1.8-2.0],3,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Left,[0.3-0.5; 0.8-1.0],4,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Left,[0.3-0.5; 1.3-1.5],4,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Left,[0.3-0.5; 1.8-2.0],4,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,500ms,Right,[0.3-0.5; 0.8-1.0],5,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1000ms,Right,[0.3-0.5; 1.3-1.5],5,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,object,object_01,1500ms,Right,[0.3-0.5; 1.8-2.0],5,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Center,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Center,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Center,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Left,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Left,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Left,[0.3-0.5; 1.8-2.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Right,[0.3-0.5; 0.8-1.0],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Right,[0.3-0.5; 1.3-1.5],2,None,No
+GNW_object_orientation,GNW,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Right,[0.3-0.5; 1.8-2.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.3-0.5],3,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.3-1.0],3,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.3-1.5],3,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.3-0.5],4,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.3-1.0],4,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.3-1.5],4,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.3-0.5],5,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.3-1.0],5,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.3-1.5],5,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_face_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Center,[0.3-0.5],3,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Center,[0.3-1.0],3,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Center,[0.3-1.5],3,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Left,[0.3-0.5],4,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Left,[0.3-1.0],4,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Left,[0.3-1.5],4,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,500ms,Right,[0.3-0.5],5,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1000ms,Right,[0.3-1.0],5,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,object,object_01,1500ms,Right,[0.3-1.5],5,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,letter,letter_01,1500ms,Right,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Center,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Center,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Center,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Left,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Left,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Left,[0.3-1.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,500ms,Right,[0.3-0.5],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1000ms,Right,[0.3-1.0],2,None,No
+IIT_object_orientation,IIT,stimulus onset,Relevant non-target,FALSE,FALSE_01,1500ms,Right,[0.3-1.5],2,None,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,1,No
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Center,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Center,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Center,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Left,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Left,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Left,[0.05-0.5; 1.55-2.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Right,[0.05-0.5; 0.55-1.0],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Right,[0.05-0.5; 1.05-1.5],None,0,Yes
+GNW_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Right,[0.05-0.5; 1.55-2.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.05-0.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.05-1.0],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.05-1.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.05-0.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.05-1.0],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.05-1.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.05-0.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.05-1.0],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.05-1.5],None,1,No
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Face_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,face,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Center,[0.05-0.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Center,[0.05-1.0],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Center,[0.05-1.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Left,[0.05-0.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Left,[0.05-1.0],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Left,[0.05-1.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,500ms,Right,[0.05-0.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1000ms,Right,[0.05-1.0],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,object,face_01,1500ms,Right,[0.05-1.5],None,1,No
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,letter,face_01,1500ms,Right,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Center,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Center,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Center,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Left,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Left,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Left,[0.05-1.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,500ms,Right,[0.05-0.5],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1000ms,Right,[0.05-1.0],None,0,Yes
+IIT_Object_selective,Other,stimulus onset,Relevant non-target,FALSE,face_01,1500ms,Right,[0.05-1.5],None,0,Yes

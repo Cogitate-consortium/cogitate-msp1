@@ -1,0 +1,66 @@
+{
+    "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+    "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+    "session": "V1",
+    "task_name": "Dur",
+    "preprocessing_folder": "epoching",
+    "preprocess_steps": "desbadcharej_notfil_lapref",
+    "montage_space": "T1",
+    "aseg": "aparc.a2009s+aseg",
+    "rois": {
+        "allbrain": null
+    },
+    "n_jobs": 32,
+    "debug": false,
+    "fig_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/visual_responsiveness/sub-super/ses-V1/ieeg/figure/high_gamma_wilcoxon_onset_activation_no_fdr/desbadcharej_notfil_manbadcharej_lapref",
+    "analysis_parameters": {
+        "duration_decoding_allbrain_high_gamma_object_ti": {
+            "signal": "high_gamma",
+            "select_vis_resp": false,
+            "vis_resp_folder": false,
+            "multitaper_parameters": null,
+            "baseline_correction": null,
+            "baseline_time": [-0.375, -0.125],
+            "crop_time": [-0.3, 2],
+            "conditions": ["stimulus onset/object/500ms/Irrelevant", "stimulus onset/object/1000ms/Irrelevant", "stimulus onset/object/1500ms/Irrelevant"],
+            "labels_condition": "duration",
+            "binning_ms": 200,
+            "do_diff": false,
+            "n_folds": 5,
+            "time_win": [0.5, 2],
+            "classifier": "svm",
+            "tail": 1,
+            "nperm": 1000,
+            "alpha": 0.05,
+            "fdr_method": null,
+            "raster_parameters": {
+                "conds_1": ["Irrelevant"],
+                "conds_2": ["1000ms", "1500ms"],
+                "sort_conditions": null,
+                "order":null,
+                "v_lines": [
+                    0,
+                    0.5,
+                    1.0,
+                    1.5
+                ],
+                "vmin": 0,
+                "vmax": 5,
+                "cbar_label": "gain",
+                "cmap_center": 1.0
+            },
+            "evoked_parameters": {
+                "conds_1": ["Irrelevant"],
+                "conds_2": ["1000ms", "1500ms"],
+                "conds_3": null,
+                "v_lines": [
+                    0,
+                    0.5,
+                    1.0,
+                    1.5
+                ],
+                "ylabel": "gain"
+            }
+        }
+    }
+}

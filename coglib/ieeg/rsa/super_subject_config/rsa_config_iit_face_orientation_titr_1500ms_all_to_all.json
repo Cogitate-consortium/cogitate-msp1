@@ -1,0 +1,217 @@
+{
+  "raw_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/Raw/projects/CoG_ECoG_PhaseII",
+  "BIDS_root": "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids",
+  "session": "V1",
+  "task_name": "Dur",
+  "preprocessing_folder": "epoching",
+  "preprocess_steps": "desbadcharej_notfil_lapref",
+  "njobs": 16,
+  "aseg": "aparc.a2009s+aseg",
+  "montage_space": "T1",
+  "rois": {
+    "iit": [
+      "ctx_lh_G_temporal_inf",
+      "ctx_rh_G_temporal_inf",
+      "ctx_lh_Pole_temporal",
+      "ctx_rh_Pole_temporal",
+      "ctx_lh_G_cuneus",
+      "ctx_rh_G_cuneus",
+      "ctx_lh_G_occipital_sup",
+      "ctx_rh_G_occipital_sup",
+      "ctx_lh_G_oc-temp_med-Lingual",
+      "ctx_rh_G_oc-temp_med-Lingual",
+      "ctx_lh_Pole_occipital",
+      "ctx_rh_Pole_occipital",
+      "ctx_lh_G_oc-temp_med-Lingual",
+      "ctx_rh_G_oc-temp_med-Lingual",
+      "ctx_lh_S_calcarine",
+      "ctx_rh_S_calcarine",
+      "ctx_lh_G_and_S_occipital_inf",
+      "ctx_rh_G_and_S_occipital_inf",
+      "ctx_lh_G_occipital_middle",
+      "ctx_rh_G_occipital_middle",
+      "ctx_lh_G_oc-temp_lat-fusifor",
+      "ctx_rh_G_oc-temp_lat-fusifor",
+      "ctx_lh_G_oc-temp_med-Parahip",
+      "ctx_rh_G_oc-temp_med-Parahip",
+      "ctx_lh_S_intrapariet_and_P_trans",
+      "ctx_rh_S_intrapariet_and_P_trans",
+      "ctx_lh_G_oc-temp_med-Parahip",
+      "ctx_rh_G_oc-temp_med-Parahip",
+      "ctx_lh_S_oc_middle_and_Lunatus",
+      "ctx_rh_S_oc_middle_and_Lunatus",
+      "ctx_lh_S_oc_sup_and_transversal",
+      "ctx_rh_S_oc_sup_and_transversal",
+      "ctx_lh_S_temporal_sup",
+      "ctx_rh_S_temporal_sup"
+    ]
+  },
+  "analysis_parameters": {
+  "iit_face_orientation_titr_1500ms_all_to_all": {
+      "signal": "high_gamma",
+      "baseline_correction": null,
+      "baseline_time": [-0.375, -0.125],
+      "crop_time": [-0.3, 2],
+      "channel_types": {"seeg": true, "ecog": true},
+      "conditions": [
+        "stimulus onset/face/Center/Irrelevant/1500ms",
+        "stimulus onset/face/Left/Irrelevant/1500ms",
+        "stimulus onset/face/Right/Irrelevant/1500ms",
+        "stimulus onset/object/Center/Relevant non-target/1500ms",
+        "stimulus onset/object/Left/Relevant non-target/1500ms",
+        "stimulus onset/object/Right/Relevant non-target/1500ms"
+      ],
+      "n_resampling": 100,
+      "store_intermediate": false,
+      "subtract_evoked": false,
+      "regress_evoked": false,
+      "equate_offset": false,
+      "equate_offset_dict": {
+        "1500ms": {
+          "excise_onset": 1.0,
+          "excise_offset": 1.5
+        },
+        "1000ms": {
+          "excise_onset": 1.5,
+          "excise_offset": 2
+        }
+      },
+      "epo_onset_offset": [-0.3, 1.5],
+      "min_n_channels": 5,
+      "n_features": null,
+      "feat_sel_diag": true,
+      "n_folds": null,
+      "baseline_time_win": [-0.3, 0],
+      "onset_time_win": [0.05, 0.35],
+      "binning_ms": 20,
+      "rsa_condition": "orientation",
+      "groups_condition": null,
+      "regress_groups": false,
+      "between_within_group": false,
+      "n_repeat": 2,
+      "equalize_trials": false,
+      "method": "all_to_all_within_vs_between",
+      "metric": "correlation",
+      "zscore": false,
+      "n_perm": 1024,
+      "rsa_stat_test_options": ["sliding_histogram_pval", "cluster_based_test"],
+      "rsa_stat_test": "cluster_based_test",
+      "sliding_histogram_pval_param": {
+        "p_value_thresh": 0.05,
+        "fdr_correction": "fdr_bh"
+      },
+      "cluster_based_test_param": {
+        "z_threshold": 1.5,
+        "adjacency": null,
+        "tail": 1,
+        "max_step": null,
+        "exclude": null,
+        "t_power": 1,
+        "step_down_p": 0.05,
+        "do_zscore": true,
+        "p_value_thresh": 0.05
+      },
+      "correlation_methods": ["kendall", "semi-partial"],
+      "theories_predictions": [
+        {
+          "iit":
+          {
+            "predicted_vals": [1],
+            "x": [
+              [
+                0.3,
+                1.5
+              ]
+            ],
+            "y": [
+              [
+                0.3,
+                1.5
+              ]
+            ]
+          },
+          "gnw":
+          {
+            "predicted_vals": [1, 1, 1, 1],
+            "x": [
+              [
+                0.3,
+                0.5
+              ],
+              [
+                0.3,
+                0.5
+              ],
+              [
+                1.8,
+                2.0
+              ],
+              [
+                1.8,
+                2.0
+              ]
+            ],
+            "y": [
+              [
+                0.3,
+                0.5
+              ],
+              [
+                1.8,
+                2.0
+              ],
+              [
+                0.3,
+                0.5
+              ],
+              [
+                1.8,
+                2.0
+              ]
+            ]
+          }
+        }
+    ],
+    "matrix_subsampling_coordinates": {
+      "200ms": {
+        "x": [
+          [
+            0.3,
+            0.5
+          ],
+          [
+            0.8,
+            1
+          ],
+          [
+            1.3,
+            1.5
+          ],
+          [
+            1.8,
+            2.0
+          ]
+        ],
+        "y": [
+          [
+            0.3,
+            0.5
+          ],
+          [
+            0.8,
+            1
+          ],
+          [
+            1.3,
+            1.5
+          ],
+          [
+            1.8,
+            2.0
+          ]
+        ]
+      }
+    }
+    }
+  }
+}
