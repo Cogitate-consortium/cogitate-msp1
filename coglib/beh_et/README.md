@@ -54,3 +54,12 @@ All the modelling of the grouped, processed data for Eyelink-based subject data 
 For the TOBII-data subjects, there is only coordinate data - without pupil diameter, information about blinks and so on. That, combined with many periods of missing data, does not allow for proper identification of blinks, saccades and fixations. 
 Therefore, this data is used only for sanity-check to see that subjects looked at the screen center during the experiment's trials. The data is loaded, parsed to trials, BL corrected, and then plotted in a heatmap. 
 It is not part of the analysis, and cannot be loaded into the R script. 
+
+
+### Information
+- [Rony Hirschhorn](https://github.com/RonyHirsch), Sagol School of Neuroscience, Tel-Aviv University
+- [Csaba Kozma](https://github.com/csaba-a), Newcastle University
+- [Abdo Sharaf](https://github.com/AbdoSharaf98), Georgia Institute of Technology
+- Center PI: Prof. Liad Mudrik, Sagol School of Neuroscience and School of Psychological Sciences, Tel-Aviv University
+
+Contact: rony.hirschhorn[at]gmail[dot]com // mudrikli[at]tauex[dot]tau[dot]ac[dot]il
