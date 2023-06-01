@@ -22,7 +22,7 @@ All the modelling of the grouped, processed data for Eyelink-based subject data 
 
 ### eyetracking
 
-Notably, as eye-tracking data parsing and processing relies on segmenting the data into trials, the behavioral processing must be done first before performing the ET data processing. This is important, as a sanity checks compares ET triggers with behavioral record logs - a comparison which cannot be made unless quality_checks.py was already run.
+Notably, as eye-tracking data parsing and processing relies on segmenting the data into trials, the behavioral processing must be done first before performing the ET data processing. This is important, as a sanity check compares ET triggers with behavioral record logs - a comparison which cannot be made unless quality_checks.py was already run.
 
 #### ET_qc_manager.py
 This is the script running all the ET data reading and QCs for Eyelink-based data (not TOBII, that is a separate script, see below). 
