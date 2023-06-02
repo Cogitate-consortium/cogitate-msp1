@@ -1,0 +1,67 @@
+{
+    "onset": {
+        "LongName": "Event onset",
+        "Description": "Event onset in seconds relative to first volume of imaging dataset; i.e. without accounting for later deletion of dummy volumes"
+    },
+    "duration": {
+        "LongName": "Event duration",
+        "Description": "Stimulus category of the event"
+    },
+    "trial_type": {
+        "LongName": "Stimulus category",
+        "Description": "Stimulus category of the event",
+        "Levels": {
+            "face": "Face stimulus",
+            "object": "Object stimulus",
+			"letter": "Letter stimulus",
+			"falseFont": "False Font stimulus",
+			"response": "Response; not a stimulus event",
+			"targetScreen": "Screen showing targets; not a stimulus event",
+			"baseline": "Null event (fixation only)"
+        }
+    },
+	"task_relevance": {
+        "LongName": "Task Relevance",
+        "Description": "Task Relevance of the presented stimulus",
+        "Levels": {
+            "target": "Target stimulus",
+            "relevant": "Task relevant non-targets stimulus",
+			"irrelevant": "Task irrelevant stimulus",
+			"response": "Response; not a stimulus event",
+			"targetScreen": "Screen showing targets; not a stimulus event",
+			"baseline": "Null event (fixation only)"
+        }
+    },
+	"stimulus_orientation": {
+        "LongName": "Stimulus Orientation",
+        "Description": "Orientation of the presented stimulus",
+        "Levels": {
+            "center": "Center facing stimulus",
+            "left": "Left facing stimulus",
+			"right": "Right facing stimulus",
+			"response": "Response; not a stimulus event",
+			"targetScreen": "Screen showing targets; not a stimulus event",
+			"baseline": "Null event (fixation only)"
+        }
+    },
+	"stimulus_id": {
+        "LongName": "Stimulus ID",
+        "Description": "ID of the presented stimulus.",
+        "Levels": {
+            "[0-9]{4}": "4 digit stimulus coding the stimulus category, orientation and specific stimulus. Where: 1st digit = stimulus type (1 = face; 2 = object; 3 = letter; 4 = false font). 2nd digit = stimulus orientation (1 = center; 2 = left; 3 = right). 3rd & 4th digits = stimulus id (1...20; for faces 1...10 is male, 11...20 is female). E.g. 1219 = 1 is face, 2 is left orientation and 19 is a female stimulus",
+			"response": "Response; not a stimulus event",
+			"targetScreen": "Screen showing targets; not a stimulus event",
+			"baseline": "Null event (fixation only)"
+        }
+    },
+	"response": {
+        "LongName": "Behavioral Response",
+        "Description": "Behavioral response of the participant",
+        "Levels": {
+            "hit": "Correct detection of a target",
+            "correctRejection": "Correct rejection of a non-target",
+			"miss": "Failure to detect a target",
+			"falseAlarm": "False response to non-target"
+        }
+    }
+}
