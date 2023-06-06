@@ -5,4 +5,3 @@
 
 **figures** -> The specific usage of the code in *coglib*. For each figure have a folder and a data_loading, data_processing, and plotting scripts, additional run.py script to bring everything together.
 
-**sample_data** -> The samples of data to test the figure scripts against 
