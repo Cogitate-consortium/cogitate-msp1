@@ -8,7 +8,8 @@ Paper Title: ""
 | --- | --- |
 | Website | ![Cogitate](https://img.shields.io/badge/cogitate-website-cornflowerblue) |
 | Twitter | [![Twitter Follow](https://img.shields.io/twitter/follow/arccogitate?style=social)](https://twitter.com/arccogitate) |
-| DOI | bioRxiv |
+| Publication DOI | bioRxiv |
+| Dataset | Will be made available in the future. |
 
 ## Structure
 
@@ -20,6 +21,11 @@ The analysis code has been split based on the measurement modality as below:
 - Intracranial Electroencephalography (ieeg)
 
 The analyses for each modality have been carried out independently. Please read the about.md file carefully before using the code.
+
+## Usage
+
+1. Clone this repository using `git clone https://github.com/Cogitate-consortium/cogitate-msp1`
+2. For each analysis, read the about.md and readme.md files carefully. This will describe how to build the environment and run the code.
 
 ## Contact
 
