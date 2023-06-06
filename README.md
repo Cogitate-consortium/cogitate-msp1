@@ -1,7 +1,32 @@
 # cogitate-msp1
 
-**coglib** -> all analysis code including plotting_uniformization and any specific or common code that is used for analysis, each analysis pipeline should have a requirements list of dependencies.
-> Eventually coglib is to be separated into it's own repo and library
+This repository contains all of the code related to the Cogitate Main Scientific Paper 1. You can find more information below.
 
-**figures** -> The specific usage of the code in *coglib*. For each figure have a folder and a data_loading, data_processing, and plotting scripts, additional run.py script to bring everything together.
+Paper Title: ""
 
+| Information | Links |
+| --- | --- |
+| Website | ![Cogitate](https://img.shields.io/badge/cogitate-website-cornflowerblue) |
+| Twitter | [![Twitter Follow](https://img.shields.io/twitter/follow/arccogitate?style=social)](https://twitter.com/arccogitate) |
+| Publication DOI | bioRxiv |
+| Dataset | Will be made available in the future. |
+
+## Structure
+
+The analysis code has been split based on the measurement modality as below:
+
+- behavioural and eye tracking (beh_et)
+- Magnetoencephalography (meeg)
+- Functional Magnetic Resonance Imaging (fmri)
+- Intracranial Electroencephalography (ieeg)
+
+The analyses for each modality have been carried out independently. Please read the about.md file carefully before using the code.
+
+## Usage
+
+1. Clone this repository using `git clone https://github.com/Cogitate-consortium/cogitate-msp1`
+2. For each analysis, read the about.md and readme.md files carefully. This will describe how to build the environment and run the code.
+
+## Contact
+
+For any questions please feel free to raise an issue or contact [Tanya Brown](mailto:tanya.brown@ae.mpg.de).
