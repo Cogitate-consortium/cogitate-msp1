@@ -1,6 +1,6 @@
 # cogitate-msp1
 
-This repository contains all of the code related to the Cogitate Main Scientific Paper 1. You can find more information below.
+This repository contains all of the code related to the Cogitate Main Scientific Paper 1 (MSP1). You can find more information below.
 
 Paper Title: ""
 
@@ -8,6 +8,7 @@ Paper Title: ""
 | --- | --- |
 | Website | ![Cogitate](https://img.shields.io/badge/cogitate-website-cornflowerblue) |
 | Twitter | [![Twitter Follow](https://img.shields.io/twitter/follow/arccogitate?style=social)](https://twitter.com/arccogitate) |
+| Preregistration | ![Link to preregistration documents](https://osf.io/3t7ax/) |
 | Publication DOI | bioRxiv |
 | Dataset | Will be made available in the future. |
 
