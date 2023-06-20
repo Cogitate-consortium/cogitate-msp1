@@ -4,15 +4,13 @@ import config
 import theories_rois
 import glob
 import os
-import subprocess
 import json
 import numpy as np
 import matplotlib.pyplot as plt
-from general_utilities import mean_confidence_interval, epochs_loader, get_roi_channels, get_ch_rois, \
-    load_fsaverage_coord, corrected_sem
+from general_utilities import epochs_loader, get_roi_channels, get_ch_rois, \
+    load_fsaverage_coord
 import seaborn as sns
 from plotters import plot_time_series, plot_rasters, mm2inch
-from ecog_plotters import plot_electrodes
 from scipy.stats import sem
 from scipy.ndimage import uniform_filter1d
 
@@ -85,7 +83,7 @@ def plot_avg(epochs, cond_1, cond_2, file_name, colors, ylim=None, smoothing=0, 
     # Looping through each categories:
     for cond1 in cond_1:
         evks = []
-        data_sem = []
+        errs = []
         # Looping through each durations:
         for cond2 in cond_2:
             cond2_evk = []
@@ -93,11 +91,9 @@ def plot_avg(epochs, cond_1, cond_2, file_name, colors, ylim=None, smoothing=0, 
             for subject in epochs.keys():
                 # Compute the average for that particular subject:
                 cond2_evk.append(epochs[subject].copy()["/".join([cond1, cond2])].average().get_data())
-            data_sem.append(np.array(np.concatenate(cond2_evk)))
-            m, err = mean_confidence_interval(np.concatenate(cond2_evk), confidence=0.95, axis=0)
-            evks.append(np.squeeze(m))
-        # Compute the within subject standard error:
-        errs = corrected_sem(data_sem, len(cond_2))
+            # Now, compute the mean and confidence intervals:
+            evks.append(np.mean(np.concatenate(cond2_evk), axis=0))
+            errs.append(sem(np.concatenate(cond2_evk), axis=0))
         # Now name the file for condition 1:
         filename = file_name.format("all", "avg_ts", cond1)
         # Opend a figure:
@@ -115,7 +111,7 @@ def plot_avg(epochs, cond_1, cond_2, file_name, colors, ylim=None, smoothing=0, 
 
     # Additionally, plotting across all categories:
     evks = []
-    data_sem = []
+    errs = []
     # Looping through each durations:
     for cond2 in cond_2:
         cond2_evk = []
@@ -123,13 +119,9 @@ def plot_avg(epochs, cond_1, cond_2, file_name, colors, ylim=None, smoothing=0, 
         for subject in epochs.keys():
             # Compute the average for that particular subject:
             cond2_evk.append(epochs[subject].copy()[cond2].average().get_data())
-        data_sem.append(np.array(np.concatenate(cond2_evk)))
         # Now, compute the mean and confidence intervals:
-        avg, error = mean_confidence_interval(np.concatenate(cond2_evk),
-                                              confidence=0.95, axis=0)
-        evks.append(np.squeeze(avg))
-    # Compute the within subject standard error:
-    errs = corrected_sem(np.array(data_sem), len(cond_2))
+        evks.append(np.mean(np.concatenate(cond2_evk), axis=0))
+        errs.append(sem(np.concatenate(cond2_evk), axis=0))
     # Now name the file for condition 1:
     filename = file_name.format("all", "avg_ts", "all")
     # Opend a figure:
@@ -174,7 +166,7 @@ def sort_metadata(metadata, conditions_order):
 
 
 def plot_lmm_raster(epochs, file_name, colors, conditions_order=None, ylim=None, smoothing=0, crop_cb=False,
-                    scaling=1, ylabel=""):
+                    scaling=1, ylabel="", midpoint=1.0):
     """
 
     :param epochs:
@@ -209,13 +201,13 @@ def plot_lmm_raster(epochs, file_name, colors, conditions_order=None, ylim=None,
             if smoothing is not None and smoothing > 0:
                 data = uniform_filter1d(data, smoothing, axis=-1)
             filename = file_name.format("{}-{}".format(subject, channel), "raster", "all")
-            plot_rasters(data, t0, tend, cmap=None, ax=None, ylim=ylim, midpoint=.0, transparency=1.0,
+            plot_rasters(data, t0, tend, cmap=None, ax=None, ylim=ylim, midpoint=midpoint, transparency=1.0,
                          xlabel="Time (s)", ylabel="Trials", cbar_label=ylabel, filename=filename,
                          vlines=vlines, title=None, square_fig=False, conditions=conds,
                          cond_order=duration_order_msec, crop_cbar=crop_cb)
             plt.close()
             filename = file_name.format("{}-{}".format(subject, channel), "raster", "all_no_cb")
-            plot_rasters(data, t0, tend, cmap=None, ax=None, ylim=ylim, midpoint=.0, transparency=1.0,
+            plot_rasters(data, t0, tend, cmap=None, ax=None, ylim=ylim, midpoint=midpoint, transparency=1.0,
                          xlabel="Time (s)", ylabel="Trials", cbar_label=ylabel, filename=filename,
                          vlines=vlines, title=None, square_fig=False, conditions=conds,
                          cond_order=duration_order_msec, do_cbar=False, add_cond_ticks=False, crop_cbar=crop_cb)
@@ -249,6 +241,20 @@ def plot_lmm_raster(epochs, file_name, colors, conditions_order=None, ylim=None,
     return None
 
 
+def cousineau_sem(data, axis=0):
+
+    # Compute the group average per time point:
+    group_mean = np.mean(data, axis=axis)
+    # Compute the within group mean:
+    subject_mean = np.mean(data, axis=0)
+    corrected_se = []
+    for cond in range(data.shape[0]):
+        # Normalize data by removing the within subject average to that condition to each subject's data and adding back
+        # the grand mean:
+        norm_data = data[cond, :, :] - subject_mean + group_mean
+        # Compute the SEM
+        corrected_se.append(sem(norm_data))
+
 def reformat_lmm_results(df):
     """
 
@@ -267,7 +273,20 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
     :param save_root:
     :return:
     """
-    cate_sel_results = pd.read_csv(cat_sel_file)
+    # Load the category selectivity:
+    cate_sel_results_ti = pd.read_csv(cat_sel_file[0])
+    cate_sel_results_tr = pd.read_csv(cat_sel_file[1])
+
+    # Identify the channels that are category selective across both task relevance conditions:
+    selective_channels = []
+    for ch in cate_sel_results_ti["channel"].to_list():
+        ti_sel = cate_sel_results_ti.loc[cate_sel_results_ti["channel"] == ch, "condition"].item()
+        if ch in cate_sel_results_tr["channel"].to_list() and \
+                cate_sel_results_tr.loc[cate_sel_results_tr["channel"] == ch, "condition"].item() == ti_sel:
+            selective_channels.append(ch)
+
+    cate_sel_results = cate_sel_results_ti.loc[cate_sel_results_ti["channel"].isin(selective_channels)]
+
     # Loop through each subfolders:
     for ind, folder in enumerate(folders_list):
         results_path = Path(results_root, folder)
@@ -280,16 +299,19 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
             scaling = 10 ** 6
             ylabel = "ERP \u03BCV (corr.)"
             baseline_window = [-0.2, 0]
+            midpoint = 0
         elif "gamma" in folder:
             baseline_mode = "ratio"
             scaling = 1
             ylabel = "HGP (norm.)"
+            midpoint = 1
             baseline_window = [-0.5, -0.05]
         elif "alpha" in folder:
             baseline_mode = "ratio"
             scaling = 1
             ylabel = "Alpha (norm.)"
             baseline_window = [-0.5, -0.05]
+            midpoint = 1
         else:
             raise Exception("The analyzed signal isn't recognized!")
         for ind2, subdir in enumerate(subdirs):
@@ -351,8 +373,7 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
             })
             for ch in ch_colors["channel"].to_list():
                 if "cate" in channels_models.loc[channels_models["channel"] == ch, "model"].item():
-                    if cate_sel_results.loc[cate_sel_results["channel"] == ch, "condition"].item() == \
-                            cate_sel_results.loc[cate_sel_results["channel"] == ch, "condition"].item():
+                    if ch in cate_sel_results["channel"].to_list():
                         ch_colors.loc[ch_colors["channel"] == ch, ["r", "g", "b"]] = cate_colors[
                             cate_sel_results.loc[cate_sel_results["channel"] == ch, "condition"].item()
                         ]
@@ -444,7 +465,8 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
                                     "category": ["face", "object", "letter", "false"],
                                     "duration": ["1500ms", "1000ms", "500ms"],
                                 },
-                                ylim=ylim, smoothing=smooth_samp, crop_cb=True, scaling=scaling, ylabel=ylabel)
+                                ylim=ylim, smoothing=smooth_samp, crop_cb=True, scaling=scaling, ylabel=ylabel,
+                                midpoint=midpoint)
 
                 # Plot the data aggregated across channels for this model:
                 plot_avg(epochs, category_order, duration_order_msec, str(Path(save_dir, gen_file_name)),
@@ -472,7 +494,7 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
                     # other categories:
                     other_cate = [cat for cat in category_order if cat != cate]
                     evks = []
-                    data_sem = []
+                    errs = []
                     # Looping through each durations:
                     for cond2 in duration_order_msec:
                         cond2_evk = []
@@ -481,13 +503,9 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
                             # Compute the average for that particular subject:
                             cond2_evk.append(
                                 epochs[subject].copy()["/".join([cate, cond2])].average().get_data())
-                        m, err = mean_confidence_interval(np.concatenate(cond2_evk), confidence=0.95, axis=0)
-                        data_sem.append(np.concatenate(cond2_evk))
-                        evks.append(np.squeeze(m))
-                    # Compute the error for this set of conditions:
-                    err = corrected_sem(data_sem, len(duration_order_msec))
-                    errs = [cond_err for cond_err in err]
-                    data_sem = []
+                        # Now, compute the mean and confidence intervals:
+                        evks.append(np.mean(np.concatenate(cond2_evk), axis=0))
+                        errs.append(sem(np.concatenate(cond2_evk), axis=0))
                     for cond_1 in other_cate:
                         cond_1_evk = []
                         # Now looping through each subject:
@@ -495,12 +513,8 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
                             # Compute the average for that particular subject:
                             cond_1_evk.append(
                                 epochs[subject].copy()[cond_1].average().get_data())
-                        m, err = mean_confidence_interval(np.concatenate(cond_1_evk), confidence=0.95, axis=0)
-                        data_sem.append(np.concatenate(cond_1_evk))
-                        evks.append(np.squeeze(m))
-                    err_other_cond = corrected_sem(data_sem, len(other_cate))
-                    for cond_err in err_other_cond:
-                        errs.append(cond_err)
+                        evks.append(np.mean(np.concatenate(cond_1_evk), axis=0))
+                        errs.append(sem(np.concatenate(cond_1_evk), axis=0))
                     # Now name the file for condition 1:
                     filename = str(Path(save_dir, "sub-all_desc-_cond-all_sel-{}.png".format(cate)))
                     # Opend a figure:
@@ -569,107 +583,163 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
                     plt.savefig(filename)
                     plt.close()
 
-        # Plotting the GNW onset responsive electrodes:
-        if ind == 0:
-            # Plot the control for GNW: plotting onset responsive channels
-            vis_resp_results = "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/" \
-                               "visual_responsiveness/" \
-                               "sub-super/ses-V1/ieeg/results/high_gamma_wilcoxon_onset_two_tailed/" \
-                               "desbadcharej_notfil_lapref/sub-super_ses-V1_task-Dur_analysis-vis_resp_sig_results.csv"
-            vis_resp_results = pd.read_csv(vis_resp_results)
-            # Further filter the results by extracting only the channels showing increase of responsiveness:
-            vis_resp_results = vis_resp_results.loc[vis_resp_results["effect_strength-stimulus onset/Irrelevant"] > 0]
-            # Get each channels showing onset responsiveness:
-            picks = vis_resp_results["channel"].to_list()
-            subs = list(set([pick.split("-")[0] for pick in picks]))
-            epo_dir = str(Path(bids_root, "derivatives", "preprocessing", "sub-{}",
-                               "ses-" + ses, "ieeg", lmm_param["preprocessing_folder"],
-                               lmm_param["analysis_parameters"][folder]["signal"],
-                               lmm_param["preprocess_steps"]))
-            epo_file = "sub-{}_ses-{}_task-Dur_desc-epoching_ieeg-epo.fif"
-            epochs = epochs_loader(subs, epo_dir, epo_file, picks, crop_time, ses,
-                                   conditions=lmm_param["analysis_parameters"][folder]["conditions"],
-                                   filtering_parameters=lmm_param["analysis_parameters"][folder][
-                                       "multitaper_parameters"], baseline_window=baseline_window,
-                                   baseline_mode=baseline_mode)
-            # Extract the channel in the GNW ROI:
-            epochs = get_roi_channels(epochs, rois["gnw"], bids_root, aseg="aparc.a2009s+aseg")
-            # Plot the data aggregated across channels for this model:
-            save_dir = Path(save_root, "onset_resp_gnw")
-            if not os.path.exists(save_dir):
-                os.makedirs(save_dir)
-            gen_file_name = "sub-{}_desc-{}_cond-{}.png"
-            colors = {
-                "500ms": [0.1, 0.1, 0.1],
-                "1000ms": [0.4, 0.4, 0.4],
-                "1500ms": [0.7, 0.7, 0.7]
-            }
-            ts_lim = [0.5, 1.5]
-            ylim = [0.5, 1.5]
+    # Plot the control for GNW: plotting onset responsive channels
+    vis_resp_results = "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/" \
+                       "visual_responsiveness/" \
+                       "sub-super/ses-V1/ieeg/results/high_gamma_wilcoxon_onset_two_tailed/" \
+                       "desbadcharej_notfil_lapref/sub-super_ses-V1_task-Dur_analysis-vis_resp_sig_results.csv"
+    vis_resp_results = pd.read_csv(vis_resp_results)
+    # Further filter the results by extracting only the channels showing increase of responsiveness:
+    vis_resp_results = vis_resp_results.loc[vis_resp_results["effect_strength-stimulus onset/Irrelevant"] > 0]
+    # Get each channels showing onset responsiveness:
+    picks = vis_resp_results["channel"].to_list()
+    # Remove those that are category selective:
+    picks = [pick for pick in picks if pick not in cate_sel_results["channel"].to_list()]
+    # Further remove any channels showing category selectivity:
+    subs = list(set([pick.split("-")[0] for pick in picks]))
+    epo_dir = str(Path(bids_root, "derivatives", "preprocessing", "sub-{}",
+                       "ses-" + ses, "ieeg", "epoching",
+                       "high_gamma", "desbadcharej_notfil_lapref"))
+    epo_file = "sub-{}_ses-{}_task-Dur_desc-epoching_ieeg-epo.fif"
+    epochs = epochs_loader(subs, epo_dir, epo_file, picks, crop_time, ses,
+                           conditions="stimulus onset/Irrelevant",
+                           filtering_parameters=None, baseline_window=[-0.5, -0.05],
+                           baseline_mode="ratio")
+    # Extract the channel in the GNW ROI:
+    epochs = get_roi_channels(epochs, rois["gnw"], bids_root, aseg="aparc.a2009s+aseg")
+    # Plot the data aggregated across channels for this model:
+    save_dir = Path(save_root, "onset_resp_gnw")
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    colors = {
+        "500ms": [0.1, 0.1, 0.1],
+        "1000ms": [0.4, 0.4, 0.4],
+        "1500ms": [0.7, 0.7, 0.7]
+    }
+    ts_lim = None
 
-            plot_avg(epochs, category_order, duration_order_msec, str(Path(save_dir, gen_file_name)), colors,
-                     ylim=None, smoothing=smooth_samp)
-            plot_lmm_raster(epochs, str(Path(save_dir, gen_file_name)), colors, ylim=ylim,
-                            conditions_order={"category": ["face", "object", "letter", "false"],
-                                              "duration": ["1500ms", "1000ms", "500ms"],
-                                              },
-                            smoothing=smooth_samp, crop_cb=True, scaling=scaling, ylabel="HGP (norm.)")
+    # Plot the grand average:
+    avgs = {dur: [] for dur in ["1500ms", "1000ms", "500ms"]}
+    for subject in epochs.keys():
+        # Loop through each channel:
+        for ch in epochs[subject].ch_names:
+            # Loop through each condition:
+            for duration in ["1500ms", "1000ms", "500ms"]:
+                # Compute the average within this condition:
+                avgs[duration].append(np.squeeze(epochs[subject][duration].average(picks=ch).get_data()))
+    # Compute the grand average:
+    grand_avg = np.array([np.mean(np.array(avgs[cond]), axis=0) for cond in avgs.keys()])
+    # Compute the errors:
+    errors = []
+    for cond in avgs.keys():
+        errors.append(sem(avgs[cond], axis=0))
+    grand_avg = uniform_filter1d(np.array(grand_avg), smooth_samp, axis=-1)
+    errors = [uniform_filter1d(error, smooth_samp, axis=-1) for error in errors]
+    filename = Path(save_dir, "non_selective_grand_average.png")
+    fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
+                                    mm2inch(fig_size[1])])
+    plot_time_series(grand_avg, crop_time[0], crop_time[1], err=errors,
+                     colors=[colors[key] for key in colors.keys()], vlines=vlines, ylim=[0.95, 1.25],
+                     ax=ax,
+                     xlabel="Time (s)", ylabel="HGP (norm.)", err_transparency=0.2, filename=filename,
+                     title=None, square_fig=False, conditions=duration_order_msec, do_legend=False,
+                     patches=None, patch_color="r", patch_transparency=0.2,
+                     x_ticks=[-0.5, 0, 0.5, 1.0, 1.5, 2.0])
+    plt.close()
 
-            # Plot the average time series of the one electrodes from the GNW ROI that shows onset offset response:
-            epo = epochs["SF104"]
-            # Extract the one channel we are interested in:
-            ch_epo = epo.pick("G12")
-            dur_evk = []
-            dur_sem_data = []
-            for dur in colors.keys():
-                dur_evk.append(np.squeeze(ch_epo.copy()[dur].average().get_data()))
-                dur_sem_data.append(np.squeeze(ch_epo.copy()[dur].get_data()))
-            dur_err = corrected_sem(dur_sem_data, len(dur_sem_data))
+    # Plot the average time series of the one electrodes from the GNW ROI that shows onset offset response:
+    epo = epochs["SF104"]
+    # Extract the one channel we are interested in:
+    ch_epo = epo.pick("G12")
+    dur_evk = []
+    errs = []
+    for dur in colors.keys():
+        dur_evk.append(np.squeeze(ch_epo.copy()[dur].average().get_data()))
+        errs.append(sem(np.squeeze(ch_epo.copy()[dur].get_data()), axis=0))
 
-            # Apply smoothing:
-            evks = uniform_filter1d(np.array(dur_evk), smooth_samp, axis=-1)
-            errs = [uniform_filter1d(error, smooth_samp, axis=-1) for error in dur_err]
-            # Opend a figure:
-            filename = Path(save_dir, "onset_offset_SF104-G12.png")
-            fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
-                                            mm2inch(fig_size[1])])
-            plot_time_series(evks, crop_time[0], crop_time[1], err=errs,
-                             colors=[colors[key] for key in colors.keys()], vlines=vlines, ylim=ts_lim,
-                             ax=ax,
-                             xlabel="Time (s)", ylabel="HGP (norm.)", err_transparency=0.2, filename=filename,
-                             title=None, square_fig=False, conditions=duration_order_msec, do_legend=False,
-                             patches=None, patch_color="r", patch_transparency=0.2,
-                             x_ticks=[-0.5, 0, 0.5, 1.0, 1.5, 2.0])
-            plt.close()
+    # Apply smoothing:
+    evks = uniform_filter1d(np.array(dur_evk), smooth_samp, axis=-1)
+    errs = [uniform_filter1d(error, smooth_samp, axis=-1) for error in errs]
+    # Opend a figure:
+    filename = Path(save_dir, "onset_offset_SF104-G12.png")
+    fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
+                                    mm2inch(fig_size[1])])
+    plot_time_series(evks, crop_time[0], crop_time[1], err=errs,
+                     colors=[colors[key] for key in colors.keys()], vlines=vlines, ylim=ts_lim,
+                     ax=ax,
+                     xlabel="Time (s)", ylabel="HGP (norm.)", err_transparency=0.2, filename=filename,
+                     title=None, square_fig=False, conditions=duration_order_msec, do_legend=False,
+                     patches=None, patch_color="r", patch_transparency=0.2,
+                     x_ticks=[-0.5, 0, 0.5, 1.0, 1.5, 2.0])
+    plt.close()
 
-            # Now name the file for condition 1:
-            filename = Path(save_dir, "onset_offset_SF104-G12_lgd.png")
-            # Opend a figure:
-            fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
-                                            mm2inch(fig_size[1])])
-            plot_time_series(evks, crop_time[0], crop_time[1], err=errs,
-                             colors=[colors[key] for key in colors.keys()], vlines=vlines, ylim=None,
-                             ax=ax,
-                             xlabel="Time (s)", ylabel="HGP (norm.)", err_transparency=0.2, filename=filename,
-                             title=None, square_fig=False, conditions=duration_order_msec, do_legend=True,
-                             patches=None, patch_color="r", patch_transparency=0.2)
-            plt.close()
+    # Now name the file for condition 1:
+    filename = Path(save_dir, "onset_offset_SF104-G12_lgd.png")
+    # Opend a figure:
+    fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
+                                    mm2inch(fig_size[1])])
+    plot_time_series(evks, crop_time[0], crop_time[1], err=errs,
+                     colors=[colors[key] for key in colors.keys()], vlines=vlines, ylim=None,
+                     ax=ax,
+                     xlabel="Time (s)", ylabel="HGP (norm.)", err_transparency=0.2, filename=filename,
+                     title=None, square_fig=False, conditions=duration_order_msec, do_legend=True,
+                     patches=None, patch_color="r", patch_transparency=0.2)
+    plt.close()
+
+    # Plot the average across face selective electrodes:
+    face_selective_picks = cate_sel_results.loc[cate_sel_results["condition"] == "face", "channel"]
+    # Further remove any channels showing category selectivity:
+    subs = list(set([pick.split("-")[0] for pick in face_selective_picks]))
+    # Load these channels:
+    epochs = epochs_loader(subs, epo_dir, epo_file, face_selective_picks, crop_time, ses,
+                           conditions="stimulus onset/Irrelevant",
+                           filtering_parameters=None, baseline_window=[-0.5, -0.05],
+                           baseline_mode="ratio")
+    # Extract the channel in the GNW ROI:
+    epochs = get_roi_channels(epochs, rois["gnw"], bids_root, aseg="aparc.a2009s+aseg")
+    # Plot the grand average:
+    avgs = {dur: [] for dur in ["1500ms", "1000ms", "500ms"]}
+    for subject in epochs.keys():
+        # Loop through each channel:
+        for ch in epochs[subject].ch_names:
+            # Loop through each condition:
+            for duration in ["1500ms", "1000ms", "500ms"]:
+                # Compute the average within this condition:
+                avgs[duration].append(np.squeeze(epochs[subject][duration].average(picks=ch).get_data()))
+    # Compute the grand average:
+    grand_avg = np.array([np.mean(np.array(avgs[cond]), axis=0) for cond in avgs.keys()])
+    # Compute the errors:
+    errors = []
+    for cond in avgs.keys():
+        errors.append(sem(avgs[cond], axis=0))
+    grand_avg = uniform_filter1d(np.array(grand_avg), smooth_samp, axis=-1)
+    errors = [uniform_filter1d(error, smooth_samp, axis=-1) for error in errors]
+    filename = Path(save_dir, "face_selective_grand_average.png")
+    fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
+                                    mm2inch(fig_size[1])])
+    plot_time_series(grand_avg, crop_time[0], crop_time[1], err=errors,
+                     colors=[colors[key] for key in colors.keys()], vlines=vlines, ylim=ts_lim,
+                     ax=ax,
+                     xlabel="Time (s)", ylabel="HGP (norm.)", err_transparency=0.2, filename=filename,
+                     title=None, square_fig=False, conditions=duration_order_msec, do_legend=False,
+                     patches=None, patch_color="r", patch_transparency=0.2,
+                     x_ticks=[-0.5, 0, 0.5, 1.0, 1.5, 2.0])
+    plt.close()
 
 
 if __name__ == "__main__":
     subfolders_list = [
-        "high_gamma_iit_ti", "high_gamma_gnw_ti",
-        "high_gamma_iit_tr", "high_gamma_gnw_tr",
-        "alpha_iit_tr", "alpha_gnw_tr",
-        "alpha_iit_ti", "alpha_gnw_ti",
-        "alpha_iit_tr", "alpha_gnw_tr",
-        "erp_iit_ti", "erp_gnw_ti",
-        "erp_iit_tr", "erp_gnw_tr"
     ]
     models = ["time_win_dur_iit", "time_win_dur_gnw", "time_win_dur_cate_iit", "time_win_dur_cate_gnw"]
-    category_selectivity_file = "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/" \
-                                "category_selectivity/sub-super/ses-V1/ieeg/results/high_gamma_dprime_test/" \
+    category_selectivity_file = ["/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/" \
+                                "category_selectivity/sub-super/ses-V1/ieeg/results/high_gamma_dprime_test_ti/" \
                                 "desbadcharej_notfil_lapref/" \
-                                "sub-super_ses-V1_task-Dur_analysis-category_selectivity_all_results.csv"
+                                "sub-super_ses-V1_task-Dur_analysis-category_selectivity_sig_results.csv",
+                                 "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/" \
+                                 "category_selectivity/sub-super/ses-V1/ieeg/results/high_gamma_dprime_test_tr/" \
+                                 "desbadcharej_notfil_lapref/" \
+                                 "sub-super_ses-V1_task-Dur_analysis-category_selectivity_sig_results.csv"
+                                 ]
+
     activation_plot_handler(subfolders_list, models, category_selectivity_file,
-                            save_root="/hpc/users/alexander.lepauvre/plotting_test/activation_analysis")
+                            save_root="/hpc/users/alexander.lepauvre/plotting_test/activation_analysis_newest")

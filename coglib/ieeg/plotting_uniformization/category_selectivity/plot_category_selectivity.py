@@ -327,9 +327,9 @@ def category_selectivity_handler(result_tbls, subjects=None, save_root="", categ
 if __name__ == "__main__":
     result_tbls = [
         "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/category_selectivity/sub-super/ses-V1/ieeg"
-        "/results/high_gamma_dprime_test_ti_400ms/desbadcharej_notfil_lapref/sub-super_ses-V1_task-Dur_analysis-category_selectivity_all_results.csv",
+        "/results/high_gamma_dprime_test_ti/desbadcharej_notfil_lapref/sub-super_ses-V1_task-Dur_analysis-category_selectivity_all_results.csv",
         "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/category_selectivity/sub-super/ses-V1/ieeg"
-        "/results/high_gamma_dprime_test_tr_400ms/desbadcharej_notfil_lapref/sub-super_ses-V1_task-Dur_analysis-category_selectivity_all_results.csv"
+        "/results/high_gamma_dprime_test_tr/desbadcharej_notfil_lapref/sub-super_ses-V1_task-Dur_analysis-category_selectivity_all_results.csv"
     ]
     category_selectivity_handler(result_tbls,
                                  save_root="/hpc/users/alexander.lepauvre/plotting_test/category_selectivity")

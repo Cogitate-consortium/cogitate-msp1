@@ -223,10 +223,10 @@ bayes_visual_responsiveness_file = "derivatives/visual_responsiveness/sub-super/
                              "high_gamma_wilcoxon_onset_bayes_t_test/desbadcharej_notfil_lapref/" \
                              "sub-super_ses-V1_task-Dur_analysis-vis_resp_all_results.csv"
 category_selectivity_ti_file = "derivatives/category_selectivity/sub-super/ses-V1/ieeg/results/" \
-                               "high_gamma_dprime_test_ti_400ms/desbadcharej_notfil_lapref/" \
+                               "high_gamma_dprime_test_ti/desbadcharej_notfil_lapref/" \
                                "sub-super_ses-V1_task-Dur_analysis-category_selectivity_all_results.csv"
 category_selectivity_tr_file = "derivatives/category_selectivity/sub-super/ses-V1/ieeg/results/" \
-                               "high_gamma_dprime_test_tr_400ms/desbadcharej_notfil_lapref/" \
+                               "high_gamma_dprime_test_tr/desbadcharej_notfil_lapref/" \
                                "sub-super_ses-V1_task-Dur_analysis-category_selectivity_all_results.csv"
 activation_analysis_iit_ti_file = "derivatives/activation_analysis/sub-super/ses-V1/ieeg/results/" \
                                   "high_gamma_iit_ti/desbadcharej_notfil_lapref/" \
@@ -731,88 +731,69 @@ for ch in channels_list:
         false_onset_offset_tr = onset_offset_false_tr_results.loc[onset_offset_false_tr_results["channel"] == ch,
                                                                   "condition"].item()
         # Check:
-        if face_onset_offset_ti == face_onset_offset_tr:
-            if face_onset_offset_ti == "both":
-                face_both = True
-                face_onset = True
-                face_offset = True
-            if 'stimulus onset' in face_onset_offset_ti:
-                face_both = False
-                face_onset = True
-                face_offset = False
-            elif 'stimulus offset' in face_onset_offset_tr:
-                face_both = False
-                face_onset = False
-                face_offset = True
-            else:
-                face_both = False
-                face_onset = False
-                face_offset = False
+        if face_onset_offset_ti == "both" and face_onset_offset_tr == "both":
+            face_both = True
+            face_onset = True
+            face_offset = True
+        elif 'stimulus onset' in face_onset_offset_ti and 'stimulus onset' in face_onset_offset_tr:
+            face_both = False
+            face_onset = True
+            face_offset = False
+        elif 'stimulus offset' in face_onset_offset_ti and 'stimulus offset' in face_onset_offset_tr:
+            face_both = False
+            face_onset = False
+            face_offset = True
         else:
             face_both = False
             face_onset = False
             face_offset = False
-        if object_onset_offset_ti == object_onset_offset_tr:
-            if object_onset_offset_ti == "both":
-                object_both = True
-                object_onset = True
-                object_offset = True
-            if 'stimulus onset' in object_onset_offset_ti:
-                object_both = False
-                object_onset = True
-                object_offset = False
-            elif 'stimulus offset' in object_onset_offset_ti:
-                object_both = False
-                object_onset = False
-                object_offset = True
-            else:
-                object_both = False
-                object_onset = False
-                object_offset = False
+
+        if object_onset_offset_ti == "both" and object_onset_offset_tr == "both":
+            object_both = True
+            object_onset = True
+            object_offset = True
+        elif 'stimulus onset' in object_onset_offset_ti and 'stimulus onset' in object_onset_offset_tr:
+            object_both = False
+            object_onset = True
+            object_offset = False
+        elif 'stimulus offset' in object_onset_offset_ti and 'stimulus offset' in object_onset_offset_tr:
+            object_both = False
+            object_onset = False
+            object_offset = True
         else:
             object_both = False
             object_onset = False
             object_offset = False
 
-        if letter_onset_offset_ti == letter_onset_offset_tr:
-            if letter_onset_offset_ti == "both":
-                letter_both = True
-                letter_onset = True
-                letter_offset = True
-            if 'stimulus onset' in letter_onset_offset_ti:
-                letter_both = False
-                letter_onset = True
-                letter_offset = False
-            elif 'stimulus offset' in letter_onset_offset_ti:
-                letter_both = False
-                letter_onset = False
-                letter_offset = True
-            else:
-                letter_both = False
-                letter_onset = False
-                letter_offset = False
+        if letter_onset_offset_ti == "both" and letter_onset_offset_tr == "both":
+            letter_both = True
+            letter_onset = True
+            letter_offset = True
+        elif 'stimulus onset' in letter_onset_offset_ti and 'stimulus onset' in letter_onset_offset_tr:
+            letter_both = False
+            letter_onset = True
+            letter_offset = False
+        elif 'stimulus offset' in letter_onset_offset_ti and 'stimulus offset' in letter_onset_offset_tr:
+            letter_both = False
+            letter_onset = False
+            letter_offset = True
         else:
             letter_both = False
             letter_onset = False
             letter_offset = False
 
-        if false_onset_offset_ti == false_onset_offset_tr:
-            if false_onset_offset_ti == "both":
-                false_both = True
-                false_onset = True
-                false_offset = True
-            if 'stimulus onset' in false_onset_offset_ti:
-                false_both = False
-                false_onset = True
-                false_offset = False
-            elif 'stimulus offset' in false_onset_offset_ti:
-                false_both = False
-                false_onset = False
-                false_offset = True
-            else:
-                false_both = False
-                false_onset = False
-                false_offset = False
+        if false_onset_offset_ti == "both" and false_onset_offset_tr == "both":
+            false_both = True
+            false_onset = True
+            false_offset = True
+        elif 'stimulus onset' in false_onset_offset_ti and 'stimulus onset' in false_onset_offset_tr:
+            false_both = False
+            false_onset = True
+            false_offset = False
+        elif 'stimulus offset' in false_onset_offset_ti and 'stimulus offset' in false_onset_offset_tr:
+            false_both = False
+            false_onset = False
+            false_offset = True
         else:
             false_both = False
             false_onset = False
