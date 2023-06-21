@@ -205,7 +205,18 @@ def rsa_plot_handler(folders_list, preprocess_steps=None, save_root=None, rdm_me
     # Loop through each RSA folders:
     for folder in folders_list:
         print(folder)
-        if "identity" in folder or "orientation" in folder or "gnw" in folder:
+        if folder == "iit_face_vs_obj_ti_1500ms_all_to_all" or folder == "iit_face_vs_obj_tr_1500ms_all_to_all":
+            ylim = [-2, 8]
+            midpoint = 0.6
+        elif folder == "gnw_face_vs_obj_ti_1500ms_all_to_all" or \
+                folder == "gnw_face_vs_obj_ti_1500ms_all_to_all" or \
+                folder == "iit_face_orientation_titr_1500ms_all_to_all" or \
+                folder == "iit_object_identity_titr_1000ms_1500ms_all_to_all" or \
+                folder == "gnw_face_orientation_titr_1500ms_all_to_all" or \
+                folder == "gnw_object_identity_titr_1000ms_1500ms_all_to_all":
+            ylim = [-2, 5]
+            midpoint = 0.6
+        elif "identity" in folder or "orientation" in folder or "gnw" in folder:
             ylim = [-2, 5]
             midpoint = 0.8
         else:
@@ -547,6 +558,8 @@ def rsa_plot_handler(folders_list, preprocess_steps=None, save_root=None, rdm_me
             xrange = np.max(pts) - np.min(pts)
             ax.set_xlim([np.min(pts) - 0.2 * xrange, np.max(pts) + 0.1 * xrange])
             ax.set_ylim([np.min(pts) - 0.2 * xrange, np.max(pts) + 0.1 * xrange])
+            plt.locator_params(axis='y', nbins=3)
+            plt.locator_params(axis='x', nbins=3)
             ax.set_xlabel("PCA 1")
             ax.set_ylabel("PCA 2")
             plt.tight_layout()
@@ -693,4 +706,4 @@ if __name__ == "__main__":
         "iit_letter_vs_sym_tr_1500ms_all_to_all", "iit_letter_vs_sym_ti_1500ms_all_to_all_200_feat"
     ]
     rsa_plot_handler(folders_list, preprocess_steps="desbadcharej_notfil_lapref",
-                     save_root="/hpc/users/alexander.lepauvre/plotting_test/rsa", rdm_method="procrustes")
+                     save_root="/hpc/users/alexander.lepauvre/plotting_test/rsa_final2", rdm_method="procrustes")
