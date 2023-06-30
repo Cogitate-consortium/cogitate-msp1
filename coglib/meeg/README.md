@@ -49,7 +49,7 @@ To run any of the group-level analysis (i.e., these analyses are marked in the s
 python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py
 ```
 
-##List of analysis and corresposing run time
+## List of analysis and corresposing run time
 - activation:
 **Individual-level analysis run time ~= 60min per participant**
 **Group-level analysis run time ~= 240min**
