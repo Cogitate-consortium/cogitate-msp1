@@ -23,7 +23,7 @@
                 "method": "wavelet",
                 "freq_range": [8, 14],
                 "step": 1,
-                "n_cycle_denom": 3.33,
+                "n_cycle_denom": 2.0,
                 "time_bandwidth": 2.0,
                 "baseline_mode": "ratio",
                 "baseline_win": [-0.750, -0.250]
