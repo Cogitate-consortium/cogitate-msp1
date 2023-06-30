@@ -1,0 +1,4 @@
+name: mne_meg01
+channels:
+  - defaults
+prefix: /home/oscar.ferrante/.conda/envs/mne_meg01
