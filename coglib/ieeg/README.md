@@ -13,8 +13,130 @@ The different analyses work with a master script that then calls functions from 
 weren't set as packages, the entire repository must be set as a new PYTHONPATH for python to know it can search for
 functions in the different folders. You should therefore execute:
 ```
-export PYTHONPATH=$PYTHONPATH:YOUR_PATH/ECoG
+export PYTHONPATH=$PYTHONPATH:REPO_ROOT/cogitate-msp1/ieeg
 ```
+
+## Running on sample data:
+For the analysis described below, as single config file is specified for illustration purpose. You can use any of the config files 
+found within a directory. Make sure to adjust the bids root to match the following first:
+*$ROOT/sample_data/bids*
+
+### Running preprocessing:
+In the file ieeg/Preprocessing/configs/PreprocessingParameters_task-Duration_Alex.json, set the parameters "BIDS_root" to
+*$ROOT/ieeg/sample_data/bids*
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/ieeg/Preprocessing/category_selectivity_master.py REPO_ROOT/cogitate-msp1/ieeg/Preprocessing/configs/PreprocessingParameters_task-Duration_Alex.json --subject SF102 --interactive
+```
+Expected output: the script should generate a directory under:
+*$ROOT/sample_data/bids/derivatives/preprocessing/sub-SF102*
+containing several subfolders, one for each preprocessing steps. The epoching folder contains the final state of 
+the data ready for the next analysis steps (note that these are already available)
+
+**Run time ~= 10min**
+
+### Running analyses:
+#### Visual responsiveness:
+In the file ieeg/visual_responsiveness_analysis/super_subject_config/visual_responsivness_config_parameters_site-HPC_task-Duration_sig-highgamma_trti_wilcoxon_onset_two_tailed.json, set the parameters "BIDS_root" to
+*$ROOT/ieeg/sample_data/bids*
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/ieeg/visual_responsiveness_analysis/visual_responsiveness_master.py --config REPO_ROOT/cogitate-msp1/ieeg/visual_responsiveness_analysis/super_subject_config/visual_responsivness_config_parameters_site-HPC_task-Duration_sig-highgamma_trti_wilcoxon_onset_two_tailed.json
+```
+This will run the visual responsiveness analysis on all subjects available in the bids folder. It will extend the derivatives:
+*$ROOT/ieeg/sample_data/bids/derivatives/visual_responsiveness/sub-super/ses-V1/ieeg*
+This folder contains 3 subfolders: 
+- data: contains the data formated for the test
+- figure: contains the figures generated at the end of the analysis pipeline
+- results: contains csv tables containing the results of the analysis
+Within each of these folders, a subfolder will be found, with a name identifying the specific parameters of the analysis
+
+**Run time ~= 30min**
+
+#### Category selectivity:
+In the file ieeg/category_selectivity_analysis/super_subject_config/category_selectivity_config_parameters_site-HPC_task-Duration_sig-highgamma_dprime_test_ti.json, set the parameters "BIDS_root" to
+*$ROOT/ieeg/sample_data/bids*
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/ieeg/category_selectivity_analysis/category_selectivity_master.py --config REPO_ROOT/cogitate-msp1/ieeg/category_selectivity_analysis/super_subject_config/category_selectivity_config_parameters_site-HPC_task-Duration_sig-highgamma_dprime_test_ti.json
+```
+This will run the category selectivity analysis on all subjects available in the bids folder. It will extend the derivatives:
+*$REPO_ROOT$ROOT/ieeg/sample_data/bids/derivatives/category_selectivity_analysis/sub-super/ses-V1/ieeg*
+This folder contains 3 subfolders: 
+- data: contains the data formated for the test
+- figure: contains the figures generated at the end of the analysis pipeline
+- results: contains csv tables containing the results of the analysis
+Within each of these folders, a subfolder will be found, with a name identifying the specific parameters of the analysis
+
+**Run time ~= 1h**
+
+#### RSA:
+In the file ieeg/rsa/super_subject_config/rsa_config_iit_face_vs_obj_ti_1500ms_all_to_all.json, set the parameters "BIDS_root" to
+*$ROOT/ieeg/sample_data/bids*
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/ieeg/rsa/rsa_master.py --config REPO_ROOT/cogitate-msp1/ieeg/rsa/super_subject_config/rsa_config_iit_face_vs_obj_ti_1500ms_all_to_all.json
+```
+This will run the RSA on all subjects available in the bids folder. It will extend the derivatives:
+*$ROOT/ieeg/sample_data/bids/derivatives/rsa/sub-super/ses-V1/ieeg*
+This folder contains 3 subfolders: 
+- data: contains the data formated for the test
+- figure: contains the figures generated at the end of the analysis pipeline
+- results: contains csv tables containing the results of the analysis
+Within each of these folders, a subfolder will be found, with a name identifying the specific parameters of the analysis
+
+**Run time ~= 2h**
+
+#### Activation analysis:
+In the file ieeg/Experiment1ActivationAnalysis/lmm_configs/linear_mixed_model_high_gamma_iit_roi_ti.json, set the parameters "BIDS_root" to
+*$ROOT/ieeg/sample_data/bids*
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/ieeg/rsa/rsa_master.py --config REPO_ROOT/cogitate-msp1/ieeg/Experiment1ActivationAnalysis/lmm_configs/linear_mixed_model_high_gamma_iit_roi_ti.json
+```
+This will run the activation analysis on all subjects available in the bids folder. It will extend the derivatives:
+*$ROOT/ieeg/sample_data/bids/derivatives/rsa/sub-super/ses-V1/ieeg*
+This folder contains 3 subfolders: 
+- data: contains the data formated for the test
+- figure: contains the figures generated at the end of the analysis pipeline
+- results: contains csv tables containing the results of the analysis
+Within each of these folders, a subfolder will be found, with a name identifying the specific parameters of the analysis
+
+**Run time ~= 1h**
+
+#### Decoding analysis:
+In the file ieeg/decoding/configs/decoding_category_face_object_duration_cross_decoding.json, set the parameters "BIDS_root" to
+*$ROOT/ieeg/sample_data/bids*
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/ieeg/decoding/decoding_master.py --config REPO_ROOT/cogitate-msp1/ieeg/configs/decoding_category_face_object_duration_cross_decoding.json
+```
+This will run the decoding on all subjects available in the bids folder. It will extend the derivatives:
+*$ROOT/ieeg/sample_data/bids/derivatives/decoding/sub-super/ses-V1/ieeg*
+This folder contains 3 subfolders: 
+- data: contains the data formated for the test
+- figure: contains the figures generated at the end of the analysis pipeline
+- results: contains csv tables containing the results of the analysis
+Within each of these folders, a subfolder will be found, with a name identifying the specific parameters of the analysis
+
+**Run time ~= 2h**
+
+#### Synchrony analysis:
+In the file ieeg/synchrony/configs/synchrony_roi_ppc.json, set the parameters "BIDS_root" to
+*$ROOT/ieeg/sample_data/bids*
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/ieeg/synchrony/synchrony_master.py --config REPO_ROOT/cogitate-msp1/ieeg/configs/synchrony_roi_ppc.json
+```
+This will run the synchrony on all subjects available in the bids folder. It will extend the derivatives:
+*$ROOT/ieeg/sample_data/bids/derivatives/decoding/sub-super/ses-V1/ieeg*
+This folder contains 3 subfolders: 
+- data: contains the data formated for the test
+- figure: contains the figures generated at the end of the analysis pipeline
+- results: contains csv tables containing the results of the analysis
+Within each of these folders, a subfolder will be found, with a name identifying the specific parameters of the analysis
+
+**Run time ~= 30min**
 
 ## General architecture:
 The repository is organized in folders corresponding to different analyses. In each folder, you will find a subfolder 
@@ -126,19 +248,19 @@ is not compatible with the main environment. You should install this separate en
 conda env create --file=requirements_lmm.yaml
 ```
 
-###rsa:
+### rsa:
 Contains functions computing correlation between vectors of channels in cross temporal fashion to investigate 
 multivariate patterns associated with sustained perception.
 
-###Decoding:
+### Decoding:
 @Simon, you can add a quick description here if needed
 
-###Synchrony:
+### Synchrony:
 @Simon, you can add a quick description here if needed
 
 
 Other folders contain general functions
-###freesurfer:
+### freesurfer:
 Contains different freesurfer functions that do different reconstructions and whatnot.
 ###general_helper_function:
 Contains collections of functions that are called in several different places throughout the repo to perform specific 
