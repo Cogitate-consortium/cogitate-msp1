@@ -77,50 +77,26 @@ def plot_single_electrodes(configs, save_folder="super"):
                     f.write(f"{subject}\n")
             # Load the epochs of every subject:
             for subject in results["subject"].unique():
-                epochs[subject], mni_coordinates = load_epochs(param.BIDS_root, analysis_parameters["signal"],
-                                                               subject,
-                                                               session=param.session,
-                                                               task_name=param.task_name,
-                                                               preprocess_folder=param.preprocessing_folder,
-                                                               preprocess_steps=param.preprocess_steps,
-                                                               channel_types={"seeg": True, "ecog": True},
-                                                               condition=analysis_parameters["conditions"],
-                                                               baseline_method=analysis_parameters[
-                                                                   "baseline_correction"],
-                                                               baseline_time=analysis_parameters["baseline_time"],
-                                                               crop_time=analysis_parameters["crop_time"],
-                                                               select_vis_resp=False,
-                                                               vis_resp_folder=None,
-                                                               aseg=param.aseg,
-                                                               montage_space="T1",
-                                                               get_mni_coord=True,
-                                                               picks_roi=None,
-                                                               filtering_parameters=analysis_parameters[
-                                                                   "multitaper_parameters"])
-                mni_coords.append(mni_coordinates)
-            mni_coords = pd.concat(mni_coords, ignore_index=True)
-            channels_info = pd.DataFrame()
-            # Looping through the results to append info to the mni coordinates:
-            for ind, channel in enumerate(results["channel"].to_list()):
-                # Get the channel mni coordinate:
-                ch_mni_coord = mni_coords.loc[mni_coords["channels"] == channel]
-                ch_results = results.loc[results["channel"] == channel]
-                # Create the table:
-                channels_info = channels_info.append(pd.DataFrame({
-                    "subject_id": channel.split("-")[0],
-                    "channel": channel,
-                    "ch_types": ch_mni_coord["ch_types"].item(),
-                    "x": ch_mni_coord["x"].item(),
-                    "y": ch_mni_coord["y"].item(),
-                    "z": ch_mni_coord["z"].item(),
-                    "condition": ch_results["condition"].item(),
-                    "reject": ch_results["reject"].item(),
-                    "onset": ch_results["onset"].item(),
-                    "offset": ch_results["offset"].item(),
-                    "effect_strength": ch_results["effect_strength"].item()
-                }, index=[ind]))
-            # Saving the results to file:
-            channels_info.to_csv(Path(save_path_fig, param.files_prefix + "channels_info.csv"))
+                epochs[subject], _ = load_epochs(param.BIDS_root, analysis_parameters["signal"],
+                                                 subject,
+                                                 session=param.session,
+                                                 task_name=param.task_name,
+                                                 preprocess_folder=param.preprocessing_folder,
+                                                 preprocess_steps=param.preprocess_steps,
+                                                 channel_types={"seeg": True, "ecog": True},
+                                                 condition=analysis_parameters["conditions"],
+                                                 baseline_method=analysis_parameters[
+                                                     "baseline_correction"],
+                                                 baseline_time=analysis_parameters["baseline_time"],
+                                                 crop_time=analysis_parameters["crop_time"],
+                                                 select_vis_resp=False,
+                                                 vis_resp_folder=None,
+                                                 aseg=param.aseg,
+                                                 montage_space="T1",
+                                                 get_mni_coord=True,
+                                                 picks_roi=None,
+                                                 filtering_parameters=analysis_parameters[
+                                                     "multitaper_parameters"])
 
             # Get the labels of each channel according to the atlas:
             channels_labels = pd.DataFrame()
@@ -166,7 +142,7 @@ def plot_single_electrodes(configs, save_folder="super"):
                     ch_epochs = sub_epochs.copy().pick(channel)
                     # Check whether this electrode is significant:
                     rej = subject_results.loc[subject_results["channel"] == channel,
-                                              "reject"].item()
+                    "reject"].item()
                     # Find in which ROI this channel is:
                     channel_roi = None
                     for roi in param.rois.keys():
@@ -256,7 +232,7 @@ def plot_single_electrodes(configs, save_folder="super"):
                     ch_epochs = sub_epochs.copy().pick(channel)
                     # Check whether this electrode is significant:
                     rej = subject_results.loc[subject_results["channel"] == channel,
-                                              "reject"].item()
+                    "reject"].item()
                     # Find in which ROI this channel is:
                     channel_roi = None
                     for roi in param.rois.keys():
@@ -356,7 +332,7 @@ def plot_single_electrodes(configs, save_folder="super"):
                     ch_epochs = sub_epochs.copy().pick(channel)
                     # Check whether this electrode is significant:
                     rej = subject_results.loc[subject_results["channel"] == channel,
-                                              "reject"].item()
+                    "reject"].item()
                     # Find in which ROI this channel is:
                     channel_roi = None
                     for roi in param.rois.keys():
