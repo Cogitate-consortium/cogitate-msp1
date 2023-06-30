@@ -12,3 +12,38 @@ conda env create --file=requirements_cogitate_meg_lmm.yaml
 ```
 The environments are tailored for Linux and the HPC, so some things might break a little if you use windows or Mac 
 (not tested very thoroughly).
+
+## Change root path:
+To run the analysis described below on the sample data, make sure to change the bids root path in /meeg/config/config.py:
+*$ROOT/sample_data/bids*
+
+### Running preprocessing:
+In the command line, enter:
+```
+python REPO_ROOT/cogitate-msp1/meeg/preprocessing/99_run_preproc.py --sub SA124 --visit v1 --record run --step 1
+```
+When the first preprocessing step is finished, enter:
+```
+python REPO_ROOT/cogitate-msp1/meeg/preprocessing/P99_run_preproc.py --sub SA124 --visit v1 --record run --step 2
+```
+Expected output: the script should generate a directory under:
+*$ROOT/sample_data/bids/derivatives/preprocessing/sub-SA124*
+containing several subfolders, one for each preprocessing steps. The epoching files contain the final state of 
+the data ready for the next analysis steps.
+
+**Run time ~= 90min**
+
+### Running analyses:
+For each analysis, run the scripts in the corresponding analysis folder (e.g., /meeg/activatin) following the order
+reported in the file name (e.g., first run "S01_source_loc.py", then "S02_source_loc_ga.py" and so on).
+To run any of the individual-level analysis, enter:
+```
+python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py --sub SA124 --visit v1
+```
+Replcae ANALYSIS_FOLDER with the name of the folder corsponsing to the analysis you want to run (e.g., activation)
+and ANALYSIS_CODE with the name of the script you want to exacute (e.g., S01_source_loc.py).
+
+To run any of the group-level analysis (i.e., these analyses are marked in the script file name with the suffix "ga"), enter:
+```
+python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py
+```
