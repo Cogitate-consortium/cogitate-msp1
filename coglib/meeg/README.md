@@ -50,18 +50,18 @@ python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py
 ```
 
 ##List of analysis and corresposing run time
-#- activation:
+- activation:
 **Individual-level analysis run time ~= 60min per participant**
 **Group-level analysis run time ~= 240min**
-#- connectivity
+- connectivity
 **Individual-level analysis run time ~= 90min per participant**
 **Group-level analysis run time ~= 30min**
-#- ged (to be run before the connectivtiy analysis)
+- ged (to be run before the connectivtiy analysis)
 **Individual-level analysis run time ~= 15min per participant**
 **Group-level analysis run time ~= 10min**
-#- roi_mvpa
+- roi_mvpa
 **Individual-level analysis run time ~= XXmin per participant**
 **Group-level analysis run time ~= XXmin**
-#- source_modelling
+- source_modelling
 **Individual-level analysis run time ~= 210min per participant**
 **Group-level analysis run time ~= 60min**
