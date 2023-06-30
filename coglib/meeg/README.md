@@ -13,6 +13,8 @@ conda env create --file=requirements_cogitate_meg_lmm.yaml
 The environments are tailored for Linux and the HPC, so some things might break a little if you use windows or Mac 
 (not tested very thoroughly).
 
+**Installation time ~= 90min**
+
 ## Change root path:
 To run the analysis described below on the sample data, make sure to change the bids root path in /meeg/config/config.py:
 *$ROOT/sample_data/bids*
@@ -42,8 +44,24 @@ python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py --sub SA124
 ```
 Replcae ANALYSIS_FOLDER with the name of the folder corsponsing to the analysis you want to run (e.g., activation)
 and ANALYSIS_CODE with the name of the script you want to exacute (e.g., S01_source_loc.py).
-
 To run any of the group-level analysis (i.e., these analyses are marked in the script file name with the suffix "ga"), enter:
 ```
 python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py
 ```
+
+##List of analysis and corresposing run time
+#- activation:
+**Individual-level analysis run time ~= 60min per participant**
+**Group-level analysis run time ~= 240min**
+#- connectivity
+**Individual-level analysis run time ~= 90min per participant**
+**Group-level analysis run time ~= 30min**
+#- ged (to be run before the connectivtiy analysis)
+**Individual-level analysis run time ~= 15min per participant**
+**Group-level analysis run time ~= 10min**
+#- roi_mvpa
+**Individual-level analysis run time ~= XXmin per participant**
+**Group-level analysis run time ~= XXmin**
+#- source_modelling
+**Individual-level analysis run time ~= 210min per participant**
+**Group-level analysis run time ~= 60min**
