@@ -2,14 +2,14 @@
 
 This repository contains all of the code related to the Cogitate Main Scientific Paper 1 (MSP1). You can find more information below.
 
-Paper Title: ""
+Paper Title: "An adversarial collaboration to critically evaluate theories of consciousness"
 
 | Information | Links |
 | --- | --- |
 | Website | ![Cogitate](https://img.shields.io/badge/cogitate-website-cornflowerblue) |
 | Twitter | [![Twitter Follow](https://img.shields.io/twitter/follow/arccogitate?style=social)](https://twitter.com/arccogitate) |
 | Preregistration | ![Link to preregistration documents](https://osf.io/3t7ax/) |
-| Publication DOI | bioRxiv |
+| Publication DOI | [Link to bioRxiv](https://www.biorxiv.org/content/10.1101/2023.06.23.546249v1) |
 | Dataset | Will be made available in the future. |
 
 ## Structure
