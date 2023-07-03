@@ -859,7 +859,6 @@ def process_data_for_analysis(sub_dict, valid_sub_list, save_path, phase_name):
 
     # analysis dataframes
 
-    """
     d_prime_cat_dur_mod_df = pd.concat(d_prime_cat_dur_mod_list, ignore_index=True)
     d_prime_cat_dur_mod_df.to_csv(os.path.join(save_path, f"lmm_dprime_cat_dur_mod_{phase_name}.csv"), index=False)
     # for d prime
@@ -868,7 +867,6 @@ def process_data_for_analysis(sub_dict, valid_sub_list, save_path, phase_name):
     # for hit rate
     hit_rate_stats = calc_df_stats_permutations(d_prime_cat_dur_mod_df, dependent_col="hit_rate", permutation_col_list=["modality", "stimType", "plndStimulusDur"])
     hit_rate_stats.to_csv(os.path.join(save_path, f"stats_hit_rate_cat_dur_mod_{phase_name}.csv"), index=False)
-    """
 
     fa_rel_cat_df = pd.concat(fa_rel_cat_list, ignore_index=True)
     #fa_stats = calc_df_stats_permutations(fa_rel_cat_df, dependent_col=f"is{FALSEPOSITIVE}", permutation_col_list=["modality", "stimType", "isTaskRelevant"])
