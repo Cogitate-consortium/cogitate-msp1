@@ -5,7 +5,6 @@ import pickle
 import pandas as pd
 
 import ET_data_processing
-import QualityChecker
 from multiprocessing import Process
 
 """ Quality Checks Management Module
