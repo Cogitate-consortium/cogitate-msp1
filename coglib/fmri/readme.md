@@ -20,9 +20,15 @@ The code for different preprocessing steps and analyses are provided in differen
 
 1. Clone this repository to the computer where you intend to run the analysis.
 2. Install the required software. A list of required software can be found in `./cogitate-msp1/coglib/fmri/fmri_all_packages.txt`. Other required software includes can be found in the analysis instructions below.
-3. Download either the sample data found in XXX, or the full dataset available in YYY.
-4. Edit the scripts so that the input paths point to where you have placed the data. Some scripts require functions defined in `./cogitate-msp1/coglib/fmri/helper_functions_MRI.py`. Edit the path in the scripts to point to this file.
+3. Download either the sample data to run a demo (see below), or the full dataset available in YYY.
+4. Edit the scripts so that the bids paths point to where you have placed the data. Some scripts require functions defined in `./cogitate-msp1/coglib/fmri/helper_functions_MRI.py`.
 5. Follow the instructions bellow to run the analyses. Note that several analyses depend on the output of previous analyses and therefore there should be run in the specified order.
+
+# Sample data and demo
+
+Sample data, used to run a demo of the analysis pipeline, can be found [here](https://keeper.mpdl.mpg.de/d/ec345ac7b65e490cb59d/). fMRI data from four subjects (two per data collection site) are provided. After downloading the data, a list of subjects (`participants_fMRI_QC_included_demo_sesV1.tsv`) can be found in `./bids/`. We provide bids converted data (in `./bids/`) as well as preprocessed data (in `./bids/derivatives/fmriprep/` and `./bids/derivatives/freesurfer/`). We also provide data quality measures that can be found in `./bids/derivatives/mriqc/`.
+
+In order to run the demo, besides editing the scripts so that the bids paths point to the downloaded data, if a script uses `subjects = get_subject_list(bids_dir,subject_list_type)` to get the list of subjects to be used, please set `subject_list_type = 'demo'`.
 
 # fMRI data pipeline overview
 
