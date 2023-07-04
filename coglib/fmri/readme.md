@@ -58,9 +58,11 @@ In order to run the demo, besides editing the scripts so that the bids paths poi
 0. BIDS COIN SETUP (https://github.com/Donders-Institute/bidscoin)
 Setup of data processing: Run only once during setup (requires sample dataset).
 
+```
     module purge
     module load bidscoin/3.6.3
     bidsmapper ./temp_raw_for_bidscoin ./bids
+```
 
 
 1. DICOM TO BIDS
