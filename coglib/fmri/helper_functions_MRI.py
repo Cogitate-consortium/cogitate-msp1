@@ -3,7 +3,7 @@
 """
 Created 12.10.2020
 
-@author: David Richter (d.richter@donders.ru.nl)
+@author: David Richter (d.richter@donders.ru.nl), Yamil Vidal (hvidaldossantos@gmail.com)
 
 Various helper functions for fMRI analyses.
 
@@ -30,8 +30,8 @@ def get_subject_list(bids_dir,list_type='all'):
         fname_suffix = 'participants_fMRI_QC_included_phase2_sesV1.tsv'
     elif list_type == 'phase3_V1':
         fname_suffix = 'participants_fMRI_QC_included_phase3_sesV1.tsv'
-    elif list_type == 'phase3_V1_subset':
-        fname_suffix = 'participants_fMRI_QC_included_phase3_sesV1_subset.tsv'
+    elif list_type == 'demo':
+        fname_suffix = 'participants_fMRI_QC_included_demo_sesV1.tsv'
     elif list_type == 'debug':
         fname_suffix = 'debug_participants.tsv'
     else:
