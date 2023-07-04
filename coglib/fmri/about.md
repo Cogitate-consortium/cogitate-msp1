@@ -1,5 +1,5 @@
 # About
-General information regarding the fMRI analysis pipeline. A comprehensive description of the pipeline and running instructions can be found in readme.md
+General information regarding the fMRI analysis pipeline. A comprehensive description of the pipeline and running instructions can be found in `readme.md`
 
 ## Information
 
