@@ -36,20 +36,20 @@ the data ready for the next analysis steps.
 **Run time ~= 90min**
 
 ### Running analyses:
-For each analysis, run the scripts in the corresponding analysis folder (e.g., /meeg/activatin) following the order
+For each analysis, run the scripts in the corresponding analysis folder (e.g., /meeg/activation) following the order
 reported in the file name (e.g., first run "S01_source_loc.py", then "S02_source_loc_ga.py" and so on).
 To run any of the individual-level analysis, enter:
 ```
 python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py --sub SA124 --visit v1
 ```
-Replcae ANALYSIS_FOLDER with the name of the folder corsponsing to the analysis you want to run (e.g., activation)
+Replace ANALYSIS_FOLDER with the name of the folder corresponding to the analysis you want to run (e.g., activation)
 and ANALYSIS_CODE with the name of the script you want to exacute (e.g., S01_source_loc.py).
 To run any of the group-level analysis (i.e., these analyses are marked in the script file name with the suffix "ga"), enter:
 ```
 python REPO_ROOT/cogitate-msp1/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py
 ```
 
-## List of analysis and corresposing run time
+## List of analysis and corresponding run time
 - activation:
 **Individual-level analysis run time ~= 60min per participant**
 **Group-level analysis run time ~= 240min**
