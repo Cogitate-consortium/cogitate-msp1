@@ -319,6 +319,7 @@ Subject level orientation decoding
 	module purge
 	cd ./cogitate-msp1/coglib/fmri/decoding
 	python searchlight_orientation_decoding_subject_level.py
+```
 
 Subject level stim vs baseline decoding to be used as input for multivariate putative NCC analysis
 ```
