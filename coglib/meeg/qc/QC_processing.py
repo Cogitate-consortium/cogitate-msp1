@@ -344,7 +344,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
             #     check=False)
             #epochs = mne.read_epochs(bids_path_epo.fpath, preload=False)
 
-            print("VERY_IMPORTANT EPOCHS faces") # save outputs to pdf for everyone to access
+            print("EPOCHS before drop check - faces") # save outputs to pdf for everyone to access
             epochs_rel_F = epochs['Task_relevance == "Relevant non-target" and Category == "face"']
             print(epochs_rel_F)
             #print(epochs[['face1', 'face2','face3','face4','face5','face6','face7','face8','face9','face10']])
@@ -356,7 +356,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
             # Drop bad epochs based on peak-to-peak magnitude
             epochs.drop_bad(reject=reject)
 
-            print("VERY_IMPORTANT AFTER DROP :)")
+            print("EPOCHS AFTER DROP :)")
             print("FACES task relevant")
             epochs_rel_F = epochs['Task_relevance == "Relevant non-target" and Category == "face"']
             print(epochs_rel_F)
@@ -423,38 +423,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
             #fig1 = epochs.plot_drop_log()
             #pdf.savefig(fig1)
             #plt.close()
-
-
-            # Epoch raw data 3/3
-            #epochs = mne.Epochs(raw,
-            #                    events, 
-            #                    events_id,
-            #                    tmin, tmax,
-            #                    baseline=None,
-            #                    proj=True,
-            #                    picks=picks,
-            #                    detrend=1,
-            #                    reject=None,
-            #                    reject_by_annotation=True,
-            #                    verbose=True)
-                
-            #del raw
             
-            # Add metadata
-            #epochs.metadata = metadata
-            
-            # Get rejection thresholds - all 
-            #reject = get_rejection_threshold(epochs, ch_types=['mag', 'grad', 'eeg'],
-            #                                decim=2)
-            
-            # Drop bad epochs based on peak-to-peak magnitude
-            #epochs.drop_bad(reject=reject)
-
-            # Plot percentage of rejected epochs per channel
-            #fig1 = epochs.plot_drop_log()
-            #pdf.savefig(fig1)
-            #plt.close()
-
 if __name__ == '__main__':
     subject_id = input("Type the subject ID (e.g., SA101)\n>>> ")
     visit_id = input("Type the visit ID (V1 or V2)\n>>> ")

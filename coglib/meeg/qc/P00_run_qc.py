@@ -37,46 +37,4 @@ elif visit_id.upper() == 'V2':
         has_eeg = True
 
 
-# # =============================================================================
-# # DEFINE PREPROCESSING STEPS
-# # =============================================================================
-
-# def pre_step1():
-#     P01_maxwell_filtering.run_maxwell_filter(subject_id, 
-#                                              visit_id)
-#     if has_eeg:
-#         P02_find_bad_eeg.find_bad_eeg(subject_id, 
-#                                       visit_id, 
-#                                       has_eeg)
-#     P03_artifact_annotation.artifact_annotation(subject_id, 
-#                                                 visit_id, 
-#                                                 has_eeg, 
-#                                                 # threshold_muscle,
-#                                                 )
-#     P04_extract_events.run_events(subject_id, 
-#                                   visit_id)
-#     P05_run_ica.run_ica(subject_id, 
-#                         visit_id, 
-#                         has_eeg)
-
-# def pre_step2(
-#               # meg_ica_eog=opt.mICA_eog, meg_ica_ecg=opt.mICA_ecg,
-#               # eeg_ica_eog=opt.eICA_eog, eeg_ica_ecg=opt.eICA_ecg,
-#               ):
-#     P06_apply_ica.apply_ica(subject_id, 
-#                             visit_id, 
-#                             has_eeg)
-
-#     P07_make_epochs.run_epochs(subject_id, 
-#                             visit_id, 
-#                             has_eeg)
-
-
-# =============================================================================
-# RUN
-# =============================================================================
-# if opt.step == '1':
-#     pre_step1()
-# elif opt.step == '2':
-#     pre_step2()
 QC_processing.run_qc_processing(subject_id, visit_id, has_eeg)

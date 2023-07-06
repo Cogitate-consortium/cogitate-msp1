@@ -189,37 +189,6 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
         epochs_irr_O = epochs['Trial_type == "Filler" and Stimuli_type == "Blank"']
         print(epochs_irr_O)
 
-        #types0 = ['Filler', 'Probe']
-        #type1 = ['Face', 'Object', 'Blank']
-        #location = ['Upper Left', 'Upper Right', 'Lower Right', 'Lower Left']
-        #response = ['Seen', 'Unseen']
-
-    #print(epochs[['face1', 'face2','face3','face4','face5','face6','face7','face8','face9','face10']])
-    #print(epochs[['object1', 'object2','object3','object4','object5','object6','object7','object8','object9','object10']])
-    #print(epochs[['letter1', 'letter2','letter3','letter4','letter5','letter6','letter7','letter8','letter9','letter10']])
-    #print(epochs[['false1', 'false2','false3','false4','false5','false6','false7','false8','false9','false10']])
-            
-    # Get rejection thresholds - MEG only
-    #reject = get_rejection_threshold(epochs, ch_types=['mag', 'grad'], #'eeg'], 
-    #                                        decim=2)
-            
-    # Drop bad epochs based on peak-to-peak magnitude
-    #epochs.drop_bad(reject=reject)
-
-    #print("VERY_IMPORTANT EPOCHS faces after drop")
-    #epochs_rel_F = epochs['Task_relevance == "Relevant non-target" and Category == "face"']
-    #print(epochs_rel_F)
-    #print(epochs[['face1', 'face2','face3','face4','face5','face6','face7','face8','face9','face10']])
-    #print(epochs[['object1', 'object2','object3','object4','object5','object6','object7','object8','object9','object10']])
-    #print(epochs[['letter1', 'letter2','letter3','letter4','letter5','letter6','letter7','letter8','letter9','letter10']])
-    #print(epochs[['false1', 'false2','false3','false4','false5','false6','false7','false8','false9','false10']])
-            
-    #print("VERY_IMPORTANT DROP LOG")
-    #print(epochs.drop_log)
-
-    # Plot percentage of rejected epochs per channel
-    #fig1 = epochs.plot_drop_log()
-    #pdf.savefig(fig1)
     plt.close()
 
 
