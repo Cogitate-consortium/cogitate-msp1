@@ -304,7 +304,9 @@ Requires Slice Display (https://github.com/bramzandbelt/slice_display), and MATL
 
 
 **b)** Obtain single trial estimates which are required for all the rest of the decoding analyses
+
 Run time ~= 240min per subject 
+
 Requires NiBetaSeries (https://nibetaseries.readthedocs.io/en/stable/) 
 ```
 	module load nibetaseries/0.6.0
