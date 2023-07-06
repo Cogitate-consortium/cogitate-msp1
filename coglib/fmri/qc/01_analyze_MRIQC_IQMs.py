@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Checks MRI data quality using IQMs from MRIQC. 
+The code is used for QC motion threshold.
+It checks MRI data quality using IQMs from MRIQC. 
 
 Takes MRIQC outputs, assuming bids specifications (bids_dir).
 Calculates mean FD, FD_perc, DVARS and tsnr per run. Uses FD_perc and DVARS 
@@ -33,9 +34,9 @@ Each csv file contains subject IDs, session labels if applicable and 4 IQMs
 run/subject should be rejected from analysis. Outputs are written to the MRIQC 
 directory (mriQcSubdir).
 
-Created on Wed Jan 27 11:03:26 2021
-
-@author: David Richter
+@author: David Richter, first created 01/27/2021
+@ Modified by Urszula Gorska (gorska@wisc.edu)
+Last modified 06/15/2023
 """
 
 import os, sys, json
@@ -46,7 +47,9 @@ import pandas as pd
 #%% Paths and Parameters
 
 # BIDS path
+
 bids_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids'
+participants_dir = '/hpc/users/urszula.gorska/codes/fMRI'
 
 # threshold to mark subjects as rejected if they exceed X SD above group mean
 SdThreshold = 2
@@ -61,11 +64,11 @@ dataDirPattern = bids_dir + mriQcSubdir + os.sep + '%(sub)s' + os.sep + '%(ses)s
 # session labels (values for ses key-value pair)
 sesLabels = ['ses-V1','ses-V2']
 
-subject_list_type = 'phase2_2.3'
-
+subject_list_type = 'optimization_exp1'
 
 # load helper functions / code dir
-code_dir_with_helperfunctions = bids_dir + '/code'
+code_dir_with_helperfunctions = '/hpc/users/urszula.gorska/codes/fMRI'
+# code_dir_with_helperfunctions = bids_dir + '/code'
 sys.path.append(code_dir_with_helperfunctions)
 from helper_functions_MRI import get_subject_list
 
@@ -92,7 +95,8 @@ def saveIQMs(df, ses=None):
     df: data frame with IQMs to be written as csv file
     ses: session label 
     """
-    outputDir = bids_dir + mriQcSubdir
+    outputDir = '/hpc/users/urszula.gorska/codes/fMRI'
+    # outputDir = bids_dir + mriQcSubdir
     if ses is None:
         fname = outputDir + os.sep + 'IQM-perRun_' + subject_list_type + '.csv'
     else:
@@ -162,7 +166,6 @@ def processQMs(df):
     #df.loc[df.tsnr < rejThresh_tsnr,['rejected']] = 1
     return df
 
-
 #%%
 if __name__ == '__main__':
     """
@@ -172,7 +175,8 @@ if __name__ == '__main__':
     subjects: list of subjects to be processed (MRI QC must be finished for all 
     sessions for these subjects)
     """
-    subjects = get_subject_list(bids_dir,subject_list_type)
+    # subjects = get_subject_list(bids_dir,subject_list_type)
+    subjects = get_subject_list(participants_dir,subject_list_type)
     df_all = pd.DataFrame()
     
     # loop over sessions
@@ -190,6 +194,7 @@ if __name__ == '__main__':
             fPath = dataDirPattern%{'sub':sub, 'ses':ses}
             # get json files
             jsonFiles = getJsonFnames(fPath)
+            print(fPath)
             # check if json files exist; otherwise throw warning and skip sub
             if not jsonFiles:
                 print('! CAUTION: No MRIQC json files found for subject: ' + sub + ' | session: ' + ses + ' ! Skipping ! Make sure to run MRIQC for all subjects first !')

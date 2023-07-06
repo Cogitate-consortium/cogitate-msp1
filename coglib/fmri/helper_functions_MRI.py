@@ -19,26 +19,26 @@ def get_subject_list(bids_dir,list_type='all'):
     """
     Gets subject list from bids compliant participants tsv file.
     bidsDir: Bids directory
-    list_type: which list should be retrieved (all, phase2_2.3 (2/3 of 
-    phase2?), phase2 (full phase2),...). By 
-    default all are returned
+    list_type: which list should be retrieved. 
+    By default all are returned
     Returns: subjects list containing subjects
     """
     import pandas as pd
     # get subject list (determines on which subjects scripts are run)
-    if list_type == 'phase2_V1':
-        fname_suffix = 'participants_fMRI_QC_included_phase2_sesV1.tsv'
-    elif list_type == 'phase3_V1':
-        fname_suffix = 'participants_fMRI_QC_included_phase3_sesV1.tsv'
-    elif list_type == 'demo':
-        fname_suffix = 'participants_fMRI_QC_included_demo_sesV1.tsv'
+    if list_type == 'all_p':
+        fname_suffix = 'participants.tsv'
+    elif list_type == 'optimization_exp1':
+        fname_suffix = 'optimization_exp1.tsv'
+    elif list_type == 'replication_exp1':
+        fname_suffix = 'replication_exp1.tsv'
     elif list_type == 'debug':
         fname_suffix = 'debug_participants.tsv'
     else:
         raise ValueError('Invalid subject list type specified. No subject list returned')
     subject_list = bids_dir + os.sep + fname_suffix
     subj_df = pd.read_csv(subject_list, sep="\t")
-    subjects = subj_df['participant_id'].values
+    # subjects = subj_df['participant_id'].values
+    subjects = 'sub-'+subj_df['participant_id'].values
     print('Number of Subjects:', subjects.size)
     return subjects
 	

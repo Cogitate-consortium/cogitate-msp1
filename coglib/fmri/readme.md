@@ -127,7 +127,7 @@ Extract IQMs of interest from MRI QC and reject runs/participants from further a
 ```
 	module purge
 	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/data_rejection
+	cd ./cogitate-msp1/coglib/fmri/qc
 	python 01_analyze_MRIQC_IQMs.py
 ```
 
