@@ -16,7 +16,7 @@ if [ $# -ne 2 ];
 fi
 
 sub_prefix=$1       # Prefix of the subjects we're working on e.g. SA SB etc...
-visit=$2
+visit=$1
 
 set --
 
