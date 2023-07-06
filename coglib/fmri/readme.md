@@ -315,7 +315,9 @@ Requires NiBetaSeries (https://nibetaseries.readthedocs.io/en/stable/)
 
 
 **c)** Run searchlight decoding
+
 Run time ~= 180min per subject 
+
 Requires mansfield (https://github.com/mekman/mansfield)
 
 Subject level category decoding
@@ -340,6 +342,7 @@ Subject level stim vs baseline decoding to be used as input for multivariate put
 ```
 
 Group level analysis 
+
 Run time ~= 60 min 
 ```
 	module purge
@@ -348,7 +351,9 @@ Run time ~= 60 min
 ```
 
 **d)** Obtain searchlight decoding tables
+
 Run time ~= 1 min
+
 Searchlight tables based on the group level searchlight accuracy maps
 ```
 	module purge
@@ -357,7 +362,9 @@ Searchlight tables based on the group level searchlight accuracy maps
 ```
 
 **e)** Run ROI decoding
+
 Run time ~= 10 min per subject 
+
 Subject level category decoding
 ```
 	module purge
@@ -373,6 +380,7 @@ Subject level orientation decoding
 ```
 
 Group level analysis 
+
 Run time ~= 10 min 
 ```
 	module purge
@@ -381,7 +389,9 @@ Run time ~= 10 min
 ```
 
 **f)** Test IIT decoding predictions
+
 Run time ~= 10 min per subject 
+
 Subject level category decoding evaluating accuracies obtained with IIT ROIs only vs accuracies obtained with IIT+PFC ROIs
 ```
 	module purge
@@ -390,6 +400,7 @@ Subject level category decoding evaluating accuracies obtained with IIT ROIs onl
 ```
 
 Group level analysis to determine if the difference between IIT+PFC accuracies and IIT accuracies is statistically significant  
+
 Run time ~= 10 min 
 ```
 	module purge
@@ -398,7 +409,9 @@ Run time ~= 10 min
 ```
 
 **g)** Plot searchlight and ROI decoding results on a brain surface
+
 Run time ~= 5 min per decoding problem 
+
 Plot group level searchlight decoding accuracy maps on a brain surface 
 ```
 	module purge
@@ -417,6 +430,7 @@ Plot group level ROI accuracies on a brain surface
 Requires MATLAB (https://www.mathworks.com/products/matlab.html) and SPM (https://www.fil.ion.ucl.ac.uk/spm/)
 
 **a)** Apply 3D nifti conversion and smoothing
+
 Run time ~= 200 min per subject
 ```
 	cd ./cogitate-msp1/coglib/fmri/gppi
@@ -425,6 +439,7 @@ Run time ~= 200 min per subject
 ```
 
 **b)** Run gppi on combined conditions
+
 Run time ~= 240 min per subject
 ```
 	cd ./cogitate-msp1/coglib/fmri/gppi
@@ -433,6 +448,7 @@ Run time ~= 240 min per subject
 ```
 
 Group level gppi analysis
+
 Run time ~= 60 min per subject
 ```
 	module purge
@@ -441,6 +457,7 @@ Run time ~= 60 min per subject
 ```
 
 **c)** Run gppi on separate conditions
+
 Run time ~= 240 min per subject
 ```
 	cd ./cogitate-msp1/coglib/fmri/gppi
@@ -449,6 +466,7 @@ Run time ~= 240 min per subject
 ```
 
 Group level gppi analysis
+
 Run time ~= 60 min per subject
 ```
 	module purge
@@ -457,6 +475,7 @@ Run time ~= 60 min per subject
 ```
 
 **d)** Obtain gppi tables
+
 Run time ~= 1 min
 ```
 	module purge
@@ -465,6 +484,7 @@ Run time ~= 1 min
 ```
 
 **e)** Plot gppi analysis results on a brain surface
+
 Run time ~= 5 min per contrast
 ```
 	cd ./cogitate-msp1/coglib/fmri/gppi
