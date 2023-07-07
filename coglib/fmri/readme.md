@@ -26,9 +26,9 @@ The code for different preprocessing steps and analyses are provided in differen
 
 # Sample data and demo
 
-Sample data, used to run a demo of the analysis pipeline, can be found [here](https://keeper.mpdl.mpg.de/d/ec345ac7b65e490cb59d/). fMRI data from four subjects (two per data collection site) are provided. After downloading the data, a list of subjects (`participants_fMRI_QC_included_demo_sesV1.tsv`) can be found in `./bids/`. We provide bids converted data (in `./bids/`) as well as preprocessed data (in `./bids/derivatives/fmriprep/` and `./bids/derivatives/freesurfer/`). We also provide data quality measures that can be found in `./bids/derivatives/mriqc/`.
+Sample data, used to run a demo of the analysis pipeline, can be found [here](https://keeper.mpdl.mpg.de/d/ec345ac7b65e490cb59d/). fMRI data from four subjects (two per data collection site) are provided. We provide bids converted data (in `./bids/`) as well as preprocessed data (in `./bids/derivatives/fmriprep/` and `./bids/derivatives/freesurfer/`). We also provide data quality measures that can be found in `./bids/derivatives/mriqc/`.
 
-In order to run the demo, besides editing the scripts so that the bids paths point to the downloaded data, if a script uses `subjects = get_subject_list(bids_dir,subject_list_type)` to get the list of subjects to be used, please set `subject_list_type = 'demo'`.
+In order to run the demo, besides editing the scripts so that the bids paths point to the downloaded data. A list of subjects for the demo (`participants_fMRI_QC_included_demo_sesV1.tsv`) can be found in `./bids/`.  If a script uses `subjects = get_subject_list(bids_dir,subject_list_type)` to get the list of subjects to be used, please set `subject_list_type = 'demo'`. If instead a script loads the subjects' list directly, please point the script to the abovementioned list.
 
 # fMRI data pipeline overview
 
@@ -64,6 +64,7 @@ Setup of data processing: Run only once during setup (requires sample dataset).
     bidsmapper ./temp_raw_for_bidscoin ./bids
 ```
 
+Run time ~= ???
 
 1. DICOM TO BIDS
 Converts DICOM to BIDS compliant niftis.
@@ -75,18 +76,20 @@ Converts DICOM to BIDS compliant niftis.
     python 01_convert_dicom_to_bids.py
 ```
 
+Run time ~= ???
 
 2. Create `events.tsv` files & perform MRI log file checks.
 Create `events.tsv` files per run from experiment native log files
 
 ```
-    module purge
+	module purge
 	module load Python/3.8.6-GCCcore-10.2.0
 	cd ./cogitate-msp1/coglib/fmri/logfiles_and_checks
 	python 01_exp1_create_events_tsv_file.py
 	python 01_evcLoc_create_events_tsv_file.py
 ```
 
+Run time ~= Seconds
 
 3. BIDS Validator (https://neuroimaging-core-docs.readthedocs.io)
 Validate BIDS compliance of dataset
@@ -98,6 +101,7 @@ Validate BIDS compliance of dataset
 	bids-validator bids
 ```
 
+Run time ~= Seconds
 
 4. a) MRI QC (https://mriqc.readthedocs.io; https://github.com/marcelzwiers/mriqc_sub)
 Run MRI QC for visual inspection of (f)MRI data quality. Perform visual inspection of each runs data (see `./bids/derivatives/mriqc`).
@@ -109,6 +113,7 @@ Run MRI QC for visual inspection of (f)MRI data quality. Perform visual inspecti
 	mriqc_sub.py ./bids -t 48 -w ./scratch/mriqc_workdir -o ./bids/derivatives
 ```
 
+Run time ~= ???
 
 4. b) MRI QC group level
 Run MRI QC at the group level
@@ -117,9 +122,10 @@ Run MRI QC at the group level
 	module purge
 	module load mriqc
 	cd ./
-	python mriqc_group.py bids
+	mriqc_group.py bids
 ```
 
+Run time ~= Seconds
 
 5. Data rejection using MRI QC IQMs
 Extract IQMs of interest from MRI QC and reject runs/participants from further analysis (run only AFTER all data has been processed with MRIQC)
@@ -131,6 +137,7 @@ Extract IQMs of interest from MRI QC and reject runs/participants from further a
 	python 01_analyze_MRIQC_IQMs.py
 ```
 
+Run time ~= ???
 
 6. fMRIprep. (https://fmriprep.org; https://github.com/marcelzwiers/fmriprep_sub)
 Preprocess (f)MRI data. Perform visual inspection of each runs data (see `./bids/derivatives/fmriprep`)
@@ -142,6 +149,7 @@ Preprocess (f)MRI data. Perform visual inspection of each runs data (see `./bids
 	fmriprep_sub.py ./bids -w ./scratch/fmriprep_workdir --time 80 --mem_mb 30000 -n 6 -a " --ignore sbref slicetiming --output-spaces T1w MNI152NLin2009cAsym"
 ```
 
+Run time ~= 2 days per subject
 
 7. a) Create anatomical ROI masks
 Besides running this code for the desired participants, it should be also run for the *MNI152NLin2009cAsym* standard brain (for group lvl analyses).
@@ -156,6 +164,7 @@ For this we used the precomputed FreeSurfer output that can be found here: https
 	python 01_create_ROI_masks.py
 ```
 
+Run time ~= 40 minutes per subject
 
 7. b) Resample anatomical ROI masks to target space
 The standard space used is MNI152NLin2009cAsym
@@ -167,6 +176,7 @@ The standard space used is MNI152NLin2009cAsym
 	python 02_resample_ROI_masks_to_target_space.py
 ```
 
+Run time ~= 2 minutes per subject
 
 7. c) Combine ROIs to create theory specific ROIs
 This also creates FFA and LOC masks used for the creation of GPPI seeds
@@ -177,6 +187,7 @@ This also creates FFA and LOC masks used for the creation of GPPI seeds
 	python 03_create_theory_ROI_masks.py
 ```
 
+Run time ~= < 1 minute per subject
 
 7. d) Resample group level anatomical ROI masks to target space
 The standard space used is MNI152NLin2009cAsym
@@ -186,6 +197,7 @@ The standard space used is MNI152NLin2009cAsym
 	bash 04_resample_MNI152_ROIs.sh
 ```
 
+Run time ~= 2 minutes
 
 7. e) Combine ROIs to create theory specific ROIs (group level)
 
@@ -194,6 +206,7 @@ The standard space used is MNI152NLin2009cAsym
 	python 05_create_theory_ROI_masks_MNI152.py
 ```
 
+Run time ~= < 1 minutes
 
 8. Create regressor event txt file
 Create regressor event txt files; 3 column format; 1 per regressors (FSL FEAT compliant) from information in `events.tsv` files per run.
@@ -206,6 +219,7 @@ Create regressor event txt files; 3 column format; 1 per regressors (FSL FEAT co
 	python 02_evcLoc_create_regressor_txt_files.py
 ```
 
+Run time ~= < 1 minutes
 
 9. Run 1st, 2nd and 3rd level GLMs using FSL (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/)
 Create confound regressor files to be used in 1st level GLMs. Then run first and second level GLMs using FSL FEAT; adjust analysis level in python script. Perform visual inspection of each run's output data (see `./bids/derivatives/fslFeat`).
@@ -220,6 +234,9 @@ Create confound regressor files to be used in 1st level GLMs. Then run first and
 	python 02_run_fsf_feat_analyses.py    # Do for each GLM lvl
 ```
 
+Run time 1st level ~= 2 hours per subject
+Run time 2nd level ~= 2:30 hours per subject
+Run time 3rd level ~= 2 hours
 
 10. Create Decoding ROIs
 Requires anatomical ROIs (step 7) and GLMs (step 9).
@@ -232,6 +249,7 @@ Requires anatomical ROIs (step 7) and GLMs (step 9).
 	python 02_create_decoding_rois_leave_one_run_out.py
 ```
 
+Run time ~= 3 minutes per subject
 
 11. Create seeds for GPPI analysis
 Requires anatomical ROIs (step 7) and GLMs (step 9).
@@ -243,6 +261,7 @@ Requires anatomical ROIs (step 7) and GLMs (step 9).
 	python 01_create_gppi_seeds.py
 ```
 
+Run time ~= < 1 minutes per subject
 
 12. Run Putative NCC analysis
 Run putative NCC analysis on FSL Feat outputs.
@@ -256,13 +275,22 @@ Run putative NCC analysis on FSL Feat outputs.
 	python 01_PutativeNCC_analysis_on_FEAT_copes.py                  # Group lvl univariate
 	python 02_putative_ncc_create_C_not_A_or_B_maps.py               # Exclude voxels responsive to task goals and task relevance (Group level univariate)
 
+# Run time ~= 10 minutes per subject
+
 	python 03_putative_ncc_analysis_on_FEAT_copes_subject_level.py   # Subject lvl univariate
 	python 04_putative_ncc_subject_level_create_C_not_A_or_B_maps.py # Exclude voxels responsive to task goals and task relevance (Subject lvl univariate)
+
+# Run time ~= 10 minutes per subject
 
 	python 05_multivariate_putative_ncc_analysis.py                  # Group lvl multivariate
 	python 06_multivariate_putative_ncc_create_C_not_A_or_B_maps.py  # Exclude voxels responsive to task goals and task relevance (Group level multivariate)
 
+# Run time ~= < 1 minutes per subject
+
 	python 07_putative_ncc_merge_phases.py                           # Combine optimization and replication phases, for plotting purposes
+
+# Run time ~= < 1 minutes
+
 ```
 
 
@@ -279,6 +307,7 @@ Requires anatomical masks (7) and the results of putative NCC analyses (12).
 	python 03_multivariate_putative_ncc_group_level_tables.py
 ```
 
+Run time ~= 3 minutes per subject
 
 14. Putative NCC analysis: Generate figures
 Requires Slice Display (https://github.com/bramzandbelt/slice_display), and MATLAB (https://www.mathworks.com/products/matlab.html)
@@ -293,6 +322,7 @@ Requires Slice Display (https://github.com/bramzandbelt/slice_display), and MATL
 	Putative_NCC_04_z_maps.m        # Individual z maps for each stimulus category and condition (relevant and irrelevant)
 ```
 
+Run time ~= < 1 minute
 
 15. Decoding Analysis
 
@@ -302,9 +332,10 @@ Rename confounds tsv files generated by fmriprep for compatibility with NiBetase
 ```
 	cd ./cogitate-msp1/coglib/fmri/decoding
 	rename_confounds_tsv_files.m      
-```	
+```
 
-Add the following information under the "BIDSVersion" field in the dataset_description.json located in the fmriprep dir 
+Add the following information under the "BIDSVersion" field in the dataset_description.json located in the fmriprep dir.
+
 ```
 	"PipelineDescription": {
         "Name": "fMRIPrep",
@@ -319,7 +350,7 @@ Add the following information under the "BIDSVersion" field in the dataset_descr
 
 **b)** Obtain single trial estimates which are required for all the rest of the decoding analyses
 
-Run time ~= 240min per subject 
+Run time ~= 240min per subject
 
 Requires NiBetaSeries (https://nibetaseries.readthedocs.io/en/stable/) 
 ```
