@@ -96,7 +96,6 @@ Create `events.tsv` files per run from experiment native log files
     module load Python/3.8.6-GCCcore-10.2.0
     cd ./cogitate-msp1/coglib/fmri/logfiles_and_checks
     python 01_exp1_create_events_tsv_file.py
-    python 01_evcLoc_create_events_tsv_file.py
 ```
 
 Run time ~= Seconds
