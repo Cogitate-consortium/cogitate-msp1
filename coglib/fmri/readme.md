@@ -92,11 +92,11 @@ Run time ~= ???
 Create `events.tsv` files per run from experiment native log files
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/logfiles_and_checks
-	python 01_exp1_create_events_tsv_file.py
-	python 01_evcLoc_create_events_tsv_file.py
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    cd ./cogitate-msp1/coglib/fmri/logfiles_and_checks
+    python 01_exp1_create_events_tsv_file.py
+    python 01_evcLoc_create_events_tsv_file.py
 ```
 
 Run time ~= Seconds
@@ -105,10 +105,10 @@ Run time ~= Seconds
 Validate BIDS compliance of dataset
 
 ```
-	module purge
-	module load nodejs/12.16.1-GCCcore-7.3.0 
-	cd ./
-	bids-validator bids
+    module purge
+    module load nodejs/12.16.1-GCCcore-7.3.0 
+    cd ./
+    bids-validator bids
 ```
 
 Run time ~= Seconds
@@ -117,10 +117,10 @@ Run time ~= Seconds
 Run MRI QC for visual inspection of (f)MRI data quality. Perform visual inspection of each runs data (see `./bids/derivatives/mriqc`).
 
 ```
-	module purge
-	module load mriqc
-	cd ./ 
-	mriqc_sub.py ./bids -t 48 -w ./scratch/mriqc_workdir -o ./bids/derivatives
+    module purge
+    module load mriqc
+    cd ./ 
+    mriqc_sub.py ./bids -t 48 -w ./scratch/mriqc_workdir -o ./bids/derivatives
 ```
 
 Run time ~= ???
@@ -129,10 +129,10 @@ Run time ~= ???
 Run MRI QC at the group level
 
 ```
-	module purge
-	module load mriqc
-	cd ./
-	mriqc_group.py bids
+    module purge
+    module load mriqc
+    cd ./
+    mriqc_group.py bids
 ```
 
 Run time ~= Seconds
@@ -141,10 +141,10 @@ Run time ~= Seconds
 Extract IQMs of interest from MRI QC and reject runs/participants from further analysis (run only AFTER all data has been processed with MRIQC)
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/qc
-	python 01_analyze_MRIQC_IQMs.py
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    cd ./cogitate-msp1/coglib/fmri/qc
+    python 01_analyze_MRIQC_IQMs.py
 ```
 
 Run time ~= ???
@@ -153,10 +153,10 @@ Run time ~= ???
 Preprocess (f)MRI data. Perform visual inspection of each runs data (see `./bids/derivatives/fmriprep`)
 
 ```
-	module purge
-	module load fmriprep/20.2.3
-	cd ./
-	fmriprep_sub.py ./bids -w ./scratch/fmriprep_workdir --time 80 --mem_mb 30000 -n 6 -a " --ignore sbref slicetiming --output-spaces T1w MNI152NLin2009cAsym"
+    module purge
+    module load fmriprep/20.2.3
+    cd ./
+    fmriprep_sub.py ./bids -w ./scratch/fmriprep_workdir --time 80 --mem_mb 30000 -n 6 -a " --ignore sbref slicetiming --output-spaces T1w MNI152NLin2009cAsym"
 ```
 
 Run time ~= 2 days per subject
@@ -166,12 +166,12 @@ Besides running this code for the desired participants, it should be also run fo
 For this we used the precomputed FreeSurfer output that can be found here: https://figshare.com/articles/dataset/FreeSurfer_reconstruction_of_the_MNI152_ICBM2009c_asymmetrical_non-linear_atlas/4223811
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	module load FreeSurfer
-	module load FSL
-	cd ./cogitate-msp1/coglib/fmri/masks
-	python 01_create_ROI_masks.py
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    module load FreeSurfer
+    module load FSL
+    cd ./cogitate-msp1/coglib/fmri/masks
+    python 01_create_ROI_masks.py
 ```
 
 Run time ~= 40 minutes per subject
@@ -180,10 +180,10 @@ Run time ~= 40 minutes per subject
 The standard space used is MNI152NLin2009cAsym
 
 ```
-	module purge
-	module load ANTs
-	cd ./cogitate-msp1/coglib/fmri/masks
-	python 02_resample_ROI_masks_to_target_space.py
+    module purge
+    module load ANTs
+    cd ./cogitate-msp1/coglib/fmri/masks
+    python 02_resample_ROI_masks_to_target_space.py
 ```
 
 Run time ~= 2 minutes per subject
@@ -192,9 +192,9 @@ Run time ~= 2 minutes per subject
 This also creates FFA and LOC masks used for the creation of GPPI seeds
 
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/masks
-	python 03_create_theory_ROI_masks.py
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/masks
+    python 03_create_theory_ROI_masks.py
 ```
 
 Run time ~= < 1 minute per subject
@@ -203,8 +203,8 @@ Run time ~= < 1 minute per subject
 The standard space used is MNI152NLin2009cAsym
 
 ```
-	cd ./cogitate-msp1/coglib/fmri/masks
-	bash 04_resample_MNI152_ROIs.sh
+    cd ./cogitate-msp1/coglib/fmri/masks
+    bash 04_resample_MNI152_ROIs.sh
 ```
 
 Run time ~= 2 minutes
@@ -212,8 +212,8 @@ Run time ~= 2 minutes
 7. e) Combine ROIs to create theory specific ROIs (group level)
 
 ```
-	cd ./cogitate-msp1/coglib/fmri/masks
-	python 05_create_theory_ROI_masks_MNI152.py
+    cd ./cogitate-msp1/coglib/fmri/masks
+    python 05_create_theory_ROI_masks_MNI152.py
 ```
 
 Run time ~= < 1 minutes
@@ -222,11 +222,11 @@ Run time ~= < 1 minutes
 Create regressor event txt files; 3 column format; 1 per regressors (FSL FEAT compliant) from information in `events.tsv` files per run.
  
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/logfiles_and_checks
-	python 02_exp1_create_regressor_txt_files.py
-	python 02_evcLoc_create_regressor_txt_files.py
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    cd ./cogitate-msp1/coglib/fmri/logfiles_and_checks
+    python 02_exp1_create_regressor_txt_files.py
+    python 02_evcLoc_create_regressor_txt_files.py
 ```
 
 Run time ~= < 1 minutes
@@ -235,13 +235,13 @@ Run time ~= < 1 minutes
 Create confound regressor files to be used in 1st level GLMs. Then run first and second level GLMs using FSL FEAT; adjust analysis level in python script. Perform visual inspection of each run's output data (see `./bids/derivatives/fslFeat`).
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	module load Spyder/4.1.5-foss-2019a-Python-3.7.2
-	module load FSL
-	cd ./cogitate-msp1/coglib/fmri/glm
-	python 01_create_confound_regressor_ev_file.py
-	python 02_run_fsf_feat_analyses.py    # Do for each GLM lvl
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    module load Spyder/4.1.5-foss-2019a-Python-3.7.2
+    module load FSL
+    cd ./cogitate-msp1/coglib/fmri/glm
+    python 01_create_confound_regressor_ev_file.py
+    python 02_run_fsf_feat_analyses.py    # Do for each GLM lvl
 ```
 
 Run time 1st level ~= 2 hours per subject
@@ -252,11 +252,11 @@ Run time 3rd level ~= 2 hours
 Requires anatomical ROIs (step 7) and GLMs (step 9).
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/decoding_rois
-	python 01_create_decoding_rois_all_runs.py
-	python 02_create_decoding_rois_leave_one_run_out.py
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    cd ./cogitate-msp1/coglib/fmri/decoding_rois
+    python 01_create_decoding_rois_all_runs.py
+    python 02_create_decoding_rois_leave_one_run_out.py
 ```
 
 Run time ~= 3 minutes per subject
@@ -265,10 +265,10 @@ Run time ~= 3 minutes per subject
 Requires anatomical ROIs (step 7) and GLMs (step 9).
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/seeds_for_gppi
-	python 01_create_gppi_seeds.py
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    cd ./cogitate-msp1/coglib/fmri/seeds_for_gppi
+    python 01_create_gppi_seeds.py
 ```
 
 Run time ~= < 1 minutes per subject
@@ -277,27 +277,27 @@ Run time ~= < 1 minutes per subject
 Run putative NCC analysis on FSL Feat outputs.
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	module load FSL
-	cd ./cogitate-msp1/coglib/fmri/putative_ncc
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    module load FSL
+    cd ./cogitate-msp1/coglib/fmri/putative_ncc
 
-	python 01_PutativeNCC_analysis_on_FEAT_copes.py                  # Group lvl univariate
-	python 02_putative_ncc_create_C_not_A_or_B_maps.py               # Exclude voxels responsive to task goals and task relevance (Group level univariate)
-
-# Run time ~= 10 minutes per subject
-
-	python 03_putative_ncc_analysis_on_FEAT_copes_subject_level.py   # Subject lvl univariate
-	python 04_putative_ncc_subject_level_create_C_not_A_or_B_maps.py # Exclude voxels responsive to task goals and task relevance (Subject lvl univariate)
+    python 01_PutativeNCC_analysis_on_FEAT_copes.py                  # Group lvl univariate
+    python 02_putative_ncc_create_C_not_A_or_B_maps.py               # Exclude voxels responsive to task goals and task relevance (Group level univariate)
 
 # Run time ~= 10 minutes per subject
 
-	python 05_multivariate_putative_ncc_analysis.py                  # Group lvl multivariate
-	python 06_multivariate_putative_ncc_create_C_not_A_or_B_maps.py  # Exclude voxels responsive to task goals and task relevance (Group level multivariate)
+    python 03_putative_ncc_analysis_on_FEAT_copes_subject_level.py   # Subject lvl univariate
+    python 04_putative_ncc_subject_level_create_C_not_A_or_B_maps.py # Exclude voxels responsive to task goals and task relevance (Subject lvl univariate)
+
+# Run time ~= 10 minutes per subject
+
+    python 05_multivariate_putative_ncc_analysis.py                  # Group lvl multivariate
+    python 06_multivariate_putative_ncc_create_C_not_A_or_B_maps.py  # Exclude voxels responsive to task goals and task relevance (Group level multivariate)
 
 # Run time ~= < 1 minutes per subject
 
-	python 07_putative_ncc_merge_phases.py                           # Combine optimization and replication phases, for plotting purposes
+    python 07_putative_ncc_merge_phases.py                           # Combine optimization and replication phases, for plotting purposes
 
 # Run time ~= < 1 minutes
 
@@ -309,12 +309,12 @@ Count detected voxels in each anatomical ROI and save data to csv files (used to
 Requires anatomical masks (7) and the results of putative NCC analyses (12).
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/putative_ncc_tables
-	python 01_putative_ncc_group_level_tables.py
-	python 02_putative_ncc_subject_level_tables.py
-	python 03_multivariate_putative_ncc_group_level_tables.py
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    cd ./cogitate-msp1/coglib/fmri/putative_ncc_tables
+    python 01_putative_ncc_group_level_tables.py
+    python 02_putative_ncc_subject_level_tables.py
+    python 03_multivariate_putative_ncc_group_level_tables.py
 ```
 
 Run time ~= 3 minutes per subject
@@ -323,13 +323,13 @@ Run time ~= 3 minutes per subject
 Requires Slice Display (https://github.com/bramzandbelt/slice_display), and MATLAB (https://www.mathworks.com/products/matlab.html)
 
 ```
-	module purge
-	module load Python/3.8.6-GCCcore-10.2.0
-	cd ./cogitate-msp1/coglib/fmri/putative_ncc_plotting
-	Putative_NCC_01_univariate.m    # Univariate pNCC, main figure (5) and individual stimulus categories
-	Putative_NCC_02_AB.m            # Areas responsive to task goals and task relevance
-	Putative_NCC_03_multivariate.m  # Multivariate pNCC
-	Putative_NCC_04_z_maps.m        # Individual z maps for each stimulus category and condition (relevant and irrelevant)
+    module purge
+    module load Python/3.8.6-GCCcore-10.2.0
+    cd ./cogitate-msp1/coglib/fmri/putative_ncc_plotting
+    Putative_NCC_01_univariate.m    # Univariate pNCC, main figure (5) and individual stimulus categories
+    Putative_NCC_02_AB.m            # Areas responsive to task goals and task relevance
+    Putative_NCC_03_multivariate.m  # Multivariate pNCC
+    Putative_NCC_04_z_maps.m        # Individual z maps for each stimulus category and condition (relevant and irrelevant)
 ```
 
 Run time ~= < 1 minute
@@ -340,14 +340,14 @@ Run time ~= < 1 minute
 
 Rename confounds tsv files generated by fmriprep for compatibility with NiBetaseries 
 ```
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	rename_confounds_tsv_files.m      
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    rename_confounds_tsv_files.m      
 ```
 
 Add the following information under the "BIDSVersion" field in the dataset_description.json located in the fmriprep dir.
 
 ```
-	"PipelineDescription": {
+    "PipelineDescription": {
         "Name": "fMRIPrep",
         "Version": "20.2.3",
         "Container": {
@@ -364,8 +364,8 @@ Run time ~= 240min per subject
 
 Requires NiBetaSeries (https://nibetaseries.readthedocs.io/en/stable/) 
 ```
-	module load nibetaseries/0.6.0
-	singularity run --cleanenv -B /mnt/beegfs:/mnt/beegfs -B /hpc:/hpc ${NIBETASERIES_SIMG} nibs -c trans_x trans_x_derivative1  trans_x_power2 trans_x_derivative1_power2 trans_y trans_y_derivative1 trans_y_power2 trans_y_derivative1_power2 trans_z trans_z_derivative1 trans_z_power2 trans_z_derivative1_power2 rot_x rot_x_derivative1 rot_x_power2 rot_x_derivative1_power2 rot_y rot_y_derivative1 rot_y_power2 rot_y_derivative1_power2 rot_z rot_z_derivative1 rot_z_power2 rot_z_derivative1_power2 csf white_matter --participant-label PARTICIPANT_LABEL  --session-label V1 --nthreads 32  --normalize-betas --estimator lss --hrf-model 'spm'  -w ./bids/derivatives/betaseries ./bids fmriprep ./bids/derivatives/ participant
+    module load nibetaseries/0.6.0
+    singularity run --cleanenv -B /mnt/beegfs:/mnt/beegfs -B /hpc:/hpc ${NIBETASERIES_SIMG} nibs -c trans_x trans_x_derivative1  trans_x_power2 trans_x_derivative1_power2 trans_y trans_y_derivative1 trans_y_power2 trans_y_derivative1_power2 trans_z trans_z_derivative1 trans_z_power2 trans_z_derivative1_power2 rot_x rot_x_derivative1 rot_x_power2 rot_x_derivative1_power2 rot_y rot_y_derivative1 rot_y_power2 rot_y_derivative1_power2 rot_z rot_z_derivative1 rot_z_power2 rot_z_derivative1_power2 csf white_matter --participant-label PARTICIPANT_LABEL  --session-label V1 --nthreads 32  --normalize-betas --estimator lss --hrf-model 'spm'  -w ./bids/derivatives/betaseries ./bids fmriprep ./bids/derivatives/ participant
 ```
 
 
@@ -377,32 +377,32 @@ Requires mansfield (https://github.com/mekman/mansfield)
 
 Subject level category decoding
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python searchlight_category_decoding_subject_level.py  
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python searchlight_category_decoding_subject_level.py  
 ```
 
 Subject level orientation decoding
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python searchlight_orientation_decoding_subject_level.py
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python searchlight_orientation_decoding_subject_level.py
 ```
 
 Subject level stim vs baseline decoding to be used as input for multivariate putative NCC analysis
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python searchlight_stim_baseline_decoding_subject_level.py
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python searchlight_stim_baseline_decoding_subject_level.py
 ```
 
 Group level analysis 
 
 Run time ~= 60 min 
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python searchlight_decoding_group_analysis.py                            # Plots group level accuracy maps on axial brain slices 
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python searchlight_decoding_group_analysis.py                            # Plots group level accuracy maps on axial brain slices 
 ```
 
 **d)** Obtain searchlight decoding tables
@@ -411,9 +411,9 @@ Run time ~= 1 min
 
 Searchlight tables based on the group level searchlight accuracy maps
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python searchlight_group_level_tables.py                         
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python searchlight_group_level_tables.py                         
 ```
 
 **e)** Run ROI decoding
@@ -422,25 +422,25 @@ Run time ~= 10 min per subject
 
 Subject level category decoding
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python roi_category_decoding_subject_level.py  
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python roi_category_decoding_subject_level.py  
 ```
 
 Subject level orientation decoding
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/code/decoding
-	python roi_orientation_decoding_subject_level.py 
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/code/decoding
+    python roi_orientation_decoding_subject_level.py 
 ```
 
 Group level analysis 
 
 Run time ~= 10 min 
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python roi_decoding_group_analysis.py                           
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python roi_decoding_group_analysis.py                           
 ```
 
 **f)** Test IIT decoding predictions
@@ -449,18 +449,18 @@ Run time ~= 10 min per subject
 
 Subject level category decoding evaluating accuracies obtained with IIT ROIs only vs accuracies obtained with IIT+PFC ROIs
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python roi_category_decoding_testing_IIT_predictions_combined_features.py 
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python roi_category_decoding_testing_IIT_predictions_combined_features.py 
 ```
 
 Group level analysis to determine if the difference between IIT+PFC accuracies and IIT accuracies is statistically significant  
 
 Run time ~= 10 min 
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python roi_decoding_group_analysis_IIT_predictions.py   
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python roi_decoding_group_analysis_IIT_predictions.py   
 ```
 
 **g)** Plot searchlight and ROI decoding results on a brain surface
@@ -469,16 +469,16 @@ Run time ~= 5 min per decoding problem
 
 Plot group level searchlight decoding accuracy maps on a brain surface 
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python MSP1_searchlight_decoding_plots.py 
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python MSP1_searchlight_decoding_plots.py 
 ```
 
 Plot group level ROI accuracies on a brain surface 
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/decoding
-	python MSP1_roi_decoding_plots.py                                   
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/decoding
+    python MSP1_roi_decoding_plots.py                                   
 ```
 
 16. gppi Analysis
@@ -488,60 +488,60 @@ Requires MATLAB (https://www.mathworks.com/products/matlab.html) and SPM (https:
 
 Run time ~= 200 min per subject
 ```
-	cd ./cogitate-msp1/coglib/fmri/gppi
-	nifti3D_conversion.m      # Convert 4D niftis to 3D niftis for SPM analaysis
-	smoothing.m               # Smooth 3D niftis
+    cd ./cogitate-msp1/coglib/fmri/gppi
+    nifti3D_conversion.m      # Convert 4D niftis to 3D niftis for SPM analaysis
+    smoothing.m               # Smooth 3D niftis
 ```
 
 **b)** Run gppi on combined conditions
 
 Run time ~= 240 min per subject
 ```
-	cd ./cogitate-msp1/coglib/fmri/gppi
-	glm_subject_level_combined.m           # Subject level GLM with category regressors collapsed across the relevant and irrelevant conditions (i.e face, object, letter, and false font regressors) 
-	gppi_subject_level_combined.m          # Subject level gppi analysis
+    cd ./cogitate-msp1/coglib/fmri/gppi
+    glm_subject_level_combined.m           # Subject level GLM with category regressors collapsed across the relevant and irrelevant conditions (i.e face, object, letter, and false font regressors) 
+    gppi_subject_level_combined.m          # Subject level gppi analysis
 ```
 
 Group level gppi analysis
 
 Run time ~= 60 min per subject
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/gppi
-	python gppi_group_analysis.py        # Plots group level stats map on axial brian slices 
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/gppi
+    python gppi_group_analysis.py        # Plots group level stats map on axial brian slices 
 ```
 
 **c)** Run gppi on separate conditions
 
 Run time ~= 240 min per subject
 ```
-	cd ./cogitate-msp1/coglib/fmri/gppi
-	glm_subject_level.m                                    # Subject level GLM with separate category regressors for the relevant and irrelevant conditions (i.e relevant_face, relevant_object, relevant_letter, and relevant_false font) 
-	gppi_subject_level.m                                   # Subject level gppi analysis
+    cd ./cogitate-msp1/coglib/fmri/gppi
+    glm_subject_level.m                                    # Subject level GLM with separate category regressors for the relevant and irrelevant conditions (i.e relevant_face, relevant_object, relevant_letter, and relevant_false font) 
+    gppi_subject_level.m                                   # Subject level gppi analysis
 ```
 
 Group level gppi analysis
 
 Run time ~= 60 min per subject
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/gppi
-	python gppi_group_analysis.py        # Plots group level stats map on axial brian slices 
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/gppi
+    python gppi_group_analysis.py        # Plots group level stats map on axial brian slices 
 ```
 
 **d)** Obtain gppi tables
 
 Run time ~= 1 min
 ```
-	module purge
-	cd ./cogitate-msp1/coglib/fmri/gppi
-	python gppi_group_level_tables.py    # gppi tables obtained based on the group level analysis 
+    module purge
+    cd ./cogitate-msp1/coglib/fmri/gppi
+    python gppi_group_level_tables.py    # gppi tables obtained based on the group level analysis 
 ```
 
 **e)** Plot gppi analysis results on a brain surface
 
 Run time ~= 5 min per contrast
 ```
-	cd ./cogitate-msp1/coglib/fmri/gppi
-	MSP1_gppi_plots.py            # Plot group level gppi stats map on a brain surface
+    cd ./cogitate-msp1/coglib/fmri/gppi
+    MSP1_gppi_plots.py            # Plot group level gppi stats map on a brain surface
 ```
