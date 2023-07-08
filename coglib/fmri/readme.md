@@ -33,15 +33,25 @@ In order to run the demo, besides editing the scripts so that the bids paths poi
 # fMRI data pipeline overview
 
 ## Preprocessing
+
+As the shared data is already converted to bids, steps 0 to 3 are not needed. These steps are provided to facilitate the application of our pipeline to other datasets.
+
 0. Setup dicom to BIDS converter (once); BIDSMAPPER
 1. Conversion of MRI DICOM data to BIDS; BIDSCOINER
 2. Creation of events.tsv files; PYTHON CODE
 3. BIDS validation; BIDSVALIDATOR
-4. MRI data quality checks; MRIQC
-5. Data rejection; PYTHON CODE
-6. MRI preprocessing & visual data/preprocessing quality checks; FMRIPREP
+
+
+Start here to test the code with the demo dataset, or to perform a full replication, including preprocessing.
+
+5. MRI data quality checks; MRIQC
+6. Data rejection; PYTHON CODE
+7. MRI preprocessing & visual data/preprocessing quality checks; FMRIPREP
 
 ## Analysis
+
+Start here to test the code with the demo dataset, or to perform a full replication, starting from already preprocessed data.
+
 7. Create (anatomical) ROI masks
 8. Create regressor event txt files (3 column format)
 9. Run 1st, 2nd and 3rd level GLMs
@@ -61,7 +71,7 @@ Setup of data processing: Run only once during setup (requires sample dataset).
 ```
     module purge
     module load bidscoin/3.6.3
-    bidsmapper ./temp_raw_for_bidscoin ./bids
+    bidsmapper ./raw ./bids
 ```
 
 Run time ~= ???
