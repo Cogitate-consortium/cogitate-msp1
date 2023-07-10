@@ -18,7 +18,11 @@ import ptitprince as pt  #conda install -c conda-forge ptitprince
 
 import mne_bids
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
+
 from S06_source_dur_lmm import (create_theories_predictors, fit_lmm, 
                                 model_comparison, create_models)
 

@@ -19,7 +19,10 @@ import mne
 from mne.preprocessing import ICA
 import mne_bids
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
 
 
 def run_ica(subject_id, visit_id, has_eeg=False):
