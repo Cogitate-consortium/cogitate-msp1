@@ -25,6 +25,7 @@ conda env create --file=requirements_cogitate_ecog.yaml
 ```
 The environments are tailored for Linux and the HPC, so some things might break a little if you use windows or Mac 
 (not tested very thoroughly). Other required software includes can be found in the analysis instructions below.
+
 3. Download either the sample data to run a demo (see below), or the full dataset available in YYY.
 4. Edit the scripts so that the bids paths point to where you have placed the data. Some scripts require functions defined in `./cogitate-msp1/coglib/fmri/helper_functions_MRI.py`.
 5. Follow the instructions bellow to run the analyses. Note that several analyses depend on the output of previous analyses and therefore there should be run in the specified order.
