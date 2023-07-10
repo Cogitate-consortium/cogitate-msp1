@@ -21,7 +21,7 @@ The code for different preprocessing steps and analyses are provided in differen
 1. Clone this repository to the computer where you intend to run the analysis.
 2. Create a new conda environment by running the following:
 ```
-conda env create --file=requirements_cogitate_ecog.yaml
+conda env create --file=requirements_cogitate_fmri.yaml
 ```
 The environments are tailored for Linux and the HPC, so some things might break a little if you use windows or Mac 
 (not tested very thoroughly). Other required software includes can be found in the analysis instructions below.
