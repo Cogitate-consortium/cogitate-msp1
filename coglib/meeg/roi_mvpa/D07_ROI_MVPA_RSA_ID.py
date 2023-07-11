@@ -24,8 +24,12 @@ import matplotlib as mpl
 
 import argparse
 
+import os
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
 
-from config import bids_root
+from config.config import bids_root
+
 from scipy.ndimage import gaussian_filter
 
 

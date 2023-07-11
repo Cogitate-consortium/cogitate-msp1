@@ -36,8 +36,10 @@ from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 
 
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
 
-from config import plot_param
+from config.config import plot_param
 from sublist_phase2 import sub_list
 
 # get the parameters dictionary

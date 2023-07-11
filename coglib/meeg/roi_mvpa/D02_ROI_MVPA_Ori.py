@@ -14,6 +14,7 @@ feature selection methods test
 
 """
 
+import os
 import os.path as op
 
 import pickle
@@ -48,10 +49,13 @@ from scipy.ndimage import gaussian_filter1d
 
 import matplotlib.patheffects as path_effects
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
+
 from D_MEG_function import set_path_ROI_MVPA, ATdata,sensor_data_for_ROI_MVPA
 from D_MEG_function import source_data_for_ROI_MVPA,sub_ROI_for_ROI_MVPA
-
 
 ####if need pop-up figures
 # %matplotlib qt5

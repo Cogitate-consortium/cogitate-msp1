@@ -25,7 +25,11 @@ import numpy as np
 import matplotlib as mpl
 import argparse
 
-from config import bids_root
+import os
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
 
 from rsa_helper_functions_meg import pseudotrials_rsa_all2all
 from D_MEG_function import set_path_ROI_MVPA, sensor_data_for_ROI_MVPA

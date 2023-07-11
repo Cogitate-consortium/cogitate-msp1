@@ -23,8 +23,11 @@ import mne
 import mne_bids
 from mne.minimum_norm import apply_inverse
 
-from config import bids_root
-from config import sfreq
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root, sfreq
+
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--sub',

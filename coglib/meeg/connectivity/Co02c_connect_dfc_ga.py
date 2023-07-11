@@ -20,7 +20,10 @@ import pickle
 import mne
 import mne_bids
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
 
 
 parser=argparse.ArgumentParser()

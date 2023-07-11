@@ -24,7 +24,10 @@ import mne
 from mne.preprocessing import find_bad_channels_maxwell
 import mne_bids
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
 
 
 def run_maxwell_filter(subject_id, visit_id, record="run"):

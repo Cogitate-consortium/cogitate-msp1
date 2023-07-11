@@ -15,9 +15,10 @@ import os.path as op
 import mne
 import numpy as np
 
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
 
-
-from config import l_freq, h_freq, sfreq
+from config.config import l_freq, h_freq, sfreq
 
 from rsa_helper_functions import equate_offset
 from mne.minimum_norm import apply_inverse_epochs

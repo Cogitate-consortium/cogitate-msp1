@@ -21,7 +21,10 @@ from pymer4.models import Lmer  #conda install -c ejolly -c conda-forge -c defau
 
 import mne_bids
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
 
 
 # Set params

@@ -53,10 +53,11 @@ from sklearn.metrics import balanced_accuracy_score
 from scipy.ndimage import gaussian_filter
 import matplotlib.patheffects as path_effects
 
+import os
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
 
-
-from config import bids_root
-
+from config.config import bids_root
 from D_MEG_function import set_path_ROI_MVPA, ATdata,sensor_data_for_ROI_MVPA
 from D_MEG_function import source_data_for_ROI_MVPA,sub_ROI_for_ROI_MVPA
 

@@ -27,7 +27,10 @@ import mne_bids
 
 from frites.conn import conn_dfc, define_windows
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
 
 
 parser=argparse.ArgumentParser()

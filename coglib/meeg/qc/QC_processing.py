@@ -3,7 +3,6 @@ import os.path as op
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
 import mne
 import mne_bids
 from pyprep.prep_pipeline import PrepPipeline
@@ -11,7 +10,10 @@ from mne.preprocessing import annotate_muscle_zscore
 from autoreject import get_rejection_threshold
 from numpy import arange
 
-from config import (bids_root, tmin, tmax)
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import (bids_root, tmin, tmax)
 
 from matplotlib.backends.backend_pdf import PdfPages
 

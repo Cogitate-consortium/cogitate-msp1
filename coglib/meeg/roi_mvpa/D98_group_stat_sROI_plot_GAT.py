@@ -32,7 +32,11 @@ import matplotlib.patheffects as path_effects
 import matplotlib.colors as mcolors
 
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root
+
 from sublist import sub_list
 
 parser = argparse.ArgumentParser()

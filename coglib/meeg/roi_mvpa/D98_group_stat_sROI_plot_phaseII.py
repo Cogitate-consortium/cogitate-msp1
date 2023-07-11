@@ -31,8 +31,11 @@ from scipy import stats as stats
 import matplotlib as mpl
 
 
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
 
-from config import bids_root,plot_param
+from config.config import bids_root,plot_param
+
 from sublist_phase2 import sub_list
 
 
