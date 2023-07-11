@@ -1,0 +1,49 @@
+name: cogitate_fmri
+channels:
+- conda-forge
+dependencies:
+- python>=3.8
+- pip
+- numpy
+- scipy
+- matplotlib
+- numba
+- pandas
+- xlrd
+- scikit-learn
+- h5py
+- pillow
+- statsmodels
+- jupyter
+- joblib
+- psutil
+- numexpr
+- imageio
+- tqdm
+- spyder-kernels>=1.10.0
+- imageio-ffmpeg>=0.4.1
+- vtk>=9.0.1
+- pyvista>=0.30
+- pyvistaqt>=0.4
+- qdarkstyle
+- darkdetect
+- mayavi
+- PySurfer
+- dipy
+- nibabel
+- nilearn
+- python-picard
+- pyqt!=5.15.3
+- mne=0.23.0
+- mffpy>=0.5.7
+- ipywidgets
+- mne-bids=0.7
+- pybv=0.5.0
+- reportlab
+- statsmodels
+- ptitprince
+- pingouin
+- pip:
+  - ipyvtklink
+  - mne-rsa==0.4
+  - pyPdf
