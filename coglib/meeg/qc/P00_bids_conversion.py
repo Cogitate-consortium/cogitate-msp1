@@ -6,13 +6,6 @@
 
 https://mne.tools/mne-bids/stable/index.html
 
-Questions/Issues:
-    - what to write in the participants and dataset_description metadata
-    files?
-    - what session ID should we give to the anat scan (e.g., v0, v2, mri)?
-    - for visit 2, what to count the replay runs? Continue the count from
-    where it was left from the VG (run 4) or restart from run 1?
-
 Notes:
     - the conversion must be done after reading the events. Here, the event 
     list includes all the triggers/events

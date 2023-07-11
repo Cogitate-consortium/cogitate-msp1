@@ -19,6 +19,10 @@ The environments are tailored for Linux and the HPC, so some things might break 
 To run the analysis described below on the sample data, make sure to change the bids root path in /meeg/config/config.py:
 *$ROOT/sample_data/bids*
 
+### Running 3rd level quality checks:
+In the command line, enter:
+sbatch --array=<subjectID> srun_qc.sh <SA/SB> V1
+
 ### Running preprocessing:
 In the command line, enter:
 ```
