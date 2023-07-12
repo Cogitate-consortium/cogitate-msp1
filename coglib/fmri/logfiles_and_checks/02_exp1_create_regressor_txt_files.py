@@ -30,7 +30,7 @@ import sys
 pd.options.mode.chained_assignment = None  # default='warn'
 
 # root project path
-root_dir = '/project/3018050.01/twcf_code_review'
+root_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
 
 ##### Parameters #####
