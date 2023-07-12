@@ -27,6 +27,12 @@ import os, glob, sys
 
 
 #%% Paths and Parameters
+# root project path
+root_dir = '/project/3018050.01/twcf_code_review'
+
+#subject_list_type = 'phase3_V1'
+subject_list_type = 'demo'
+
 
 ### Confound regressors of interest ###
 # define which confound regressor set should be extracted. See 
@@ -34,9 +40,8 @@ import os, glob, sys
 # options: 6motion, 24motion, 6motion_FD_CSF_WM, 24motion_CSF_WM, 6motion_FD_5aCompCor
 confound_regressor_set = '24motion_CSF_WM'
 
-
 # BIDS path
-bids_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids'
+bids_dir = root_dir + '/bids'
 
 # input file (from fmriprep)
 fmriprep_confound_file_pattern = bids_dir + '/derivatives/fmriprep/%(sub)s/%(ses)s/func/%(sub)s_%(ses)s_%(task)s_desc-confounds_timeseries.tsv'
@@ -48,7 +53,7 @@ event_file_output_pattern = '%(sub)s_%(ses)s_%(task)s_confounds.txt'
 
 
 # session list
-session_labels = ['ses-V1', 'ses-V2']
+session_labels = ['ses-V1']
 
 # dummy volumes (removed from beginning of confound tsv file)
 n_dummy_volumes = 3
@@ -187,8 +192,6 @@ def run_conf_for_all_subjects(subjects, session_labels, confounds_of_interest):
 # %% run
 if __name__ == '__main__':
     # get subject list
-    #subject_list_type = 'phase3_V1'
-    subject_list_type = 'debug'
     subjects = get_subject_list(bids_dir,subject_list_type)
     
     # get confound regressor set
