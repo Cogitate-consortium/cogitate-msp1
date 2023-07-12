@@ -47,7 +47,7 @@ import pandas as pd
 #%% Paths and Parameters
 
 # root project path
-root_dir = '/project_root_path'
+root_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
 # threshold to mark subjects as rejected if they exceed X SD above group mean
 SdThreshold = 2
