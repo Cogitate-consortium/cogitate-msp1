@@ -19,20 +19,27 @@ The code for different preprocessing steps and analyses are provided in differen
 # Installation and running instructions
 
 1. Clone this repository to the computer where you intend to run the analysis.
-2. Create a new conda environment by running the following:
+2. Create a new conda environment by running the following (requires [Anaconda](https://www.anaconda.com/download)):
 ```
 conda env create --file=requirements_cogitate_fmri.yaml
 ```
-The environments are tailored for Linux and the HPC, so some things might break a little if you use windows or Mac 
-(not tested very thoroughly). Other required software includes can be found in the analysis instructions below.
 
-3. Download either the sample data to run a demo (see below), or the full dataset available in YYY.
-4. Edit the scripts so that the bids paths point to where you have placed the data. Some scripts require functions defined in `./cogitate-msp1/coglib/fmri/helper_functions_MRI.py`.
-5. Follow the instructions bellow to run the analyses. Note that several analyses depend on the output of previous analyses and therefore there should be run in the specified order.
+3. What the command above did was create the env in your user directory. You should then activate the environment to start working with it. To do so, execute the following command:
+```
+module purge; module load Anaconda3/2020.11; source /hpc/shared/EasyBuild/apps/Anaconda3/2020.11/bin/activate; conda activate /hpc/users/$USER/.conda/envs/cogitate_fmri
+```
+
+The environments are tailored for Linux and the HPC, so some things might break a little if you use windows or Mac (not tested very thoroughly). Other required software includes can be found in the analysis instructions below.
+
+4. Download either the sample data to run a demo (see below), or the full dataset available in YYY.
+5. Edit the scripts so that the bids paths point to where you have placed the data. Some scripts require functions defined in `./cogitate-msp1/coglib/fmri/helper_functions_MRI.py`.
+6. Follow the instructions bellow to run the analyses. Note that several analyses depend on the output of previous analyses and therefore there should be run in the specified order.
 
 # Sample data and demo
 
-Sample data, used to run a demo of the analysis pipeline, can be found [here](https://keeper.mpdl.mpg.de/d/ec345ac7b65e490cb59d/). fMRI data from four subjects (two per data collection site) are provided. We provide bids converted data (in `./bids/`) as well as preprocessed data (in `./bids/derivatives/fmriprep/` and `./bids/derivatives/freesurfer/`). We also provide data quality measures that can be found in `./bids/derivatives/mriqc/`.
+Sample data, used to run a demo of the analysis pipeline, can be found [here](https://keeper.mpdl.mpg.de/d/ec345ac7b65e490cb59d/)
+
+fMRI data from four subjects (two per data collection site) are provided. We provide bids converted data (in `./bids/`) as well as preprocessed data (in `./bids/derivatives/fmriprep/` and `./bids/derivatives/freesurfer/`). We also provide data quality measures that can be found in `./bids/derivatives/mriqc/`.
 
 In order to run the demo, besides editing the scripts so that the bids paths point to the downloaded data. A list of subjects for the demo (`participants_fMRI_QC_included_demo_sesV1.tsv`) can be found in `./bids/`.  If a script uses `subjects = get_subject_list(bids_dir,subject_list_type)` to get the list of subjects to be used, please set `subject_list_type = 'demo'`. If instead a script loads the subjects' list directly, please point the script to the abovementioned list.
 
