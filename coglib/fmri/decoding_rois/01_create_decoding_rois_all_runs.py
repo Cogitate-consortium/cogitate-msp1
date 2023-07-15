@@ -227,14 +227,6 @@ def save_d_roi(sub_id,d_roi,f_name):
 # %% run
 subjects = get_subject_list(bids_dir, subject_list_type)
 
-remove_subjects = ['sub-SD122','sub-SD196']
-for r in remove_subjects:
-    subjects = subjects[subjects != r]
-
-print('Removed subjects:',remove_subjects)
-print('Total subjects:',len(subjects))
-
-
 for n_voxels in roi_sizes:
     #for sub_id in ['sub-SC136']:
     for sub_id in subjects:

@@ -90,14 +90,6 @@ if __name__ == '__main__':
     
     subjects = np.concatenate((subjects1,subjects2))
     
-    remove_subjects = ['sub-SD122','sub-SD196']
-    for r in remove_subjects:
-        subjects = subjects[subjects != r]
-    
-    print('Removed subjects:',remove_subjects)
-    print('Total subjects:',len(subjects))
-
-    
     for conjunction_name in conjunction_names:
         
         data = np.zeros((len(group_mask),len(subjects)))

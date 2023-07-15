@@ -997,13 +997,6 @@ if __name__ == '__main__':
     # get subject list
     subjects = get_subject_list(bids_dir,subject_list_type)
     
-    remove_subjects = ['sub-SD122','sub-SD196']
-    for r in remove_subjects:
-        subjects = subjects[subjects != r]
-
-    print('Removed subjects:',remove_subjects)
-    print('Total subjects:',len(subjects))
-
     # create empty df for error log
     error_df = pd.DataFrame(columns=['sub','analysis','analyses_suffix','error_run_no','error_msg'])
     

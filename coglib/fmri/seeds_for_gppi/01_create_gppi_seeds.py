@@ -159,14 +159,6 @@ def save_seed(sub_id,d_roi,f_name):
 # %% run
 subjects = get_subject_list(bids_dir, subject_list_type)
 
-remove_subjects = ['sub-SD122','sub-SD196']
-for r in remove_subjects:
-    subjects = subjects[subjects != r]
-
-print('Removed subjects:',remove_subjects)
-print('Total subjects:',len(subjects))
-
-
 cope = '23' # RelIrrelFacesvsObject
 rel = 'rel_irrel'
 
