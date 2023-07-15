@@ -2,6 +2,7 @@
 
 """
 Created by Yamil Vidal and modified by Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 04-11-2023
 Date modified: 04-26-2023
 """

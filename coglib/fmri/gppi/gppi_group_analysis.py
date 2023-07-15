@@ -2,6 +2,7 @@
 # Corrected group-level maps are obtained by running cluster-based permutation testing on the gppi contrast maps
 """
 Author: Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 03-14-2023
 Date modified:
 """

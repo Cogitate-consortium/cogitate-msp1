@@ -2,6 +2,7 @@ function gppi_analysis_combined(seed, n_voxels)
 % Performs gppi analysis on the relevant and irrelevant conditions combined using gppi toolbox implemented in SPM08
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-22-2022
 
 % SPM8 path

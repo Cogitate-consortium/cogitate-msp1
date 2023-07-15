@@ -14,6 +14,7 @@ v2: added support to only convert the first 50% of data based on tsv file
 Created on Tue Jun  8 13:34:26 2021
 
 @author: David Richter
+Email: david.richter.work@gmail.com
 @tag: prereg_v4.2
 """
 

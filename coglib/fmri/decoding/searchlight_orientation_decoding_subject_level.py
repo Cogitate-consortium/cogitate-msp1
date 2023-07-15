@@ -3,6 +3,7 @@ Performs orientation decoding and obtains decoding accuracy for each voxel withi
 The code uses single trial estimates calculated using nibetaseries 6.0 as input features to an SVM classifier
 
 Author: Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 09-13-2021
 Date modified: 12-20-2022
 """

@@ -1,3 +1,11 @@
+%{
+Plots putative NCC analysis results (step 12). Requires Slice Display (https://github.com/bramzandbelt/slice_display)
+
+Author: Yamil Vidal
+Email: hvidaldossantos@gmail.com
+ 
+%}
+
 clear
 close all
 

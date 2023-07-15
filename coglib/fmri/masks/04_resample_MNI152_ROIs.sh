@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# Author: Yamil Vidal
+# Email: hvidaldossantos@gmail.com
 module purge
 module load AFNI
 

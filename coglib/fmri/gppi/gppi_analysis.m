@@ -2,6 +2,7 @@ function gppi_analysis(seed, n_voxels)
 % Performs gppi analysis using gppi toolbox implemented in SPM08
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-22-2022
 
 % SPM8 path

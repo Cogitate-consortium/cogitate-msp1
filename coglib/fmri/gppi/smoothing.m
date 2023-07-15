@@ -2,6 +2,7 @@
 % The input fMRI BOLD data to be smoothed are the 3D nifti files produced by nifti3D_conversion.m
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-20-2022
 
 % SPM12 path

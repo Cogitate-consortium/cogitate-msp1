@@ -2,6 +2,7 @@
 Plots searchlight accuracy maps on a brain surface
 
 Author: Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 03-04-2023
 """
 

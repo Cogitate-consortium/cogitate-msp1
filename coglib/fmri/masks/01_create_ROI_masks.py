@@ -24,6 +24,7 @@ module load FSL
 Created on Tue Aug 24 13:39:06 2021
 
 @author: David Richter, Yamil Vidal
+Email: hvidaldossantos@gmail.com
 @tag: prereg_v4.2
 """
 

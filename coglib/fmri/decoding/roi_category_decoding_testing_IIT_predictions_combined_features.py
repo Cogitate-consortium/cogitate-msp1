@@ -3,6 +3,7 @@ Tests the decoding predictions of IIT on irrelevant category decoding by evaluat
 a prediction model employing features from GNW+ IIT ROIs combined
 
 Author: Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 12-01-2022
 Date modified: 04-22-2023
 """

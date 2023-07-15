@@ -20,7 +20,7 @@ The conjunction maps, intermediate equivalence maps and additional conjunction
 
 Created on Fri Jun 18 17:18:01 2021
 
-@author: David Richter (d.richter@donders.ru.nl); Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author: David Richter (david.richter.work@gmail.com), Yamil Vidal (hvidaldossantos@gmail.com)
 @tag: prereg_v4.2
 """
 

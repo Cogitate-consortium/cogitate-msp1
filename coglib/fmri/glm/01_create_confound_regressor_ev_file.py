@@ -18,6 +18,7 @@ subjects of interest!
 Created on Wed Mar 14 12:39:58 2021
 
 @author: David Richter
+david.richter.work@gmail.com
 @tag: prereg_v4.2
 """
 

@@ -3,7 +3,7 @@
 """
 Combines putative NCC subject level results across optimization and replication phases for plotting purposes.
 
-@author:Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author:Yamil Vidal (hvidaldossantos@gmail.com)
 
 """
 

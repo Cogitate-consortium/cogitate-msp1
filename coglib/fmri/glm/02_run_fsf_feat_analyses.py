@@ -58,11 +58,9 @@ Requires FSL functions!
 I.e., in the shell run, before executing the python script:
 module load FSL
 
-
-Created on Fri Mar 29 15:11:06 2021
-
 @author: David Richter, Yamil Vidal
-
+Email: hvidaldossantos@gmail.com
+Created on Fri Mar 29 15:11:06 2021
 """
 
 import os, time, sys

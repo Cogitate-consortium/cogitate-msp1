@@ -4,7 +4,7 @@
 Takes C (pNCCs) conjunction maps and excludes voxels that are included either
 in an A (task goals) conjunction or a B (task relevance) conjunction.
 
-@author:Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author:Yamil Vidal (hvidaldossantos@gmail.com)
 
 """
 

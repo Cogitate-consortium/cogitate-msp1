@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun 21 11:02:20 2022
+Creates regions of interes (ROIs) for several decoding analyses.
+Decoding ROIs are produced for each anatomical region of interest (step 7).
+Requires several contrasts of parameter estimates produced in step 9.
 
 @author: Yamil Vidal
-
+Email: hvidaldossantos@gmail.com
+Created on Tue Jun 21 11:02:20 2022
 """
 import os, sys
 import numpy as np

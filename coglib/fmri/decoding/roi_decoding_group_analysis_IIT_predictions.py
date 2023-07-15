@@ -1,6 +1,7 @@
 # 1 - Runs one sample permutation test on the irrelevant category decoding accuracy values of the IIT+GNW prediction model vs those from the IIT prediction model
 """
 Author: Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 09-13-2021
 Date modified: 02-20-2023
 """

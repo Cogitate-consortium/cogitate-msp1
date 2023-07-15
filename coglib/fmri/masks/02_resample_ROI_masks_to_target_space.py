@@ -16,6 +16,7 @@ module load ANTs
 Created on Tue Sep 22 13:01:00 2021
 
 @author: David Richter
+Email: david.richter.work@gmail.com
 @tag: prereg_v4.2
 """
 
