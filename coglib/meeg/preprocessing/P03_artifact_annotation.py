@@ -19,8 +19,10 @@ import mne
 from mne.preprocessing import annotate_muscle_zscore
 import mne_bids
 
-from config import bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
 
+from config.config import bids_root
 
 def artifact_annotation(subject_id, visit_id, record="run", has_eeg=False, threshold_muscle=7):
     

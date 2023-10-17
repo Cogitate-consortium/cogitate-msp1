@@ -18,12 +18,16 @@ from scipy.stats import zscore
 import shutil
 
 from fpdf import FPDF
-from mne.time_frequency import psd_multitaper
+
+# PS
+# from mne.time_frequency import psd_multitaper
 import mne_bids
 from pyprep.prep_pipeline import PrepPipeline
 
-from config import  bids_root
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
 
+from config.config import bids_root
 
 def find_bad_eeg(subject_id, visit_id, record="run", has_eeg=False):
     
@@ -229,7 +233,9 @@ def find_bad_eeg(subject_id, visit_id, record="run", has_eeg=False):
 
 def viz_psd(raw):
     # Compute averaged power
-    psds, freqs = psd_multitaper(raw,fmin = 1,fmax = 40, picks=['eeg'])
+    # PS
+    # psds, freqs = psd_multitaper(raw,fmin = 1,fmax = 40, picks=['eeg'])
+    psds, freqs = raw.compute_psd(method='multitaper', fmin = 1,fmax = 40, picks=['eeg'])
     psds = np.sum(psds,axis = 1)
     psds = 10. * np.log10(psds)
     # Show power spectral density plot

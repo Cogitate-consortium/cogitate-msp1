@@ -33,7 +33,10 @@ from rsa_helper_functions_meg import subsample_matrices,compute_correlation_theo
 
 import ptitprince as pt
 
-from config import bids_root,plot_param
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import bids_root,plot_param
 
 import matplotlib.colors as mcolors
 

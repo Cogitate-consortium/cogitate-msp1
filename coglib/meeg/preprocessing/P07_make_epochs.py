@@ -22,7 +22,10 @@ import mne
 import mne_bids
 from autoreject import get_rejection_threshold
 
-from config import (bids_root, tmin, tmax)
+import sys
+sys.path.insert(1, op.dirname(op.dirname(os.path.abspath(__file__))))
+
+from config.config import (bids_root, tmin, tmax)
 
 
 def run_epochs(subject_id, visit_id, task, has_eeg=False):
