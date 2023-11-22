@@ -34,7 +34,7 @@ def gnw_channels(vis_resp_file, cat_sel_file, lmm_file, save_root=""):
     for ch in ch_coords["name"].to_list():
         cate = cate_sel_results.loc[cate_sel_results["channel"] == ch, "condition"].item()
         vis_resp = vis_resp_results.loc[vis_resp_results["channel"] == ch, "reject"].item()
-        if ch == "SF104-G12":
+        if ch == "CF104-G12":
             ch_coords_new = ch_coords_new.append(pd.DataFrame({
                 "channel": ch,
                 "x": ch_coords.loc[ch_coords["name"] == ch, "x"].item(),

@@ -6,7 +6,7 @@ Finds exp2 sessions in raw data path.
 Extracts summary files from VGR and Replay.
 Writes output csv file (exp2_beh_data_checks) with seen, unseen & FA to raw data path.
 
-NOTE: This code is NOT relevant for the final analysis pipeline, 
+NOTE: This code is NOT relevant for the final analysis pipeline,
 but was temporarily used to assess behavioral data during data acquisition
 
 @author: David Richter
@@ -19,20 +19,20 @@ import os, glob
 rawDataPath = '/project/3018050.01/raw'
 
 # subject & session folder prefixes & labels for exp2
-subjectPrefix = 'sub-SC'
+subjectPrefix = 'sub-CC'
 expTwoSessionFolder = 'ses-mri02'
 
-# %% find data to be processed 
+# %% find data to be processed
 def findRawData(rawDataPath):
     """
     Find file names + paths per subject for exp2 summary json files.
-    Assumes subjects are prefixed with sub-SC and exp2 sessions with ses-mri02
+    Assumes subjects are prefixed with sub-CC and exp2 sessions with ses-mri02
     """
     fNames_Prescreen = []
     fNames_VGR = []
     fNames_Replay = []
     # find subjects (raw and processed)
-    for (_, rawDirs, _) in os.walk(rawDataPath):break    
+    for (_, rawDirs, _) in os.walk(rawDataPath):break
     n_sub_raw = 0
     for sid in rawDirs:
         if sid[0:len(subjectPrefix)] == subjectPrefix:

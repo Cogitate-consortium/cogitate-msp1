@@ -47,7 +47,7 @@ conditions = [['face', 'object', 'letter', 'false'],
 phase = 3
 
 if debug:
-    sub_list = ["SA124", "SA124"]
+    sub_list = ["CA124", "CA124"]
 else:
     # Read the .txt file
     f = open(op.join(bids_root,
@@ -66,7 +66,7 @@ def source_dur_ga():
                                 "figures")
     if not op.exists(source_figure_root):
         os.makedirs(source_figure_root)
-    
+
     # Set task
     if visit_id == "V1":
         bids_task = 'dur'
@@ -76,7 +76,7 @@ def source_dur_ga():
     #     bids_task = 'replay'
     else:
         raise ValueError("Error: could not set the task")
-    
+
     # Find all combinations between variables' levels
     if len(factor) == 1:
         cond_combs = list(itertools.product(conditions[0]))
@@ -87,28 +87,28 @@ def source_dur_ga():
         cond_combs = list(itertools.product(conditions[0],
                                             conditions[1],
                                             conditions[2]))
-    
+
     # Read list with label names
     bids_path_source = mne_bids.BIDSPath(
-                        root=source_deriv_root[:-10], 
-                        subject=sub_list[0],  
-                        datatype='meg',  
+                        root=source_deriv_root[:-10],
+                        subject=sub_list[0],
+                        datatype='meg',
                         task=bids_task,
-                        session=visit_id, 
+                        session=visit_id,
                         suffix="desc-labels",
                         extension='.txt',
                         check=False)
-    
+
     labels_names = open(bids_path_source.fpath, 'r').read()
     labels_names = labels_names[2:-2].split("', '")
-    
+
     # Create empty dataframe
     all_data_df = pd.DataFrame()
-    
+
     # Loop over conditions of interest
     for cond_comb in cond_combs:
         print("\n\nAnalyzing %s: %s" % (factor, cond_comb))
-        
+
         # Select epochs
         if len(factor) == 1:
             fname = cond_comb[0]
@@ -116,23 +116,23 @@ def source_dur_ga():
             fname = cond_comb[0] + "_" + cond_comb[1]
         if len(factor) == 3:
             fname = cond_comb[0] + "_" + cond_comb[1] + "_" + cond_comb[2]
-        
+
         # Loop over labels
         for label in labels_names:
             print('\nlabel:', label)
-            
+
             # Create empty list
             label_data = []
-            
+
             # Loop over participants
             for sub in sub_list:
                 print('subject:', sub)
-                
+
                 # Read individual dataframe
                 try:
                     bids_path_source = bids_path_source.update(
-                        root=source_deriv_root, 
-                        subject=sub,  
+                        root=source_deriv_root,
+                        subject=sub,
                         suffix=f"desc-{fname},ERF,{label}_datatable",
                         extension='.tsv',
                         check=False)
@@ -140,25 +140,25 @@ def source_dur_ga():
                 except:
                     label_r = label.replace("&", "_and_")
                     bids_path_source = bids_path_source.update(
-                        root=source_deriv_root, 
-                        subject=sub,  
+                        root=source_deriv_root,
+                        subject=sub,
                         suffix=f"desc-{fname},ERF,{label_r}_datatable",
                         extension='.tsv',
                         check=False)
                     df = pd.read_csv(str(bids_path_source.fpath), sep="\t")
-                
+
                 # Append dataframe to list
                 label_data.append(df['data'])
-                    
+
             # Create table with the extracted label time course data
             label_data_df = pd.DataFrame(sub_list,columns=['sub'])
             label_data_df = pd.concat(
                 [label_data_df,
                  pd.DataFrame(
-                    np.array(label_data), 
+                    np.array(label_data),
                     columns=df['times'])],
                 axis=1)
-            
+
             # Add info to the table regarding the conditions
             if len(factor) == 1:
                 label_data_df[factor[0]] = cond_comb[0]
@@ -169,20 +169,20 @@ def source_dur_ga():
                 label_data_df[factor[0]] = cond_comb[0]
                 label_data_df[factor[1]] = cond_comb[1]
                 label_data_df[factor[2]] = cond_comb[2]
-            
+
             label_data_df['band'] = "ERF"
             label_data_df['label'] = label
-            
+
             # Append label table to data table
             all_data_df = all_data_df.append(label_data_df)
-            
+
     # Save table as .tsv
     bids_path_source = bids_path_source.copy().update(
         root=source_deriv_root,
         subject=f"groupphase{phase}",
         suffix="datatable",
         check=False)
-    all_data_df.to_csv(bids_path_source.fpath, 
+    all_data_df.to_csv(bids_path_source.fpath,
                        sep="\t",
                        index=False)
 

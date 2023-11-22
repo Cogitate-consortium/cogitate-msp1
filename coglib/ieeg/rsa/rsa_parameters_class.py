@@ -59,7 +59,7 @@ class RsaParameters:
         elif len(json_dict['SUBJ_ID']) == 0:
             self.SUBJ_ID = input("You have not passed a subject ID in the command line and you have not provied any in "
                                  "the config file either \n "
-                                 "You must enter a subject ID to continue (SF___): ")
+                                 "You must enter a subject ID to continue (CF___): ")
         else:
             print(
                 "You have not provided a subject ID when calling the function but there was a subject ID found in the "

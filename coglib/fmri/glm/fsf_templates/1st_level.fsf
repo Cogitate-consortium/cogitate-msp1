@@ -30,7 +30,7 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_analysis-1stPutativeNCC_space-MNI152NLin2009cAsym.feat"
+set fmri(outputdir) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_analysis-1stPutativeNCC_space-MNI152NLin2009cAsym.feat"
 
 # TR(s)
 set fmri(tr) 1.500000
@@ -260,7 +260,7 @@ set fmri(regstandard_dof) 6
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10 
+set fmri(regstandard_nonlinear_warpres) 10
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 128
@@ -273,13 +273,13 @@ set fmri(totalVoxels) 326078304
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fmriprep/sub-SC101/ses-V1/func/sub-SC101_ses-V1_task-Dur_run-1_space-MNI152NLin2009cAsym_desc-preproc_bold"
+set feat_files(1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fmriprep/sub-CC101/ses-V1/func/sub-CC101_ses-V1_task-Dur_run-1_space-MNI152NLin2009cAsym_desc-preproc_bold"
 
 # Add confound EVs text file
 set fmri(confoundevs) 1
 
 # Confound EVs text file for analysis 1
-set confoundev_files(1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/confound_event_files/sub-SC101_ses-V1_task-Dur_run-1_confounds.txt"
+set confoundev_files(1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/confound_event_files/sub-CC101_ses-V1_task-Dur_run-1_confounds.txt"
 
 # EV 1 title
 set fmri(evtitle1) "tar_face"
@@ -314,7 +314,7 @@ set fmri(tempfilt_yn1) 1
 set fmri(deriv_yn1) 1
 
 # Custom EV file (EV 1)
-set fmri(custom1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_target_face_EV.txt"
+set fmri(custom1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_target_face_EV.txt"
 
 # Orthogonalise EV 1 wrt EV 0
 set fmri(ortho1.0) 0
@@ -391,7 +391,7 @@ set fmri(tempfilt_yn2) 1
 set fmri(deriv_yn2) 1
 
 # Custom EV file (EV 2)
-set fmri(custom2) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_target_object_EV.txt"
+set fmri(custom2) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_target_object_EV.txt"
 
 # Orthogonalise EV 2 wrt EV 0
 set fmri(ortho2.0) 0
@@ -468,7 +468,7 @@ set fmri(tempfilt_yn3) 1
 set fmri(deriv_yn3) 1
 
 # Custom EV file (EV 3)
-set fmri(custom3) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_target_letter_EV.txt"
+set fmri(custom3) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_target_letter_EV.txt"
 
 # Orthogonalise EV 3 wrt EV 0
 set fmri(ortho3.0) 0
@@ -545,7 +545,7 @@ set fmri(tempfilt_yn4) 1
 set fmri(deriv_yn4) 1
 
 # Custom EV file (EV 4)
-set fmri(custom4) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_target_falseFont_EV.txt"
+set fmri(custom4) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_target_falseFont_EV.txt"
 
 # Orthogonalise EV 4 wrt EV 0
 set fmri(ortho4.0) 0
@@ -622,7 +622,7 @@ set fmri(tempfilt_yn5) 1
 set fmri(deriv_yn5) 1
 
 # Custom EV file (EV 5)
-set fmri(custom5) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_relevant_face_EV.txt"
+set fmri(custom5) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_relevant_face_EV.txt"
 
 # Orthogonalise EV 5 wrt EV 0
 set fmri(ortho5.0) 0
@@ -699,7 +699,7 @@ set fmri(tempfilt_yn6) 1
 set fmri(deriv_yn6) 1
 
 # Custom EV file (EV 6)
-set fmri(custom6) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_relevant_object_EV.txt"
+set fmri(custom6) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_relevant_object_EV.txt"
 
 # Orthogonalise EV 6 wrt EV 0
 set fmri(ortho6.0) 0
@@ -776,7 +776,7 @@ set fmri(tempfilt_yn7) 1
 set fmri(deriv_yn7) 1
 
 # Custom EV file (EV 7)
-set fmri(custom7) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_relevant_letter_EV.txt"
+set fmri(custom7) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_relevant_letter_EV.txt"
 
 # Orthogonalise EV 7 wrt EV 0
 set fmri(ortho7.0) 0
@@ -853,7 +853,7 @@ set fmri(tempfilt_yn8) 1
 set fmri(deriv_yn8) 1
 
 # Custom EV file (EV 8)
-set fmri(custom8) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_relevant_falseFont_EV.txt"
+set fmri(custom8) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_relevant_falseFont_EV.txt"
 
 # Orthogonalise EV 8 wrt EV 0
 set fmri(ortho8.0) 0
@@ -930,7 +930,7 @@ set fmri(tempfilt_yn9) 1
 set fmri(deriv_yn9) 1
 
 # Custom EV file (EV 9)
-set fmri(custom9) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_irrelevant_face_EV.txt"
+set fmri(custom9) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_irrelevant_face_EV.txt"
 
 # Orthogonalise EV 9 wrt EV 0
 set fmri(ortho9.0) 0
@@ -1007,7 +1007,7 @@ set fmri(tempfilt_yn10) 1
 set fmri(deriv_yn10) 1
 
 # Custom EV file (EV 10)
-set fmri(custom10) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_irrelevant_object_EV.txt"
+set fmri(custom10) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_irrelevant_object_EV.txt"
 
 # Orthogonalise EV 10 wrt EV 0
 set fmri(ortho10.0) 0
@@ -1084,7 +1084,7 @@ set fmri(tempfilt_yn11) 1
 set fmri(deriv_yn11) 1
 
 # Custom EV file (EV 11)
-set fmri(custom11) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_irrelevant_letter_EV.txt"
+set fmri(custom11) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_irrelevant_letter_EV.txt"
 
 # Orthogonalise EV 11 wrt EV 0
 set fmri(ortho11.0) 0
@@ -1161,7 +1161,7 @@ set fmri(tempfilt_yn12) 1
 set fmri(deriv_yn12) 1
 
 # Custom EV file (EV 12)
-set fmri(custom12) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_irrelevant_falseFont_EV.txt"
+set fmri(custom12) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_irrelevant_falseFont_EV.txt"
 
 # Orthogonalise EV 12 wrt EV 0
 set fmri(ortho12.0) 0
@@ -1238,7 +1238,7 @@ set fmri(tempfilt_yn13) 1
 set fmri(deriv_yn13) 1
 
 # Custom EV file (EV 13)
-set fmri(custom13) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_run-1_targetScreen_EV.txt"
+set fmri(custom13) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/regressoreventfiles/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_run-1_targetScreen_EV.txt"
 
 # Orthogonalise EV 13 wrt EV 0
 set fmri(ortho13.0) 0

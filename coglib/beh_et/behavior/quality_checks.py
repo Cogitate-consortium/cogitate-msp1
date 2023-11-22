@@ -15,16 +15,16 @@ import data_saver
 
 
 """
-This module performs quality checks on subject data of experiment 1. 
+This module performs quality checks on subject data of experiment 1.
 
 ### LAST UPDATED: 2022-12-20 :  ###
 
-The quality-check module includes: 
+The quality-check module includes:
 - Checks of the experimental data : to determine which subjects will be excluded from the general analyses of exp.1.
-The module outputs a table in which each row is a subject and each column is a statistic of this subject's behavior 
+The module outputs a table in which each row is a subject and each column is a statistic of this subject's behavior
 in the screening and/or in the game. Subjects who don't have full game data are analyzed anyway, the game-analysis
-columns will remain empty. 
-Based on the thresholds that exist in the "quality_checks_criteria" module, the last 3 columns of the output table 
+columns will remain empty.
+Based on the thresholds that exist in the "quality_checks_criteria" module, the last 3 columns of the output table
 indicate whether the subject's data is valid.
 
 @author: RonyHirsch
@@ -58,10 +58,14 @@ FILENAME_PHASE2 = "quality_checks_phase2.csv"
 FILENAME_PHASE3 = "quality_checks_phase3.csv"
 
 # names and colors for plotting
-LAB_NAME_DICT = {"SA": "Birmingham", "SB": "PKU", "SC": "Donders", "SD": "Yale", "SE": "Harvard", "SF": "NYU", "SG": "Madison"}
-
+# XXX: Load the labname dictionary from a local file
+LAB_NAMES_DICT = None
+LAB_NAME_DICT = LAB_NAMES_DICT  # Sometimes singular var is used sometimes plural
 
 STIM_HUE_DICT = {FACE: "#003544", OBJ: "#ad501d", LETTER: "#397384", FALF: "#601f00"}
+
+LAB_HUE_DICT = {"CA": "#cd7a19", "CB": "#ff991f", "CC": "#93001a", "SD": "#ff8ac2", "SE": "#144E3B",
+                "CF": "#26B46C", "SG": "#0e8a69", "SZ": "tab:Blue"}
 
 STIM_TITLE_DICT = {FACE: FACE.title(), OBJ: OBJ.title(), LETTER: LETTER.title(), FALF: "False Font"}
 # colors from https://github.com/Cogitate-consortium/plotting_uniformization/blob/main/config.py
@@ -81,11 +85,6 @@ PHASE_3_PATH = {data_reader.FMRI: "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/proces
                 data_reader.MEG: "/mnt/beegfs/XNAT/COGITATE/MEG/phase_2/processed/bids/participants_MEG_phase3_included.txt",
                 data_reader.ECOG: "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/participants_ECoG_phase3_included.txt"}
 
-LAB_NAMES_DICT = {'SA': 'Birmingham', 'SB': 'Peking', 'SC': 'Donders', 'SD': 'Yale', 'SE': 'Harvard', 'SF': 'NYU',
-                  'SG': 'Madison', 'SX': 'MPI', 'SY': 'Reed', 'SZ': 'TAU'}
-
-LAB_HUE_DICT = {"SA": "#cd7a19", "SB": "#ff991f", "SC": "#93001a", "SD": "#ff8ac2", "SE": "#144E3B",
-                "SF": "#26B46C", "SG": "#0e8a69", "SZ": "tab:Blue"}
 
 
 def evaluate_resp(row):
@@ -777,8 +776,8 @@ def plot_fa(fa_df, save_path, save_name):
     fa_df_summ.loc[:, "False Alarm Rate"] = 100 * (fa_df_summ.loc[:, f"is{FALSEPOSITIVE}"] / fa_df_summ.loc[:, "count"])
     fa_df_summ.loc[:, data_reader.LAB] = fa_df_summ.apply(lambda row: map_lab(row), axis=1)
 
-    # REMOVE SF121 - HAS 36% FA RATE IN TASK RELEVANT FACE
-    #fa_df_summ = fa_df_summ[fa_df_summ[data_reader.SUB_CODE] != "SF121"]
+    # REMOVE CF121 - HAS 36% FA RATE IN TASK RELEVANT FACE
+    #fa_df_summ = fa_df_summ[fa_df_summ[data_reader.SUB_CODE] != "CF121"]
 
     # prepare plot
     modality_list = [data_reader.ECOG, data_reader.FMRI, data_reader.MEG]
@@ -892,9 +891,9 @@ def process_data_for_analysis(sub_dict, valid_sub_list, save_path, phase_name):
     fa_exceptions.to_csv(os.path.join(save_path, f"lmm_fa_cat_rt_extreme_{phase_name}.csv"))
     fa_single_plot(data=fa_rel_cat_df, plot_title=f"False Alarm Rate by Task Relevance {phase_name}",
                    save_path=save_path, save_name=f"lmm_fa_tr_{phase_name}", skip=10)
-    fa_rel_cat_df_noSF121 = fa_rel_cat_df[fa_rel_cat_df[data_reader.SUB_CODE] != "SF121"]
-    fa_single_plot(data=fa_rel_cat_df_noSF121, plot_title=f"False Alarm Rate by Task Relevance {phase_name}",
-                   save_path=save_path, save_name=f"lmm_fa_tr_{phase_name}_noSF121", skip=1)
+    fa_rel_cat_df_noCF121 = fa_rel_cat_df[fa_rel_cat_df[data_reader.SUB_CODE] != "CF121"]
+    fa_single_plot(data=fa_rel_cat_df_noCF121, plot_title=f"False Alarm Rate by Task Relevance {phase_name}",
+                   save_path=save_path, save_name=f"lmm_fa_tr_{phase_name}_noCF121", skip=1)
 
     # hit_rt_df IS PER **TRIAL**, for plotting purposes we would like to have it per **SUBJECT**
     rt_exceptions = plot_hit_rt(hit_rt_df, save_path, f"lmm_hitRTs_cat_dur_mod_trials_{phase_name}")
@@ -962,7 +961,7 @@ def check_data(root_folder=data_reader.COGITATE_PATH, phase_3=False, phase_name=
     valid_subs = data_table_res[data_table_res[quality_checks_criteria.VALID] == True]  # TAKE ONLY VALID SUBJECTS!
     """
     As ECoG patients are valuable, it was decided in Paris to *NOT* exclude patients EVEN IF THEIR BEHAVIOR IS INVALID.
-    Therefore, if we are in phase 3, we need to RE-INCLUDE the ECoG subjects that were just now excluded. 
+    Therefore, if we are in phase 3, we need to RE-INCLUDE the ECoG subjects that were just now excluded.
     """
     if phase_3:
         # take excluded subjects WHO ARE ECOG SUBJECTS

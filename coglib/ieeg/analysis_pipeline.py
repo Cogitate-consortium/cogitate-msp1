@@ -5,9 +5,9 @@ from Experiment1ActivationAnalysis.activation_analysis_batch_runner import activ
 from category_selectivity_analysis.category_selectivity_batch_runner import category_selectivity_batch_runner
 from visual_responsiveness_analysis.visual_responsiveness_batch_runner import visual_responsiveness_batch_runner
 
-subjects_list = ["SE103", "SE107", "SE108", "SE109", "SE110", "SE112", "SE113", "SE115", "SE118",
-                 "SE119", "SF102", "SF103", "SF104", "SF105", "SF106", "SF107", "SF109", "SF110",
-                 "SF112", "SF113", "SF117", "SF119"]
+subjects_list = ["CE103", "CE107", "CE108", "CE109", "CE110", "CE112", "CE113", "CE115", "CE118",
+                 "CE119", "CF102", "CF103", "CF104", "CF105", "CF106", "CF107", "CF109", "CF110",
+                 "CF112", "CF113", "CF117", "CF119"]
 
 
 def run_analysis_pipeline(bids_root, do_visual_responsiveness=False,

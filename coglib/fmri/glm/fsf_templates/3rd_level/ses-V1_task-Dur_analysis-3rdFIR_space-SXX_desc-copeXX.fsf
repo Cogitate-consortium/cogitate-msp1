@@ -35,7 +35,7 @@ set fmri(outputdir) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/deriv
 # TR(s)
 set fmri(tr) 3
 
-# Total volumes 
+# Total volumes
 set fmri(npts) 22
 
 # Delete volumes
@@ -260,7 +260,7 @@ set fmri(regstandard_dof) 12
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10 
+set fmri(regstandard_nonlinear_warpres) 10
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 100
@@ -272,70 +272,70 @@ set fmri(ncopeinputs) 1
 set fmri(copeinput.1) 1
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC101/ses-V1/sub-SC101_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(1) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC101/ses-V1/sub-CC101_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (2)
-set feat_files(2) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC102/ses-V1/sub-SC102_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(2) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC102/ses-V1/sub-CC102_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (3)
-set feat_files(3) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC104/ses-V1/sub-SC104_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(3) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC104/ses-V1/sub-CC104_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (4)
-set feat_files(4) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC106/ses-V1/sub-SC106_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(4) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC106/ses-V1/sub-CC106_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (5)
-set feat_files(5) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC108/ses-V1/sub-SC108_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(5) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC108/ses-V1/sub-CC108_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (6)
-set feat_files(6) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC109/ses-V1/sub-SC109_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(6) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC109/ses-V1/sub-CC109_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (7)
-set feat_files(7) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC110/ses-V1/sub-SC110_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(7) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC110/ses-V1/sub-CC110_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (8)
-set feat_files(8) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC114/ses-V1/sub-SC114_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(8) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC114/ses-V1/sub-CC114_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (9)
-set feat_files(9) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC118/ses-V1/sub-SC118_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(9) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC118/ses-V1/sub-CC118_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (10)
-set feat_files(10) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC120/ses-V1/sub-SC120_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(10) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC120/ses-V1/sub-CC120_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (11)
-set feat_files(11) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC121/ses-V1/sub-SC121_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(11) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC121/ses-V1/sub-CC121_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (12)
-set feat_files(12) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC122/ses-V1/sub-SC122_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(12) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC122/ses-V1/sub-CC122_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (13)
-set feat_files(13) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC124/ses-V1/sub-SC124_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(13) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC124/ses-V1/sub-CC124_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (14)
-set feat_files(14) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC125/ses-V1/sub-SC125_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(14) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC125/ses-V1/sub-CC125_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (15)
-set feat_files(15) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC126/ses-V1/sub-SC126_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(15) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC126/ses-V1/sub-CC126_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (16)
-set feat_files(16) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC129/ses-V1/sub-SC129_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(16) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC129/ses-V1/sub-CC129_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (17)
-set feat_files(17) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC131/ses-V1/sub-SC131_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(17) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC131/ses-V1/sub-CC131_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (18)
-set feat_files(18) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC134/ses-V1/sub-SC134_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(18) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC134/ses-V1/sub-CC134_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (19)
-set feat_files(19) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC136/ses-V1/sub-SC136_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(19) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC136/ses-V1/sub-CC136_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (20)
-set feat_files(20) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC140/ses-V1/sub-SC140_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(20) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC140/ses-V1/sub-CC140_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (21)
-set feat_files(21) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC143/ses-V1/sub-SC143_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(21) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC143/ses-V1/sub-CC143_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # 4D AVW data or FEAT directory (22)
-set feat_files(22) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-SC144/ses-V1/sub-SC144_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
+set feat_files(22) "/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/fslFeat/sub-CC144/ses-V1/sub-CC144_ses-V1_task-Dur_analysis-2ndFIR_space-MNI152NLin2009cAsym.gfeat/copeXX.feat"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0

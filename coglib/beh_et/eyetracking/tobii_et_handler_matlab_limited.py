@@ -14,11 +14,11 @@ import ET_data_extraction
 
 """
 This script takes all the tobii csv files from their HPC locations, and (subject by subject) calls the matlab script "tobii_parsrer.m" to parse them.
-tobii_parser prepares the data s.t. the ClusterFix package could be run on the data, to extract fixations and saccades based on the coordinate data in the csv files. 
-Notably, ClusterFix crashes on NaN samples. Therefore, we use pchip to interpolate missing values, BUT as some sections contain prolonged durations of missing values, 
+tobii_parser prepares the data s.t. the ClusterFix package could be run on the data, to extract fixations and saccades based on the coordinate data in the csv files.
+Notably, ClusterFix crashes on NaN samples. Therefore, we use pchip to interpolate missing values, BUT as some sections contain prolonged durations of missing values,
 every section above 500ms that is missing is later ignored. The end result is a pickle file per subject with dfSamples- which includes all the raw samples as well as their
-ClusterFix taggings and interpolation results, and estimated fixations (dfFix) and saccades (dfSacc) that contain ClusterFix results on all data that was not missing for 
-longer than the predefined threshold. 
+ClusterFix taggings and interpolation results, and estimated fixations (dfFix) and saccades (dfSacc) that contain ClusterFix results on all data that was not missing for
+longer than the predefined threshold.
 
 Author: Rony Hirschhorn
 """
@@ -58,7 +58,7 @@ def parse_tobii(tobii_raw_path, beh_data_path, root_folder, save_path):
     This is a Matlab package for extracting fixations and saccades from X, Y coordinates.
     * NOTE*: for piping Matlab from Python, MATLAB.ENGINE VERSION HAS TO BE 9.11.19!
 
-    :param tobii_raw_path: the folder where all the subjects who have tobii (SF) are (ECoG)
+    :param tobii_raw_path: the folder where all the subjects who have tobii (CF) are (ECoG)
     :param beh_data_path: the folder where all the behavioral data resides (DMT's QC folder)
     :param save_path: where to save the processed data to
     """
@@ -68,7 +68,7 @@ def parse_tobii(tobii_raw_path, beh_data_path, root_folder, save_path):
     tobii_parsed_subs = []
     for sub in subs:
         sub_code = sub
-        if not sub_code.startswith("SF"):
+        if not sub_code.startswith("CF"):
             continue
         tobii_sub_path = os.path.join(tobii_raw_path, sub_code, f"{sub_code}_{ECOG_SUBFOLDER}", "RESOURCES", "ET")
         sub_save_path = os.path.join(save_path, f"{ET_data_processing.SUBJECT}-{sub_code}", ET_qc_manager.SES_V1, ET_qc_manager.ET_RES_FOLD)
@@ -151,7 +151,7 @@ def pad_missing_data(et_data):
 
     missing_data = et_samples[et_samples["is_missing_pad"] == 1]
     for index, missing in missing_data.iterrows():
-        # Labeling an SSACC...ESACC pair with one or more SBLINK events between them as BLINKS
+        # Labeling an SSACC...ESACC pair with one or more CBLINK events between them as BLINKS
         et_samples.loc[(et_samples[DataParser.T_SAMPLE] <= missing[DataParser.T_SAMPLE] + ET_param_manager.BLINK_PAD_MS) &
                        (et_samples[DataParser.T_SAMPLE] >= missing[DataParser.T_SAMPLE] - ET_param_manager.BLINK_PAD_MS), f"{MISSING_PAD}"] = True
     return et_data
@@ -222,7 +222,7 @@ def parse_tobii_sub(sub_code, tobii_raw_path, save_path, sub_beh_data):
     """
     Because we might have read an aborted/restarted file, we select as trials only the LATEST trial in each Block/Miniblock.
     This allows us to mark the same trials as the BEH data, hence use only timestamps that are relevant for those trials when markering trials.
-    **NOTE**: this relies on the fact that when restarting a run, it starts from the top. 
+    **NOTE**: this relies on the fact that when restarting a run, it starts from the top.
     """
     et_trial_info = et_trial_info.groupby([DataParser.BLOCK_COL, DataParser.MINIBLOCK_COL, DataParser.TRIAL_COL]).tail(1)
 
@@ -273,7 +273,7 @@ def mark_missing_data(orig):
     """
     This goes over the nan indices: if the next nan index is not the current + 1, look at the current range.
     If range's length exceeds the pre-defined threshold, set "is_missing" to 1. Otherwise, set it to 0.
-    Set the clusterfix coordinates to be the original coordinates in non-NaN indices, and to the interpolated 
+    Set the clusterfix coordinates to be the original coordinates in non-NaN indices, and to the interpolated
     coordinates if "is_missing" == 0 (if 1, the cell is NaN).
     """
     # This helps create a missing DF, which helps to mark padded missing data (similar to padded Hershman)

@@ -1,7 +1,7 @@
 import data_reader
 
 """
-This sets the criteria for the quality checks on subject data of experiment 1. 
+This sets the criteria for the quality checks on subject data of experiment 1.
 This is based on the OSF pre-registration: https://osf.io/3t7ax/
 
 @author: RonyHirsch
@@ -13,12 +13,13 @@ MEG = 'MEG'
 ECOG = 'ECoG'
 LAB = 'Lab'
 # module per lab : taken from https://twcf-arc.slab.com/posts/institutional-abbreviations-rsi4obcd
-METHOD_HPC = {'SA': MEG, 'SB': MEG, 'SC': FMRI, 'SD': FMRI, 'SE': ECOG, 'SF': ECOG, 'SG': ECOG, 'SX': ECOG, 'SZ': MEG}  # This is used when saving to the HPC derivatives folder
+# XXX: Change names to Curated names
+METHOD_HPC = {'CA': MEG, 'CB': MEG, 'CC': FMRI, 'CD': FMRI, 'CE': ECOG, 'CE': ECOG, 'SG': ECOG, 'SX': ECOG, 'SZ': MEG}  # This is used when saving to the HPC derivatives folder
 
 # Behavioral screening exclusion criteria
 """
-For Experiment 1, subjects were excluded if their hit rate was lower than 80% or FAs higher than 20% for M-EEG and fMRI, 
-and for iEEG, a more relaxed criteria of 70% Hits and 30% FAs was used. 
+For Experiment 1, subjects were excluded if their hit rate was lower than 80% or FAs higher than 20% for M-EEG and fMRI,
+and for iEEG, a more relaxed criteria of 70% Hits and 30% FAs was used.
 Source: https://osf.io/gm3vd
 """
 HIT_RATE_MIN = {FMRI: 0.8, MEG: 0.8, ECOG: 0.7}  # minimum hit rate
@@ -82,7 +83,7 @@ def check_data_table(data):
         data.at[ind, FAS_OK] = check_fas(row)
         data.at[ind, VALID_2ND] = data.at[ind, HITS_OK] & data.at[ind, FAS_OK]
     """
-    Once the data is updated, check whether this subject passed both the 2nd (behavioral, here) and 3rd (neural, 
+    Once the data is updated, check whether this subject passed both the 2nd (behavioral, here) and 3rd (neural,
     see list at the top) quality checks.
     """
     for ind, row in data.iterrows():

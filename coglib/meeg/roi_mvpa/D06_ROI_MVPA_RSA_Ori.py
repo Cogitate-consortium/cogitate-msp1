@@ -42,7 +42,7 @@ from D_MEG_function import source_data_for_ROI_MVPA,sub_ROI_for_ROI_MVPA
 #mpl.use('Qt5Agg')
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--sub',type=str,default='SA101',help='subject_id')
+parser.add_argument('--sub',type=str,default='CA101',help='subject_id')
 parser.add_argument('--visit',
                     type=str,
                     default='V1',
@@ -109,7 +109,7 @@ subjects_dir = opt.fs_path
 
 def Orientation_RSA(epochs, stcs, conditions_C,n_features=None, n_pseudotrials=5, n_iterations=20, n_jobs=-1, feat_sel_diag=True):
     X = np.array([stc.data for stc in stcs])
-    
+
     # Get the labels:
     conditions_O = ['Center', 'Left', 'Right']
 
@@ -129,9 +129,9 @@ def Orientation_RSA(epochs, stcs, conditions_C,n_features=None, n_pseudotrials=5
         ) for i in tqdm(range(n_iterations))))
     return rsa_results, rdm_diag, sel_features
 
-def Plot_RSA(rsa, sample, roi_name,fname_fig):           
+def Plot_RSA(rsa, sample, roi_name,fname_fig):
     fig, ax = plt.subplots(1)
-    
+
     time_point = np.array(range(-500,2001, 10))/1000
     cmap = mpl.cm.jet
     im=ax.imshow(rsa, interpolation='lanczos', origin='lower', cmap=cmap,extent=time_point[[0, -1, 0, -1]])#, vmin=vmin, vmax=vmax)#, norm=norm
@@ -145,10 +145,10 @@ def Plot_RSA(rsa, sample, roi_name,fname_fig):
     # Save figure
 
     fig.savefig(op.join(fname_fig+ "_rsa_ori" + '.png'))
-    
+
     # fig, ax = plt.subplots(1)
-    
-    
+
+
     # trial_index= np.array(range(0, sample.shape[0], 1))
     # #GAT setting
     # cmap = mpl.cm.jet
@@ -172,23 +172,23 @@ def Plot_RSA(rsa, sample, roi_name,fname_fig):
 # run roi decoding analysis
 
 if __name__ == "__main__":
-    
+
     #opt INFO
-    
-    # subject_id = 'SB085'
+
+    # subject_id = 'CB085'
     #
     # visit_id = 'V1'
     # space = 'surface'
     #
 
     # analysis info
-    
+
     # con_C = ['LF']
     # con_D = ['Irrelevant', 'Relevant non-target']
     # con_T = ['500ms','1000ms','1500ms']
     #metric="correlation" or metric='euclidean'
-    
-    
+
+
     analysis_name='RSA_Ori'
 
     # 1 Set Path
@@ -212,7 +212,7 @@ if __name__ == "__main__":
                                                                                    con_D)
 
 
-    
+
     roi_rsa = dict()
     roi_sample = dict()
     roi_feature = dict()
@@ -223,67 +223,67 @@ if __name__ == "__main__":
         # 4 Get Source Data for each ROI
         stcs = []
         stcs = source_data_for_ROI_MVPA(epochs_rs, fpath_fw, rank, common_cov, sub_info, surf_label_list[nroi])
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         ### CTCCD
-        
+
         # #1 scoring methods with accuracy score
-        fname_fig = op.join(roi_figure_root, 
+        fname_fig = op.join(roi_figure_root,
                             sub_info + task_info + '_'+ roi_name
                             )
-        
+
         if roi_name=='GNW':
             sample_times=[0.3, 0.5]
         else:
             sample_times=[0.3, 1.5]
-            
-        
+
+
         cT_rsa = dict()
         cT_sample = dict()
         cT_features = dict()
-        
-        
+
+
         rsa, sample, sel_features = Orientation_RSA(epochs_rs, stcs, conditions_C, n_features=None)
-        
+
         # converting dictionary to
         # numpy array
         rsa_array = np.asarray(rsa)
         sample_array = np.asarray(sample)
         features_array = np.asarray(sel_features)
-        
-        
-    
+
+
+
         cT_rsa = np.mean(rsa_array, axis=0)
         cT_sample = np.mean(sample_array, axis=0)
         cT_features = features_array
-        
-        
+
+
         roi_rsa[roi_name]=cT_rsa
         roi_sample[roi_name] = cT_sample
         roi_feature[roi_name] = cT_features
-        
+
         roi_data=dict()
         roi_data['rsa']=roi_rsa
         roi_data['sample']=roi_sample
         roi_data['feature']=roi_feature
-        
+
 
         fname_data=op.join(roi_data_root, sub_info + '_' + task_info + roi_name + "_ROIs_data_RSA_Ori" + '.pickle')
         fw = open(fname_data,'wb')
         pickle.dump(roi_data,fw)
         fw.close()
-        
+
         #pot results
         # #1 scoring methods with accuracy score
-        fname_fig = op.join(roi_figure_root, 
+        fname_fig = op.join(roi_figure_root,
                             sub_info + task_info + '_'+ roi_name
                             )
-        Plot_RSA(cT_rsa, cT_sample, roi_name,fname_fig)    
-        
+        Plot_RSA(cT_rsa, cT_sample, roi_name,fname_fig)
+
 
     # #load
     # fr=open(fname_data,'rb')

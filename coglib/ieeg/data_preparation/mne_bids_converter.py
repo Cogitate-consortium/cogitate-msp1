@@ -281,7 +281,7 @@ def project_elec_to_surf(raw, subjects_dir, subject, montage_space="T1"):
 
 
 def save_to_BIDs(raw, elec_recon_file=None, bids_root=None, subject_id=None, session=None,
-                 task=None, data_type=None, line_freq=None, site="SF", channels_description_file=None,
+                 task=None, data_type=None, line_freq=None, site="CF", channels_description_file=None,
                  project_ecog_to_surf=True, raw_root=None):
     """
     This function creates a montage for the ECoG electrodes and save the data to BIDS (according to the tutorial found
@@ -310,10 +310,10 @@ def save_to_BIDs(raw, elec_recon_file=None, bids_root=None, subject_id=None, ses
         for coordinates_space in elec_recon_file.keys():
             # Formatting the electrodes reconstruction file:
             # Loading the electrodes coordinates in a data frame:
-            if site == "SF":
+            if site == "CF":
                 elec_coord_raw = np.genfromtxt(elec_recon_file[coordinates_space], dtype=str, delimiter=' ',
                                                comments=None, encoding='utf-8')
-            elif site == "SE":
+            elif site == "CE":
                 elec_coord_raw = np.genfromtxt(elec_recon_file[coordinates_space], dtype=str, delimiter=',',
                                                comments=None, encoding='utf-8')
                 # Keeping only the columns of interest
@@ -331,7 +331,7 @@ def save_to_BIDs(raw, elec_recon_file=None, bids_root=None, subject_id=None, ses
 
             # At NYU, the output of the electrodes reconstruction adds a 0 before some of the numbers,
             # which don't exist in the edfs. They therefore need to be removed:
-            if site == "SF":
+            if site == "CF":
                 electrode_tsv['name'] = remove_elecname_leading_zero(
                     electrode_tsv['name'])
             # Get the channels name

@@ -13,35 +13,35 @@ param = config.param
 # =================================================================================
 # Plotting electrode activations:
 
-# electrode activations must be Nx4 (mni, activation)    
-electrode_activations = np.array([[-67.333333, -20.666667, -10.000000, 400], [-71. ,  -8.5,  -9.5, 200]])  
-    
-# Using fsaverage      
-plot_brain(subject='fsaverage', surface='pial', hemi='lh', sulc_map='curv', parc='aparc.a2009s', 
-                         views=['lateral', 'medial'], 
+# electrode activations must be Nx4 (mni, activation)
+electrode_activations = np.array([[-67.333333, -20.666667, -10.000000, 400], [-71. ,  -8.5,  -9.5, 200]])
+
+# Using fsaverage
+plot_brain(subject='fsaverage', surface='pial', hemi='lh', sulc_map='curv', parc='aparc.a2009s',
+                         views=['lateral', 'medial'],
                          cmap='Oranges', colorbar=True, colorbar_title='Latency (ms)', colorbar_title_position='left', vmin=0.,
-                         electrode_activations=electrode_activations, vertex_distance=10., vertex_scaling='linear', 
-                         brain_cmap='Greys', brain_color_scale=(0.42, 0.58), brain_alpha=1, figsize=(8, 6), save_file=None, dpi=300)    
+                         electrode_activations=electrode_activations, vertex_distance=10., vertex_scaling='linear',
+                         brain_cmap='Greys', brain_color_scale=(0.42, 0.58), brain_alpha=1, figsize=(8, 6), save_file=None, dpi=300)
 plt.show()
 
 
-# Using inflated surface (preserves suface mapping by matching vertices across pial/inflated surfaces)      
-plot_brain(subject='fsaverage', surface='inflated', hemi='lh', sulc_map='curv', parc='aparc.a2009s', 
-                         electrode_activations=electrode_activations, vertex_distance=10., vertex_scaling='linear', 
-                         views=['lateral', 'medial'], 
+# Using inflated surface (preserves suface mapping by matching vertices across pial/inflated surfaces)
+plot_brain(subject='fsaverage', surface='inflated', hemi='lh', sulc_map='curv', parc='aparc.a2009s',
+                         electrode_activations=electrode_activations, vertex_distance=10., vertex_scaling='linear',
+                         views=['lateral', 'medial'],
                          cmap='Oranges', colorbar=True, colorbar_title='Latency (ms)', colorbar_title_position='left', vmin=0.,
-                         brain_cmap='Greys', brain_color_scale=(0.42, 0.58), brain_alpha=1, figsize=(8, 6), save_file=None, dpi=300)    
+                         brain_cmap='Greys', brain_color_scale=(0.42, 0.58), brain_alpha=1, figsize=(8, 6), save_file=None, dpi=300)
 plt.show()
 
 
 # #%% USING CH2 this is commented out, but is for ECoG using CH2 template brain
-# # Using CH2 (must be in your freesurfer subjects_dir). 
-# # Is this case you need to set scanner2tkr (or set to None for auto-detection) since this is brain is offset       
-# plot_brain(subject='CH2', surface='pial', hemi='lh', sulc_map='curv', parc='aparc.a2009s', 
+# # Using CH2 (must be in your freesurfer subjects_dir).
+# # Is this case you need to set scanner2tkr (or set to None for auto-detection) since this is brain is offset
+# plot_brain(subject='CH2', surface='pial', hemi='lh', sulc_map='curv', parc='aparc.a2009s',
 #                           views=['lateral', 'medial'], scanner2tkr=(1.0, 17., -19.0),
 #                           cmap='Oranges', colorbar=True, colorbar_title='Latency (ms)', colorbar_title_position='left', vmin=0.,
-#                           electrode_activations=electrode_activations, vertex_distance=10., vertex_scaling='linear', 
-#                           brain_cmap='Greys', brain_color_scale=(0.42, 0.58), brain_alpha=1, figsize=(8, 6), save_file=None, dpi=300)    
+#                           electrode_activations=electrode_activations, vertex_distance=10., vertex_scaling='linear',
+#                           brain_cmap='Greys', brain_color_scale=(0.42, 0.58), brain_alpha=1, figsize=(8, 6), save_file=None, dpi=300)
 # plt.show()
 
 
@@ -49,7 +49,7 @@ plt.show()
 
 #%% electrode plotting
 bids_root = "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids"
-elec_file = bids_root+'/sub-SF119/ses-V1/ieeg/sub-SF119_ses-V1_space-fsaverage_electrodes.tsv'
+elec_file = bids_root+'/sub-CF119/ses-V1/ieeg/sub-CF119_ses-V1_space-fsaverage_electrodes.tsv'
 channels_coordinates = pd.read_csv(elec_file, sep='\t')
 mni = np.asarray([channels_coordinates.x.values, channels_coordinates.y.values, channels_coordinates.z.values]).T * 1e3
 elec_color = np.tile( [0., 0., 0., 1.], np.size(mni,0) ).reshape(np.size(mni,0),4)

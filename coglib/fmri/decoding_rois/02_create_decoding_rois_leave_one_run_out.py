@@ -12,8 +12,8 @@ from datetime import datetime
 
 projectRoot = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
-bids_dir = projectRoot + '/bids'  
-code_dir = projectRoot + '/bids/code' 
+bids_dir = projectRoot + '/bids'
+code_dir = projectRoot + '/bids/code'
 data_dir = projectRoot + '/bids/derivatives/fslFeat'
 
 mask_dir_pattern = bids_dir + '/derivatives/masks/%(sub_id)s'
@@ -98,7 +98,7 @@ roi_list = ['G_and_S_cingul-Ant',
 roi_list = ['GNW',
             'GNW_S_front_inf']
 
-# Should only bilateral masks be processed? these are assumed to be label with 
+# Should only bilateral masks be processed? these are assumed to be label with
 # a 'bh' (both hemispheres) in the file name (as created by 01_create_ROI_masks.py)
 process_only_bilateral_masks = True
 
@@ -128,45 +128,45 @@ def get_mask_list(sub_mask_dir):
 def load_a_rois(sub_id):
     """
     Load all anatomica ROIs of a subject into a dictionary
-    
+
     sub_id: Subject ID
     Returns: Dictionary containing all the anatomical ROIs of the subject
     """
     sub_mask_dir = mask_dir_pattern%{'sub_id':sub_id}
     mask_paths = get_mask_list(sub_mask_dir)
     mask_paths.sort()
-    
+
     sub_mask_list = [l[95:] for l in mask_paths]
     sub_mask_list = [l[:-33] for l in sub_mask_list]
-    
+
     # empty dictionary that will contain all masks of a subject
     a_rois = {}
-    
+
     for n in range(0,len(mask_paths)):
         mask = mask_paths[n]
         m = load_mri(mask, brain_mask)
         a_rois[sub_mask_list[n]] = m
-        
+
     return a_rois, sub_mask_list
 
 
 def make_d_roi(sub_id,run_num,a_roi,cope,n_voxels):
-    
+
     # Load the relevant functional maps
     f_roi = load_mri(cope_pattern%{'sub_id':sub_id,'run_num':run_num,'cope_num':cope},brain_mask)
-    
+
     # Set to zero the voxels that don't belong to the ROI
     f_roi[a_roi == 0] = 0
-    
+
     # Pick only non-zero voxels
     idxnz = np.nonzero(-f_roi)[0]
     idx_pos = idxnz[np.argsort(-f_roi[idxnz])[:n_voxels//2]]
     idx_neg = idxnz[np.argsort(f_roi[idxnz])[:n_voxels//2]]
-    
+
     d_roi = np.zeros(f_roi.shape)
     d_roi[idx_pos] = 1
     d_roi[idx_neg] = 1
-    
+
     return d_roi, f_roi
 
 
@@ -174,10 +174,10 @@ def make_d_roi_face(sub_id,run_num,a_roi,cope,n_voxels):
 
     # Load the relevant functional maps
     f_roi = load_mri(cope_pattern%{'sub_id':sub_id,'run_num':run_num,'cope_num':cope},brain_mask)
-    
+
     # Set to zero the voxels that don't belong to the ROI
     f_roi[a_roi == 0] = 0
-    
+
     # Pick only non-zero voxels
     idxnz = np.nonzero(-f_roi)[0]
     idx = idxnz[np.argsort(-f_roi[idxnz])[:n_voxels]]
@@ -190,18 +190,18 @@ def make_d_roi_face(sub_id,run_num,a_roi,cope,n_voxels):
 
 def check_for_zeros(d_roi,f_roi,f_name):
     if any(f_roi[d_roi.astype(bool)]==0):
-        
+
         message = 'Found ' + str(sum((f_roi[d_roi.astype(bool)]==0))) + ' zeros in ' + f_name + '\n'
         print('ROI contains zeros!! Check log file\n')
-        
+
         try:
             with open(log_file, 'a') as file:
                 file.write(message)
         except FileNotFoundError:
             with open(log_file, 'w') as file:
                 file.write(message)
-                
-                
+
+
 def check_roi_size(sub_id,d_roi,f_name,n_voxels):
     if np.sum(d_roi) != n_voxels:
         try:
@@ -217,14 +217,14 @@ def save_d_roi(sub_id,d_roi,f_name):
     output_dir = output_pattern%{'sub':sub_id}
     if not os.path.isdir(output_dir):
         os.makedirs(output_dir)
-    
+
     full_f_name = output_dir + f_name
     save_mri(d_roi, brain_mask,full_f_name)
 
 # %% run
 subjects = get_subject_list(bids_dir, subject_list_type)
 
-remove_subjects = ['sub-SD122','sub-SD196']
+remove_subjects = ['sub-CD122','sub-CD196']
 for r in remove_subjects:
     subjects = subjects[subjects != r]
 
@@ -235,18 +235,18 @@ print('Total subjects:',len(subjects))
 for n_voxels in roi_sizes:
 
     for sub_id in subjects:
-        
+
         for run_num in range(1,9):
-            
+
             brain_mask = brain_mask_pattern%{'sub_id':sub_id,'run_num':run_num}
             a_rois, sub_roi_list = load_a_rois(sub_id)
-            
+
             for roi_name in roi_list:
-            
+
                 print(sub_id + ' Size: ' + str(n_voxels)+ ' LeaveOut: ' + str(run_num) + ' ' + roi_name)
                 #roi_name = roi_list[0]
                 a_roi = np.squeeze(a_rois[roi_name])
-                
+
                 rel = 'rel'
                 deco = 'face_vs_object'
                 cope = '19'
@@ -255,7 +255,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'rel'
                 deco = 'letter_vs_falsefont'
                 cope = '20'
@@ -264,7 +264,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'rel'
                 deco = 'face_orientation'
                 cope = '5'
@@ -273,7 +273,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'rel'
                 deco = 'object_orientation'
                 cope = '6'
@@ -282,7 +282,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'rel'
                 deco = 'letter_orientation'
                 cope = '7'
@@ -291,7 +291,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'rel'
                 deco = 'falsefont_orientation'
                 cope = '8'
@@ -300,7 +300,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'irrel'
                 deco = 'face_vs_object'
                 cope = '21'
@@ -309,7 +309,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'irrel'
                 deco = 'letter_vs_falsefont'
                 cope = '22'
@@ -318,7 +318,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'irrel'
                 deco = 'face_orientation'
                 cope = '9'
@@ -327,7 +327,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'irrel'
                 deco = 'object_orientation'
                 cope = '10'
@@ -336,7 +336,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'irrel'
                 deco = 'letter_orientation'
                 cope = '11'
@@ -345,7 +345,7 @@ for n_voxels in roi_sizes:
                 check_for_zeros(d_roi,f_roi,f_name)
                 check_roi_size(sub_id,d_roi,f_name,n_voxels)
                 save_d_roi(sub_id,d_roi,f_name)
-                
+
                 rel = 'irrel'
                 deco = 'falsefont_orientation'
                 cope = '12'

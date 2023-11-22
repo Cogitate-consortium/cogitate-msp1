@@ -15,8 +15,8 @@ subject_list_type = 'phase2_V1'
 #subject_list_type = 'phase3_V1_subset'
 #subject_list_type = 'debug'
 
-bids_dir = projectRoot + '/bids'  
-code_dir = projectRoot + '/bids/code' 
+bids_dir = projectRoot + '/bids'
+code_dir = projectRoot + '/bids/code'
 data_dir = projectRoot + '/bids/derivatives/fslFeat'
 
 #roi_dir = projectRoot + '/bids/derivatives/decoding_rois/'
@@ -36,7 +36,7 @@ from helper_functions_MRI import get_subject_list, load_mri
 
 space = 'MNI152NLin2009cAsym'
 
-# Should only bilateral masks be processed? these are assumed to be label with 
+# Should only bilateral masks be processed? these are assumed to be label with
 # a 'bh' (both hemispheres) in the file name (as created by 01_create_ROI_masks.py)
 process_only_bilateral_masks = True
 
@@ -68,26 +68,26 @@ def get_mask_list(sub_mask_dir):
 def load_a_rois(sub_id):
     """
     Load all anatomica ROIs of a subject into a dictionary
-    
+
     sub_id: Subject ID
     Returns: Dictionary containing all the anatomical ROIs of the subject
     """
     sub_mask_dir = mask_dir_pattern%{'sub_id':sub_id}
     mask_paths = get_mask_list(sub_mask_dir)
     mask_paths.sort()
-    
+
     sub_mask_list = [l[95:] for l in mask_paths]
     sub_mask_list = [l[:-33] for l in sub_mask_list]
-    
+
     # empty dictionary that will contain all masks of a subject
     a_rois = {}
-    
+
     for n in range(0,len(mask_paths)):
         mask = mask_paths[n]
         m = load_mri(mask, brain_mask)
-        
+
         a_rois[sub_mask_list[n]] = sum(m)
-        
+
     return a_rois, sub_mask_list
 
 # load all decoding ROIs
@@ -115,26 +115,26 @@ def get_droi_list(sub_droi_dir):
 def load_d_rois(sub_id):
     """
     Load all anatomica ROIs of a subject into a dictionary
-    
+
     sub_id: Subject ID
     Returns: Dictionary containing all the anatomical ROIs of the subject
     """
     sub_droi_dir = droi_dir_pattern%{'sub_id':sub_id}
     droi_paths = get_droi_list(sub_droi_dir)
     droi_paths.sort()
-    
+
     sub_droi_list = [l[95:] for l in droi_paths]
     sub_droi_list = [l[:-33] for l in sub_droi_list]
-    
+
     # empty dictionary that will contain all masks of a subject
     d_rois = {}
-    
+
     for n in range(0,len(droi_paths)):
         droi = droi_paths[n]
         d = load_mri(droi, brain_mask)
-        
+
         d_rois[sub_droi_list[n]] = sum(d)
-        
+
     return d_rois, sub_droi_list
 
 
@@ -143,12 +143,12 @@ subjects = get_subject_list(bids_dir, subject_list_type)
 
 
 # for sub in range(len(subjects)):
-    
+
 #     sub_id = subjects[sub]
 #     a_rois, sub_roi_list = load_a_rois(sub_id)
     #print(sub_id + ': ' + str(a_rois['G_rectus']))
 
-sub_id = 'sub-SC156'
+sub_id = 'sub-CC156'
 
 #subject_list_type = 'phase2_V1'
 subject_list_type = 'phase3_V1_subset'

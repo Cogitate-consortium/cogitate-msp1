@@ -4,38 +4,38 @@
 Run 1st, 2nd or 3rd level analyses using FSL FEAT.
 
 First, fsf files are created based on template fsf files (one per analysis).
-For each analysis from these templates one fsf file is created for each 
+For each analysis from these templates one fsf file is created for each
 participant and run (1st level only).
-Analyses are defined in analysis_definitions_* dicts, including task and output 
+Analyses are defined in analysis_definitions_* dicts, including task and output
 space definitions.
-    analysis_definitions_1stLevel: analysis definitons for first level feat 
+    analysis_definitions_1stLevel: analysis definitons for first level feat
     analyses (run level)
-    analysis_definitions_2ndLevel: analysis definitons for second level feat 
+    analysis_definitions_2ndLevel: analysis definitons for second level feat
     analyses (subject level)
-    analysis_definitions_3rdLevel: analysis definitons for third level feat 
+    analysis_definitions_3rdLevel: analysis definitons for third level feat
     analyses (group level)
 
-Second, feat analyses are submitted as separate jobs using the created fsf 
+Second, feat analyses are submitted as separate jobs using the created fsf
 files.
 
 Assumed are:
-    1. a bids compliant dataset preprocessed with fmriprep, following default 
+    1. a bids compliant dataset preprocessed with fmriprep, following default
     fmriprep output folder structures and filenames
-    2. fsf templates per analysis/task type and output space (e.g. 
+    2. fsf templates per analysis/task type and output space (e.g.
     sub-PXX_DurXX_analysis-2ndQC_space-T1w.fsf)
-        - fsf templates are further assumed to contain place holders for: 
-        A: subject IDs (sub-PXX), 
-        B: number of volumes (XXX_NTPS; only 1st level analyses) 
-        C: task/run place holders that are task specific (e.g. DurXX for 
+        - fsf templates are further assumed to contain place holders for:
+        A: subject IDs (sub-PXX),
+        B: number of volumes (XXX_NTPS; only 1st level analyses)
+        C: task/run place holders that are task specific (e.g. DurXX for
         task-Dur of exp.1)
-        D: analysis space place holder (space-SXX) defining the analysis space 
+        D: analysis space place holder (space-SXX) defining the analysis space
         (e.g. T1w, MNI152NLin2009cAsym)
-        Analysis labels + suffix must correspond to the labels defined in 
+        Analysis labels + suffix must correspond to the labels defined in
         analysis_definitions_* below.
 
 Handles 2nd level feat analyses for 1st level feat dirs which are already
 normalized/registered to the desired template (MNI or T1); i.e., bypasses
-2nd level normalization usually run by feat. Note: it is essential that 
+2nd level normalization usually run by feat. Note: it is essential that
 1st level feat dirs are NOT modified by parallel 2nd level analyses! Use
 time_wait_after_analysis to set a delay before submitting subsequent 2nd level
 analyses.
@@ -48,10 +48,10 @@ do not contain at least 1 trial in each run. Hence these analyses have to be
 defined as separate 2nd level analyses with the missingCon option enabled.
 
 Group level (3rd level) feat analyses can be defined for many copes of the same
-2nd level gfeat. Applicable subjects must (currently) be defined in fsf 
+2nd level gfeat. Applicable subjects must (currently) be defined in fsf
 template.
 
-Additional custom group level (3rd level) feat analysis option added for 
+Additional custom group level (3rd level) feat analysis option added for
 task-independent visual processing analysis with special fsf file handling.
 
 Requires FSL functions!
@@ -73,7 +73,7 @@ import pandas as pd
 
 # BIDS path
 bids_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids'
-# FSL output path 
+# FSL output path
 fsl_output_dir = bids_dir + '/derivatives/fslFeat'
 
 # Determine which analyses are run:
@@ -85,14 +85,14 @@ run_analysis = 3
 # Whether to submit feat jobs using qsub. If False only fsf files are created
 submit_jobs = True
 
-# Optional wait time between submitting successive jobs. This can be useful to 
-# avoid too many parallel jobs due to FEAT's large temporary files, if storage 
+# Optional wait time between submitting successive jobs. This can be useful to
+# avoid too many parallel jobs due to FEAT's large temporary files, if storage
 # space is a concern
 wait_between_jobs_in_sec = 600
 
-# Wait time after successive analyses. Useful for 2nd level analyses modifying 
-# the same 1st level feat dir (i.e. for 2nd level analyses where this applies; 
-# this should be at least the duration of the 2nd level 
+# Wait time after successive analyses. Useful for 2nd level analyses modifying
+# the same 1st level feat dir (i.e. for 2nd level analyses where this applies;
+# this should be at least the duration of the 2nd level
 # analyses to finish before proceeding!)
 time_wait_after_analysis = 600
 
@@ -110,26 +110,26 @@ from helper_functions_MRI import get_subject_list
 
 #%% Define analyses to be performed !
 """
-Dict per analysis, specifying analysis label, suffix and number of runs. 
+Dict per analysis, specifying analysis label, suffix and number of runs.
 Analysis labels must match the fsf file template names!
 
 desc: (optional) description of analysis
-label: determines the analysis label, including session (ses-xx) and task 
+label: determines the analysis label, including session (ses-xx) and task
     (e.g. task-Dur) key-value pairs to be analyzed
-suffix: suffix for the analysis label; should describe the type of analysis 
-    (e.g. QC = quality control) and space (e.g. T1w = T1 weighted space) 
+suffix: suffix for the analysis label; should describe the type of analysis
+    (e.g. QC = quality control) and space (e.g. T1w = T1 weighted space)
     key-value pair. Space has to correspond to an output space of fmriprep
     2nd level analyses are assumed to be flagged by "analysis-2nd..." key/value
     THIS DETERMINES WHETHER AN ANALYSIS IS CONSIDERED TO BE 1st OR 2nd LEVEL!
 fsf_file: path to the fsf file templates (assumed to be located in bids dir).
-    The fsf file templates must match the analysis label + suffix 
-runs: number of runs of this type. Note: 2nd level analyses do not have a run 
+    The fsf file templates must match the analysis label + suffix
+runs: number of runs of this type. Note: 2nd level analyses do not have a run
     key/value pair!
 copes: cope labels/numbers used exclusively for 3rd (group) level analyses.
 walltime: hours required to process run (submitted as job)
 memory: gb memory required to process run (submitted as job)
-missingCon: (optional) whether to check 1st level contrasts for runs with 
-    missing data (e.g. some exp1 runs do not contain target face or target 
+missingCon: (optional) whether to check 1st level contrasts for runs with
+    missing data (e.g. some exp1 runs do not contain target face or target
     letter trials) and if applicable remove these runs from 2nd level analysis
     (required by feat). Only applies for 2nd level analyses.
 """
@@ -156,7 +156,7 @@ analysis_definitions_1stLevel = {
         }
         }
 
-# Second level analyses (subject level)  
+# Second level analyses (subject level)
 analysis_definitions_2ndLevel = {
         'GLM_Dur_MNI': {
         'desc'      : '2nd level GLM for exp 1 (all contrasts)',
@@ -345,7 +345,7 @@ def get_fmriprep_processed_nifti_file(bids_dir, sub, session_label, analysis, sp
     """
     get nifti file name, given path + pattern (defined here), and input parameters
     bids_dir = bids directory
-    sub: subject ID (e.g. SC101)
+    sub: subject ID (e.g. CC101)
     session_label: session label ("key-value" pair; e.g. ses-V1)
     analysis: analysis label (e.g. task-Dur)
     space: analysis space (e.g. T1w)
@@ -360,8 +360,8 @@ def get_fmriprep_processed_nifti_file(bids_dir, sub, session_label, analysis, sp
 
 def get_analysis_labels(analysis_dict):
     """
-    combine analysis label, analysis suffix and run numbers to for analyses 
-    labels per run (if 1st level). Only return analysis label + suffix for 
+    combine analysis label, analysis suffix and run numbers to for analyses
+    labels per run (if 1st level). Only return analysis label + suffix for
     higher (2nd level) analyses.
     Returns:
     analyses: analysis labels
@@ -397,17 +397,17 @@ def write_error_log(bids_dir, error_df):
     print('Error saved to ' + output_dir)
 
 
-#%% functions to modify fsf templates 
+#%% functions to modify fsf templates
 def replace_text(fname, string_to_replace, replacement_string):
     """
-    replace text (string_to_replace) with new string (replacement_string) in 
+    replace text (string_to_replace) with new string (replacement_string) in
     input file (fname)
     """
     import fileinput
     with fileinput.FileInput(fname, inplace=True) as file:
         for line in file:
             print(line.replace(string_to_replace, replacement_string), end='')
-            
+
 def get_n_volumes(nifti_file):
     """
     get number of volumes in input nifti file
@@ -425,15 +425,15 @@ def get_n_volumes(nifti_file):
 
 def make_this_fsf_template(fsf_file, sub, analysis, nifti_file, place_holder, space):
     """
-    Take fsf template and replace subject, analysis and number of volumes 
-    place holders with args below. 
-    Subject ID place holder is assumed to be PXX number of volumes XXX_NTPS and 
+    Take fsf template and replace subject, analysis and number of volumes
+    place holders with args below.
+    Subject ID place holder is assumed to be PXX number of volumes XXX_NTPS and
     analysis place holders are the task key's value + XX.
     fsf_file: fsf file name
-    sub: subject ID (can be empty for 3rd level analyses). Assumed to contain 
+    sub: subject ID (can be empty for 3rd level analyses). Assumed to contain
     sub key-value pair
     analysis: analysis label or cope label (for 3rd level analyses)
-    nifti_file: nifti file 
+    nifti_file: nifti file
     place_holder: string of analysis place holder in template
     space: target analysis space (key-value pair; e.g. space-T1w)
     """
@@ -448,19 +448,19 @@ def make_this_fsf_template(fsf_file, sub, analysis, nifti_file, place_holder, sp
     replace_text(fsf_file, place_holder, analysis)
     # replace analysis space place holder with target space
     replace_text(fsf_file, 'space-SXX', space)
-    
 
-# %% function to modify 2nd level fsf template in case of missing contrasts in first level feat dirs, necessary if some contrasts have no trails in some runs (e.g. Dur Targets)  
+
+# %% function to modify 2nd level fsf template in case of missing contrasts in first level feat dirs, necessary if some contrasts have no trails in some runs (e.g. Dur Targets)
 def adjust_fsf_template_for_missing_contrasts(fsf_file):
     """
-    Adjust 2nd level feat fsf file such that runs with empty contrasts are 
-    removed from analysis. First gets list of 1st level dirs and list of 
-    contrast labels. Then checks for the current contrast of interest (defined 
-    by the fsf_file namen) whether any runs have an empty contrast of interest. 
-    If so removes these runs from the 2nd level contrast definitions in the fsf 
+    Adjust 2nd level feat fsf file such that runs with empty contrasts are
+    removed from analysis. First gets list of 1st level dirs and list of
+    contrast labels. Then checks for the current contrast of interest (defined
+    by the fsf_file namen) whether any runs have an empty contrast of interest.
+    If so removes these runs from the 2nd level contrast definitions in the fsf
     file. Note: the 2nd level fsf template must contain the same label for the
     contrast of interest as the 1st level contrast name. Thus, if the contrast
-    on the first level is called TarFace (experiment 1, target, face) then the 
+    on the first level is called TarFace (experiment 1, target, face) then the
     2nd level fsf file template must contain TarFace in its filename.
     fsf_file: path and fname of fsf file to be edited
     """
@@ -491,11 +491,11 @@ def adjust_fsf_template_for_missing_contrasts(fsf_file):
         replace_text(fsf_file, 'XXX_RUN'+str(run_counter), valid_feat_dir)
     # disable other references to invalid runs (technically not necessary as feat will ignore these, but it results in a cleaner design.fsf file)
     cleanup_fsf_file_with_missing_contrasts(fsf_file,feat_1st_level_dirs,valid_1st_level_dirs)
-    
-    
+
+
 def cleanup_fsf_file_with_missing_contrasts(fsf_file,feat_1st_level_dirs,valid_1st_level_dirs):
     """
-    Perform some additional cleanup on 2nd level fsf files with missing 
+    Perform some additional cleanup on 2nd level fsf files with missing
     contrasts by prepending # to unnecessary rows in the fsf file.
     fsf_file: path and fname of fsf file to be edited
     feat_1st_level_dirs: list of 1st level feat dirs
@@ -506,8 +506,8 @@ def cleanup_fsf_file_with_missing_contrasts(fsf_file,feat_1st_level_dirs,valid_1
     for run_idx in range(runs_to_disable):
         run_no = (len(feat_1st_level_dirs)-run_idx)
         # replace 3 target strings that are dependent on the number of runs
-        # each string is prepended with a # to denote a comment and the first 
-        # letter is removed to avoid accidental string finds looking e.g. for 
+        # each string is prepended with a # to denote a comment and the first
+        # letter is removed to avoid accidental string finds looking e.g. for
         # the run data
         string_to_replace = 'set fmri(groupmem.' + str(run_no) + ') 1'
         replace_text(fsf_file, string_to_replace, '# '+string_to_replace[1::])
@@ -515,13 +515,13 @@ def cleanup_fsf_file_with_missing_contrasts(fsf_file,feat_1st_level_dirs,valid_1
         replace_text(fsf_file, string_to_replace, '# '+string_to_replace[1::])
         string_to_replace = 'set feat_files(' + str(run_no) + ')'
         replace_text(fsf_file, string_to_replace, '# '+string_to_replace[1::])
-                     
+
 def get_only_valid_1st_level_feat_dirs(feat_1st_level_dirs, empty_runs):
     """
-    Get a list with 1st level feat dirs that do not contain runs without the 
+    Get a list with 1st level feat dirs that do not contain runs without the
     contrast of interest
     feat_1st_level_dirs: list of 1st level feat dirs
-    empty_runs: list with runs that do not contain trials of the contrast of 
+    empty_runs: list with runs that do not contain trials of the contrast of
     interest
     Returns
     valid_1st_level_dirs: list with 1st level feat dirs that all contain runs
@@ -532,7 +532,7 @@ def get_only_valid_1st_level_feat_dirs(feat_1st_level_dirs, empty_runs):
         cur_run = feat_dir[feat_dir.find('run-'):feat_dir.find('run-')+len('run-')+1]
         if not cur_run in empty_runs:
             valid_1st_level_dirs.append(feat_dir)
-    return valid_1st_level_dirs   
+    return valid_1st_level_dirs
 
 def check_if_contrast_is_empty(feat_1st_level_dirs, contrast_idx):
     """
@@ -542,10 +542,10 @@ def check_if_contrast_is_empty(feat_1st_level_dirs, contrast_idx):
     for any regressor forming the contrast of interest. Such empty runs are
     checked and returned in a list of empty_runs.
     feat_1st_level_dirs: list of 1st level feat dirs
-    contrast_idx: index of the current contrast of interest in the list of 
+    contrast_idx: index of the current contrast of interest in the list of
     contrasts
-    Returns 
-    empty_runs: list with runs that do not contain trials of the contrast of 
+    Returns
+    empty_runs: list with runs that do not contain trials of the contrast of
     interest
     """
     empty_runs=[]
@@ -618,8 +618,8 @@ def check_if_feat_output_exists(fsf_file):
     feat_dir = fsf_file_text[fsf_file_text.find(target_string) + len(target_string):fsf_file_text.find('# TR(s)') - 3]
     feat_dir_exists = os.path.isdir(feat_dir)
     return feat_dir_exists
-                      
-# %% functions for submitting feat jobs 
+
+# %% functions for submitting feat jobs
 def write_tmp_file_with_sbatch_cmd(fsf_file):
     """
     Create file with command to run feat on fsf file to be submitted as job
@@ -638,14 +638,14 @@ def write_tmp_file_with_sbatch_cmd(fsf_file):
 
 def check_1st_level_feat_dirs(fsf_file):
     """
-    Checks before 2nd level analyses whether 1st level feat dirs exist and 
+    Checks before 2nd level analyses whether 1st level feat dirs exist and
     whether report.html files of 1st level contain no errors.
     fsf_file: path to fsf file
     Returns
-    check_flag_feat_dirs: true if all 1st level feat dirs exist and have no 
-    errors, false if not all dirs exist or any errors are detected in 
+    check_flag_feat_dirs: true if all 1st level feat dirs exist and have no
+    errors, false if not all dirs exist or any errors are detected in
     report.html
-    error_msg: lists error type and run number for errors detected in 1st level 
+    error_msg: lists error type and run number for errors detected in 1st level
     feat dirs, if any
     """
     error_msg = []
@@ -673,8 +673,8 @@ def check_1st_level_feat_dirs(fsf_file):
 def submit_feat_job(fsf_file,walltime,memory):
     """
     Submit feat jobs using fsf files, unless outputs already exist.
-    In case of 2nd level analyses, also checks if 1st level feat reports 
-    contain any errors and prepares 1st level feat dirs to avoid repeating 
+    In case of 2nd level analyses, also checks if 1st level feat reports
+    contain any errors and prepares 1st level feat dirs to avoid repeating
     registration.
     fsf_file: fsf file to be submitted as feat job
     walltime: walltime in hours for job
@@ -705,7 +705,7 @@ def submit_feat_job(fsf_file,walltime,memory):
         else:
             error_msg = []
             check_flag_feat_dirs = True
-        # check if no error in feat dirs has been detected or throw error 
+        # check if no error in feat dirs has been detected or throw error
         if check_flag_feat_dirs:
             # write tmp file to submit as job using qsub
             tmp_file = write_tmp_file_with_sbatch_cmd(fsf_file)
@@ -723,9 +723,9 @@ def submit_feat_job(fsf_file,walltime,memory):
 # %% functions for avoiding reregistration in feat before running 2nd level
 def process_1st_level_reg_dirs_before_2nd_level(fsf_file):
     """
-    Process 1st level feat/reg dirs before running 2nd level feat analysis to 
+    Process 1st level feat/reg dirs before running 2nd level feat analysis to
     avoid repeating registration during higher level feat analysis.
-    Finds all 1st level feat dir associated with current 2nd level analysis 
+    Finds all 1st level feat dir associated with current 2nd level analysis
     (fsf_file) then submits each 1st level dir to be modified.
     Assumes that bold data is already registered to common space (MNI or T1w)
     due to e.g. preprocessing data with fmriprep.
@@ -739,10 +739,10 @@ def process_1st_level_reg_dirs_before_2nd_level(fsf_file):
 
 def modify_1st_level_reg_dir(feat_dir_1st_level):
     """
-    Modifies 1st level feat /reg dirs before running 2nd level feat analysis to 
+    Modifies 1st level feat /reg dirs before running 2nd level feat analysis to
     avoid repeating registration during higher level feat analysis.
     Removes any files that may result in repeated registration reg_standard dir
-    and any .mat file in /reg. Then replaces example_func2standard with 
+    and any .mat file in /reg. Then replaces example_func2standard with
     identity matrix and reference image standard.nii.gz with mean_func.
     feat_dir_1st_level: path to first level feat
     """
@@ -768,7 +768,7 @@ def modify_1st_level_reg_dir(feat_dir_1st_level):
     # copy mean_func as new standard reference image
     mean_func = feat_dir_1st_level + os.sep + 'mean_func.nii.gz'
     shutil.copy(mean_func,standard_image)
-    
+
 
 # %% main function to loop over subjects & analyses
 def run_fsf_creation_and_submit_feat_job(bids_dir, subjects, analyses, analyses_suffix, fsf_templates_dir, fsf_output_dir, run_missing_contrast_check, error_df, walltime, memory):
@@ -801,7 +801,7 @@ def run_fsf_creation_and_submit_feat_job(bids_dir, subjects, analyses, analyses_
                 # get nifti file name if it is not 2nd level analysis
                 nifti_file = get_fmriprep_processed_nifti_file(bids_dir, sub, session_label, analysis, space)
                 # get place holder in template based on analysis name
-                place_holder = analysis[analysis.find('task-')+5:analysis.find('_run-')] + 'XX' 
+                place_holder = analysis[analysis.find('task-')+5:analysis.find('_run-')] + 'XX'
             else:
                 # if it is 2nd or 3rd level analysis set nifti file to 2nd level flag
                 nifti_file = 'is_2nd_level'
@@ -840,7 +840,7 @@ def run_fsf_creation_and_submit_feat_job(bids_dir, subjects, analyses, analyses_
 
 def run_fsf_creation_and_submit_feat_job_group_analyses(bids_dir, copes, analysis_prefix, analyses_suffix, fsf_templates_dir, fsf_output_dir, run_missing_contrast_check, error_df, walltime, memory):
     """
-    Run fsf file creation for all subjects and runs for current analysis 
+    Run fsf file creation for all subjects and runs for current analysis
     specification. Uses modified functions for GLM analyses, detected
     based on GLM string in analyses_suffix.
     bids_dir: path to bids folder
@@ -894,35 +894,35 @@ def run_fsf_creation_and_submit_feat_job_group_analyses(bids_dir, copes, analysi
                 error_df.loc[len(error_df)] = [cope, analysis_prefix, analyses_suffix, 'run-' + err_row[1], err_row[0]]
         else:
             error_df.loc[len(error_df)] = [cope, analysis_prefix, analyses_suffix, '-', '_ Job submitted _']
-        
+
 
 #%% functions specific for GLM analysis
 def make_GLM_3rd_level_fsf_template(fsf_file, analysis_label, subjects, cope, space):
     """
-    Take fsf template and replace analysis, number of subjects, cope and space 
+    Take fsf template and replace analysis, number of subjects, cope and space
     place holders with args below. This specific version handles fsf templates
     specific to the GLM group level (3rd level) analysis.
     Place holders in the fsf template file are assumed to be:
-    - GLMXX: set to specific GLM analysis label; 
+    - GLMXX: set to specific GLM analysis label;
     e.g.   GLMTarFace
     - XXX_NTPS: set to number of subjects; e.g.:   22
     - copeXX: to number of 2nd level cope; e.g.:   cope1
-    - feat_filesXX: full string per subject where 2nd feat copes are located 
+    - feat_filesXX: full string per subject where 2nd feat copes are located
     with additional string; e.g.:   set feat_files(1) ... .feat"
     	note this must also include the correct cope & analysis!
-    - evgXX: full string per subject; for # Higher-level EV value for EV 1 and 
-    input 3 set e.g.:   set fmri(evg3.1) 1 
-    - groupmemXX: full string per subject; for 3rd subjects 
+    - evgXX: full string per subject; for # Higher-level EV value for EV 1 and
+    input 3 set e.g.:   set fmri(evg3.1) 1
+    - groupmemXX: full string per subject; for 3rd subjects
     e.g.:    set fmri(groupmem.3) 1
-    - analysis_label: The analysis output/input label; must correspond to 2nd 
+    - analysis_label: The analysis output/input label; must correspond to 2nd
     level input analysis dir labels.
     fsf_file: fsf file name
     subjects: list of subject IDs to be used in the 3rd level analysis
-    analysis_label: string of analysis label. Will be the 3rd level feat 
-    analysis output label and must be the same name as of the 2nd level 
-    analysis label; i.e. name of the analysis of the 2nd level feat dir 
+    analysis_label: string of analysis label. Will be the 3rd level feat
+    analysis output label and must be the same name as of the 2nd level
+    analysis label; i.e. name of the analysis of the 2nd level feat dir
     (e.g. GLMTarFace)
-    cope: cope of interest; must correspond to the cope#.feat dir of the 2nd 
+    cope: cope of interest; must correspond to the cope#.feat dir of the 2nd
     level analyses
     space: target analysis space (key-value pair; e.g. space-T1w)
     """
@@ -937,24 +937,24 @@ def make_GLM_3rd_level_fsf_template(fsf_file, analysis_label, subjects, cope, sp
     replace_text(fsf_file, 'space-SXX', space)
     # construct & replace feat_filesXX string
     feat_files_string = construct_feat_files_string(subjects, analysis_label, cope, space)
-    replace_text(fsf_file, 'feat_filesXX', feat_files_string) 
+    replace_text(fsf_file, 'feat_filesXX', feat_files_string)
     # construct & replace evgXX string
     evg_string = construct_evg_string(subjects)
-    replace_text(fsf_file, 'evgXX', evg_string) 
+    replace_text(fsf_file, 'evgXX', evg_string)
     # construct & replace groupmemXX string
     groupmem_string = construct_groupmem_string(subjects)
-    replace_text(fsf_file, 'groupmemXX', groupmem_string) 
+    replace_text(fsf_file, 'groupmemXX', groupmem_string)
 
 def construct_feat_files_string(subjects, analysis_label, cope, space):
     """
-    Constructs feat files string for replacing placeholder in 3rd level fsf 
+    Constructs feat files string for replacing placeholder in 3rd level fsf
     template (currently specific to GLM analysis)
     subjects: list of subject IDs to be used in the 3rd level analysis
-    analysis_label: string of analysis label. Will be the 3rd level feat 
-    analysis output label and must be the same name as of the 2nd level 
-    analysis label; i.e. name of the analysis of the 2nd level feat dir 
+    analysis_label: string of analysis label. Will be the 3rd level feat
+    analysis output label and must be the same name as of the 2nd level
+    analysis label; i.e. name of the analysis of the 2nd level feat dir
     (e.g. GLMTarFace)
-    cope: cope of interest; must correspond to the cope#.feat dir of the 2nd 
+    cope: cope of interest; must correspond to the cope#.feat dir of the 2nd
     level analyses
     space: name of the analysis space (e.g. MNI152NLin2009cAsym)
     """
@@ -967,7 +967,7 @@ def construct_feat_files_string(subjects, analysis_label, cope, space):
 
 def construct_evg_string(subjects):
     """
-    Constructs evg string for replacing placeholder in 3rd level fsf 
+    Constructs evg string for replacing placeholder in 3rd level fsf
     template (currently specific to GLM analysis)
     subjects: list of subject IDs to be used in the 3rd level analysis
     """
@@ -978,7 +978,7 @@ def construct_evg_string(subjects):
 
 def construct_groupmem_string(subjects):
     """
-    Constructs groupmem string for replacing placeholder in 3rd level fsf 
+    Constructs groupmem string for replacing placeholder in 3rd level fsf
     template (currently specific to GLM analysis)
     subjects: list of subject IDs to be used in the 3rd level analysis
     """
@@ -991,15 +991,15 @@ def construct_groupmem_string(subjects):
 # %% run
 if __name__ == '__main__':
     """
-    Get analyses from analysis_definitions, then run fsf file creation for all 
+    Get analyses from analysis_definitions, then run fsf file creation for all
     analyses.
     bids_dir: path to bids folder
     analysis_definitions: dict per analysis to be performed
     """
     # get subject list
     subjects = get_subject_list(bids_dir,subject_list_type)
-    
-    remove_subjects = ['sub-SD122','sub-SD196']
+
+    remove_subjects = ['sub-CD122','sub-CD196']
     for r in remove_subjects:
         subjects = subjects[subjects != r]
 
@@ -1008,16 +1008,16 @@ if __name__ == '__main__':
 
     # create empty df for error log
     error_df = pd.DataFrame(columns=['sub','analysis','analyses_suffix','error_run_no','error_msg'])
-    
+
     # loop over analyses in analysis definition dict
     for key in analysis_definitions:
         print('')
         print('PROCESSING ANALYSIS: -> ' + key + ' <- ')
-        
-        # get analysis specification 
+
+        # get analysis specification
         analysis_dict = analysis_definitions[key]
         analyses, analyses_suffix, fsf_templates_dir, run_missing_contrast_check = get_analysis_labels(analysis_dict)
-        
+
         # get required walltime and memory from analysis dict
         if submit_jobs:
             walltime = analysis_dict['walltime']
@@ -1025,14 +1025,14 @@ if __name__ == '__main__':
         else:
             walltime = 0
             memory = 0
-        
+
         # determine fsf output dir
         fsf_output_subdir = analyses_suffix[analyses_suffix.find('analysis-')+len('analysis-'):analyses_suffix.find('analysis-')+len('analysis-')+3]
         fsf_output_dir = bids_dir + os.sep + 'derivatives' + os.sep + 'fslFeat' + os.sep + 'fsf_files' + os.sep + fsf_output_subdir + '_level'
         # create fsf output directory
         if not os.path.isdir(fsf_output_dir):
             os.makedirs(fsf_output_dir)
-        
+
         # check whether group analysis (3rd level) of individual subject analyses (1st or 2nd level) are to be performed
         if run_analysis == 3:
             # run fsf file creation for group analyses for current analysis
@@ -1042,11 +1042,11 @@ if __name__ == '__main__':
         else:
             # run fsf file creation for all subjects and runs of current analysis
             run_fsf_creation_and_submit_feat_job(bids_dir, subjects, analyses, analyses_suffix, fsf_templates_dir, fsf_output_dir, run_missing_contrast_check, error_df, walltime, memory)
-        
+
         print('')
         print('waiting before continuting with next analyses')
         time.sleep(time_wait_after_analysis)
-        
+
     # write log file for submission listing potential errors
     write_error_log(bids_dir, error_df)
 

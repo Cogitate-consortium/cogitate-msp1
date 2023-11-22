@@ -2,21 +2,21 @@
 # -*- coding: utf-8 -*-
 """
 Performs the putative NCC (pNCC) analysis at the subject
-level. Uses output of several FSL FEAT analyses to perform conjunctions. 
-These 1st (run), 2nd (subject) and 3rd (group) level feat analyses must be 
-submitted using the script glm/02_run_fsf_feat_analyses.py and must be 
-completed by the time this script is run! The cope paths, cope numbers and 
+level. Uses output of several FSL FEAT analyses to perform conjunctions.
+These 1st (run), 2nd (subject) and 3rd (group) level feat analyses must be
+submitted using the script glm/02_run_fsf_feat_analyses.py and must be
+completed by the time this script is run! The cope paths, cope numbers and
 labels must be defined below to correspond to exactly the same cope numbers
 and labels used during the FSL FEAT setup (i.e. as defined in the fsf files).
 
-In addition to using the existing FSL FEAT outputs this script performs 
+In addition to using the existing FSL FEAT outputs this script performs
 bayes factor tests to establish equivalence to baseline for relevant contrasts.
 Settings for the bayes factor test can be adjusted below.
 
 Finally, it runs the actual conjunctions for the pNCC analysis as defined below.
 The cope labels in pncc_conjunctions must correspond to those used in
 the FSL FEAT cope setup.
-The conjunction maps, intermediate equivalence maps and additional conjunction 
+The conjunction maps, intermediate equivalence maps and additional conjunction
 
 Created on Fri Jun 18 17:18:01 2021
 
@@ -35,8 +35,8 @@ import pingouin as pn
 projectRoot = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
 # paths
-bids_dir = projectRoot + '/bids'  
-code_dir = projectRoot + '/bids/code' 
+bids_dir = projectRoot + '/bids'
+code_dir = projectRoot + '/bids/code'
 data_dir = projectRoot + '/bids/derivatives/fslFeat'
 output_dir_template = bids_dir + '/derivatives/putative_ncc_subject_level/%(sub)s'
 
@@ -101,13 +101,13 @@ smoothing_in_mm = 0
 
 
 """
-Define contrasts run for pNCC analysis (note these are different 
-contrasts then those run on the 1st/2nd level of FEAT analyses, but rather use 
-2nd level feat contrasts as their input). Subsequently these serve as input to 
+Define contrasts run for pNCC analysis (note these are different
+contrasts then those run on the 1st/2nd level of FEAT analyses, but rather use
+2nd level feat contrasts as their input). Subsequently these serve as input to
 the conjunction analyses.
 
 Adjusted from Preregistration:
-A)	[Tar > bsl] & [Rel = bsl] & [Irrel = bsl] 
+A)	[Tar > bsl] & [Rel = bsl] & [Irrel = bsl]
     [TarAll > 0] && [RelAll == 0] && [IrrelAll == 0]
 B)	[Tar > bsl] & [Rel != bsl] & [Irrel = bsl]
     [TarAll > 0] && [(RelAll > 0) || (RelAll < 0)] && [IrrelAll == 0]
@@ -166,19 +166,19 @@ def save_conjunction_map(conjunction_name, conjunction_map, brain_mask, output_d
     brain_mask: brain mask path
     output_dir: output dir where nifti files are written
     """
-    
+
     save_fname = output_dir + os.sep + conjunction_name + '_conjunction.nii.gz'
     save_mri(conjunction_map, brain_mask, save_fname)
-        
+
 def load_subject_cope(cope_of_interest, test_direction, brain_mask, data_fname='thresh_zstat1.nii.gz',  return_bool=False):
     """
-    Gets thresholded maps for subject copes; i.e. significance maps for C 
+    Gets thresholded maps for subject copes; i.e. significance maps for C
     conjunctions.
     cope_of_interest: cope name of interest to be loaded (e.g. RelFace to load relevant faces > baseline contrast)
     test direction: direction of statistical test to load; corresponds to subCopes (e.g. Activation to load RelFace>Baseline)
     return_bool: if true returns a boolean map instead of z values (default false)
     data_fname: (optional) file name for contast of interest; appended to path. If left empty thresholded z stat from gfeat dirs will be used
-    brain_mask_fname: (optional) full path to brain mask used to mask the MRI data. If left empty the gfeat mask will be used corresponding to the loaded contrast 
+    brain_mask_fname: (optional) full path to brain mask used to mask the MRI data. If left empty the gfeat mask will be used corresponding to the loaded contrast
     Returns:
     data: mri map as vector
     brain_mask: utilized brain mask path
@@ -190,7 +190,7 @@ def load_subject_cope(cope_of_interest, test_direction, brain_mask, data_fname='
     print('. . loading ' + cope + '.gfeat, thresh_zstat' + subCope + '.nii.gz | ' + test_direction + ' to relative baseline' )
     # make data path
     data_path = cope_subject_results_template%{'sub':sub_id,'sub':sub_id,'path_ext':path_ext,'cope':cope,'subCope':subCope}
-    
+
     # if brain_mask_fname == 'mask.nii.gz':
     #     brain_mask = data_path + brain_mask_fname
     # else:
@@ -203,13 +203,13 @@ def load_subject_cope(cope_of_interest, test_direction, brain_mask, data_fname='
 
 def load_subject_bayesian(cope_of_interest, test_direction, brain_mask, data_fname='thresh.nii.gz',  return_bool=False):
     """
-    Gets thresholded maps for subject bayesian test; i.e. significance maps 
+    Gets thresholded maps for subject bayesian test; i.e. significance maps
     for A or B conjunctions.
     cope_of_interest: cope name of interest to be loaded (e.g. RelFace to load relevant faces == baseline contrast)
     test direction: direction of statistical test to load; corresponds to subCopes (must be Equivalence to load e.g. RelFace==Baseline)
     return_bool: if true returns a boolean map instead of z values (default false)
     data_fname: (optional) file name for contast of interest; appended to path. If left empty z stat will be used
-    brain_mask: full path to brain mask used to mask the MRI data. If left empty the gfeat mask will be used corresponding to the loaded contrast 
+    brain_mask: full path to brain mask used to mask the MRI data. If left empty the gfeat mask will be used corresponding to the loaded contrast
     Returns:
     data: mri map as vector
     brain_mask: utilized brain mask path
@@ -218,7 +218,7 @@ def load_subject_bayesian(cope_of_interest, test_direction, brain_mask, data_fna
     cope = copes[cope_of_interest]['cope']
     print('. . loading ' + cope + ' | ' + test_direction + ' relative to baseline')
     # make data path
-    bayesian_results_path = output_dir + os.sep + 'bayesian_maps' 
+    bayesian_results_path = output_dir + os.sep + 'bayesian_maps'
     data_final_path = bayesian_results_path + os.sep + cope_of_interest + '_bayesian_map_'  + data_fname
     # load mri data
     data = np.squeeze(load_mri(data_final_path, brain_mask))
@@ -229,7 +229,7 @@ def load_subject_bayesian(cope_of_interest, test_direction, brain_mask, data_fna
 # Functions to make various conjunctions
 def make_C_directional_conjunction(conjunction_name, conjunction_info, brain_mask, output_dir):
     """
-    Make a C style conjunction map, but only for contrasts of same 
+    Make a C style conjunction map, but only for contrasts of same
     direction (activation or deactivation) for rel and irrel; i.e.:
     [Rel(id) > bsl] & [Irrel(id) > bsl]
     and
@@ -263,7 +263,7 @@ def make_C_directional_conjunction(conjunction_name, conjunction_info, brain_mas
     if test_direction_1A == test_direction_2A:
         conjunction_name_A = conjunction_name + '_' + test_direction_1A
         print('. Creating C directional conjunction map for: ' + conjunction_name_A)
-        
+
         conjunction_map = np.logical_and(data1A>0, data2A>0)
         # save maps
         save_conjunction_map(conjunction_name_A, conjunction_map, brain_mask, output_dir)
@@ -273,18 +273,18 @@ def make_C_directional_conjunction(conjunction_name, conjunction_info, brain_mas
     if test_direction_1B == test_direction_2B:
         conjunction_name_B = conjunction_name + '_' + test_direction_1B
         print('. Creating C directional conjunction map for: ' + conjunction_name_B)
-        
+
         conjunction_map = np.logical_and(data1B>0, data2B>0)
         # save maps
         save_conjunction_map(conjunction_name_B, conjunction_map, brain_mask, output_dir)
-    else: 
+    else:
         print('. ! Caution: conjunction test direction do not match. No map created for C Directional conjunction C.B')
     return brain_mask
 
 # Functions to make various conjunctions
 def make_C_conjunction(conjunction_name, conjunction_info, brain_mask, output_dir):
     """
-    Make a C style conjunction map; i.e. 
+    Make a C style conjunction map; i.e.
     [Rel(id) != bsl] & [Irrel(id) != bsl]
     conjunction_map = (con1A || con1B) && (con2A || con2B)
     Save map as binary & associated z stat map as nifti files.
@@ -313,21 +313,21 @@ def make_C_conjunction(conjunction_name, conjunction_info, brain_mask, output_di
     test_direction = conjunction_info['con2B']['test_direction']
     data2B, brain_mask = load_subject_cope(cope_of_interest, test_direction, brain_mask)
     # make binary conjunction map
-    
+
     #conjunction_map = np.logical_and(np.logical_or(data1A>0,data1B>0), np.logical_or(data2A>0,data2B>0))
     conjunction_map = np.logical_or(np.logical_and(data1A>0,data2A>0), np.logical_and(data1B>0,data2B>0))
     # save maps
     save_conjunction_map(conjunction_name, conjunction_map, brain_mask, output_dir)
     return brain_mask
-       
+
 # create merged C conjunction map
 def merge_C_conjunction_maps(pncc_conjunctions, brain_mask, output_dir):
     """
-    Merges C conjunction maps together; i.e. the C conjunction in the prereg. 
-    specifies that this conjunction is run separately for each stimulus 
+    Merges C conjunction maps together; i.e. the C conjunction in the prereg.
+    specifies that this conjunction is run separately for each stimulus
     category. However, for display purposes it can help to merge related
     stimuli togehter and output the union of the maps.
-    
+
     """
     print('Creating merged C conjunction map')
     # load example data
@@ -343,39 +343,39 @@ def merge_C_conjunction_maps(pncc_conjunctions, brain_mask, output_dir):
     for cidx in range(len(conjunctions_of_interest)):
         fname = output_dir + os.sep + conjunctions_of_interest[cidx] + '_conjunction.nii.gz'
         data[:,cidx] = np.squeeze(load_mri(fname, brain_mask))
-    
+
     # merge data
     merged_c_map = np.min(data,1)
     fname = output_dir + os.sep + 'C_combined_and_conjunction.nii.gz'
     save_mri(merged_c_map, brain_mask, fname)
-    
+
     # merge data
     merged_c_map = np.max(data,1)
     fname = output_dir + os.sep + 'C_combined_or_conjunction.nii.gz'
     save_mri(merged_c_map, brain_mask, fname)
-    
+
     # merge data
     merged_c_map = np.sum(data,1)
     fname = output_dir + os.sep + 'C_combined_sum_conjunction.nii.gz'
     save_mri(merged_c_map, brain_mask, fname)
-    
+
     # Directional conjunctions
     for direction in ['Activation', 'Deactivation']:
         # load data
         for cidx in range(len(conjunctions_of_interest)):
             fname = output_dir + os.sep + conjunctions_of_interest[cidx] + '_' + direction + '_conjunction.nii.gz'
             data[:,cidx] = np.squeeze(load_mri(fname, brain_mask))
-        
+
         # merge data
         merged_c_map = np.min(data,1)
         fname = output_dir + os.sep + 'C_combined_and_' + direction + '_conjunction.nii.gz'
         save_mri(merged_c_map, brain_mask, fname)
-        
+
         # merge data
         merged_c_map = np.max(data,1)
         fname = output_dir + os.sep + 'C_combined_or_' + direction + '_conjunction.nii.gz'
         save_mri(merged_c_map, brain_mask, fname)
-        
+
         # merge data
         merged_c_map = np.sum(data,1)
         fname = output_dir + os.sep + 'C_combined_sum_' + direction + '_conjunction.nii.gz'
@@ -383,7 +383,7 @@ def merge_C_conjunction_maps(pncc_conjunctions, brain_mask, output_dir):
 
 def make_B_conjunction(conjunction_name, conjunction_info, brain_mask, output_dir):
     """
-    Make a B style conjunction map; i.e. 
+    Make a B style conjunction map; i.e.
     [Tar > bsl] & [Rel != bsl] & [Irrel = bsl]
     conjunction_map = (con1) && (con2A || con2B) && (con3_equivalence)
     Save map as binary & associated z stat map as nifti files.
@@ -410,12 +410,12 @@ def make_B_conjunction(conjunction_name, conjunction_info, brain_mask, output_di
     # get map for conjunction part 1A, activation
     cope_of_interest = conjunction_info['con3']['cope_of_interest']
     test_direction = conjunction_info['con3']['test_direction']
-    
-    
+
+
     data3, brain_mask = load_subject_bayesian(cope_of_interest, test_direction, brain_mask)
-    
+
     # make binary conjunction map
-    
+
     conjunction_map = np.logical_and.reduce([data1>0, np.logical_or(data2A>0,data2B>0), data3>0])
     # save maps
     save_conjunction_map(conjunction_name, conjunction_map, brain_mask, output_dir)
@@ -423,8 +423,8 @@ def make_B_conjunction(conjunction_name, conjunction_info, brain_mask, output_di
 
 def make_A_conjunction(conjunction_name, conjunction_info, brain_mask, output_dir):
     """
-    Make an A style conjunction map; i.e. 
-    [Tar > bsl] & [Rel = bsl] & [Irrel = bsl] 
+    Make an A style conjunction map; i.e.
+    [Tar > bsl] & [Rel = bsl] & [Irrel = bsl]
     conjunction_map = (con1) && (con2_equivalence) && (con3_equivalence)
     Save map as binary & associated z stat map as nifti files.
     conjunction_name: name of conjunction
@@ -448,7 +448,7 @@ def make_A_conjunction(conjunction_name, conjunction_info, brain_mask, output_di
     test_direction = conjunction_info['con3']['test_direction']
     data3, brain_mask = load_subject_bayesian(cope_of_interest, test_direction, brain_mask)
     # make conjunction map
-    
+
     conjunction_map = np.logical_and.reduce([data1>0, data2>0, data3>0])
     # save maps
     save_conjunction_map(conjunction_name, conjunction_map, brain_mask, output_dir)
@@ -459,13 +459,13 @@ def make_A_conjunction(conjunction_name, conjunction_info, brain_mask, output_di
 
 def get_cope_data_for_bayesian_test(sub_id, brain_mask, cope_info):
     """
-    Gets 2nd level FEAT cope data from feat dir. Sets all data outside of mask 
+    Gets 2nd level FEAT cope data from feat dir. Sets all data outside of mask
     to NaN.
     subjects: list of subjects for analysis
     brain_mask: brain level mask (e.g. MNI) for masking maps.
     cope_info: cope number (cope) and path extensions (path_ext) information
     cope_path_template: template string for cope path with place holders for
-    subjects, labels, cope numbers.    
+    subjects, labels, cope numbers.
     Returns:
     data: cope maps
     """
@@ -482,7 +482,7 @@ def get_cope_data_for_bayesian_test(sub_id, brain_mask, cope_info):
     # set all zeros to NaN (to drop voxels containing missing data from analysis)
     t_data[t_data==0] = np.NaN
     # count and display n NaN
-    
+
     nanCount = sum(np.isnan(t_data))
     print('. . ' + str(nanCount) + ' of ' + str(t_data.shape[0]) + ' voxels contain NaN')
     return t_data, dof_data
@@ -500,22 +500,22 @@ def make_bayesian_map(cope_for_bayesian_test, t_data, dof_data, brain_mask, outp
     # make empty data arrays
     bf01 = np.NaN * np.ones(t_data.shape[0])
     #bf01[:] = np.NaN
-    
+
     # loop over voxels and run bayesian tests
     print('. . running bayes factor (threshold: ' + str(bf_threshold) + ') for: ' + cope_for_bayesian_test + ' | total n voxels: ' + str(t_data.shape[0]))
     for idx in range(t_data.shape[0]):
         if idx%10000 == 0:
             print('. . . processing voxel: ' + str(idx) + ' of ' + str(t_data.shape[0]))
-        
+
         # skip if there are any nans
         if np.isnan(t_data[idx]):
             bf01[idx] = np.NaN
-            
+
         else:
             #t_data = t_data.astype(float)
             #dof_data = dof_data.astype(float)
             bf01[idx] = 1/pn.bayesfactor_ttest(float(t_data[idx]), dof_data[idx])
-            
+
     # save resulting maps
     fname_bf01 = save_bayesian_map(cope_for_bayesian_test, bf01, brain_mask, output_dir, bf_threshold)
     # apply additional smoothing to bayesian maps
@@ -523,9 +523,9 @@ def make_bayesian_map(cope_for_bayesian_test, t_data, dof_data, brain_mask, outp
         print('Smoothing bayesian map (' + str(smoothing_in_mm) + 'mm)')
         smoothed_bf01_map = smooth_maps(fname_bf01, smoothing_in_mm, brain_mask)
         save_bayesian_map(cope_for_bayesian_test, smoothed_bf01_map, brain_mask, output_dir, bf_threshold)
-    
+
     return bf01
-    
+
 
 def smooth_maps(map_fname, smoothing_in_mm, brain_mask):
     """
@@ -542,7 +542,7 @@ def smooth_maps(map_fname, smoothing_in_mm, brain_mask):
     # apply smoothing
     map_to_smooth = nib.load(map_fname)
     smoothed_img = image.smooth_img(map_to_smooth, smoothing_in_mm)
-    # mask 
+    # mask
     m = nib.load(brain_mask).get_fdata()
     masked_data = np.asarray(smoothed_img.get_fdata()[m != 0], dtype=np.float32)
     return masked_data
@@ -562,38 +562,38 @@ def save_bayesian_map(cope_for_bayesian_test, bf01, brain_mask, output_dir, bf_t
     """
     # set nans to 0
     # bf01[np.isnan(bf01)] = 0
-    
+
     # make output path
-    fpath = output_dir + os.sep + 'bayesian_maps' 
+    fpath = output_dir + os.sep + 'bayesian_maps'
     if not os.path.exists(fpath):
         os.makedirs(fpath)
-    
+
     # save bf
     fname = fpath + os.sep + cope_for_bayesian_test + '_bayesian_map.nii.gz'
     save_mri(bf01, brain_mask, fname)
-    
-    # threshold z-map 
+
+    # threshold z-map
     bf01[bf01<bf_threshold] = 0
     fname = fpath + os.sep + cope_for_bayesian_test + '_bayesian_map_thresh.nii.gz'
     save_mri(bf01, brain_mask, fname)
-    
+
     return fname
-    
+
 
 # %% run
 if __name__ == '__main__':
 
     subjects = get_subject_list(bids_dir, subject_list_type)
-    
-    remove_subjects = ['sub-SD122','sub-SD196']
+
+    remove_subjects = ['sub-CD122','sub-CD196']
     for r in remove_subjects:
         subjects = subjects[subjects != r]
-    
+
     print('Removed subjects:',remove_subjects)
     print('Total subjects:',len(subjects))
 
     for sub_id in subjects:
-        
+
         brain_mask = brain_mask_pattern%{'sub_id':sub_id}
 
         # make output dir

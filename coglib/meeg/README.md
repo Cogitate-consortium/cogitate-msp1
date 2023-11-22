@@ -25,14 +25,14 @@ To run the analysis described below on the sample data, make sure to change the 
 ### Running preprocessing:
 In the command line, enter:
 ```
-python REPO_ROOT/cogitate-msp1/scripts/meeg/preprocessing/99_run_preproc.py --sub SA124 --visit V1 --record run --step 1
+python REPO_ROOT/cogitate-msp1/scripts/meeg/preprocessing/99_run_preproc.py --sub CA124 --visit V1 --record run --step 1
 ```
 When the first preprocessing step is finished, enter:
 ```
-python REPO_ROOT/cogitate-msp1/scripts/meeg/preprocessing/P99_run_preproc.py --sub SA124 --visit V1 --record run --step 2
+python REPO_ROOT/cogitate-msp1/scripts/meeg/preprocessing/P99_run_preproc.py --sub CA124 --visit V1 --record run --step 2
 ```
 Expected output: the script should generate a directory under:
-*$ROOT/sample_data/bids/derivatives/preprocessing/sub-SA124*
+*$ROOT/sample_data/bids/derivatives/preprocessing/sub-CA124*
 containing several subfolders, one for each preprocessing steps. The epoching files contain the final state of 
 the data ready for the next analysis steps.
 
@@ -43,7 +43,7 @@ For each analysis, run the scripts in the corresponding analysis folder (e.g., /
 reported in the file name (e.g., first run "S01_source_loc.py", then "S02_source_loc_ga.py" and so on).
 To run any of the individual-level analysis, enter:
 ```
-python REPO_ROOT/cogitate-msp1/scripts/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py --sub SA124 --visit V1
+python REPO_ROOT/cogitate-msp1/scripts/meeg/ANALYSIS_FOLDER/ANALYSIS_CODE.py --sub CA124 --visit V1
 ```
 Replace ANALYSIS_FOLDER with the name of the folder corresponding to the analysis you want to run (e.g., activation)
 and ANALYSIS_CODE with the name of the script you want to execute (e.g., S01_source_loc.py).

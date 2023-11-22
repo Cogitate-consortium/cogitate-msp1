@@ -10,12 +10,12 @@
 
 if [ $# -ne 2 ];
     then echo "Please pass sub_prefix visit and step as command line arguments. E.g."
-    echo "sbatch --array=101,103,105 srun_bids.sh SA V1"
+    echo "sbatch --array=101,103,105 srun_bids.sh CA V1"
     echo "Exiting."
     exit 1
 fi
 
-sub_prefix=$1       # Prefix of the subjects we're working on e.g. SA SB etc...
+sub_prefix=$1       # Prefix of the subjects we're working on e.g. CA CB etc...
 visit=$2
 
 set --

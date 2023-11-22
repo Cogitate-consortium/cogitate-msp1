@@ -78,7 +78,7 @@ else:
 phase = 3
 
 if debug:
-    sub_list = ["SA124", "SA124"]
+    sub_list = ["CA124", "CA124"]
 else:
     # Read the .txt file
     f = open(op.join(bids_root,
@@ -98,7 +98,7 @@ def connectivity_ga(sub_list, visit_id):
                                 con_method)
     if not op.exists(con_figure_root):
         os.makedirs(con_figure_root)
-    
+
     # Set task
     if visit_id == "V1":
         bids_task = 'dur'
@@ -108,18 +108,18 @@ def connectivity_ga(sub_list, visit_id):
     #     bids_task = 'replay'
     else:
         raise ValueError("Error: could not set the task")
-    
+
     print('\nCompute connectivity grandaverage with method:', con_method)
-    
+
     # Create indices of connections for which connectivity was computed
     n_labels = 2
     indices = (np.concatenate([range(0,n_labels),range(0,n_labels)]),
                np.array([n_labels]*len(range(0,n_labels)) + [n_labels+1]*len(range(0,n_labels))))
-    
+
     # Loop over frequencies
     for freq_range in ['low', 'high']:
         print(f'\nFreq range: {freq_range}')
-        
+
         # Loop over analysis (i.e., contrasts)
         con_dif = {}
         if task_rel == ["Relevant non-target", "Irrelevant"]:
@@ -128,75 +128,75 @@ def connectivity_ga(sub_list, visit_id):
             cond_contr = [['face', 'object']]
         for anal_contr in cond_contr:
             print(f"\nAnalysis: {anal_contr[0]} vs {anal_contr[1]}")
-            
+
             # Loop over conditions
             con_condlist = {}
             for cond_name in anal_contr:
                 print(f"\nCondition: {cond_name}")
-                
+
                 # Load connectivity results
                 con_all = []
                 for sub in sub_list:
                     print(f"subject id: {sub}")
-                    
+
                     # Set path
                     bids_path_con = mne_bids.BIDSPath(
-                        root=con_deriv_root, 
-                        subject=sub,  
-                        datatype='meg',  
+                        root=con_deriv_root,
+                        subject=sub,
+                        datatype='meg',
                         task=bids_task,
-                        session=visit_id, 
+                        session=visit_id,
                         suffix=f"desc-gnw-pfc-ged,{con_method},{freq_range},{cond_name}_con",
                         extension='.nc',
                         check=False)
-                    
+
                     # Load data
                     con_all.append(
                         read_connectivity(bids_path_con.fpath))
-                
+
                 # Get data
                 con_all_data = []
                 for con in con_all:
                     con_all_data.append(con.get_data())
                     times = ['%.0f' %t for t in (np.array(con.times) - .5) * 1000]
                     freqs = ['%.0f' %f for f in con.freqs]
-                
+
                 con_all_data = np.asarray(con_all_data)  #convert to array
-                
+
                 # Append individual con data to full data list
                 con_condlist[cond_name] = np.asarray(con_all_data)
-                
+
                 # Average data across participants and put them in a connectivity object
                 con_ga = SpectroTemporalConnectivity(
-                    data = np.mean(con_all_data, axis=0), 
-                    freqs = con.freqs, 
-                    times = con.times, 
+                    data = np.mean(con_all_data, axis=0),
+                    freqs = con.freqs,
+                    times = con.times,
                     n_nodes = con.n_nodes,
                     indices = indices)
-                
+
                 # Save grandaverage data
                 bids_path_con = bids_path_con.copy().update(
                     subject=f"groupphase{phase}",
                     check=False)
-                
+
                 con_ga.save(bids_path_con.fpath)
-                
-                
+
+
                 ## Plotting
-                
+
                 # Set plotting params
                 ged_filter_labels = ['pfc','v1v2','face filter','object filter']
                 indices_comb = [[i,j] for i,j in zip(indices[0], indices[1])]
                 vmin = 0.
                 vmax = .15
-                
+
                 # Plot individual ROI results
                 for i in indices_comb:
                     print(f'\nPlotting {ged_filter_labels[i[0]]}-{ged_filter_labels[i[1]]}...')
                     fig, ax = plt.subplots(figsize=[8,6])
                     sns.heatmap(con_ga.get_data()[indices_comb.index(i),:,:],
                                 xticklabels=250, yticklabels=5,
-                                vmin=vmin, 
+                                vmin=vmin,
                                 vmax=vmax,
                                 cmap='RdYlBu_r',
                                 ax=ax)
@@ -207,26 +207,26 @@ def connectivity_ga(sub_list, visit_id):
                                         fontsize=8)
                     cbar = ax.collections[0].colorbar
                     cbar.ax.tick_params(labelsize=8)
-                    
+
                     plt.xlabel("time (ms)", fontsize=14)
                     plt.ylabel("Frequency (Hz)", fontsize=14)
                     plt.title(f"{con_method} on {ged_filter_labels[i[0]]}-{ged_filter_labels[i[1]]}: {cond_name}", fontsize=14, fontweight="bold")
-                    
+
                     # Save figure
                     fname_fig = op.join(con_figure_root,
                                         f"conn-{con_method}_{freq_range}_{cond_name}_{ged_filter_labels[i[0]]}-x-{ged_filter_labels[i[1]]}.png")
                     fig.savefig(fname_fig, dpi=300)
                     plt.close(fig)
-            
-            
+
+
             ## Face vs. object / relev. vs. irrel.: Permutation analysis
-                
+
             # Set test params
             pval = 0.05  # arbitrary
             n_observations = len(sub_list)
             df = n_observations - 1  # degrees of freedom for the test
             thresh = stats.t.ppf(1 - pval / 2, df)  # two-tailed, t distribution
-            
+
             # Loop over indices
             t_obs_all = []
             clusters_all = []
@@ -234,52 +234,52 @@ def connectivity_ga(sub_list, visit_id):
             p_values_all = []
             for i in indices_comb:
                 print(f'\nTesting clursters for {ged_filter_labels[i[0]]} - {ged_filter_labels[i[1]]}')
-                
+
                 # Get data (subjects) × time × space
                 Xfac = con_condlist[f'{anal_contr[0]}'][:,indices_comb.index(i),:,:]
                 Xobj = con_condlist[f'{anal_contr[1]}'][:,indices_comb.index(i),:,:]
-                
+
                 # Run permutation analysis
                 t_obs, clusters, cluster_p_values, H0 = \
                     mne.stats.permutation_cluster_1samp_test(
-                        Xfac - Xobj, 
+                        Xfac - Xobj,
                         threshold=thresh,
                         out_type='mask')
-        
-                # Append results to list        
+
+                # Append results to list
                 t_obs_all.append(t_obs)
                 clusters_all.append(clusters)
                 cluster_p_values_all.append(cluster_p_values)
                 p_values_all.append(cluster_p_values)
-                
+
             # Select the clusters that are statistically significant at p < 0.05
             good_clusters_all = []
             for clusters, cluster_p_values in zip(clusters_all, cluster_p_values_all):
                 good_clusters_idx = np.where(cluster_p_values < 0.05)[0]
                 good_clusters = [clusters[idx] for idx in good_clusters_idx]
                 good_clusters_all.append(good_clusters)
-            
+
             # Save significant clusters
             bids_path_con = bids_path_con.copy().update(
                 subject=f"groupphase{phase}",
                 suffix=f"desc-gnw-pfc-ged,{con_method},{freq_range},{anal_contr}_clusters",
                 extension=".pkl",
                 check=False)
-            
+
             with open(bids_path_con.fpath, 'wb') as file:
                 pickle.dump(good_clusters_all, file)
-            
-            
+
+
             ## Face vs. object / relev. vs. irrel.: Plotting
-            
+
             # Compute difference between face and object trials
             con_dif[f"{anal_contr}"] = con_condlist[f'{anal_contr[0]}'] - con_condlist[f'{anal_contr[1]}']
-            
+
             con_dif_data = np.mean(con_dif[f"{anal_contr}"], axis=0)
-            
+
             vmin = -.075
             vmax = .075
-            
+
             # Plot
             for i in indices_comb:
                 print(f'\nPlotting {ged_filter_labels[i[0]]}-{ged_filter_labels[i[1]]}...')
@@ -289,51 +289,51 @@ def connectivity_ga(sub_list, visit_id):
                 extent = list(map(int, [times[0],times[-1],freqs[0],freqs[-1]]))
                 sig_mask = np.any(good_clusters_all[indices_comb.index(i)], axis=0)
                 masked_data = np.ma.masked_where(sig_mask == 0, data)
-                
+
                 # Open figure
                 fig, ax = plt.subplots(figsize=[8,6])
-                
+
                 # Plot all data
-                ax.imshow(data, 
+                ax.imshow(data,
                           cmap='RdYlBu_r',
                           extent=extent,
-                          origin="lower", 
-                          alpha=.4, 
+                          origin="lower",
+                          alpha=.4,
                           aspect='auto',
                           vmin=vmin, vmax=vmax)
-                
+
                 # Plot masked data
-                im = ax.imshow(masked_data, 
-                               cmap='RdYlBu_r', 
+                im = ax.imshow(masked_data,
+                               cmap='RdYlBu_r',
                                origin='lower',
                                extent=extent,
-                               aspect='auto', 
+                               aspect='auto',
                                vmin=vmin, vmax=vmax)
-                
+
                 # Draw contour
                 if np.any(sig_mask == 1):
-                    ax.contour(sig_mask, 
-                               levels=[0, 1], 
-                               colors="k", 
+                    ax.contour(sig_mask,
+                               levels=[0, 1],
+                               colors="k",
                                origin="lower",
                                extent=extent)
-                
+
                 ax.set_yticklabels(freqs[0::5])
-                
+
                 cbar = plt.colorbar(im, ax=ax)
                 cbar.ax.tick_params(labelsize=8)
-                
+
                 plt.xlabel("time (ms)", fontsize=14)
                 plt.ylabel("Frequency (Hz)", fontsize=14)
                 plt.title(f"{con_method} on {ged_filter_labels[i[0]]}-{ged_filter_labels[i[1]]}: {anal_contr[0]} vs {anal_contr[1]}", fontsize=14, fontweight="bold")
-                
+
                 # Save figure
                 fname_fig = op.join(con_figure_root,
                                         f"conn-{con_method}_{freq_range}_{anal_contr[0][0]}vs{anal_contr[1][0]}_{ged_filter_labels[i[0]]}-x-{ged_filter_labels[i[1]]}.png")
                 fig.savefig(fname_fig, dpi=300)
                 plt.close(fig)
-            
-            
+
+
             # # Compute the difference of the difference (face trials vs object trials / face filter vs. object filter)
             # con_dif_c1flt_data = con_condlist[f'{anal_contr[0]}'][:,:len(con_dif_data)//2,:,:] \
             #                               - con_condlist[f'{anal_contr[1]}'][:,:len(con_dif_data)//2,:,:]
@@ -341,16 +341,16 @@ def connectivity_ga(sub_list, visit_id):
             #                               - con_condlist[f'{anal_contr[1]}'][:,len(con_dif_data)//2:,:,:]
             # con_dif_dif_data = np.mean(con_dif_c1flt_data - con_dif_c2flt_data,
             #                            axis=0)
-            
+
             # vmin = -.075
             # vmax = .075
-            
+
             # # Plot
             # for i in range(len(con_dif_dif_data)):
             #     fig, ax = plt.subplots(figsize=[8,6])
             #     sns.heatmap(con_dif_dif_data[i,:,:],
             #                 xticklabels=250, yticklabels=5,
-            #                 vmin=vmin, 
+            #                 vmin=vmin,
             #                 vmax=vmax,
             #                 cmap='RdYlBu_r',
             #                 ax=ax)
@@ -361,27 +361,27 @@ def connectivity_ga(sub_list, visit_id):
             #                         fontsize=8)
             #     cbar = ax.collections[0].colorbar
             #     cbar.ax.tick_params(labelsize=8)
-                
+
             #     plt.xlabel("time (ms)", fontsize=14)
             #     plt.ylabel("Frequency (Hz)", fontsize=14)
             #     plt.title(f"{con_method} {anal_contr[0]}-vs-{anal_contr[1]} on {ged_filter_labels[i]}: {anal_contr[0]} vs {anal_contr[1]} filter", fontsize=14, fontweight="bold")
-                
+
             #     # Save figure
             #     fname_fig = op.join(con_figure_root,
             #                         f"conn-{con_method}_{freq_range}_{anal_contr[0][0]}vs{anal_contr[1][0]}DiffDiff_{ged_filter_labels[i]}.png")
             #     fig.savefig(fname_fig, dpi=300)
             #     plt.close(fig)
-        
-        
+
+
         ## Stimulus vs. task: Permutation analysis
-        
+
         if task_rel == ["Relevant non-target", "Irrelevant"]:
             # Set test params
             pval = 0.05  # arbitrary
             n_observations = len(sub_list)
             df = n_observations - 1  # degrees of freedom for the test
             thresh = stats.t.ppf(1 - pval / 2, df)  # two-tailed, t distribution
-            
+
             # Loop over indices
             t_obs_all = []
             clusters_all = []
@@ -389,52 +389,52 @@ def connectivity_ga(sub_list, visit_id):
             p_values_all = []
             for i in indices_comb:
                 print(f'\nTesting clursters for {ged_filter_labels[i[0]]} - {ged_filter_labels[i[1]]}')
-                
+
                 # Get data (subjects) × time × space
                 Xsti = con_dif["['face', 'object']"][:,indices_comb.index(i),:,:]
                 Xtas = con_dif["['relev', 'irrel']"][:,indices_comb.index(i),:,:]
-                
+
                 # Run permutation analysis
                 t_obs, clusters, cluster_p_values, H0 = \
                     mne.stats.permutation_cluster_1samp_test(
-                        Xsti - Xtas, 
+                        Xsti - Xtas,
                         threshold=thresh,
                         out_type='mask')
-        
-                # Append results to list        
+
+                # Append results to list
                 t_obs_all.append(t_obs)
                 clusters_all.append(clusters)
                 cluster_p_values_all.append(cluster_p_values)
                 p_values_all.append(cluster_p_values)
-                
+
             # Select the clusters that are statistically significant at p < 0.05
             good_clusters_all = []
             for clusters, cluster_p_values in zip(clusters_all, cluster_p_values_all):
                 good_clusters_idx = np.where(cluster_p_values < 0.05)[0]
                 good_clusters = [clusters[idx] for idx in good_clusters_idx]
                 good_clusters_all.append(good_clusters)
-            
+
             # Save significant clusters
             bids_path_con = bids_path_con.copy().update(
                 subject=f"groupphase{phase}",
                 suffix=f"desc-gnw-pfc-ged,{con_method},{freq_range},stim_vs_relev_clusters",
                 extension=".pkl",
                 check=False)
-            
+
             with open(bids_path_con.fpath, 'wb') as file:
                 pickle.dump(good_clusters_all, file)
-            
-            
+
+
             ## Plotting
-                
+
             # Compute difference between stimulus and task effects
             con_dif_dif_data = np.mean(
                 con_dif["['face', 'object']"] - con_dif["['relev', 'irrel']"],
                 axis=0)
-            
+
             vmin = -.075
             vmax = .075
-            
+
             # Plot
             for i in indices_comb:
                 print(f'\nPlotting {ged_filter_labels[i[0]]}-{ged_filter_labels[i[1]]}...')
@@ -444,44 +444,44 @@ def connectivity_ga(sub_list, visit_id):
                 extent = list(map(int, [times[0],times[-1],freqs[0],freqs[-1]]))
                 sig_mask = np.any(good_clusters_all[indices_comb.index(i)], axis=0)
                 masked_data = np.ma.masked_where(sig_mask == 0, data)
-                
+
                 # Open figure
                 fig, ax = plt.subplots(figsize=[8,6])
-                
+
                 # Plot all data
-                ax.imshow(data, 
+                ax.imshow(data,
                           cmap='RdYlBu_r',
                           extent=extent,
-                          origin="lower", 
-                          alpha=.4, 
+                          origin="lower",
+                          alpha=.4,
                           aspect='auto',
                           vmin=vmin, vmax=vmax)
-                
+
                 # Plot masked data
-                im = ax.imshow(masked_data, 
-                               cmap='RdYlBu_r', 
+                im = ax.imshow(masked_data,
+                               cmap='RdYlBu_r',
                                origin='lower',
                                extent=extent,
-                               aspect='auto', 
+                               aspect='auto',
                                vmin=vmin, vmax=vmax)
-                
+
                 # Draw contour
                 if np.any(sig_mask == 1):
-                    ax.contour(sig_mask, 
-                               levels=[0, 1], 
-                               colors="k", 
+                    ax.contour(sig_mask,
+                               levels=[0, 1],
+                               colors="k",
                                origin="lower",
                                extent=extent)
-                
+
                 ax.set_yticklabels(freqs[0::5])
-                
+
                 cbar = plt.colorbar(im, ax=ax)
                 cbar.ax.tick_params(labelsize=8)
-                
+
                 plt.xlabel("time (ms)", fontsize=14)
                 plt.ylabel("Frequency (Hz)", fontsize=14)
                 plt.title(f"{con_method} on {ged_filter_labels[i[0]]}-{ged_filter_labels[i[1]]}: stimuus vs task", fontsize=14, fontweight="bold")
-                
+
                 # Save figure
                 fname_fig = op.join(con_figure_root,
                                         f"conn-{con_method}_{freq_range}_svst_{ged_filter_labels[i[0]]}-x-{ged_filter_labels[i[1]]}.png")
@@ -489,6 +489,6 @@ def connectivity_ga(sub_list, visit_id):
                 plt.close(fig)
 
 if __name__ == '__main__':
-    # subject_id = input("Type the subject ID (e.g., SA101)\n>>> ")
+    # subject_id = input("Type the subject ID (e.g., CA101)\n>>> ")
     # visit_id = input("Type the visit ID (V1 or V2)\n>>> ")
     connectivity_ga(sub_list, visit_id)

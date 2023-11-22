@@ -31,7 +31,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
     prep_deriv_root = op.join(bids_root, "derivatives", "qc", visit_id)
     if not op.exists(prep_deriv_root):
         os.makedirs(prep_deriv_root)
-    
+
     print("Processing subject: %s" % subject_id)
 
     raw_list = list()
@@ -47,10 +47,10 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
         plt.text(0.5, 0.5, subject_id, transform=FirstPage.transFigure, size=16, ha="center")
         pdf.savefig(FirstPage)
         plt.close()
-        
+
         #endregion first page
 
-        bids_eo_path = mne_bids.BIDSPath(root=bids_root, 
+        bids_eo_path = mne_bids.BIDSPath(root=bids_root,
                                         datatype='meg',
                                         subject=subject_id,
                                         session=visit_id,
@@ -72,10 +72,10 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
         data_path = os.path.join(bids_root, f"sub-{subject_id}", f"ses-{visit_id}", "meg")
         run = 0
         for fname in os.listdir(data_path):
-            if fname.endswith(".fif") and "run" in fname:      
+            if fname.endswith(".fif") and "run" in fname:
                 run = run + 1
                 print("  Run: %s" % run)
-                
+
                 # Set task
                 if 'dur' in fname:
                     bids_task = 'dur'
@@ -85,22 +85,22 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
                     bids_task = 'replay'
                 else:
                     raise ValueError("Error: could not find the task for %s" % fname)
-                
+
                 # Set BIDS path
                 bids_path = mne_bids.BIDSPath(
-                    root=bids_root, 
-                    subject=subject_id,  
-                    datatype='meg',  
+                    root=bids_root,
+                    subject=subject_id,
+                    datatype='meg',
                     task=bids_task,
                     run=f"{run:02}",
-                    session=visit_id, 
+                    session=visit_id,
                     extension='.fif')
-                
+
                 # Read raw data
                 raw = mne_bids.read_raw_bids(bids_path)
 
                 #region PART 2a - MEG data filtering using Maxwell filters, method - defined in config
-            
+
                 if run_part_2:
                     # Find initial head position
                     if run == 1:
@@ -108,16 +108,16 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
 
                     # # Set BIDS path
                     # bids_path_sss = mne_bids.BIDSPath(
-                    #     root=op.join(bids_root, "derivatives", "preprocessing"), 
-                    #     subject=subject_id,  
-                    #     datatype='meg',  
+                    #     root=op.join(bids_root, "derivatives", "preprocessing"),
+                    #     subject=subject_id,
+                    #     datatype='meg',
                     #     task=bids_task,
                     #     run=f"{run:02}",
-                    #     session=visit_id, 
-                    #     suffix="sss", 
+                    #     session=visit_id,
+                    #     suffix="sss",
                     #     extension='.fif',
                     #     check=False)
-                    
+
                     # # Read raw data
                     # raw_sss = mne_bids.read_raw_bids(bids_path_sss).load_data()
 
@@ -133,7 +133,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
 
                     # # raw.plot_psd(picks=['meg'], fmin=1, fmax=100, ax=[axes[0][0], axes[1][0]])
                     # raw.plot_psd(picks=['meg'], fmin=1, fmax=100, ax=[ax1, ax2], show=False)
-                    
+
                     # # raw_sss.plot_psd(picks=['meg'], fmin=1, fmax=100, ax=[axes[0][1], axes[1][1]])
                     # raw_sss.plot_psd(picks=['meg'], fmin=1, fmax=100, ax=[ax3, ax4], show=False)
 
@@ -166,7 +166,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
                             "max_iterations": 4}
 
                         montage = raw.get_montage()
-                        prep = PrepPipeline(raw_sss, prep_params, montage, ransac=True)        
+                        prep = PrepPipeline(raw_sss, prep_params, montage, ransac=True)
                         prep.fit()
                         raw_car = prep.raw
                         raw_car.interpolate_bads(reset_bads=True)
@@ -190,16 +190,16 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
                     if len(eog_ch.ch_names) < 2:
                         raw_sss.set_channel_types({'BIO002':'eog'})
                         raw_sss.rename_channels({'BIO002': 'EOG002'})
-                    
+
                     # Find EOG events
                     eog_events = mne.preprocessing.find_eog_events(raw_sss)
                     onsets = (eog_events[:, 0] - raw_sss.first_samp) / raw_sss.info['sfreq'] - 0.25
                     durations = [0.5] * len(eog_events)
                     descriptions = ['Blink'] * len(eog_events)
-                    
+
                     # Annotate events
                     annot_blink = mne.Annotations(
-                        onsets, 
+                        onsets,
                         durations,
                         descriptions)
 
@@ -210,31 +210,31 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
 
                 # Notch filter
                 raw_muscle = raw_sss.copy().notch_filter([50, 100])
-                
+
                 # Choose one channel type, if there are axial gradiometers and magnetometers,
                 # select magnetometers as they are more sensitive to muscle activity.
                 annot_muscle, scores_muscle = annotate_muscle_zscore(
-                    raw_muscle, 
-                    ch_type="mag", 
-                    threshold=threshold_muscle, 
+                    raw_muscle,
+                    ch_type="mag",
+                    threshold=threshold_muscle,
                     min_length_good=0.3,
                     filter_freq=[110, 140])
-                
+
                 #################
                 # Detect breaks #
                 #################
-                
+
                 # Get events
                 # events, event_id = mne.events_from_annotations(raw_sss)
-                
+
                 # Detect breaks based on events
                 # annot_break = mne.preprocessing.annotate_break(
                 #     raw=raw_sss,
                 #     events=events,
                 #     min_break_duration=15.0)
-                
+
                 ###########################
-                
+
                 # Contatenate blink and muscle artifact annotations
                 if has_eeg:
                     annot_artifact = annot_blink + annot_muscle
@@ -244,11 +244,11 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
                                                     duration = annot_artifact.duration,
                                                     description = annot_artifact.description,
                                                     orig_time = raw_sss.info['meas_date'])
-                
+
                 # Add artifact annotations in raw_sss
                 # raw_sss.set_annotations(raw_sss.annotations + annot_artifact + annot_break)
                 raw_sss.set_annotations(raw_sss.annotations + annot_artifact)
-                
+
                 #endregion annotations
 
                 events, metadata = run_events(raw_sss, visit_id)
@@ -264,11 +264,11 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
         if run_part_3:
             raw, events = mne.concatenate_raws(raw_list, events_list=events_list)
             del raw_list
-                
+
             # Concatenate metadata tables
             metadata = pd.concat(metadata_list)
             # metadata.to_csv(op.join(out_path, file_name[0:14] + 'ALL-meta.csv'), index=False)
-            
+
             # Select sensor types
             picks = mne.pick_types(raw.info,
                                 meg = True,
@@ -277,7 +277,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
                                 eog = has_eeg,
                                 ecg = has_eeg,
                                 )
-            
+
             # Set trial-onset event_ids
             if visit_id == 'V1':
                 events_id = {}
@@ -295,7 +295,7 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
 
             # Epoch raw data
             epochs = mne.Epochs(raw,
-                                events, 
+                                events,
                                 events_id,
                                 tmin, tmax,
                                 baseline=None,
@@ -305,17 +305,17 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
                                 reject=None,
                                 reject_by_annotation=True,
                                 verbose=True)
-                
+
             del raw
-            
+
             # Add metadata
             epochs.metadata = metadata
-            
+
             # Get rejection thresholds
-            reject = get_rejection_threshold(epochs, 
+            reject = get_rejection_threshold(epochs,
                                             ch_types=['mag', 'grad'], #'eeg'], #TODO: eeg not use for epoch rejection
                                             decim=2)
-            
+
             # Drop bad epochs based on peak-to-peak magnitude
             epochs.drop_bad(reject=reject)
 
@@ -326,6 +326,6 @@ def run_qc_processing(subject_id, visit_id, has_eeg):
 
 
 if __name__ == '__main__':
-    subject_id = input("Type the subject ID (e.g., SA101)\n>>> ")
+    subject_id = input("Type the subject ID (e.g., CA101)\n>>> ")
     visit_id = input("Type the visit ID (V1 or V2)\n>>> ")
     run_qc_processing(subject_id, visit_id)

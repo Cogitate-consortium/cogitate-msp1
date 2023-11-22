@@ -62,7 +62,7 @@ from D_MEG_function import source_data_for_ROI_MVPA,sub_ROI_for_ROI_MVPA
 #mpl.use('Qt5Agg')
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--sub',type=str,default='SA101',help='subject_id')
+parser.add_argument('--sub',type=str,default='CA101',help='subject_id')
 parser.add_argument('--visit',
                     type=str,
                     default='V1',
@@ -170,12 +170,12 @@ def Category_CTCCD(epochs_rs,stcs,conditions_C,conditions_D,
     # First: train condition a (cond_a) and Test on condition b (cond_b) cross condition decoding
     # Fit
     ctccd=dict()
-    
+
     group_xa=X[cond_a]
     group_ya=y[cond_a]
     group_xb=X[cond_b]
     group_yb=y[cond_b]
-    
+
     scores_ab_per=np.zeros([100,group_xa.shape[2],group_xa.shape[2]])
     scores_ba_per=np.zeros([100,group_xb.shape[2],group_xa.shape[2]])
     for num_per in range(100):
@@ -193,17 +193,17 @@ def Category_CTCCD(epochs_rs,stcs,conditions_C,conditions_D,
             #block_size
             #array_like or int
             #Array containing down-sampling integer factor along each axis. Default block_size is 2.
-            
+
             # funccallable
             # Function object which is used to calculate the return value for each local block. This function must implement an axis parameter. Primary functions are numpy.sum, numpy.min, numpy.max, numpy.mean and numpy.median. See also func_kwargs.
-            
+
             # cvalfloat
             # Constant padding value if image is not perfectly divisible by the block size.
-            
+
             # Now generating the labels and group:
             new_xa.append(avg_xa)
             new_ya += [label] * avg_xa.shape[0]
-            
+
             # Extract the data:
             data_b = group_xb[np.where(group_yb == label+1)]
             data_b = np.take(data_b, np.random.permutation(data_b.shape[0]), axis=0)
@@ -212,29 +212,29 @@ def Category_CTCCD(epochs_rs,stcs,conditions_C,conditions_D,
             #block_size
             #array_like or int
             #Array containing down-sampling integer factor along each axis. Default block_size is 2.
-            
+
             # funccallable
             # Function object which is used to calculate the return value for each local block. This function must implement an axis parameter. Primary functions are numpy.sum, numpy.min, numpy.max, numpy.mean and numpy.median. See also func_kwargs.
-            
+
             # cvalfloat
             # Constant padding value if image is not perfectly divisible by the block size.
-            
+
             # Now generating the labels and group:
             new_xb.append(avg_xb)
             new_yb += [label] * avg_xb.shape[0]
 
         new_xa = np.concatenate((new_xa[0],new_xa[1]),axis=0)
         new_ya = np.array(new_ya)
-        
+
         # average temporal feature (5 point average)
         new_xa=ATdata(new_xa)
-        
+
         new_xb = np.concatenate((new_xb[0],new_xb[1]),axis=0)
         new_yb = np.array(new_yb)
-        
+
         # average temporal feature (5 point average)
         new_xb=ATdata(new_xb)
-        
+
         # First: train condition a (cond_a) and Test on condition b (cond_b) cross condition decoding
         # Fit
         sliding.fit(X=new_xa, y=new_ya)
@@ -243,7 +243,7 @@ def Category_CTCCD(epochs_rs,stcs,conditions_C,conditions_D,
 
 
         scores_ab_per[num_per,:,:]=scores_ab
-        
+
         # Then: train condition b (cond_b) and Test on condition a (cond_a) cross condition decoding
         # Fit
         sliding.fit(X=new_xb, y=new_yb)
@@ -252,15 +252,15 @@ def Category_CTCCD(epochs_rs,stcs,conditions_C,conditions_D,
 
 
         scores_ba_per[num_per,:,:]=scores_ba
-    
-    
+
+
     ctccd['IR2RE'] = scores_ab
     ctccd['RE2IR'] = scores_ba
-    
+
     fig, axes = plt.subplots(1, 2,figsize=(10,3),sharex=True,sharey=True)
     plt.subplots_adjust(wspace=0.5, hspace=0)
     fig.suptitle('CTCCD')
-    
+
     t = 1e3 * epochs_rs.times
     pe = [path_effects.Stroke(linewidth=5, foreground='w', alpha=0.5), path_effects.Normal()]
     cmap = mpl.cm.jet
@@ -343,16 +343,16 @@ def Category_CTWCD(epochs_rs,stcs,
     # wcd=dict()
     # scores_a= cross_val_multiscore(sliding, X=X[cond_a], y=y[cond_a], cv=5, n_jobs=2)
     # wcd[conditions_D[0]]=np.mean(scores_a, axis=0)
-    
+
     # scores_b = cross_val_multiscore(sliding, X=X[cond_b], y=y[cond_b], cv=5, n_jobs=-1)
     # wcd[conditions_D[1]] = np.mean(scores_b, axis=0)
-    
+
     ctwcd=dict()
     for condi in range(len(conditions_D)):
         con_index=np.where(epochs_rs.metadata['Task_relevance'] == conditions_D[condi])[0]
         group_x=X[con_index]
         group_y=y[con_index]
-    
+
         scores_per=np.zeros([100,group_x.shape[2],group_x.shape[2]])
         for num_per in range(100):
             # do the average trial
@@ -367,35 +367,35 @@ def Category_CTWCD(epochs_rs,stcs,
                 #block_size
                 #array_like or int
                 #Array containing down-sampling integer factor along each axis. Default block_size is 2.
-                
+
                 # funccallable
                 # Function object which is used to calculate the return value for each local block. This function must implement an axis parameter. Primary functions are numpy.sum, numpy.min, numpy.max, numpy.mean and numpy.median. See also func_kwargs.
-                
+
                 # cvalfloat
                 # Constant padding value if image is not perfectly divisible by the block size.
-                
+
                 # Now generating the labels and group:
                 new_x.append(avg_x)
                 new_y += [label] * avg_x.shape[0]
-    
+
             new_x = np.concatenate((new_x[0],new_x[1]),axis=0)
             new_y = np.array(new_y)
-            
+
             # average temporal feature (5 point average)
             new_x=ATdata(new_x)
-            
+
             scores= cross_val_multiscore(sliding, X=new_x, y=new_y, cv=5, n_jobs=-1)
             scores_per[num_per,:,:]=np.mean(scores, axis=0)
-            
-        ctwcd[conditions_D[condi]]=np.mean(scores_per, axis=0)           
-    
 
-    
+        ctwcd[conditions_D[condi]]=np.mean(scores_per, axis=0)
+
+
+
 
     fig, axes = plt.subplots(1, 2,figsize=(10,3),sharex=True,sharey=True)
     plt.subplots_adjust(wspace=0.5, hspace=0)
     fig.suptitle('CTWCD')
-    
+
     t = 1e3 * epochs_rs.times
     pe = [path_effects.Stroke(linewidth=5, foreground='w', alpha=0.5), path_effects.Normal()]
     cmap = mpl.cm.jet
@@ -444,17 +444,17 @@ def Category_CTWCD(epochs_rs,stcs,
 # run roi decoding analysis
 
 if __name__ == "__main__":
-    
+
     #opt INFO
-    
-    # subject_id = 'SB085'
+
+    # subject_id = 'CB085'
     #
     # visit_id = 'V1'
     # space = 'surface'
     #
 
     # analysis info
-    
+
     # con_C = ['LF']
     # con_D = ['Irrelevant', 'Relevant non-target']
     # con_T = ['500ms','1000ms','1500ms']
@@ -482,7 +482,7 @@ if __name__ == "__main__":
                                                                                    con_D)
 
 
-    
+
     roi_ctccd_acc = dict()
     roi_ctwcd_acc = dict()
 
@@ -492,33 +492,33 @@ if __name__ == "__main__":
         # 4 Get Source Data for each ROI
         stcs = []
         stcs = source_data_for_ROI_MVPA(epochs_rs, fpath_fw, rank, common_cov, sub_info, surf_label_list[nroi])
-        
+
         # ### CTCCD
-        
+
         # #1 scoring methods with accuracy score
-        fname_fig_acc = op.join(roi_figure_root, 
+        fname_fig_acc = op.join(roi_figure_root,
                             sub_info + task_info + '_'+ roi_name
                             + "_acc_CTCCD" + '.png')
 
-        
+
         score_methods=make_scorer(accuracy_score)
-        ctccd_acc = Category_CTCCD(epochs_rs, stcs, 
+        ctccd_acc = Category_CTCCD(epochs_rs, stcs,
                                         conditions_C, conditions_D,
                                         select_F,
-                                        roi_name, score_methods, 
+                                        roi_name, score_methods,
                                         fname_fig_acc)
 
-        roi_ctccd_acc[roi_name] = ctccd_acc        
+        roi_ctccd_acc[roi_name] = ctccd_acc
 
 
         ### CTWCD
-        
+
         #1 scoring methods with accuracy score
-        fname_fig_acc = op.join(roi_figure_root, 
-                            sub_info  + task_info + '_' 
+        fname_fig_acc = op.join(roi_figure_root,
+                            sub_info  + task_info + '_'
                             + roi_name + "_acc_CTWCD" + '.png')
 
-        
+
         score_methods=make_scorer(accuracy_score)
         ctwcd_acc= Category_CTWCD(epochs_rs, stcs,
                               conditions_C, conditions_D,
@@ -527,12 +527,12 @@ if __name__ == "__main__":
                               fname_fig_acc)
 
         roi_ctwcd_acc[roi_name] = ctwcd_acc
-        
-        
+
+
     roi_data=dict()
     roi_data['ctccd_acc']=roi_ctccd_acc
     roi_data['ctwcd_acc']=roi_ctwcd_acc
-    
+
 
     fname_data=op.join(roi_data_root, sub_info + '_' + task_info +"_ROIs_data_GAT_Cat" + '.pickle')
     fw = open(fname_data,'wb')

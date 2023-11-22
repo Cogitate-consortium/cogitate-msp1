@@ -9,7 +9,7 @@ The "read_data" function expects to receive a path to a directory containing sub
 Each subject directory is then read (and verified) by the "read_sub_data" function, which expects to receive a path
 to a subject folder that contains session folders. From session, the extracted data are the "Details" files (within
 the "Details" folder) and the Analyzer output for this session - which is expected to be nested right under the session
-folder. This information is then used to instantiate class instance Subject, which contains instances of class Session, 
+folder. This information is then used to instantiate class instance Subject, which contains instances of class Session,
 and within each session the Details file class and the analyzer output dataframe.
 
 @author: RonyHirsch
@@ -185,10 +185,10 @@ class Subject:
     def handle_sa167(self, path):
         """
         Manually fix the behavioral data as per this subject's CRF:
-        'SA167_Beh_V1_RawDurR4 contains block 7,
-        SA167_Beh_V1_RawDurR4-1 contains block 8 and 9,
-        SA167_Beh_V1_RawDurR5 contains block 10'
-        'SA167_Beh_V1_SumDur contains block 1 - 7; SA167_Beh_V1_SumDur-1 contains block 8 - 10'
+        'CA167_Beh_V1_RawDurR4 contains block 7,
+        CA167_Beh_V1_RawDurR4-1 contains block 8 and 9,
+        CA167_Beh_V1_RawDurR5 contains block 10'
+        'CA167_Beh_V1_SumDur contains block 1 - 7; CA167_Beh_V1_SumDur-1 contains block 8 - 10'
         """
         # raw data files
         data_files = [x for x in os.listdir(path) if x.endswith("csv")]
@@ -227,7 +227,7 @@ class Subject:
         return
 
     def add_data(self, path):
-        if self.sub_name == "SA167":  # this subject had a special case, to be treated separately based on the CRF
+        if self.sub_name == "CA167":  # this subject had a special case, to be treated separately based on the CRF
             self.handle_sa167(path)
         else:
             # beh summary outputted from the experiment
@@ -361,12 +361,12 @@ class Subject:
         """
         NOTE 2023-01-13:
         The PLND_STIM_DUR column denotes the stimulus duration group - either 0.5 / 1 / 1.5 seconds, as per the pre-reg
-        (https://osf.io/gm3vd). However, in the ECoG modality, subjects SF102, SF103, and SF104 have different values
-        (e.g., 0.508474576 instead of 0.5). 
-        To unify analyses across all participants, and correctly attribute stimuli to their duration conditions, 
+        (https://osf.io/gm3vd). However, in the ECoG modality, subjects CF102, CF103, and CF104 have different values
+        (e.g., 0.508474576 instead of 0.5).
+        To unify analyses across all participants, and correctly attribute stimuli to their duration conditions,
         we will now implement a fix for these subjects, that will delete the originally-logged stimulus duration groups
-        and replace them with the pre-registered ones. 
-        We will do so by rounding the stimulus duration to 1 decimal digit. This manipulation will not affect 
+        and replace them with the pre-registered ones.
+        We will do so by rounding the stimulus duration to 1 decimal digit. This manipulation will not affect
         other subjects, as this is the format the durations are already saved in.
         """
         raw.loc[:, PLND_STIM_DUR] = raw.loc[:, PLND_STIM_DUR].round(1)

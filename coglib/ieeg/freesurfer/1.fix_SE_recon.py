@@ -23,5 +23,5 @@ def recon_all(subjects_list, subjects_dir):
 
 
 if __name__ == "__main__":
-    recon_all(["SE103", "SE107", "SE108", "SE109", "SE110", "SE112", "SE113", "SE115", "SE118", "SE119"],
+    recon_all(["CE103", "CE107", "CE108", "CE109", "CE110", "CE112", "CE113", "CE115", "CE118", "CE119"],
               "/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/fs")

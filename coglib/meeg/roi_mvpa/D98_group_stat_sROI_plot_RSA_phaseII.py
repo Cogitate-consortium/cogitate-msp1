@@ -110,7 +110,7 @@ elif con_C[0] == 'L':
 elif con_C[0] == 'FA':
     conditions_C = ['false']
     print(conditions_C)
-    
+
 #1) Select time duration
 if con_T[0] == 'T_all':
     con_T = ['500ms', '1000ms','1500ms']
@@ -153,10 +153,10 @@ def set_path_plot(bids_root, visit_id, analysis_name,con_name):
     group_deriv_root = op.join(data_path, "group_phase2")
     if not op.exists(group_deriv_root):
         os.makedirs(group_deriv_root)
-        
-    
+
+
     # Set path to the ROI MVPA output(1) stat_data, 2) figures, 3) codes)
-   
+
     # 1) output_stat_data
     stat_data_root = op.join(group_deriv_root,"stat_data",con_name)
     if not op.exists(stat_data_root):
@@ -167,7 +167,7 @@ def set_path_plot(bids_root, visit_id, analysis_name,con_name):
     if not op.exists(stat_figure_root):
         os.makedirs(stat_figure_root)
 
-    return group_deriv_root,stat_data_root,stat_figure_root    
+    return group_deriv_root,stat_data_root,stat_figure_root
 
 
 def rsa2gat(dat,roi_name,cond_name,decoding_name,analysis):
@@ -195,27 +195,27 @@ def rsa2gat(dat,roi_name,cond_name,decoding_name,analysis):
             for i, sbn in enumerate(sub_list):
                 roi_rsa_gc[i,:,:]=dat[sbn][roi_name][cond][roi_name][decoding_name]
         roi_rsa_g[:,:,:]=roi_rsa_gc
-        
-    return roi_rsa_g   
+
+    return roi_rsa_g
 
 def rsa_plot(roi_rsa_data,C1_stat,time_points,fname_fig):
-     
+
     #fig, ax = plt.subplots(1)
     fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),mm2inch(fig_size[0])])
-    
+
     roi_rsa_mean=np.mean(roi_rsa_data,0)
     RDM_avg_plot = np.nan * np.ones_like(roi_rsa_mean)
     for c, p_val in zip(C1_stat['cluster'], C1_stat['cluster_p']):
         if p_val <= 0.05:
             RDM_avg_plot[c] = roi_rsa_mean[c]
-            
+
     cmap = mpl.cm.RdYlBu_r
     im=ax.imshow(roi_rsa_mean, interpolation='lanczos', origin='lower', cmap=cmap, alpha=0.9,aspect='equal',
                        extent=time_points[[0, -1, 0, -1]],vmin=-0.02, vmax=0.1)
     ax.contour(RDM_avg_plot > 0, RDM_avg_plot > 0, colors="grey", linewidths=2, origin="lower",extent=time_points[[0, -1, 0, -1]])
     im = ax.imshow(RDM_avg_plot, origin='lower', cmap=cmap,aspect='equal',
                    extent=time_points[[0, -1, 0, -1]], vmin=-0.02, vmax=0.1)
-    
+
     # Define the size and position of the squares
     square_size = 0.2
     x=[0.3,0.8,1.3,1.8]
@@ -224,12 +224,12 @@ def rsa_plot(roi_rsa_data,C1_stat,time_points,fname_fig):
     for ii in range(16):
         for nn in range(4):
             for mm in range(4):
-                squares.append((x[nn],y[mm])) 
+                squares.append((x[nn],y[mm]))
 
 
     # Draw the squares
     for square in squares:
-        
+
         rect = Rectangle(square, square_size, square_size, linewidth=3,edgecolor=[0, 0, 0], facecolor='none', linestyle=":")
         ax.add_patch(rect)
 
@@ -248,24 +248,24 @@ def rsa_plot(roi_rsa_data,C1_stat,time_points,fname_fig):
     # Save figure
 
     fig.savefig(fname_fig,format="svg", transparent=True, dpi=300)
-    
+
     #mne.stats.permutation_cluster_1samp_test
 
 def rsa_ID_plot(roi_rsa_data,C1_stat,time_points,fname_fig):
-     
+
     #fig, ax = plt.subplots(1)
     fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),mm2inch(fig_size[0])])
-    
+
     roi_rsa_mean=np.mean(roi_rsa_data,0)
     RDM_avg_plot = np.nan * np.ones_like(roi_rsa_mean)
     for c, p_val in zip(C1_stat['cluster'], C1_stat['cluster_p']):
         if p_val <= 0.05:
             RDM_avg_plot[c] = roi_rsa_mean[c]
-            
+
     #cmap = mpl.cm.RdYlBu_r
     cmap = mcolors.LinearSegmentedColormap.from_list('my_colormap',
                                                      np.vstack((plt.cm.Blues_r(np.linspace(0, 1, 220) ),
-                                                                plt.cm.Blues_r( np.linspace(1, 1, 36) ), 
+                                                                plt.cm.Blues_r( np.linspace(1, 1, 36) ),
                                                                 plt.cm.Reds( np.linspace(0, 0, 36) ),
                                                                 plt.cm.Reds( np.linspace(0, 1, 220) ) ) ) )
     im=ax.imshow(roi_rsa_mean, interpolation='lanczos', origin='lower', cmap=cmap, alpha=0.9,aspect='equal',
@@ -273,7 +273,7 @@ def rsa_ID_plot(roi_rsa_data,C1_stat,time_points,fname_fig):
     ax.contour(RDM_avg_plot > 0, RDM_avg_plot > 0, colors="grey", linewidths=2, origin="lower",extent=time_points[[0, -1, 0, -1]])
     im = ax.imshow(RDM_avg_plot, origin='lower', cmap=cmap,aspect='equal',
                    extent=time_points[[0, -1, 0, -1]], vmin=-0.02, vmax=0.1)
-    
+
     # Define the size and position of the squares
     square_size = 0.2
     x=[0.3,0.8,1.3]
@@ -282,12 +282,12 @@ def rsa_ID_plot(roi_rsa_data,C1_stat,time_points,fname_fig):
     for ii in range(9):
         for nn in range(3):
             for mm in range(3):
-                squares.append((x[nn],y[mm])) 
+                squares.append((x[nn],y[mm]))
 
 
     # Draw the squares
     for square in squares:
-        
+
         rect = Rectangle(square, square_size, square_size, linewidth=3,edgecolor=[0, 0, 0], facecolor='none', linestyle=":")
         ax.add_patch(rect)
 
@@ -306,15 +306,15 @@ def rsa_ID_plot(roi_rsa_data,C1_stat,time_points,fname_fig):
     # Save figure
 
     fig.savefig(fname_fig,format="svg", transparent=True, dpi=300)
-    
+
     #mne.stats.permutation_cluster_1samp_test
 
 def rsa_subsample_plot(roi_rsa_mean, subsampled_time_ref, matrices_delimitations_ref, sub_matrix_dict,vmin,vmax,cmap,fname_fig):
-     
+
     fig, ax = plt.subplots(1)
-    
-    
-    
+
+
+
     cmap = mpl.cm.RdYlBu_r
     im=ax.imshow(roi_rsa_mean, interpolation='lanczos', origin='lower', cmap=cmap,
                        aspect='equal',vmin=vmin, vmax=vmax)
@@ -324,8 +324,8 @@ def rsa_subsample_plot(roi_rsa_mean, subsampled_time_ref, matrices_delimitations
     #ax.set_title(f'RSA_ {roi_name}')
     ax.set(xlabel='Time (s)', ylabel='Time (s)')
     ax.set_xticks([0, 0.5, 1.0, 1.5])
-    plt.colorbar(im, ax=ax,fraction=0.03, pad=0.05) 
-    
+    plt.colorbar(im, ax=ax,fraction=0.03, pad=0.05)
+
     # Adding the matrices demarcations in case of subsampling:
     [ax.axhline(ind + 0.5, color='k', linestyle='--')
     for ind in matrices_delimitations_ref]
@@ -354,9 +354,9 @@ def rsa_subsample_plot(roi_rsa_mean, subsampled_time_ref, matrices_delimitations
     ax.set_xticklabels(ticks_labels)
     ax.set_yticklabels(ticks_labels)
     plt.tight_layout()
-    
+
     fig.savefig(fname_fig,format="svg", transparent=True, dpi=300)
-    
+
 # def sign_test(data):
 #     seed=1999
 #     random_state = check_random_state(seed)
@@ -369,11 +369,11 @@ def theory_rdm(RSA_methods):
         GNW_rdm[0:21,0:21]=1
         GNW_rdm[0:21,42:63]=1
         GNW_rdm[42:63,0:21]=1
-        GNW_rdm[42:63,42:63]=1    
-        
+        GNW_rdm[42:63,42:63]=1
+
         IIT_rdm=np.zeros([63,63])
         IIT_rdm[0:42,0:42]=1
-        
+
         theory_rdm=dict()
         theory_rdm['IIT']=IIT_rdm
         theory_rdm['GNW']=GNW_rdm
@@ -382,22 +382,22 @@ def theory_rdm(RSA_methods):
         GNW_rdm[0:21,0:21]=1
         GNW_rdm[0:21,63:84]=1
         GNW_rdm[63:84,0:21]=1
-        GNW_rdm[63:84,63:84]=1    
-        
+        GNW_rdm[63:84,63:84]=1
+
         IIT_rdm=np.zeros([84,84])
         IIT_rdm[0:63,0:63]=1
-        
+
         theory_rdm=dict()
         theory_rdm['IIT']=IIT_rdm
         theory_rdm['GNW']=GNW_rdm
-    
+
     return theory_rdm
 
 def corr_theory(rsa_subsample,analysis_name,decoding_name):
-    
+
     #1:generated theory_rdm
     theory_rdm_matrix=theory_rdm(analysis_name)
-    
+
     #2:correlate the theories matrices with the observed matrices for each subjects
     for n in range(len(sub_list)):
         observed_matrix=rsa_subsample[n,:,:]
@@ -409,22 +409,22 @@ def corr_theory(rsa_subsample,analysis_name,decoding_name):
             correlation_results, correlation_results_corrected=compute_correlation_theories([observed_matrix], theory_rdm_matrix, method="kendall")
             group_corr_corrected=group_corr_corrected.append(correlation_results_corrected,ignore_index=True)
             group_corr=group_corr.append(correlation_results,ignore_index=True)
-       
+
     #stat
-    
+
     p_value=dict()
     stat,p_value['IIT']=stats.wilcoxon(group_corr['IIT'])
     stat,p_value['GNW']=stats.wilcoxon(group_corr['GNW'])
     stat,p_value['diff']=stats.mannwhitneyu(group_corr_corrected['GNW'],group_corr_corrected['IIT'])
-    
+
     fname_p_value=op.join(stat_data_root, task_info +"_" + analysis_name + roi_name + decoding_name +'_stat_value.npz')
     np.savez(fname_p_value,p_value,group_corr,group_corr_corrected)
-    
-    
+
+
     corr_palette=[colors['IIT'],colors['GNW']]
     #plot
     group_corr_plot=group_corr.melt(var_name='theory',value_name='corr')
-    
+
     fig, ax = plt.subplots(1)
     ax=pt.RainCloud(x='theory',y='corr',data=group_corr_plot,palette=corr_palette,bw=.2,width_viol=.5,ax=ax,orient='v')
     plt.title(analysis_name+'_corr_'+roi_name)
@@ -434,24 +434,24 @@ def corr_theory(rsa_subsample,analysis_name,decoding_name):
 def RSA_ID_plot(roi_name):
     analysis_name='RSA_ID'
     time_point = np.array(range(-500, 1501, 10))/1000
-    
+
     #get decoding data
     roi_rsa_g=rsa2gat(group_data,roi_name,cond_name=['rsa'],decoding_name='ID',analysis=analysis_name)
     C1_stat=stat_cluster_1sample_RDM(roi_rsa_g,test_win_on=0, test_win_off=201,chance_index=0)
-    
+
     fname_fig=op.join(stat_figure_root, task_info +"_" + analysis_name +'_' + roi_name+'_.svg')
     #plot
     rsa_ID_plot(roi_rsa_g,C1_stat=C1_stat,time_points=time_point,fname_fig=fname_fig)
-    
+
     #subsample data
     intervals_of_interest={"x": [[0.3,0.5],[0.8,1.0],[1.3,1.5]],"y":[[0.3,0.5],[0.8,1.0],[1.3,1.5]]}
-    
+
     rsa_subsample=np.zeros([len(sub_list),63,63])
-    
+
     for n in range(len(sub_list)):
         rsa_subsample[n,:,:], subsampled_time_ref, matrices_delimitations_ref, sub_matrix_dict=subsample_matrices(roi_rsa_g[n,:,:], -0.5, 1.5, intervals_of_interest)
-    
-    
+
+
     roi_rsa_mean=np.mean(rsa_subsample,0)
     fname_fig_sub=op.join(stat_figure_root, task_info +"_" + analysis_name + roi_name +'_subsample.svg')
     cmap = mpl.cm.RdYlBu_r
@@ -459,7 +459,7 @@ def RSA_ID_plot(roi_name):
     vmax=0.1
     #plot
     rsa_subsample_plot(roi_rsa_mean, subsampled_time_ref, matrices_delimitations_ref, sub_matrix_dict,vmin,vmax,cmap,fname_fig_sub)
-    
+
     #correlated with theory rdm
     corr_theory(rsa_subsample,analysis_name,decoding_name='ID')
 
@@ -472,25 +472,25 @@ def RSA_Cat_plot(roi_name,condition):
         conD='IR'
     elif condition=='Relevant non-target':
         conD='RE'
-    
+
     #get decoding data
     roi_rsa_g=rsa2gat(group_data,roi_name,cond_name=['rsa'],decoding_name=condition,analysis=analysis_name)
-    
-    
+
+
     C1_stat=stat_cluster_1sample_RDM(roi_rsa_g,test_win_on=0, test_win_off=251,chance_index=0)
-    
+
     fname_fig=op.join(stat_figure_root, task_info +"_" + analysis_name +'_' + roi_name + '_' + conD +'.svg')
     #plot
     rsa_plot(roi_rsa_g,C1_stat=C1_stat,time_points=time_point,fname_fig=fname_fig)
-    
+
     #subsample data
     intervals_of_interest={"x": [[0.3,0.5],[0.8,1.0],[1.3,1.5],[1.8,2.0]],"y":[[0.3,0.5],[0.8,1.0],[1.3,1.5],[1.8,2.0]]}
-    
+
     rsa_subsample=np.zeros([len(sub_list),84,84])
-    
+
     for n in range(len(sub_list)):
         rsa_subsample[n,:,:], subsampled_time_ref, matrices_delimitations_ref, sub_matrix_dict=subsample_matrices(roi_rsa_g[n,:,:], -0.5, 2, intervals_of_interest)
-    
+
     roi_rsa_mean=np.mean(rsa_subsample,0)
     fname_fig_sub=op.join(stat_figure_root, task_info +"_" + analysis_name + roi_name + '_' + conD + '_subsample.svg')
     cmap = mpl.cm.RdYlBu_r
@@ -498,43 +498,43 @@ def RSA_Cat_plot(roi_name,condition):
     vmax=0.1
     #plot
     rsa_subsample_plot(roi_rsa_mean, subsampled_time_ref, matrices_delimitations_ref, sub_matrix_dict,vmin,vmax,cmap,fname_fig_sub)
-    
+
     #correlated with theory rdm
     corr_theory(rsa_subsample,analysis_name,decoding_name=condition)
 
 def RSA_Ori_plot(roi_name):
     analysis='RSA_Ori'
     time_point = np.array(range(-500,2001, 10))/1000
-    
-    
+
+
     #get decoding data
     roi_rsa_g=rsa2gat(group_data,roi_name,cond_name=['rsa'],decoding_name='Ori',analysis=analysis)
-    
+
     C1_stat=stat_cluster_1sample_RDM(roi_rsa_g,test_win_on=0, test_win_off=251,chance_index=0)
-    
+
     fname_fig=op.join(stat_figure_root, task_info +"_" + analysis_name +'_' + roi_name +'.svg')
     #plot
     rsa_plot(roi_rsa_g,C1_stat=C1_stat,time_points=time_point,fname_fig=fname_fig)
-    
+
     #subsample data
     intervals_of_interest={"x": [[0.3,0.5],[0.8,1.0],[1.3,1.5],[1.8,2.0]],"y":[[0.3,0.5],[0.8,1.0],[1.3,1.5],[1.8,2.0]]}
-    
+
     rsa_subsample=np.zeros([len(sub_list),84,84])
-    
+
     for n in range(len(sub_list)):
         rsa_subsample[n,:,:], subsampled_time_ref, matrices_delimitations_ref, sub_matrix_dict=subsample_matrices(roi_rsa_g[n,:,:], -0.5, 2, intervals_of_interest)
-    
+
     roi_rsa_mean=np.mean(rsa_subsample,0)
-    
-    
-    
+
+
+
     fname_fig_sub=op.join(stat_figure_root, task_info +"_" + analysis_name + roi_name +'_subsample.svg')
     cmap = mpl.cm.RdYlBu_r
     vmin=-0.02
     vmax=0.1
     #plot
     rsa_subsample_plot(roi_rsa_mean, subsampled_time_ref, matrices_delimitations_ref, sub_matrix_dict,vmin,vmax,cmap,fname_fig_sub)
-    
+
     #correlated with theory rdm
     corr_theory(rsa_subsample,analysis_name,decoding_name='Ori')
 
@@ -547,28 +547,28 @@ def stat_cluster_1sample_RDM(gc_mean,test_win_on,test_win_off,chance_index):
     stat_time_points=gc_mean[:,test_win_on:test_win_off,test_win_on:test_win_off].shape[2]
     df = n_observations - 1  # degrees of freedom for the test
     thresh = stats.t.ppf(1 - pval / 2, df)  # two-tailed, t distribution
-    
-    
-    
+
+
+
     T_obs_1, clusters_1, cluster_p_values_1, H0_1 = mne.stats.permutation_cluster_1samp_test(
-        gc_mean[:,test_win_on:test_win_off,test_win_on:test_win_off]-np.ones([n_observations,stat_time_points,stat_time_points])*chance_index, 
+        gc_mean[:,test_win_on:test_win_off,test_win_on:test_win_off]-np.ones([n_observations,stat_time_points,stat_time_points])*chance_index,
         threshold=thresh, n_permutations=1000, tail=tail, out_type='mask',verbose=None)
-    
+
     C1_stat=dict()
     C1_stat['T_obs']=T_obs_1
     C1_stat['cluster']=clusters_1
     C1_stat['cluster_p']=cluster_p_values_1
-    
+
     return C1_stat
 
 
 ################
 #set data root
 if analysis_name=='RSA_Cat':
-    analysis_index='RSA_Cat_NoFS'    
+    analysis_index='RSA_Cat_NoFS'
     group_deriv_root,stat_data_root,stat_figure_root=set_path_plot(bids_root,visit_id, analysis_index,con_C[0])
 else:
-    group_deriv_root,stat_data_root,stat_figure_root=set_path_plot(bids_root,visit_id, analysis_name,con_C[0])    
+    group_deriv_root,stat_data_root,stat_figure_root=set_path_plot(bids_root,visit_id, analysis_name,con_C[0])
 
 
 ## analysis/task info
@@ -592,15 +592,15 @@ group_data=pickle.load(fr)
 
 
 if analysis_name=='RSA_ID':
-    #sub_list.remove('SB006')
+    #sub_list.remove('CB006')
     # GNW ROI
-    roi_name='GNW' 
+    roi_name='GNW'
     RSA_ID_plot(roi_name)
-    
+
     # IIT ROI
-    roi_name='IIT' 
+    roi_name='IIT'
     RSA_ID_plot(roi_name)
-    
+
 elif analysis_name=='RSA_Cat':
     # GNW ROI
     roi_name='GNW'
@@ -608,9 +608,9 @@ elif analysis_name=='RSA_Cat':
     RSA_Cat_plot(roi_name,condition)
     condition='Relevant non-target'
     RSA_Cat_plot(roi_name,condition)
-    
+
     # IIT ROI
-    roi_name='IIT' 
+    roi_name='IIT'
     condition='Irrelevant'
     RSA_Cat_plot(roi_name,condition)
     condition='Relevant non-target'
@@ -618,11 +618,11 @@ elif analysis_name=='RSA_Cat':
 
 elif analysis_name=='RSA_Ori':
     # GNW ROI
-    roi_name='GNW' 
+    roi_name='GNW'
     RSA_Ori_plot(roi_name)
-    
+
     # IIT ROI
-    roi_name='IIT' 
+    roi_name='IIT'
     RSA_Ori_plot(roi_name)
 
 

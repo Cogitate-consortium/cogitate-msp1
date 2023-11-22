@@ -64,7 +64,7 @@ def preprocessing():
     parser.add_argument('config', type=str, default=None,
                         help="Config file for analysis parameters (path and filename)")
     parser.add_argument('--subject', type=str, default=None,
-                        help="subject ID, for instance SE101 or SF101")
+                        help="subject ID, for instance SE101 or CF101")
     parser.add_argument('--interactive', action="store_true",
                         help="Option to preprocessing the preprocessing script interactively, allowing for manual input")
     args = parser.parse_args()

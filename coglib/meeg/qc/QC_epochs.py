@@ -30,7 +30,7 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
     qc_output_path = op.join(bids_root, "derivatives", "qc", visit_id)
     if not op.exists(qc_output_path):
         os.makedirs(qc_output_path)
-    
+
     print("Processing subject: %s" % subject_id)
 
     #raw_list = list()
@@ -60,11 +60,11 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
 
     #raw, events = mne.concatenate_raws(raw_list, events_list=events_list)
     #del raw_list
-                
+
      # Concatenate metadata tables
     #metadata = pd.concat(metadata_list)
     # metadata.to_csv(op.join(out_path, file_name[0:14] + 'ALL-meta.csv'), index=False)
-            
+
     # Select sensor types
     #picks = mne.pick_types(raw.info,
     #                     meg = True,
@@ -73,7 +73,7 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
     #                    eog = has_eeg,
     #                    ecg = has_eeg,
     #                    )
-            
+
     # Set trial-onset event_ids
     if visit_id == 'V1':
         events_id = {}
@@ -112,7 +112,7 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
 
     # Epoch raw data
     #epochs = mne.Epochs(raw,
-    #                    events, 
+    #                    events,
     #                    events_id,
     #                    tmin, tmax,
     #                    baseline=None,
@@ -126,17 +126,17 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
     # Add metadata
     #epochs.metadata = metadata
 
-    # Read epoched data from preprocessed 
+    # Read epoched data from preprocessed
     bids_path_epo = mne_bids.BIDSPath(
-            root=prep_deriv_root, 
-            subject=subject_id,  
-            datatype='meg',  
+            root=prep_deriv_root,
+            subject=subject_id,
+            datatype='meg',
             task=bids_task,
-            session=visit_id, 
+            session=visit_id,
             suffix='epo',
             extension='.fif',
             check=False)
-            
+
     epochs = mne.read_epochs(bids_path_epo.fpath, preload=False)
 
     if visit_id == 'V1':
@@ -200,11 +200,11 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
     #print(epochs[['object1', 'object2','object3','object4','object5','object6','object7','object8','object9','object10']])
     #print(epochs[['letter1', 'letter2','letter3','letter4','letter5','letter6','letter7','letter8','letter9','letter10']])
     #print(epochs[['false1', 'false2','false3','false4','false5','false6','false7','false8','false9','false10']])
-            
+
     # Get rejection thresholds - MEG only
-    #reject = get_rejection_threshold(epochs, ch_types=['mag', 'grad'], #'eeg'], 
+    #reject = get_rejection_threshold(epochs, ch_types=['mag', 'grad'], #'eeg'],
     #                                        decim=2)
-            
+
     # Drop bad epochs based on peak-to-peak magnitude
     #epochs.drop_bad(reject=reject)
 
@@ -215,7 +215,7 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
     #print(epochs[['object1', 'object2','object3','object4','object5','object6','object7','object8','object9','object10']])
     #print(epochs[['letter1', 'letter2','letter3','letter4','letter5','letter6','letter7','letter8','letter9','letter10']])
     #print(epochs[['false1', 'false2','false3','false4','false5','false6','false7','false8','false9','false10']])
-            
+
     #print("VERY_IMPORTANT DROP LOG")
     #print(epochs.drop_log)
 
@@ -226,6 +226,6 @@ def run_qc_epochs(subject_id, visit_id, has_eeg):
 
 
 if __name__ == '__main__':
-    subject_id = input("Type the subject ID (e.g., SA101)\n>>> ")
+    subject_id = input("Type the subject ID (e.g., CA101)\n>>> ")
     visit_id = input("Type the visit ID (V1 or V2)\n>>> ")
     run_qc_epochs(subject_id, visit_id)

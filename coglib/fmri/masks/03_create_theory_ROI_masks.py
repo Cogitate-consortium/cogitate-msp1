@@ -13,8 +13,8 @@ import numpy as np
 
 projectRoot = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
-bids_dir = projectRoot + '/bids'  
-code_dir = projectRoot + '/bids/code' 
+bids_dir = projectRoot + '/bids'
+code_dir = projectRoot + '/bids/code'
 data_dir = projectRoot + '/bids/derivatives/fslFeat'
 
 mask_dir_pattern = bids_dir + '/derivatives/masks/%(sub_id)s'
@@ -176,7 +176,7 @@ FFA_roi_list = ['G_and_S_occipital_inf',
 LOC_roi_list = ['G_occipital_middle',
                 'S_oc_middle_and_Lunatus']
 
-# Should only bilateral masks be processed? these are assumed to be label with 
+# Should only bilateral masks be processed? these are assumed to be label with
 # a 'bh' (both hemispheres) in the file name (as created by 01_create_ROI_masks.py)
 process_only_bilateral_masks = True
 
@@ -206,41 +206,41 @@ def get_mask_list(sub_mask_dir):
 def load_a_rois(sub_id):
     """
     Load all anatomica ROIs of a subject into a dictionary
-    
+
     sub_id: Subject ID
     Returns: Dictionary containing all the anatomical ROIs of the subject
     """
     sub_mask_dir = mask_dir_pattern%{'sub_id':sub_id}
     mask_paths = get_mask_list(sub_mask_dir)
     mask_paths.sort()
-    
+
     sub_mask_list = [l[95:] for l in mask_paths]
     sub_mask_list = [l[:-33] for l in sub_mask_list]
-    
+
     # empty dictionary that will contain all masks of a subject
     a_rois = {}
-    
+
     for n in range(0,len(mask_paths)):
         mask = mask_paths[n]
         m = load_mri(mask, brain_mask)
         a_rois[sub_mask_list[n]] = m
-        
+
     return a_rois, sub_mask_list
 
 def combine_rois(combine_roi_list,combine_roi_name):
     print(sub_id + ' ' + 'ROI: ' + combine_roi_name)
     combine_roi = np.array([a_rois[n] for n in combine_roi_list])
     combine_roi = np.sum(combine_roi,axis=0)
-    
+
     f_name = f_name_pattern%{'sub':sub_id,'roi':combine_roi_name,'space':space}
     full_f_name = sub_mask_dir + f_name
-    
+
     return combine_roi, full_f_name
-    
+
 # %%
 subjects = get_subject_list(bids_dir, subject_list_type)
 
-remove_subjects = ['sub-SD122','sub-SD196']
+remove_subjects = ['sub-CD122','sub-CD196']
 for r in remove_subjects:
     subjects = subjects[subjects != r]
 
@@ -251,35 +251,35 @@ print('Total subjects:',len(subjects))
 for sub_id in subjects:
 
     brain_mask = brain_mask_pattern%{'sub_id':sub_id}
-    
-    sub_mask_dir = mask_dir_pattern%{'sub_id':sub_id}    
+
+    sub_mask_dir = mask_dir_pattern%{'sub_id':sub_id}
     a_rois, sub_roi_list = load_a_rois(sub_id)
-    
-    
+
+
     # # GNW
     GNW_roi, full_f_name = combine_rois(GNW_roi_list,'GNW')
     save_mri(GNW_roi,brain_mask,full_f_name)
-    
+
     # # GNW_S_front_inf
     GNW_roi_S_front_inf, full_f_name = combine_rois(GNW_S_front_inf_roi_list,'GNW_S_front_inf')
     save_mri(GNW_roi_S_front_inf,brain_mask,full_f_name)
-    
+
     # # IIT
     IIT_roi, full_f_name = combine_rois(IIT_roi_list,'IIT')
     save_mri(IIT_roi,brain_mask,full_f_name)
-    
+
     # # IIT_extended
     IIT_extended_roi, full_f_name = combine_rois(IIT_extended_roi_list,'IIT_extended')
     save_mri(IIT_extended_roi,brain_mask,full_f_name)
-    
+
     # # IIT_excluded
     IIT_excluded_roi, full_f_name = combine_rois(IIT_excluded_roi_list,'IIT_excluded')
     save_mri(IIT_excluded_roi,brain_mask,full_f_name)
-    
+
     # FFA
     FFA_roi, full_f_name = combine_rois(FFA_roi_list,'FFA')
     save_mri(FFA_roi,brain_mask,full_f_name)
-    
+
     # LOC
     LOC_roi, full_f_name = combine_rois(LOC_roi_list,'LOC')
     save_mri(LOC_roi,brain_mask,full_f_name)

@@ -422,7 +422,7 @@ ch_coords = ch_coords.rename(columns={"name": "channel"})
 # Loop through each channel to extract all the relevant info:
 channels_summary_table = pd.DataFrame()
 for ch in channels_list:
-    if ch == "SE107-O2PH5":
+    if ch == "CE107-O2PH5":
         print("!")
     # Get all the info from the different file:
     # Onset responsiveness:

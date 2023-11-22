@@ -29,7 +29,7 @@ done
 
 cd /hpc/users/$USER/sw/github/ECoG
 
-module purge; module load Anaconda3/2020.11; source /hpc/shared/EasyBuild/apps/Anaconda3/2020.11/bin/activate; 
+module purge; module load Anaconda3/2020.11; source /hpc/shared/EasyBuild/apps/Anaconda3/2020.11/bin/activate;
 conda activate /hpc/users/$USER/.conda/envs/cogitate_ecog
 
 export PYTHONPATH=$PYTHONPATH:/hpc/users/$USER/sw/github/ECoG

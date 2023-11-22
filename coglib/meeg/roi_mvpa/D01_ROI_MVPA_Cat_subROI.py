@@ -1,6 +1,6 @@
 """
 ====================
-D01. Decoding for MEG on source space of ROI, 
+D01. Decoding for MEG on source space of ROI,
 Category decoding
 control analysis,
 decoding at subROI.
@@ -41,7 +41,7 @@ from D01_ROI_MVPA_Cat import Category_WCD
 
 parser=argparse.ArgumentParser()
 
-parser.add_argument('--sub',type=str,default='SA101',help='subject_id')
+parser.add_argument('--sub',type=str,default='CA101',help='subject_id')
 parser.add_argument('--visit',
                     type=str,
                     default='V1',
@@ -113,27 +113,27 @@ subjects_dir = opt.fs_path
 # run roi decoding analysis
 
 if __name__ == "__main__":
-    
+
     #opt INFO
-    
-    # subject_id = 'SB085'
+
+    # subject_id = 'CB085'
     #
     # visit_id = 'V1'
     # space = 'surface'
     #
 
     # analysis info
-    
+
     # con_C = ['LF']
     # con_D = ['Irrelevant', 'Relevant non-target']
     # con_T = ['500ms','1000ms','1500ms']
     ROI_index = ['subF','subP']
-    
+
     for analysis_index in ROI_index:
         analysis_name='Cat_' + analysis_index + '_control'
-    
-        
-    
+
+
+
         # 1 Set Path
         sub_info, \
         fpath_epo, fpath_fw, fpath_fs, \
@@ -141,10 +141,10 @@ if __name__ == "__main__":
                                                                           subject_id,
                                                                           visit_id,
                                                                           analysis_name)
-    
+
         # 2 Get Sub ROI
         surf_label_list, ROI_Name = sub_ROI_for_ROI_MVPA(fpath_fs, subject_id,analysis_name)
-    
+
         # 3 prepare the sensor data
         epochs_rs, \
         rank, common_cov, \
@@ -153,44 +153,44 @@ if __name__ == "__main__":
                                                                                        con_T,
                                                                                        con_C,
                                                                                        con_D)
-    
+
         #roi_ccd_acc = dict()
         #roi_ccd_auc = dict()
         roi_wcd_acc = dict()
         #roi_wcd_auc = dict()
-        
-    
+
+
         for nroi, roi_name in enumerate(ROI_Name):
-    
+
             # 4 Get Source Data for each ROI
             stcs = []
             stcs = source_data_for_ROI_MVPA(epochs_rs, fpath_fw, rank, common_cov, sub_info, surf_label_list[nroi])
-            
-            
-            # fname_fig_acc = op.join(roi_figure_root, 
+
+
+            # fname_fig_acc = op.join(roi_figure_root,
             #                     sub_info + task_info + '_'+ roi_name
             #                     + "_acc_CCD" + '.png')
-    
-            
+
+
             # score_methods=make_scorer(accuracy_score)
-            # ccd_acc = Category_CCD(epochs_rs, stcs, 
+            # ccd_acc = Category_CCD(epochs_rs, stcs,
             #                                 conditions_C, conditions_D,
             #                                 select_F,
             #                                 n_trials,
             #                                 # nPCA,
-            #                                 roi_name, score_methods, 
+            #                                 roi_name, score_methods,
             #                                 fname_fig_acc)
-    
+
             # roi_ccd_acc[roi_name] = ccd_acc
-    
-    
+
+
             ### WCD
-            
-            
-            fname_fig_acc = op.join(roi_figure_root, 
+
+
+            fname_fig_acc = op.join(roi_figure_root,
                                 sub_info  + task_info + '_' + roi_name + "_acc_WCD" + '.png')
-    
-            
+
+
             score_methods=make_scorer(accuracy_score)
             wcd_acc= Category_WCD(epochs_rs, stcs,
                                   conditions_C, conditions_D,
@@ -199,19 +199,19 @@ if __name__ == "__main__":
                                   # nPCA,
                                   roi_name, score_methods,
                                   fname_fig_acc)
-    
+
             roi_wcd_acc[roi_name] = wcd_acc
-            
-    
-    
-            
+
+
+
+
         roi_data=dict()
         # roi_data['ccd_acc']=roi_ccd_acc
-        
+
         roi_data['wcd_acc']=roi_wcd_acc
-        
-    
-    
+
+
+
         fname_data=op.join(roi_data_root, sub_info + '_' + task_info +"_ROIs_data_" + analysis_name + '.pickle')
         fw = open(fname_data,'wb')
         pickle.dump(roi_data,fw)

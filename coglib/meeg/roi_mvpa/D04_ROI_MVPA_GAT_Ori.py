@@ -66,7 +66,7 @@ from D_MEG_function import source_data_for_ROI_MVPA,sub_ROI_for_ROI_MVPA
 #mpl.use('Qt5Agg')
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--sub',type=str,default='SA101',help='subject_id')
+parser.add_argument('--sub',type=str,default='CA101',help='subject_id')
 parser.add_argument('--visit',
                     type=str,
                     default='V1',
@@ -181,13 +181,13 @@ def Orientation_CTWCD(epochs_rs,stcs,conditions_C,select_F,n_trials,roi_name,sco
     # # ccd['RE'] = np.mean(scores_b, axis=0)
     # wcd[conditions_C[0]] = np.mean(scores_a, axis=0)
     # wcd[conditions_C[1]] = np.mean(scores_b, axis=0)
-    
+
     ctwcd=dict()
     for condi in range(len(conditions_C)):
         con_index=np.where(epochs_rs.metadata['Category'] == conditions_C[condi])[0]
         group_x=X[con_index]
         group_y=y[con_index]
-        
+
         scores_per=np.zeros([100,group_x.shape[2],group_x.shape[2]])
         for num_per in range(100):
             # do the average trial
@@ -202,35 +202,35 @@ def Orientation_CTWCD(epochs_rs,stcs,conditions_C,select_F,n_trials,roi_name,sco
                 #block_size
                 #array_like or int
                 #Array containing down-sampling integer factor along each axis. Default block_size is 2.
-                
+
                 # funccallable
                 # Function object which is used to calculate the return value for each local block. This function must implement an axis parameter. Primary functions are numpy.sum, numpy.min, numpy.max, numpy.mean and numpy.median. See also func_kwargs.
-                
+
                 # cvalfloat
                 # Constant padding value if image is not perfectly divisible by the block size.
-                
+
                 # Now generating the labels and group:
                 new_x.append(avg_x)
                 new_y += [label] * avg_x.shape[0]
 
             new_x = np.concatenate((new_x[0],new_x[1],new_x[2]),axis=0)
             new_y = np.array(new_y)
-            
+
             # average temporal feature (5 point average)
             new_x=ATdata(new_x)
-            
+
             scores= cross_val_multiscore(sliding, X=new_x, y=new_y, cv=5, n_jobs=-1)
             scores_per[num_per,:,:]=np.mean(scores, axis=0)
-            
-        ctwcd[conditions_C[condi]]=np.mean(scores_per, axis=0)       
-    
-    
 
-    
+        ctwcd[conditions_C[condi]]=np.mean(scores_per, axis=0)
+
+
+
+
     fig, axes = plt.subplots(1)
     plt.subplots_adjust(wspace=0.5, hspace=0)
     fig.suptitle('ORI CTWCD')
-    
+
     t = 1e3 * epochs_rs.times
     pe = [path_effects.Stroke(linewidth=5, foreground='w', alpha=0.5), path_effects.Normal()]
     cmap = mpl.cm.jet
@@ -252,7 +252,7 @@ def Orientation_CTWCD(epochs_rs,stcs,conditions_C,select_F,n_trials,roi_name,sco
     axes.axhline(0, color='k')
     axes.axline((0, 0), slope=1, color='k')
     plt.colorbar(im, ax=axes,fraction=0.03, pad=0.05)
-    
+
     #fname_fig = op.join('/home/user/S10/Cogitate/HPC/mvpa/ROI/figure/',ROI_Name[nroi] +"_CCD" + '.png')
     fig.savefig(fname_fig)
 
@@ -265,17 +265,17 @@ def Orientation_CTWCD(epochs_rs,stcs,conditions_C,select_F,n_trials,roi_name,sco
 # run roi decoding analysis
 
 if __name__ == "__main__":
-    
+
     #opt INFO
-    
-    # subject_id = 'SB085'
+
+    # subject_id = 'CB085'
     #
     # visit_id = 'V1'
     # space = 'surface'
     #
 
     # analysis info
-    
+
     # con_C = ['face']
     # con_D = ['Irrelevant', 'Relevant non-target']
     # con_T = ['500ms','1000ms','1500ms']
@@ -308,19 +308,19 @@ if __name__ == "__main__":
 
         # 4 Get Source Data for each ROI
         stcs = []
-        stcs = source_data_for_ROI_MVPA(epochs_rs, fpath_fw, 
-                                        rank, common_cov, 
+        stcs = source_data_for_ROI_MVPA(epochs_rs, fpath_fw,
+                                        rank, common_cov,
                                         sub_info, surf_label_list[nroi])
-        
-       
+
+
         ### wcd_orientation
         #1 scoring methods with balanced accuracy score
-        fname_fig_acc = op.join(roi_figure_root, 
+        fname_fig_acc = op.join(roi_figure_root,
                             sub_info  + task_info + '_' + roi_name + "_acc_CTWCD_ori" + '.png')
 
-        
+
         score_methods=make_scorer(balanced_accuracy_score)
-        ctwcd_ori_acc= Orientation_CTWCD(epochs_rs, stcs, 
+        ctwcd_ori_acc= Orientation_CTWCD(epochs_rs, stcs,
                                       conditions_C,
                                       select_F,
                                       n_trials,
@@ -329,9 +329,9 @@ if __name__ == "__main__":
                                       fname_fig_acc)
 
         roi_ctwcd_ori_acc[roi_name] = ctwcd_ori_acc
-        
+
     roi_data=dict()
-    
+
     roi_data['ctwcd_ori_acc']=roi_ctwcd_ori_acc
 
     fname_data=op.join(roi_data_root, sub_info + '_' + task_info +"_ROIs_data_GAT_Ori" + '.pickle')

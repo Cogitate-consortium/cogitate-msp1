@@ -16,8 +16,8 @@ subject_list_type = 'phase3_V1'
 #subject_list_type = 'debug'
 
 
-bids_dir = projectRoot + '/bids'  
-code_dir = projectRoot + '/bids/code' 
+bids_dir = projectRoot + '/bids'
+code_dir = projectRoot + '/bids/code'
 data_dir = projectRoot + '/bids/derivatives/fslFeat'
 output_dir = bids_dir + '/derivatives/putative_ncc_subject_level_tables/' + subject_list_type
 
@@ -89,7 +89,7 @@ roi_list = ['G_and_S_cingul-Mid-Post',
             'IIT_excluded']
 
 
-# Should only bilateral masks be processed? these are assumed to be label with 
+# Should only bilateral masks be processed? these are assumed to be label with
 # a 'bh' (both hemispheres) in the file name (as created by 01_create_ROI_masks.py)
 process_only_bilateral_masks = True
 
@@ -130,35 +130,35 @@ def get_mask_list(sub_mask_dir):
 def load_a_rois(sub_id):
     """
     Load all anatomica ROIs of a subject into a dictionary
-    
+
     sub_id: Subject ID
     Returns: Dictionary containing all the anatomical ROIs of the subject
     """
     sub_mask_dir = mask_dir_pattern%{'sub_id':sub_id}
     mask_paths = get_mask_list(sub_mask_dir)
     mask_paths.sort()
-    
+
     sub_mask_list = [l[95:] for l in mask_paths]
     sub_mask_list = [l[:-33] for l in sub_mask_list]
-    
+
     # empty dictionary that will contain all masks of a subject
     a_rois = {}
-    
+
     for n in range(0,len(mask_paths)):
         mask = mask_paths[n]
         m = load_mri(mask, group_mask)
         a_rois[sub_mask_list[n]] = m
-        
+
     return a_rois, sub_mask_list
 
 
 def count_voxels_in_roi(a_roi,conjunction):
-    
+
     # Set to zero the voxels that don't belong to the ROI
     conjunction[a_roi == 0] = 0
-    
+
     n_voxels = int(np.sum(conjunction > 0))
-    
+
     return n_voxels
 
 
@@ -167,44 +167,44 @@ def count_voxels_in_roi(a_roi,conjunction):
 subjects = get_subject_list(bids_dir, subject_list_type)
 #subjects = get_subject_list(bids_dir, 'debug')
 
-remove_subjects = ['sub-SD122','sub-SD196']
+remove_subjects = ['sub-CD122','sub-CD196']
 for r in remove_subjects:
     subjects = subjects[subjects != r]
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-        
+
 for conjunct_name in conjunctions:
-    
+
     voxel_count = dict(zip(roi_list,np.zeros((len(roi_list),len(subjects)), dtype=int)))
 
     for sub in range(len(subjects)):
-        
+
         sub_id = subjects[sub]
         a_rois, sub_roi_list = load_a_rois(sub_id)
-        
+
         print(conjunct_name + ' ' + sub_id)
-        
+
         for roi_name in roi_list:
-            
+
             #print(sub_id + ' ' + conjunct_name + ' ROI: ' + roi_name)
             #roi_name = roi_list[0]
             a_roi = np.squeeze(a_rois[roi_name])
 
             # Load the relevant functional maps
             conjunction = np.squeeze(load_mri(conjunct_pattern%{'sub_id':sub_id,'conj':conjunct_name},group_mask))
-    
+
             n_voxels = count_voxels_in_roi(a_roi,conjunction)
             #print(str(n_voxels))
             voxel_count[roi_name][sub] = n_voxels
-    
+
     voxel_sub_count = dict(zip(roi_list,np.zeros(len(roi_list), dtype=int)))
     for k in voxel_count.keys():
         voxel_sub_count[k] = sum(voxel_count[k]>0)/len(subjects)*100
-    
-    
+
+
     voxel_df = pd.DataFrame.from_dict(voxel_count, orient='index')
     voxel_df.to_csv(output_fname_pattern%{'conj':conjunct_name, 'type':'voxels'}, header=False)
-    
+
     voxel_sub_df = pd.DataFrame.from_dict(voxel_sub_count, orient='index')
     voxel_sub_df.to_csv(output_fname_pattern%{'conj':conjunct_name, 'type':'sub'}, header=False)

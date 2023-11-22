@@ -282,7 +282,7 @@ def load_logs(root_path, file_naming_pattern, file_extension=None):
 def data_preparation():
     parser = argparse.ArgumentParser(description="Data preparation")
     parser.add_argument('--SubjectID', type=str, default=None,
-                        help="Subject ID, for instance SE110")
+                        help="Subject ID, for instance CE110")
     parser.add_argument('--AnalysisParametersFile', type=str, default=None,
                         help="Analysis parameters file (file name + path)")
     args = parser.parse_args()
@@ -310,7 +310,7 @@ def data_preparation():
     print(raw.info)
     # Get the sampling frequency of the file
     sr = raw.info["sfreq"]
-    if site == "SE":
+    if site == "CE":
         change_sr = input(
             "The sampling rate in your file is {0}. Do you want to change it? (Yes/No) ".format(sr))
         if change_sr.lower() == "yes":
@@ -377,7 +377,7 @@ def data_preparation():
             elec_recon_file = elec_recon_files[0]
         print(elec_recon_file)
         # There are slight differences in format of elec recon between the different sites, which is adressed here:
-        if site == "SF":
+        if site == "CF":
             # Loading the file:
             elec_coord_raw = np.genfromtxt(elec_recon_file, dtype=str, delimiter=' ',
                                            comments=None, encoding='utf-8')
@@ -391,7 +391,7 @@ def data_preparation():
                 "z": elec_coord_raw[:, 3],
                 "type": elec_coord_raw[:, 4],
             })
-        elif site == "SE":
+        elif site == "CE":
             # Loading the file:
             elec_coord_raw = np.genfromtxt(elec_recon_file, dtype=str, delimiter=',',
                                            comments=None, encoding='utf-8')
@@ -448,9 +448,9 @@ def data_preparation():
                                "handling".format(ch), RuntimeWarning)
                 print("{0}: {1}".format(ch, "seeg"))
     except IndexError:
-        # If the site is SE, then most of the electrodes are depth, therefore, setting all the channels to seeg. The
+        # If the site is CE, then most of the electrodes are depth, therefore, setting all the channels to seeg. The
         # other type are handled below:
-        if site == "SE":
+        if site == "CE":
             raw.set_channel_types({ch: "seeg" for ch in raw.ch_names})
         for elec_name_conv in data_preparation_parameters.additional_channel_conv.keys():
             raw.set_channel_types({ch_name: data_preparation_parameters.additional_channel_conv[elec_name_conv]

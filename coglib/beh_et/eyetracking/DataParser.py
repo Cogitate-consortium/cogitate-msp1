@@ -127,7 +127,7 @@ def set_visibility(category, response):
                 ("Face", "Yes"): TP, ("Object", "Yes"): TP, ("Face_target", "Resp"): TP, ("Obj_target", "Resp"): TP,
                 ("Face_non_target", "Resp"): FP, ("Obj_non_target", "Resp"): FP,
                 ("Face_non_target", "NoResp"): TN, ("Obj_non_target", "NoResp"): TN,
-                ("Obj_target", "No"): FN, ("Object", "Resp"): TP}  # THIS CASE SHOULDN'T EVEN HAPPEN, For some reason it was spotted in SD154 only
+                ("Obj_target", "No"): FN, ("Object", "Resp"): TP}  # THIS CASE SHOULDN'T EVEN HAPPEN, For some reason it was spotted in CD154 only
     return vis_dict[(category, response)]
 
 
@@ -207,9 +207,9 @@ def compare_beh_triggers(beh_trial_data, et_trial_data, sub_code):
                         if np.isnan(row[diff_specific.columns[0]]):  # if this is because the ET df is MISSING that data
                             if not np.isnan(row[diff_specific.columns[1]]):  # if the behavioral df HAS that data
                                 """
-                                This case happened with subject SA125, where in one of the trials in miniblock 14
+                                This case happened with subject CA125, where in one of the trials in miniblock 14
                                 a trigger for the DURATION of a stimulus event is just missing, probably failed to send.
-                                As the duration of that stimulus is also logged in the behavioral files, we can 
+                                As the duration of that stimulus is also logged in the behavioral files, we can
                                 complete that information based on the behavior.
                                 """
                                 # this means that the trigger with the information for that event was MISSING
@@ -315,7 +315,7 @@ def get_trial_info(allMsgDF, params, is_tobii=False):  # params
             curr_stim = {BLOCK_COL: block_number, MINIBLOCK_COL: curr_miniblock}
         elif msg_type == ET_param_manager.RESP:
             """
-            If we have seen the current stimulus, this is its' response time. 
+            If we have seen the current stimulus, this is its' response time.
             Else, this is attributed to the last seen stimulus (previous stimulus, one before curr) and the response
             time will be listed there. The field is NaN if no response was made.
             """
@@ -327,7 +327,7 @@ def get_trial_info(allMsgDF, params, is_tobii=False):  # params
             # In some subjects, there is an additional offset at the beggining, which makes a bad shift for stim timings.
             # In order to solve this, we assure that there was an onset before that offset - if there was no onset prior to this offset -DO NOTHING
             """
-            If we have seen the current stimulus, this is its' response time. 
+            If we have seen the current stimulus, this is its' response time.
             Else, this is attributed to the last seen stimulus (previous stimulus, one before curr) and the response
             time will be listed there. The field is NaN if no response was made.
             """
@@ -359,14 +359,14 @@ def get_trial_info(allMsgDF, params, is_tobii=False):  # params
 
     """
     BLOCK NUMBER CORRECTION FOR MEG:
-    As per the pre-registration (https://osf.io/gm3vd), "For M-EEG, stimuli were administered over 10 different runs, 
+    As per the pre-registration (https://osf.io/gm3vd), "For M-EEG, stimuli were administered over 10 different runs,
     for fMRI over 8 runs, and for the iEEG, over 5 runs."
 
     For fMRI and iEEG, run = block = a separate durR file. Therefore, each file we parsed corresponded to a block.
-    For MEG, a file contained more than one block in it (10 runs in 5 files). Therefore, when parsing ET data based on 
-    triggers and file numbers alone, creates a discrepancy between the counted and actual block numbers in the et df. 
+    For MEG, a file contained more than one block in it (10 runs in 5 files). Therefore, when parsing ET data based on
+    triggers and file numbers alone, creates a discrepancy between the counted and actual block numbers in the et df.
 
-    Here, we implement a correction for that, based on the knowledge that EACH BLOCK CONTAINS 4 MINIBLOCKS IN IT. 
+    Here, we implement a correction for that, based on the knowledge that EACH BLOCK CONTAINS 4 MINIBLOCKS IN IT.
     Pre-registration: "The experiment was divided into runs, with four blocks each. During each block, a ratio of 34-38 trials was presented"
     slab for trigger coding scheme: https://twcf-arc.slab.com/posts/eyetracker-and-meg-coding-scheme-pf78qe5y
     """
@@ -666,7 +666,7 @@ def ParseEyeLinkAsc(elFilename, last_end_time, total_prev_diff):
     # events may be used to label the next "ESACC" event as being part of a blink and not a true saccade."
     # more from EDF2ASC documentation: Blinks are always embedded in saccades, caused by artifactual motion as the
     # eyelids progressively occlude the pupil of the eye. Such artifacts are best eliminated by labeling an
-    # SSACC...ESACC pair with one or more SBLINK events between them as a blink, not a saccade. The data contained in
+    # SSACC...ESACC pair with one or more CBLINK events between them as a blink, not a saccade. The data contained in
     # the ESACC event will be inaccurate in this case, but the "tStart", "tEnd", and "duration" data will be accurate.
     # It is also useful to eliminate any short (less than 120 millisecond duration) fixations that precede or follow
     # a blink. These may be artificial or be corrupted by the blink.
@@ -753,7 +753,7 @@ def et_data_mark_Eyelink(et_data_dict):
     • ENDSACC
     Note that the position and velocity data recorded in the ENDSACC event is not valid. All data between the STARTSACC
     and ENDSACC events should be discarded.
-    - Labeling an SSACC...ESACC pair with one or more SBLINK events between them as a blink, not a saccade.
+    - Labeling an SSACC...ESACC pair with one or more CBLINK events between them as a blink, not a saccade.
     - Eliminating any short (less than 120 millisecond duration) fixations that precede or follow a blink as these may
     be artificial or be corrupted by the blink. The end of fixation events will be marked by EFIX events, and those
     markers will immediately precede the SSACC event marker for the saccade surrounding the blink.  Similarly, the start
@@ -785,14 +785,14 @@ def et_data_mark_Eyelink(et_data_dict):
     samps = et_data_dict[DF_SAMPLES]
 
     for index, blink in bls.iterrows():
-        # Labeling an SSACC...ESACC pair with one or more SBLINK events between them as BLINKS
+        # Labeling an SSACC...ESACC pair with one or more CBLINK events between them as BLINKS
         saccs.loc[(saccs[T_START] <= blink[T_START]) & (saccs[T_END] >= blink[T_START]) & (
                 saccs['eye'] == blink['eye']), f"is_{EYELINK}Blink"] = blink[T_START]
 
     """
     note that fixations CANNOT contain blink events according to Marcus from eyelink, so this check should be satisfactory
-    Labeling fixations that precede or follow a blink : "The end of fixation events will immediately precede the 
-    SSACC event marker for the saccade surrounding the blink. Similarly, the start of fixations immediately following 
+    Labeling fixations that precede or follow a blink : "The end of fixation events will immediately precede the
+    SSACC event marker for the saccade surrounding the blink. Similarly, the start of fixations immediately following
     blinks will be marked by an SFIX marker immediately after the ESACC marker containing the blink."
     - short
     - fixation tEnd immediately before the tStart of a false saccade (that surrounds a blink), or
@@ -859,27 +859,27 @@ def et_data_to_trials(et_data_prepro, trial_info, params, is_tobii=False):
         probed_stim_onsets_sample_inds = np.array([np.where(et_data_prepro[DF_SAMPLES][T_SAMPLE] == onset)[0][0] for onset in probed_stim_onsets])
     except IndexError:
         print(f"WARNING!: {params['SubjectName']} HAS EYELINK MGSS W/O CORRESPONDING SAMPLES")
-        if params["SubjectLab"] == "SE":
+        if params["SubjectLab"] == "CE":
             """
             Example: SE103
             For ECoG subjects, where the sampling rate was less than 1000Hz (500), trigger messages timestamps reflected
-            to Eyelink device times that had no corresponding sample. Meaning, the stimulus trigger had a timestamp that 
-            did not appear in any sample. Therefore, to be able to compare Eyelink events with behavioral log events, 
+            to Eyelink device times that had no corresponding sample. Meaning, the stimulus trigger had a timestamp that
+            did not appear in any sample. Therefore, to be able to compare Eyelink events with behavioral log events,
             we implement the following correction for these exceptional cases:
             """
             et_data_prepro[DF_SAMPLES]["aligned_timings"] = et_data_prepro[DF_SAMPLES][T_SAMPLE]//2
             probed_stim_onsets_sample_inds = np.array([np.where(et_data_prepro[DF_SAMPLES]["aligned_timings"] == onset//2)[0][0] for onset in probed_stim_onsets])
         else:
             """
-            Example: SD118, SA125
+            Example: CD118, CA125
             For some subjects (or at least this one), the eyetracking device did not track eye data during
             some interval mid-experiment. The result of this is that a trigger was sent to Eyelink, but no eye data
             was sampled at the time. For the analysis, the missing trial (i.e., a trial as was indicated in the
             trigger messages, that is missing gaze data) will be nullified completely to preserve dataframe coherence.
             This means that less trials are analyzed for this subject (only trials were gaze data was collected).
-            
-            *NOTE* : this is based on the stimOnset trigger - if the moment of stimOnset does not have any 
-            corresponding sample, then we assume this trial is lost, as we have no trackin of the eyes during the onset. 
+
+            *NOTE* : this is based on the stimOnset trigger - if the moment of stimOnset does not have any
+            corresponding sample, then we assume this trial is lost, as we have no trackin of the eyes during the onset.
             """
             for onset in probed_stim_onsets:
                 try:

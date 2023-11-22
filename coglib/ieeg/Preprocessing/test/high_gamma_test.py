@@ -62,6 +62,6 @@ def run(file_root=None, save_root=None, njobs=1):
 
 if __name__ == "__main__":
     run(
-        file_root="/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/preprocessing/sub-SF109/ses-V1/ieeg/manual_bad_channels_rejection/broadband/manbadcharej_notfil_manbadcharej_car_manbadcharej",
+        file_root="/mnt/beegfs/XNAT/COGITATE/ECoG/phase_2/processed/bids/derivatives/preprocessing/sub-CF109/ses-V1/ieeg/manual_bad_channels_rejection/broadband/manbadcharej_notfil_manbadcharej_car_manbadcharej",
         save_root="/home/alexander.lepauvre/Desktop/temp",
         njobs=8)

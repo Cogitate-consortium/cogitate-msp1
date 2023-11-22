@@ -6,9 +6,9 @@
 The cogitate sample dataset consists of data shared from their original projects.
 
 Two subjects from every site are included:
-FMRI - SC102, SC202, SD101, SD199
-MEEG - SA124, SA140, SB013, SB072
-ECOG - SE107, SE110, SF102, SF104
+FMRI - CC102, CC202, CD101, CD199
+MEEG - CA124, CA140, CB013, CB072
+ECOG - CE107, CE110, CF102, CF104
 
 """
 
@@ -69,7 +69,7 @@ project = connection.projects[myproject]
 project.download_dir(download_dir)
 
 # download all the data for a subject
-# mysubject = 'SA124'
+# mysubject = 'CA124'
 # project.subjects[mysubject].download_dir(download_dir)
 
 # download all the resources only (excluding the scans)

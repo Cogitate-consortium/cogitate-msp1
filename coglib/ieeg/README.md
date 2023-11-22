@@ -26,10 +26,10 @@ In the file ieeg/Preprocessing/configs/PreprocessingParameters_task-Duration_Ale
 *$ROOT/ieeg/sample_data/bids*
 In the command line, enter:
 ```
-python REPO_ROOT/cogitate-msp1/ieeg/Preprocessing/category_selectivity_master.py REPO_ROOT/cogitate-msp1/ieeg/Preprocessing/configs/PreprocessingParameters_task-Duration_Alex.json --subject SF102 --interactive
+python REPO_ROOT/cogitate-msp1/ieeg/Preprocessing/category_selectivity_master.py REPO_ROOT/cogitate-msp1/ieeg/Preprocessing/configs/PreprocessingParameters_task-Duration_Alex.json --subject CF102 --interactive
 ```
 Expected output: the script should generate a directory under:
-*$ROOT/sample_data/bids/derivatives/preprocessing/sub-SF102*
+*$ROOT/sample_data/bids/derivatives/preprocessing/sub-CF102*
 containing several subfolders, one for each preprocessing steps. The epoching folder contains the final state of 
 the data ready for the next analysis steps (note that these are already available)
 

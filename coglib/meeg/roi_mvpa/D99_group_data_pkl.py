@@ -72,7 +72,7 @@ con_T = opt.cT
 #         con_T=['500ms','1000ms','1500ms']
 #     else:
 #         con_T = methods_name[0]
-    
+
 
 select_F = opt.nF
 n_trials = opt.nT
@@ -102,7 +102,7 @@ elif con_C[0] == 'L':
 elif con_C[0] == 'FA':
     conditions_C = ['false']
     print(conditions_C)
-    
+
 #1) Select time duration
 if con_T[0] == 'T_all':
     con_T = ['500ms', '1000ms','1500ms']
@@ -111,8 +111,8 @@ elif con_T[0] == 'ML':# middle and long
     con_T = ['1000ms','1500ms']
     print(con_T)
 
-    
-    
+
+
 decoding_path=op.join(bids_root, "derivatives",'decoding','roi_mvpa')
 
 data_path=op.join(decoding_path,analysis_name)
@@ -146,10 +146,10 @@ print(task_info)
 
 group_data=dict()
 for i, sbn in enumerate(sb_list):
-    # if 'SB' in sbn:
+    # if 'CB' in sbn:
     # sub and visit info
     sub_info = 'sub-' + sbn + '_ses-' + visit_id
-    
+
     sub_data_root = op.join(data_path,
                             f"sub-{sbn}", f"ses-{visit_id}", "meg",
                             "data")
@@ -174,20 +174,20 @@ for i, sbn in enumerate(sb_list):
             fr=open(fname_data,'rb')
             rsa_data[roi_name]=pickle.load(fr)
         group_data[sbn]=rsa_data
-        
+
     elif analysis_name == "Cat_PFC":
         fname_data=op.join(sub_data_root, sub_info + '_' + task_info +'_IITPFC_data_Cat.pickle')
         fr=open(fname_data,'rb')
         roi_data=pickle.load(fr)
         group_data[sbn]=roi_data
-        
+
     elif analysis_name == "Ori_PFC":
         fname_data=op.join(sub_data_root, sub_info + '_' + task_info +'_IITPFC_data_Ori.pickle')
         fr=open(fname_data,'rb')
         roi_data=pickle.load(fr)
         group_data[sbn]=roi_data
-            
-    else:       
+
+    else:
         fname_data=op.join(sub_data_root, sub_info + '_' + task_info +'_ROIs_data_'+analysis_name +'.pickle')
         fr=open(fname_data,'rb')
         roi_data=pickle.load(fr)

@@ -45,7 +45,7 @@ from D_MEG_function import source_data_for_ROI_MVPA,sub_ROI_for_ROI_MVPA
 #mpl.use('Qt5Agg')
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--sub',type=str,default='SA101',help='subject_id')
+parser.add_argument('--sub',type=str,default='CA101',help='subject_id')
 parser.add_argument('--visit',
                     type=str,
                     default='V1',
@@ -127,22 +127,22 @@ def Identity_RSA(epochs, stcs, n_features=None, metric="correlation", n_jobs=-1,
     # X = X[trials_inds, :, :]
     # # Get the labels:
     # y = epochs.metadata["Category"].to_numpy()
-    
+
     temp = epochs.events[:, 2] # identity label, e.g face01, face02,
 
     y = temp
     X=np.array([stc.data for stc in stcs])
-    
-    
+
+
     data=ATdata(X)
-        
+
     label=y
-    
-    
+
+
 
 
     #metric='euclidean'
-    
+
     rsa_results, rdm_diag, sel_features = all_to_all_within_class_dist(data,label,metric=metric,
                                                                        n_bootsstrap=20,
                                                                        shuffle_labels=False,
@@ -158,8 +158,8 @@ def Identity_RSA(epochs, stcs, n_features=None, metric="correlation", n_jobs=-1,
 
 
 
-def Plot_RSA(rsa, roi_name,fname_fig):      
-     
+def Plot_RSA(rsa, roi_name,fname_fig):
+
     fig, ax = plt.subplots(1)
     plt.subplots_adjust(wspace=0.5, hspace=0)
     fig.suptitle(f'RSA_Cat_ {roi_name}')
@@ -180,9 +180,9 @@ def Plot_RSA(rsa, roi_name,fname_fig):
     # Save figure
 
     fig.savefig(op.join(fname_fig+ "_rsa_ID" + '.png'))
-    
+
     # fig, ax = plt.subplots(1)
-    
+
     # for condi, Si_name in sample.items():
     #     trial_index= np.array(range(0, Si_name.shape[0], 1))
     #     #GAT setting
@@ -200,7 +200,7 @@ def Plot_RSA(rsa, roi_name,fname_fig):
 
     # fig.savefig(op.join(fname_fig+ "_sample_rdm_ID" + '.png'))
 
-    
+
 # =============================================================================
 # RUN
 # =============================================================================
@@ -209,17 +209,17 @@ def Plot_RSA(rsa, roi_name,fname_fig):
 # run roi decoding analysis
 
 if __name__ == "__main__":
-    
+
     #opt INFO
-    
-    # subject_id = 'SB085'
+
+    # subject_id = 'CB085'
     #
     # visit_id = 'V1'
     # space = 'surface'
     #
 
     # analysis info
-    
+
     # con_C = ['LF']
     # con_D = ['Irrelevant', 'Relevant non-target']
     # con_T = ['500ms','1000ms','1500ms']
@@ -249,7 +249,7 @@ if __name__ == "__main__":
                                                                                    remove_too_few_trials=True)
 
 
-    
+
     roi_rsa = dict()
     roi_sample = dict()
     roi_feature = dict()
@@ -260,42 +260,42 @@ if __name__ == "__main__":
         # 4 Get Source Data for each ROI
         stcs = []
         stcs = source_data_for_ROI_MVPA(epochs_rs, fpath_fw, rank, common_cov, sub_info, surf_label_list[nroi])
-        
+
         ### CTCCD
-        
+
         # #1 scoring methods with accuracy score
-        fname_fig = op.join(roi_figure_root, 
+        fname_fig = op.join(roi_figure_root,
                             sub_info + task_info + '_'+ roi_name
                             )
-        
+
         if roi_name=='GNW':
             sample_times=[0.3, 0.5]
         else:
             sample_times=[0.3, 1.5]
-            
+
         rsa, sample, sel_features=Identity_RSA(epochs_rs,stcs,metric=metric)
-            
-            
-        
-        
+
+
+
+
         roi_rsa[roi_name]=rsa
         roi_sample[roi_name] =sample
         roi_feature[roi_name] = sel_features
-        
+
         roi_data=dict()
         roi_data['rsa']=roi_rsa
         roi_data['sample']=roi_sample
         roi_data['feature']=roi_feature
-        
+
 
         fname_data=op.join(roi_data_root, sub_info + '_' + task_info + roi_name + "_ROIs_data_RSA_ID" + '.pickle')
         fw = open(fname_data,'wb')
         pickle.dump(roi_data,fw)
         fw.close()
-        
+
         #pot results
         # #1 scoring methods with accuracy score
-        fname_fig = op.join(roi_figure_root, 
+        fname_fig = op.join(roi_figure_root,
                             sub_info + task_info + '_'+ roi_name
                             )
         Plot_RSA(rsa, roi_name,fname_fig)

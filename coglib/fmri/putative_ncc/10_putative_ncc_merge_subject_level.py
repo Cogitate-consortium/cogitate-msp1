@@ -19,8 +19,8 @@ import nibabel as nib
 projectRoot = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
 # paths
-bids_dir = projectRoot + '/bids'  
-code_dir = projectRoot + '/bids/code/Yamil/fMRI' 
+bids_dir = projectRoot + '/bids'
+code_dir = projectRoot + '/bids/code/Yamil/fMRI'
 
 # import functions from helper_functions_MRI
 sys.path.append(code_dir)
@@ -66,15 +66,15 @@ def save_conjunction_map(conjunction_name, conjunction_map, brain_mask, data_dir
     brain_mask: subject mask path
     output_dir: output dir where nifti files are written
     """
-    
+
     save_fname = data_dir + os.sep + conjunction_name + '_merged.nii.gz'
     save_mri(conjunction_map, brain_mask, save_fname)
-        
+
 
 
 # %% run
 if __name__ == '__main__':
-    
+
     conjunction_names = ['C_Face_Activation_conjunction',
                           'C_FalseFont_Activation_conjunction',
                           'C_Letter_Activation_conjunction',
@@ -83,30 +83,30 @@ if __name__ == '__main__':
                           'C_FalseFont_Deactivation_conjunction',
                           'C_Letter_Deactivation_conjunction',
                           'C_Object_Deactivation_conjunction']
-    
+
     #subject_list_type = 'debug'
     subjects1 = get_subject_list(bids_dir, subject_list_type_1)
     subjects2 = get_subject_list(bids_dir, subject_list_type_2)
-    
+
     subjects = np.concatenate((subjects1,subjects2))
-    
-    remove_subjects = ['sub-SD122','sub-SD196']
+
+    remove_subjects = ['sub-CD122','sub-CD196']
     for r in remove_subjects:
         subjects = subjects[subjects != r]
-    
+
     print('Removed subjects:',remove_subjects)
     print('Total subjects:',len(subjects))
 
-    
+
     for conjunction_name in conjunction_names:
-        
+
         data = np.zeros((len(group_mask),len(subjects)))
-            
+
         for cidx in range(len(subjects)):
-            
+
             data[:,cidx] = np.squeeze(load_mri(data_subject_dir + os.sep + subjects[cidx] + os.sep + conjunction_name + '_not_A_or_B.nii.gz', group_mask_dir))
             print('Loading ',conjunction_name,' subject: ',subjects[cidx])
-            
+
         # merge data
         merged_c_map = np.sum(data,1)
         fname = output_dir + os.sep + conjunction_name + '_merged.nii.gz'

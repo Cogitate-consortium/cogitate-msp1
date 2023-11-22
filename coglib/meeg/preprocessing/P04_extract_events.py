@@ -27,7 +27,7 @@ from config.config import bids_root
 
 
 def run_events(subject_id, visit_id):
-    
+
     # Prepare PDF report
     pdf = FPDF(orientation="P", unit="mm", format="A4")
 
@@ -42,15 +42,15 @@ def run_events(subject_id, visit_id):
     prep_code_root = op.join(prep_deriv_root,
                              f"sub-{subject_id}",f"ses-{visit_id}","meg",
                              "codes")
-    
+
     print("Processing subject: %s" % subject_id)
-    
+
     # Lopp over runs
     data_path = os.path.join(bids_root,f"sub-{subject_id}",f"ses-{visit_id}","meg")
-    
+
     for fname in sorted(os.listdir(data_path)):
         if fname.endswith(".json") and "run" in fname:
-            
+
             # Set run
             run = int(fname[-10])
             print("  Run: %s" % run)
@@ -67,23 +67,23 @@ def run_events(subject_id, visit_id):
 
             # Set BIDS path
             bids_path_annot = mne_bids.BIDSPath(
-                root=prep_deriv_root, 
-                subject=subject_id,  
-                datatype='meg',  
+                root=prep_deriv_root,
+                subject=subject_id,
+                datatype='meg',
                 task=bids_task,
                 run=f"{run:02}",
-                session=visit_id, 
+                session=visit_id,
                 suffix='annot',
                 extension='.fif',
                 check=False)
-            
+
             # Read raw data
             raw = mne_bids.read_raw_bids(bids_path_annot)
-        
+
             ###############
             # Read events #
             ###############
-        
+
             # Find response events
             response = mne.find_events(raw,
                                      stim_channel='STI101',
@@ -92,7 +92,7 @@ def run_events(subject_id, visit_id):
                                      mask_type = 'not_and'
                                     )
             response = response[response[:,2] == 255]
-            
+
             # Find all other events
             events = mne.find_events(raw,
                                      stim_channel='STI101',
@@ -102,18 +102,18 @@ def run_events(subject_id, visit_id):
                                      mask_type = 'not_and'
                                     )
             events = events[events[:,2] != 255]
-            
+
             # Concatenate all events
             events = np.concatenate([response,events],axis = 0)
             events = events[events[:,0].argsort(),:]
-            
+
             # Show events
             fig = mne.viz.plot_events(events)
             fname_fig = op.join(prep_figure_root,
                                 "04_%sr%s_events.png" % (bids_task,run))
             fig.savefig(fname_fig)
             plt.close(fig)
-            
+
             # Add figure to report
             pdf.add_page()
             pdf.set_font('helvetica', 'B', 16)
@@ -122,20 +122,20 @@ def run_events(subject_id, visit_id):
             pdf.set_font('helvetica', 'B', 12)
             pdf.cell(0, 10, 'Events', 'B', ln=1)
             pdf.image(fname_fig, 0, 45, pdf.epw)
-            
+
             # Save event array
             bids_path_eve = bids_path_annot.copy().update(
                 suffix="eve",
                 check=False)
             if not op.exists(bids_path_eve):
                 bids_path_eve.fpath.parent.mkdir(exist_ok=True, parents=True)
-                            
+
             mne.write_events(bids_path_eve.fpath, events)
-            
+
             #################
             # Read metadata #
             #################
-            
+
             # # Generate metadata table
             if visit_id == 'V1':
                 eve = events.copy()
@@ -178,10 +178,10 @@ def run_events(subject_id, visit_id):
                     eve = events.copy()
                     metadata = {}
                     metadata = pd.DataFrame(metadata, index=np.arange(np.sum(events[:, 2] < 51)),
-                                            columns=['Trial_type', 
+                                            columns=['Trial_type',
                                                      'Stim_trigger',
                                                      'Stimuli_type',
-                                                     'Location', 
+                                                     'Location',
                                                      'Response',
                                                      'Response_time'])
                     types0 = ['Filler', 'Probe']
@@ -206,13 +206,13 @@ def run_events(subject_id, visit_id):
                 elif bids_task == "replay":
                     eve = events.copy()
                     metadata = {}
-                    metadata = pd.DataFrame(metadata, 
+                    metadata = pd.DataFrame(metadata,
                                             index=np.arange(np.size(
                                                 [i for i in events[:, 2] if i in list(range(101,151)) + list(range(201,251))])),
-                                            columns=['Stim_trigger', 
+                                            columns=['Stim_trigger',
                                                      'Stimuli_type',
-                                                     'Trial_type', 
-                                                     'Location', 
+                                                     'Trial_type',
+                                                     'Location',
                                                      'Response',
                                                      'Response_time'])
                     types0 = ['Non-Target', 'Target']
@@ -251,7 +251,7 @@ def run_events(subject_id, visit_id):
                                 else:
                                     metadata.loc[k]['Response'] = response[1]
                             k += 1
-            
+
             # Save metadata table as csv
             bids_path_meta = bids_path_annot.copy().update(
                 suffix="meta",
@@ -259,20 +259,19 @@ def run_events(subject_id, visit_id):
                 check=False)
             if not op.exists(bids_path_meta):
                 bids_path_meta.fpath.parent.mkdir(exist_ok=True, parents=True)
-            
+
             metadata.to_csv(bids_path_meta.fpath,
                             index=False)
-            
+
     # Save code
     shutil.copy(__file__, prep_code_root)
-    
+
     # Save report
     pdf.output(op.join(prep_report_root,
                        os.path.basename(__file__) + '-report.pdf'))
 
 
 if __name__ == '__main__':
-    subject_id = input("Type the subject ID (e.g., SA101)\n>>> ")
+    subject_id = input("Type the subject ID (e.g., CA101)\n>>> ")
     visit_id = input("Type the visit ID (V1 or V2)\n>>> ")
     run_events(subject_id, visit_id)
-    

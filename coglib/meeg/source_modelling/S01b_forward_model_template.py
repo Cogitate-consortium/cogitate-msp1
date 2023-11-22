@@ -18,8 +18,8 @@ import mne
 parser=argparse.ArgumentParser()
 parser.add_argument('--sub',
                     type=str,
-                    default='SA101',
-                    help='site_id + subject_id (e.g. "SA101")')
+                    default='CA101',
+                    help='site_id + subject_id (e.g. "CA101")')
 parser.add_argument('--visit',
                     type=str,
                     default='V1',
@@ -64,7 +64,7 @@ if not op.exists(fpath_fw):
 #     os.makedirs(fpath_fig)
 
 def make_forward_model_from_template(task):
-    
+
     # Set path to raw FIF
     fname_raw = op.join(opt.bids_root, subject, "ses-"+visit, "meg", subject+"_ses-"+visit+"_task-"+task+"_run-01_meg.fif")
 
@@ -74,25 +74,25 @@ def make_forward_model_from_template(task):
     if space == 'surface':
         src = op.join(subjects_dir, subj, 'bem', 'fsaverage-ico-5-src.fif')
         bem = op.join(subjects_dir, subj, 'bem', 'fsaverage-5120-5120-5120-bem-sol.fif')
-    
+
     # Load raw
     raw = mne.io.read_raw(fname_raw, preload=True)
-    
+
     # # Check that the locations of sensors is correct with respect to MRI
     # mne.viz.plot_alignment(
     #     raw.info, src=src, trans=trans,
     #     subjects_dir=subjects_dir,
     #     show_axes=True, mri_fiducials=True, dig='fiducials')
-    
+
     # Setup source space and compute forward
-    fwd = mne.make_forward_solution(raw.info, 
-                                    trans=trans, 
-                                    src=src, 
+    fwd = mne.make_forward_solution(raw.info,
+                                    trans=trans,
+                                    src=src,
                                     bem=bem,
-                                    meg=True, eeg=False, 
+                                    meg=True, eeg=False,
                                     mindist=5.,
                                     verbose=True)
-    
+
     # Save forward model
     fname_fwd = op.join(fpath_fw, subject+"_ses-"+visit+"_task-"+task+"_%s_fwd.fif" % space)
     mne.write_forward_solution(fname_fwd,

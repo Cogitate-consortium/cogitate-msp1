@@ -16,14 +16,14 @@ This module manages the preparation of raw eye-tracking data of experiment 2 FOR
 The main function here is called "extract_data", and it manages all the stages in the process of QC:
 - data extraction
 - data parsing
-- data saving 
+- data saving
 
-The "extract_data" management function creates a folder for each subject under "save_path", in which all the 
+The "extract_data" management function creates a folder for each subject under "save_path", in which all the
 resulting plots and data tables of the subject are saved (e.g., "save_path/..."). But the only thing saved at the
-extraction stage for each subject is its pickle file - containing all the extracted eyetracking information. 
+extraction stage for each subject is its pickle file - containing all the extracted eyetracking information.
 NOTE: No analysis is performed at the extraction stage!
 In the result folder, you'll find one "_EyeTrackingData.pickle" file per each subject who had eye tracking data in the
-form of ascii files. 
+form of ascii files.
 
 @authors: RonyHirsch, AbdoSharaf98
 """
@@ -47,7 +47,7 @@ MEDIAN = "Median"
 BL_CORRECTED = "_BLcorrected"
 
 """
-The following features are based on Engbert, R., & Mergenthaler, K. (2006) Microsaccades are triggered by low retinal 
+The following features are based on Engbert, R., & Mergenthaler, K. (2006) Microsaccades are triggered by low retinal
 image slip. Proceedings of the National Academy of Sciences of the United States of America, 103: 7192-7197.
 """
 THRESHOLD = "threshold"
@@ -159,11 +159,11 @@ def blink_detection(et_data, params):
     # mark samples that are blinks according to the Hershman method
     num_of_blink_samples = blink_data["blink_onset"].shape[0] if isinstance(blink_data['blink_onset'], np.ndarray) else 0
     """
-    We also start a blink_counter: each *valid* blink (Hershman) is numbered from the first to last in the entire run. 
-    This is used for later preparation of the pre-processed data to analysis. 
-    
+    We also start a blink_counter: each *valid* blink (Hershman) is numbered from the first to last in the entire run.
+    This is used for later preparation of the pre-processed data to analysis.
+
     NOTE: the "blink_onset" and "blink_offset" returned from based_noise_blinks_detection can be either "real time"
-    (a conversion made in the original implementation) or indices (as the author suggested in a comment in line 161, 
+    (a conversion made in the original implementation) or indices (as the author suggested in a comment in line 161,
     see https://osf.io/qh5sg). ==> I CHOSE FOR THE ALGORITHM TO RETURN **INDICES**, and not try to convert them to time.
     """
     blink_counter = 1
@@ -184,7 +184,7 @@ def blink_detection(et_data, params):
             blink_counter += 1
 
     """
-    throwing away everything that is not Hershman from dfBlinks. In dfSamples, Hershman is a column. 
+    throwing away everything that is not Hershman from dfBlinks. In dfSamples, Hershman is a column.
     """
     et_blinks = et_blinks[et_blinks[f"{DataParser.HERSHMAN}"] == 1]
     et_data[DataParser.DF_BLINK] = et_blinks
@@ -214,7 +214,7 @@ def pad_blinks(et_data, params):
     bls = et_data[DataParser.DF_BLINK]
     bls = bls[bls[DataParser.HERSHMAN] == True]
     for index, blink in bls.iterrows():
-        # Labeling an SSACC...ESACC pair with one or more SBLINK events between them as BLINKS
+        # Labeling an SSACC...ESACC pair with one or more CBLINK events between them as BLINKS
         et_samples.loc[(et_samples[DataParser.T_SAMPLE] <= blink[DataParser.T_END] + ET_param_manager.BLINK_PAD_MS) &
                        (et_samples[DataParser.T_SAMPLE] >= blink[DataParser.T_START] - ET_param_manager.BLINK_PAD_MS), f"{eye}{DataParser.HERSHMAN_PAD}"] = 1
     return et_data
@@ -346,7 +346,7 @@ def extract_microsaccades(eye_gaze, velocity, speed, params):
 
         # Same calculation as sacc_direction
         """
-        there is a (-) before the y parameter of the atan2 because, as said before, in Eyelink - when Y goes down -> 
+        there is a (-) before the y parameter of the atan2 because, as said before, in Eyelink - when Y goes down ->
         that means that the gaze went UP. See http://sr-research.jp/support/EyeLink%201000%20User%20Manual%201.5.0.pdf
         So, we flip this **now** so that the direction will be correct (otherwise, it'll be upside down)
         """
@@ -367,23 +367,23 @@ def extract_microsaccades(eye_gaze, velocity, speed, params):
 
 def saccade_detection(et_data_dict, params):
     """
-    For saccade and microsaccade calculation, we need to convert coordinates to degrees visual angle (VA). 
-    To convert (X, Y) locations (in PIXELS on the screen) to degrees VA, we will: 
+    For saccade and microsaccade calculation, we need to convert coordinates to degrees visual angle (VA).
+    To convert (X, Y) locations (in PIXELS on the screen) to degrees VA, we will:
     1. Convert pixels to be relative to the screen center (taking center as (0, 0))
-    2. Convert CM to degrees VA (according to the viewing distance) from the center of fixation 
+    2. Convert CM to degrees VA (according to the viewing distance) from the center of fixation
     (assumed to be screen center) based on the relations between degrees and pixels, calculated in params
-    
-    *** NOTE *** : 
+
+    *** NOTE *** :
     Gaze coordinates (X, Y) in Eyelink are such that (0, 0) is the TOP LEFT corner of the screen!!!
-    This means that when gaze goes DOWN --> Y coordinate goes UP! 
+    This means that when gaze goes DOWN --> Y coordinate goes UP!
     Source: EL1000 User manual 1.5 chapter 4.4.2.3 GAZE
     http://sr-research.jp/support/EyeLink%201000%20User%20Manual%201.5.0.pdf
-    
-    *** NOTE *** : 
-    In fMRI subjects the eye tracking was MONOCULAR, yet, the algorithm for microsaccade detection described in the 
-    2006 paper above is to track ONLY **binocular microsaccades**, which they defined as microsaccades detected 
-    in both eyes with a temporal overlap of at least one data sample. 
-    For clusters consisting of microsaccades with multiple overlapping relations, 
+
+    *** NOTE *** :
+    In fMRI subjects the eye tracking was MONOCULAR, yet, the algorithm for microsaccade detection described in the
+    2006 paper above is to track ONLY **binocular microsaccades**, which they defined as microsaccades detected
+    in both eyes with a temporal overlap of at least one data sample.
+    For clusters consisting of microsaccades with multiple overlapping relations,
     they selected the largest microsaccades from both eyes within the cluster.
     """
     samples = et_data_dict[DataParser.DF_SAMPLES]
@@ -397,14 +397,14 @@ def saccade_detection(et_data_dict, params):
     EK_sacc_dict = {eye: None for eye in EYES}
     for eye in EYES:
         eye_gaze = np.array(gaze_coords[[f"{eye}X", f"{eye}Y"]])
-        """ 
-        Calculate velocity according to the paper below, with λ = 5 as they suggest 
-        Engbert, R., & Mergenthaler, K. (2006). Microsaccades are triggered by low retinal image slip. 
+        """
+        Calculate velocity according to the paper below, with λ = 5 as they suggest
+        Engbert, R., & Mergenthaler, K. (2006). Microsaccades are triggered by low retinal image slip.
         Proceedings of the National Academy of Sciences, 103(18), 7192-7197.
         https://www.pnas.org/doi/full/10.1073/pnas.0509557103#F1
-        
-        The velocity calculation itself is an EXACT replica of equation (1) in: 
-        Engbert, R., & Kliegl, R. (2003). Microsaccades uncover the orientation of covert attention. 
+
+        The velocity calculation itself is an EXACT replica of equation (1) in:
+        Engbert, R., & Kliegl, R. (2003). Microsaccades uncover the orientation of covert attention.
         Vision research, 43(9), 1035-1045. https://www.sciencedirect.com/science/article/pii/S0042698903000841
         Which represents a moving average of velocities over 5 data **samples** to suppress noise
         """
@@ -432,10 +432,10 @@ def saccade_detection(et_data_dict, params):
             EK_sacc_dict[eye] = None
 
     """
-    IDEA: identify all the saccades that their L and R intervals overlap for a duration that is 
+    IDEA: identify all the saccades that their L and R intervals overlap for a duration that is
     >= SACC_FEATURES[OVERLAP] (E&K threshold for a binocular microsaccade). Then, select these saccades based on the L
     eye (ARBITRARY!) and output the binocular saccade information. Meaning, this dataframe will include L eye saccades
-    that overlapped with the right eye for at least SACC_FEATURES[OVERLAP]. 
+    that overlapped with the right eye for at least SACC_FEATURES[OVERLAP].
     """
     if params[DataParser.EYE] == 'LR':
         print(f"Only monocular data is considered: 2022-09-12 consortium decision")
@@ -485,11 +485,11 @@ def mark_saccades(et_data_dict, params):
     ek_saccs.loc[:, f"{DataParser.HERSHMAN_PAD}"] = False
     for index, blink in et_data_dict[DataParser.DF_BLINK].iterrows():
         """
-        A saccade is marked as not real (=overlapping with a padded blink period) ONLY IF STARTED during a blink period, 
-        OR ENDED during a blink period. 
+        A saccade is marked as not real (=overlapping with a padded blink period) ONLY IF STARTED during a blink period,
+        OR ENDED during a blink period.
         The other way around (i.e., blink period starting within a saccade) is not realistic, as saccade last ~50ms
-        while the padded blink periods extend for longer than 2 * ET_param_manager.BLINK_PAD_MS . 
-        Thus, we do not account for a case where a blink PERIOD is completely submerged within a saccade (i.e., 
+        while the padded blink periods extend for longer than 2 * ET_param_manager.BLINK_PAD_MS .
+        Thus, we do not account for a case where a blink PERIOD is completely submerged within a saccade (i.e.,
         starting after a saccade started AND ending before it ended).
         """
         ek_saccs.loc[(((ek_saccs[DataParser.T_START] >= blink[DataParser.T_START] - ET_param_manager.BLINK_PAD_MS) & (ek_saccs[DataParser.T_START] <= blink[DataParser.T_END] + ET_param_manager.BLINK_PAD_MS)) |
@@ -501,8 +501,8 @@ def mark_saccades(et_data_dict, params):
     samps.loc[:, DataParser.REAL_SACC] = False
     ek_sacc_no_blink = ek_saccs.loc[ek_saccs[f"{DataParser.HERSHMAN_PAD}"] == False, :]
     """
-        We also start a saccade_counter: each *valid* saccade (EK + not in blink pad) is numbered from the first to last in the entire run. 
-        This is used for later preparation of the pre-processed data to analysis. 
+        We also start a saccade_counter: each *valid* saccade (EK + not in blink pad) is numbered from the first to last in the entire run.
+        This is used for later preparation of the pre-processed data to analysis.
     """
     sacc_counter = 1
     for sacc in ek_saccs.itertuples():
@@ -538,7 +538,7 @@ def mark_fixations(et_data_dict, params):
     fixations.loc[:, f"{DataParser.HERSHMAN_PAD}"] = False
     for index, blink in et_data_dict[DataParser.DF_BLINK].iterrows():
         """
-        ONE WAY: a fixation is nullified if it started during a blink period, OR ENDED during a blink period. 
+        ONE WAY: a fixation is nullified if it started during a blink period, OR ENDED during a blink period.
         """
         fixations.loc[(((fixations[DataParser.T_START] >= blink[DataParser.T_START] - ET_param_manager.BLINK_PAD_MS) & (fixations[DataParser.T_START] <= blink[DataParser.T_END] + ET_param_manager.BLINK_PAD_MS)) |
                       ((fixations[DataParser.T_END] >= blink[DataParser.T_START] - ET_param_manager.BLINK_PAD_MS) & (fixations[DataParser.T_END] <= blink[DataParser.T_END] + ET_param_manager.BLINK_PAD_MS))) & (
@@ -772,9 +772,9 @@ def extract_data(sub_code, et_path, asc_files, save_path, sub_beh_data):  # exam
 
     print("-- All blocks processed --")
     """
-    Example: SD161
+    Example: CD161
     Go over all the keys in the subject et_data dictionary (fixations, saccades, blinks) and check they all have data.
-    If one dictionary is completely empty (i.e., no parsed blinks/saccades/fixations..) - this subject is invalid as 
+    If one dictionary is completely empty (i.e., no parsed blinks/saccades/fixations..) - this subject is invalid as
     it doesn't make sense to have 0 fixations in 1:30 hrs of experiment.
     """
     for key in [DataParser.DF_MSG, DataParser.DF_FIXAT, DataParser.DF_SACC, DataParser.DF_BLINK, DataParser.DF_SAMPLES]:
@@ -782,8 +782,8 @@ def extract_data(sub_code, et_path, asc_files, save_path, sub_beh_data):  # exam
             print(f"Issue with subject's {sub_code}: no {key} at all in the entire experiment. Inspect manually")
             return
     """
-    Example: SB999
-    This subject had dfSacc but it was all empty: no tracking in the R eye, and in the left, all zeros. 
+    Example: CB999
+    This subject had dfSacc but it was all empty: no tracking in the R eye, and in the left, all zeros.
     Unclear why it was tagged by Eyelink as a saccade.
     It doesn't make sense to have 0 saccades in 1:30 hrs of experiment.
     """
@@ -820,7 +820,7 @@ def extract_data(sub_code, et_path, asc_files, save_path, sub_beh_data):  # exam
     et_data = saccade_detection(et_data, params)  # this is the RAW EK OUTPUT
 
     print(f"mark samples with EK data")
-    if et_data[DataParser.DF_SACC].empty:  # subject SB999, who does have fixations and blinks - dfSacc is empty!
+    if et_data[DataParser.DF_SACC].empty:  # subject CB999, who does have fixations and blinks - dfSacc is empty!
         print(f"WARNING: subject {sub_code} has 0 saccades; skipping this step")
     # if empty, mark_saccades just adds null columns
     et_data = mark_saccades(et_data, params)  # this marks EK saccades IFF they don't overlap with padded blink periods
@@ -829,11 +829,11 @@ def extract_data(sub_code, et_path, asc_files, save_path, sub_beh_data):  # exam
     et_data = mark_fixations(et_data, params)  # this marks Eyelink fixations IFF they don't overlap with padded blink periods
 
     """
-    Then, we pre-process pupil data to prepare it for pupil-size analysis. 
-    The pre-processing is limited, because Eyelink pupil size units are ARBITRARY, and the labs did not calibrate 
-    the real pupil size with an artificial pupil (the Eyelink units - to mms conversion). 
-    Therefore, we will take the artibtrary sizes as they are for future analyses (across subjects); However, 
-    they still need to be filtered such that blinks are not included. 
+    Then, we pre-process pupil data to prepare it for pupil-size analysis.
+    The pre-processing is limited, because Eyelink pupil size units are ARBITRARY, and the labs did not calibrate
+    the real pupil size with an artificial pupil (the Eyelink units - to mms conversion).
+    Therefore, we will take the artibtrary sizes as they are for future analyses (across subjects); However,
+    they still need to be filtered such that blinks are not included.
     """
     et_data = mark_pupils(et_data, params)  # this nullifies pupil size IFF it overlaps with padded blink periods
 
@@ -844,12 +844,12 @@ def extract_data(sub_code, et_path, asc_files, save_path, sub_beh_data):  # exam
     """
     Because we might have read an aborted/restarted file, we select as trials only the LATEST trial in each Block/Miniblock.
     This allows us to mark the same trials as the BEH data, hence use only timestamps that are relevant for those trials when markering trials.
-    **NOTE**: this relies on the fact that when restarting a run, it starts from the top. 
+    **NOTE**: this relies on the fact that when restarting a run, it starts from the top.
     """
     et_trial_info_unsorted = et_trial_info.groupby([DataParser.BLOCK_COL, DataParser.MINIBLOCK_COL, DataParser.TRIAL_COL]).tail(1)
 
     """
-    SB035 - in this subject's ET trigger data, 2 trials from block 7 are somehow sent AFTER the entire block 8 is done.
+    CB035 - in this subject's ET trigger data, 2 trials from block 7 are somehow sent AFTER the entire block 8 is done.
     Meaning, block 7 starts from mibiblock 25 **trial 3**, and trials 1, 2 in miniblock 25 (block 7) appear between
     blocks 8 and 9!
     As the CRF of this subject did not include any information about anything wrong, and as all triggers are technically
@@ -880,10 +880,10 @@ def extract_data(sub_code, et_path, asc_files, save_path, sub_beh_data):  # exam
 
     print('Calculating fixation, saccade, and blink stats in windows')
     """
-    In this step, we take the parsed data and pre-process it for future analyses and descriptives. 
+    In this step, we take the parsed data and pre-process it for future analyses and descriptives.
     As per the pre-registration, we are interested in 3 time windows (onset-500ms, 500ms-1000ms, 1000ms-1500ms).
     Within each time window, we are intersted in fixations (average distance from screen center), saccades (maximum
-    amplitude), and blinks (number) during that window. The analysis_windows method handles these summaries, 
+    amplitude), and blinks (number) during that window. The analysis_windows method handles these summaries,
     and adds them as columns in the trial_info dataframe
     """
     trial_info = analysis_windows(trial_info, et_data, params)

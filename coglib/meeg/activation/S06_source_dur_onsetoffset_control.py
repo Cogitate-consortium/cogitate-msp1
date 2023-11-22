@@ -54,14 +54,14 @@ conditions = [['face', 'object', 'letter', 'false'],
 phase = 3
 
 if debug:
-    sub_list = ["SA124", "SA126"]
+    sub_list = ["CA124", "CA126"]
 elif phase == 2:
-    sub_list = ["SA106", "SA107", "SA109", "SA112", "SA113", "SA116", "SA124",
-                "SA126", "SA127", "SA128", "SA131",
-                "SA110", "SA142", "SA152", "SA160", "SA172",
-                "SB002", "SB015", "SB022", "SB030" ,"SB038", "SB041", "SB061", 
-                "SB065", "SB071", "SB073", "SB085",
-                "SB013", "SB024", "SB045", "SB050", "SB078"
+    sub_list = ["CA106", "CA107", "CA109", "CA112", "CA113", "CA116", "CA124",
+                "CA126", "CA127", "CA128", "CA131",
+                "CA110", "CA142", "CA152", "CA160", "CA172",
+                "CB002", "CB015", "CB022", "CB030" ,"CB038", "CB041", "CB061",
+                "CB065", "CB071", "CB073", "CB085",
+                "CB013", "CB024", "CB045", "CB050", "CB078"
                 ]
 elif phase == 3:
     # Read the .txt list
@@ -81,7 +81,7 @@ def source_dur_ga():
                                 "figures")
     if not op.exists(source_figure_root):
         os.makedirs(source_figure_root)
-    
+
     # Set task
     if visit_id == "V1":
         bids_task = 'dur'
@@ -91,54 +91,54 @@ def source_dur_ga():
     #     bids_task = 'replay'
     else:
         raise ValueError("Error: could not set the task")
-    
+
     # Read the group data table
     bids_path_source = mne_bids.BIDSPath(
-        root=source_deriv_root, 
-        subject=f"groupphase{phase}",  
-        datatype="meg",  
+        root=source_deriv_root,
+        subject=f"groupphase{phase}",
+        datatype="meg",
         task=bids_task,
-        session=visit_id, 
+        session=visit_id,
         suffix="datatable",
         extension=".tsv",
         check=False)
-    
+
     df = pd.read_csv(bids_path_source.fpath, sep="\t")
-    
+
     # Move power values to a single column
     df['values'] = [np.array(df.iloc[i,1:-5]) for i in range(len(df))]
-    
+
     # Drop the columns left
     df = df.drop(df.columns[1:-6],axis=1)
-    
+
     # Select task-irrelevant trials only
     df = df[df['Task_relevance'] == 'Irrelevant']
-    
+
     # Create info
     info = mne.create_info(
-        ch_names=['gnw_all', 'iit_all'], 
+        ch_names=['gnw_all', 'iit_all'],
         sfreq=1000)
-    
+
     # Create empy data frame
     results = pd.DataFrame()
-    
+
     # Loop over analysis
     for analysis in ['onset', 'offset']:
-        
+
         # Loop over freq bands
         for band in ['alpha', 'gamma']:
             print('\nfreq_band:', band)
-            
+
             # Create empty list
             all_df = np.empty((len(sub_list),2,(3501)))
-            
+
             # Loop over labels
             for i, label in enumerate(['gnw_all', 'iit_all']):
                 print('\nlabel:', label)
-    
+
                 # Get data for given conditions
                 data = df[(df['band'] == band) & (df['label'] == label)]
-                
+
                 # If offset analysis, lock data to stim offset
                 if analysis == 'offset':
                     for dur in np.unique(data["Duration"]):
@@ -146,61 +146,61 @@ def source_dur_ga():
                             data.loc[data['Duration'] == dur, "values"].apply(
                                 lambda temp: np.concatenate(
                                     [temp[int(dur[:-2]):],temp[:int(dur[:-2])]]))
-                
+
                 # Average across conditions
                 data = data.groupby(
                     ['sub','band','label'])['values'].apply(
                         np.mean,0).to_frame().reset_index()
-                
+
                 # Append data to group array
                 all_df[:,i,:] = np.stack(data['values'])
-            
+
             # Empty list
             data_df = []
-            
+
             # Loop across subjects
             for i, sub in enumerate(sub_list):
                 print('\nsubject:', sub)
-                
+
                 # Create epoch object
                 epochs = mne.EpochsArray(all_df[np.newaxis,i,:,:],
                                           info,
                                           tmin=-1.)
-                
+
                 # Format the data for the test
                 data_df.append(format_tim_win_comp_data(
                     epochs,
                     sub,
                     baseline_window=[-0.2, 0.0],
                     test_window=[0.3, 0.5]))
-                
+
             # Convert list to data frame:
-            data_df= pd.concat(data_df, 
-                                axis=0, 
+            data_df= pd.concat(data_df,
+                                axis=0,
                                 ignore_index=True)
-            
+
             # Performing the moving window test
             if band == "gamma":
                 alternative = "greater"
             elif band == "alpha":
                 alternative = "less"
             test_results = moving_window_test(
-                data_df, 
+                data_df,
                 onset=[0.3, 0.5][0],
                 alternative=alternative)
-            
+
             # Append results to data frame
             test_results["band"] = band
             test_results["analysis"] = analysis
             results = results.append(test_results)
-            
+
             # Save results as .tsv
             bids_path_source = bids_path_source.copy().update(
                 root=source_deriv_root,
                 subject=f"groupphase{phase}",
                 suffix="onset_offset_results",
                 check=False)
-            results.to_csv(bids_path_source.fpath, 
+            results.to_csv(bids_path_source.fpath,
                                sep="\t",
                                index=False)
             # # Plot
@@ -255,7 +255,7 @@ def format_tim_win_comp_data(epochs, subject, baseline_window, test_window):
     return data_df
 
 
-def test_sustained_threshold(y, stat_test="t-test", threshold=0.05, 
+def test_sustained_threshold(y, stat_test="t-test", threshold=0.05,
                              window_sec=0.02, sr=1000,
                              alternative="greater", fdr_method=None):
     """

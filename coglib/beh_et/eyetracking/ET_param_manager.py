@@ -19,12 +19,12 @@ It contains the following functions:
 # LAB - DEPENDENT INPUT :
 # SCREEN W*H IN CM : taken from Lab_Equip_Setup_Summary doc:
 # https://docs.google.com/spreadsheets/d/13x8n6MEI77dmya0CuO6wTysOv5k5ueiAgIYdlxZZ_Ec/edit?usp=sharing
-SCREEN_SIZE = {'SA': np.array([78.7, 44.6]), 'SB': np.array([64, 36]), 'SC': np.array([69.8, 39.3]),
-               'SD': np.array([58.5, 32.9]), 'SE': np.array([34.5, 19.5]), 'SF': np.array([34.5, 19.5]),
+SCREEN_SIZE = {'CA': np.array([78.7, 44.6]), 'CB': np.array([64, 36]), 'CC': np.array([69.8, 39.3]),
+               'CD': np.array([58.5, 32.9]), 'CE': np.array([34.5, 19.5]), 'CF': np.array([34.5, 19.5]),
                'SG': np.array([41, 25.8]), 'SX': np.array([53, 30]), 'SZ': np.array([53.5, 29.5])}
 # VIEWING DISTANCE IN CM:
 # taken from : https://docs.google.com/spreadsheets/d/13x8n6MEI77dmya0CuO6wTysOv5k5ueiAgIYdlxZZ_Ec/edit#gid=0
-VIEWING_DIST = {'SA': 119, 'SB': 100, 'SC': 144, 'SD': 123, 'SE': 80, 'SF': 80, 'SG': 80, 'SX': 69.5, 'SZ': 71}
+VIEWING_DIST = {'CA': 119, 'CB': 100, 'CC': 144, 'CD': 123, 'CE': 80, 'CF': 80, 'SG': 80, 'SX': 69.5, 'SZ': 71}
 
 
 # modules
@@ -33,7 +33,7 @@ MEG = 'MEG'
 ECOG = 'ECoG'
 SUBJECT_LAB = 'SubjectLab'
 # modality per lab : taken from https://twcf-arc.slab.com/posts/institutional-abbreviations-rsi4obcd
-MODALITY = {'SA': MEG, 'SB': MEG, 'SC': FMRI, 'SD': FMRI, 'SE': ECOG, 'SF': ECOG, 'SG': ECOG, 'SX': ECOG, 'SZ': MEG}
+MODALITY = {'CA': MEG, 'CB': MEG, 'CC': FMRI, 'CD': FMRI, 'CE': ECOG, 'CF': ECOG, 'SG': ECOG, 'SX': ECOG, 'SZ': MEG}
 
 
 # blink padding parameter
@@ -271,22 +271,22 @@ def UpdateParams(params, msgDF):  # fulllog_path
     params['ScreenCenter'] = params['ScreenResolution'] / 2
 
     """
-    We now define a conversion between the pixels and degrees VA. 
+    We now define a conversion between the pixels and degrees VA.
     Here is what we know about each lab's setup:
     - SCREEN_SIZE: each lab's screen size (see https://docs.google.com/spreadsheets/d/13x8n6MEI77dmya0CuO6wTysOv5k5ueiAgIYdlxZZ_Ec/edit?usp=sharing)
     - VIEWING_DISTL: each lab's participant viewing distance (see https://docs.google.com/spreadsheets/d/13x8n6MEI77dmya0CuO6wTysOv5k5ueiAgIYdlxZZ_Ec/edit?usp=sharing)
     - screen resolution (taken from the subject's Eyelink log files; but also exist in the above table)
-    - EXPERIMENT 2'S STIMULUS SIZE IN DEGREES VISUAL ANGLE: all of these setups were calibrated such that in experiment 2, 
+    - EXPERIMENT 2'S STIMULUS SIZE IN DEGREES VISUAL ANGLE: all of these setups were calibrated such that in experiment 2,
     the size of the stimuli in visual angles will be 2.3° (see pre-registration https://osf.io/gm3vd).
-    Thus, this process included adjusting parameters based on calculations of HORIZONTAL visual angle, and VERTICAL 
-    visual angle, for each lab. see https://twcf-arc.slab.com/posts/2-exp-2-visual-angle-checks-5kungvut . 
-    
+    Thus, this process included adjusting parameters based on calculations of HORIZONTAL visual angle, and VERTICAL
+    visual angle, for each lab. see https://twcf-arc.slab.com/posts/2-exp-2-visual-angle-checks-5kungvut .
+
     **NOTABLY** As each lab's setup is IDENTICAL between experiments 1 and 2, we can rely on the abovementioned
-    parameters to convert pixels to degrees visual angle IN BOTH EXPERIMENTS. 
-    Therefore, the 'stimAng' is EXPERIMENT 2'S STIMULUS SIZE IN VISUAL ANGLES, 
-    and the below calculated 'stimPix' is EXPERIMENT 2'S STIMULSU SIZE IN PIXELS. 
-    However, in exp.1, this only uses as a transition to easily calculate 'DegreesPerPix', which is true for both  
-    experiments. 
+    parameters to convert pixels to degrees visual angle IN BOTH EXPERIMENTS.
+    Therefore, the 'stimAng' is EXPERIMENT 2'S STIMULUS SIZE IN VISUAL ANGLES,
+    and the below calculated 'stimPix' is EXPERIMENT 2'S STIMULSU SIZE IN PIXELS.
+    However, in exp.1, this only uses as a transition to easily calculate 'DegreesPerPix', which is true for both
+    experiments.
     """
 
     # view_distance in cm = view_distance / 10 as 'ViewDistance' is in MILLIMETERS

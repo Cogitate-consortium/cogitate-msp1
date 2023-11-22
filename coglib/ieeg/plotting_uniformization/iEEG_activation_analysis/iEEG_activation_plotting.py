@@ -192,7 +192,7 @@ def plot_lmm_raster(epochs, file_name, colors, conditions_order=None, ylim=None,
         t0 = epoch.times[0]
         tend = epoch.times[-1]
         for channel in epoch.ch_names:
-            if subject == "SE107" and channel == "O2PH16":
+            if subject == "CE107" and channel == "O2PH16":
                 ylim = [0.5, 2.0]
             else:
                 ylim = ylim
@@ -377,7 +377,7 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
                         ch_colors.loc[ch_colors["channel"] == ch, ["r", "g", "b"]] = cate_colors[
                             cate_sel_results.loc[cate_sel_results["channel"] == ch, "condition"].item()
                         ]
-                if ch == "SF107-O1" or ch == "SF113-RIT1" or ch == "SE107-O2PH16" or ch == "SF109-G45":
+                if ch == "CF107-O1" or ch == "CF113-RIT1" or ch == "CE107-O2PH16" or ch == "CF109-G45":
                     ch_coords.loc[ch_coords["channel"] == ch, "radius"] = 3
 
             # Save the data:
@@ -648,7 +648,7 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
     plt.close()
 
     # Plot the average time series of the one electrodes from the GNW ROI that shows onset offset response:
-    epo = epochs["SF104"]
+    epo = epochs["CF104"]
     # Extract the one channel we are interested in:
     ch_epo = epo.pick("G12")
     dur_evk = []
@@ -661,7 +661,7 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
     evks = uniform_filter1d(np.array(dur_evk), smooth_samp, axis=-1)
     errs = [uniform_filter1d(error, smooth_samp, axis=-1) for error in errs]
     # Opend a figure:
-    filename = Path(save_dir, "onset_offset_SF104-G12.png")
+    filename = Path(save_dir, "onset_offset_CF104-G12.png")
     fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
                                     mm2inch(fig_size[1])])
     plot_time_series(evks, crop_time[0], crop_time[1], err=errs,
@@ -674,7 +674,7 @@ def activation_plot_handler(folders_list, models, cat_sel_file, save_root=""):
     plt.close()
 
     # Now name the file for condition 1:
-    filename = Path(save_dir, "onset_offset_SF104-G12_lgd.png")
+    filename = Path(save_dir, "onset_offset_CF104-G12_lgd.png")
     # Opend a figure:
     fig, ax = plt.subplots(figsize=[mm2inch(fig_size[0]),
                                     mm2inch(fig_size[1])])

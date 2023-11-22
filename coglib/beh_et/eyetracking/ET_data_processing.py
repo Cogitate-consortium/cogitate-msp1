@@ -15,9 +15,9 @@ import itertools
 
 """
 The following list is a list of participans whose ET data quality was so low we decided not to analyze their ET data.
-This is mainly due to issues with the tracker onsite, that are also reported in those subjects' CRFs. 
+This is mainly due to issues with the tracker onsite, that are also reported in those subjects' CRFs.
 """
-INVALID_LIST = ["SD119", "SE115", "SD156", "SG101", "SG102", "SG104", "SG105"]
+INVALID_LIST = ["CD119", "CE115", "CD156", "SG101", "SG102", "SG104", "SG105"]
 
 TRIAL_INFO = "trial_info"
 ET_DATA_DICT = "et_data_dict"
@@ -47,12 +47,12 @@ TASK_TITLE_DICT = {True: "Task Relevant", False: "Task Irrelevant"}
 
 """
 We assume that regardless of the actual screen size, the visual stimulus was THE SAME SIZE IN VISUAL ANGLES
-for ALL subjects (i.e., larger screens --> subjects sat farther). 
-For fixation density, we are interested in a histogram showing the fixation distances (in VA) 
-from the screen center and from points of interest in the screen (which all should be the SAME DISTANCE IN VA 
-across subjects). Thus, when aggregating across labs with different screen sizes, we assume that all screens spanned 
-the same VA SIZE. And so, for density, we want to BIN ALL SCREENS to the SAME NUMBER OF BINS across screens. 
-Because each bin spans THE SAME VISUAL ANGLE. 
+for ALL subjects (i.e., larger screens --> subjects sat farther).
+For fixation density, we are interested in a histogram showing the fixation distances (in VA)
+from the screen center and from points of interest in the screen (which all should be the SAME DISTANCE IN VA
+across subjects). Thus, when aggregating across labs with different screen sizes, we assume that all screens spanned
+the same VA SIZE. And so, for density, we want to BIN ALL SCREENS to the SAME NUMBER OF BINS across screens.
+Because each bin spans THE SAME VISUAL ANGLE.
 """
 FIXATION_DENSITY_XBINS = 96  # number of bins on the X axis to be calculated (width)
 FIXATION_DENSITY_YBINS = 54  # number of bins on the Y axis to be calculated (height)
@@ -343,10 +343,10 @@ def calculate_sample_time_in_trial(relevant_trials, trial_samps, additional_cols
             trial_samps.loc[trial_samps[DataParser.TRIAL] == trial[DataParser.TRIAL_NUMBER], col] = trial[col]
 
     """
-    Example: SA125
-    That subject (who was found to be a bit erroneous already at the prepro stage, but fixed - see comments there) 
-    for some reason has excessive samples (i.e., more samples than defined in an epoch - exceeds the epoch end time 
-    by 4 samples). 
+    Example: CA125
+    That subject (who was found to be a bit erroneous already at the prepro stage, but fixed - see comments there)
+    for some reason has excessive samples (i.e., more samples than defined in an epoch - exceeds the epoch end time
+    by 4 samples).
     In order to ensure that time-based plots and stats begin at epoch start and end at epoch end, we trim:
     """
     trial_samps = trial_samps[trial_samps[TIME_IN_EPOCH] <= ET_param_manager.EPOCH_END]
@@ -380,7 +380,7 @@ def calculate_fixation_density(num_of_bins_x, num_of_bins_y, screen_dims, gaze_x
     Initialize the fixation density matrix: the bins' order is starting from the TOP LEFT and fills up accordingly!
     NOTE that TL -> BR is also the order of things in Eyelink data we parsed in ET_data_extraction, so this is ok.
     Gaze coordinates (X, Y) in Eyelink are such that (0, 0) is the TOP LEFT corner of the screen!!!
-    This means that when gaze goes DOWN --> Y coordinate goes UP! 
+    This means that when gaze goes DOWN --> Y coordinate goes UP!
     Source: EL1000 User manual 1.5 chapter 4.4.2.3 GAZE
     http://sr-research.jp/support/EyeLink%201000%20User%20Manual%201.5.0.pdf
     """
@@ -434,7 +434,7 @@ def calculate_fixation_density_va(num_of_bins_x, num_of_bins_y, gaze_x, gaze_y, 
     Initialize the fixation density matrix: the bins' order is starting from the TOP LEFT and fills up accordingly!
     NOTE that TL -> BR is also the order of things in Eyelink data we parsed in ET_data_extraction, so this is ok.
     Gaze coordinates (X, Y) in Eyelink are such that (0, 0) is the TOP LEFT corner of the screen!!!
-    This means that when gaze goes DOWN --> Y coordinate goes UP! 
+    This means that when gaze goes DOWN --> Y coordinate goes UP!
     Source: EL1000 User manual 1.5 chapter 4.4.2.3 GAZE
     http://sr-research.jp/support/EyeLink%201000%20User%20Manual%201.5.0.pdf
     """
@@ -574,9 +574,9 @@ def fix_hist_mod(subs_list, modality, time, save_path, minimal_dims_va, max_val=
             print(f"va_per_bin_x: {va_per_bin_x}, va_per_bin_y: {va_per_bin_y}")
 
             """
-            CREATE A 6 X 6 VA RECTANGLE around fixation by using patches.Rectangle 
+            CREATE A 6 X 6 VA RECTANGLE around fixation by using patches.Rectangle
             https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.Rectangle.html
-            
+
             The size is EXP1_STIM_VA x EXP1_STIM_VA around the screen center -- meaning, it spans (EXP1_STIM_VA/2) from
             the center in each direction
             """
@@ -1054,7 +1054,7 @@ def saccade_amp(subs_dict, save_path, phase_name):
                              title_name=f"Average Saccade Amplitude in **{category}** Trials",
                              save_path=save_path, save_name=f"sacc_amp_line_{category}")
 
-    Now, per LAB 
+    Now, per LAB
     mean_df = all_sub_means_df.groupby([TIME_IN_EPOCH, DataParser.STIM_DUR_PLND_SEC, MODALITY, DataParser.STIM_TYPE_COL, LAB]).mean(numeric_only=True).reset_index()
     se_df = all_sub_means_df.groupby([TIME_IN_EPOCH, DataParser.STIM_DUR_PLND_SEC, MODALITY, DataParser.STIM_TYPE_COL, LAB]).sem(numeric_only=True).reset_index()
     mean_df.loc[:, f"{DataParser.AMP_DEG}_SE"] = se_df.loc[:, DataParser.AMP_DEG]
@@ -1181,7 +1181,7 @@ def saccade_amp_relevance(subs_dict, save_path):
                              save_path=save_path, save_name=f"sacc_amp_line_{category}_tr")
 
     """
-    Now, per LAB 
+    Now, per LAB
     """
     mean_df = all_sub_means_df.groupby([TIME_IN_EPOCH, DataParser.IS_TASK_RELEVANT_COL, MODALITY, DataParser.STIM_TYPE_COL, LAB]).mean(numeric_only=True).reset_index()
     se_df = all_sub_means_df.groupby([TIME_IN_EPOCH, DataParser.IS_TASK_RELEVANT_COL, MODALITY, DataParser.STIM_TYPE_COL, LAB]).sem(numeric_only=True).reset_index()
@@ -1714,7 +1714,7 @@ def lmm_data(subs_dict, pupil_sub_means, save_path, phase_name):
             fl = open(sub_data_path, 'rb')
             sub_data = pickle.load(fl)
             fl.close()
-            if sub_data[PARAMS][ET_param_manager.SUBJECT_LAB] != "SF" and sub_data[PARAMS]['SubjectName'] in pupil_sub_means:
+            if sub_data[PARAMS][ET_param_manager.SUBJECT_LAB] != "CF" and sub_data[PARAMS]['SubjectName'] in pupil_sub_means:
                 sub_data = add_pupil_to_lmm(sub_data, pupil_sub_means)
 
             """
@@ -1812,7 +1812,7 @@ def pupil_plot_no_tr(subs_dict, save_path, phase_name, do_each_category=False, g
                 sub_mean = sub_means_dict[sub_data[PARAMS]['SubjectName']]
             relevant_trials = sub_data[TRIAL_INFO]
             trial_samps = trial_samps.loc[trial_samps[DataParser.TRIAL].isin(list(relevant_trials[DataParser.TRIAL_NUMBER])), :]
-            # SD156: trial_samps was empty as all it had in this condition was BLINKS (no pupil size). garbage in -> garbage out
+            # CD156: trial_samps was empty as all it had in this condition was BLINKS (no pupil size). garbage in -> garbage out
             if trial_samps.empty:
                 print(f"Subject {sub_data_path} has no samples remaining with task relevance")
                 continue
@@ -1820,9 +1820,9 @@ def pupil_plot_no_tr(subs_dict, save_path, phase_name, do_each_category=False, g
                 """
                 *** PUPIL SIZE NORMALIZATION ***
                 In the process of normalizing pupil size, we normalize the size PER SUBJECT, across all trials
-                of that subjects (i.e., across all EPOCHs). We do that by calculating the AVERAGE of all pupil 
-                size samples that are within an epoch. Then, each sample is DIVIDED (*not* substracted!) by the 
-                subject's own mean. 
+                of that subjects (i.e., across all EPOCHs). We do that by calculating the AVERAGE of all pupil
+                size samples that are within an epoch. Then, each sample is DIVIDED (*not* substracted!) by the
+                subject's own mean.
                 """
                 trial_samps[f"{DataParser.REAL_PUPIL}Norm"] = trial_samps[f"{DataParser.REAL_PUPIL}"] / sub_mean
                 trial_samps = calculate_sample_time_in_trial(relevant_trials, trial_samps, [group_with, DataParser.STIM_TYPE_COL])
@@ -1925,7 +1925,7 @@ def pupil_plot(subs_dict, save_path, phase_name, do_each_category=False, group_w
                 relevant_trials = sub_data[TRIAL_INFO]
                 relevant_trials = relevant_trials.loc[relevant_trials[DataParser.IS_TASK_RELEVANT_COL] == is_tr, :]
                 trial_samps = trial_samps.loc[trial_samps[DataParser.TRIAL].isin(list(relevant_trials[DataParser.TRIAL_NUMBER])), :]
-                # SD156: trial_samps was empty as all it had in this condition was BLINKS (no pupil size). garbage in -> garbage out
+                # CD156: trial_samps was empty as all it had in this condition was BLINKS (no pupil size). garbage in -> garbage out
                 if trial_samps.empty:
                     print(f"Subject {sub_data_path} has no samples remaining with task relevance {is_tr}")
                     continue
@@ -1933,9 +1933,9 @@ def pupil_plot(subs_dict, save_path, phase_name, do_each_category=False, group_w
                     """
                     *** PUPIL SIZE NORMALIZATION ***
                     In the process of normalizing pupil size, we normalize the size PER SUBJECT, across all trials
-                    of that subjects (i.e., across all EPOCHs). We do that by calculating the AVERAGE of all pupil 
-                    size samples that are within an epoch. Then, each sample is DIVIDED (*not* substracted!) by the 
-                    subject's own mean. 
+                    of that subjects (i.e., across all EPOCHs). We do that by calculating the AVERAGE of all pupil
+                    size samples that are within an epoch. Then, each sample is DIVIDED (*not* substracted!) by the
+                    subject's own mean.
                     """
                     trial_samps[f"{DataParser.REAL_PUPIL}Norm"] = trial_samps[f"{DataParser.REAL_PUPIL}"] / sub_mean
                     trial_samps = calculate_sample_time_in_trial(relevant_trials, trial_samps, [group_with, DataParser.STIM_TYPE_COL])
@@ -2135,7 +2135,7 @@ def fixation_plots(subs_dict, save_path, phase_name):
 def filter_out_tobii_subs(subs_dict):
     """
     The subjects who do not have pupil data are filtered out, as they don't have that data.
-    These are only SF subjects. Therefore, we will ignore them in the pupil and blink data analyses.
+    These are only CF subjects. Therefore, we will ignore them in the pupil and blink data analyses.
     """
     relevant_subs = {}
     counter = 0
@@ -2146,7 +2146,7 @@ def filter_out_tobii_subs(subs_dict):
             sub_data = pickle.load(fl)
             fl.close()
             counter += 1
-            if sub_data[PARAMS][ET_param_manager.SUBJECT_LAB] == 'SF':
+            if sub_data[PARAMS][ET_param_manager.SUBJECT_LAB] == 'CF':
                 filtered_out_counter += 1
                 continue
             if modality not in relevant_subs:
@@ -2335,7 +2335,7 @@ def plot_second_model(subs_dict, save_path, phase_name):
                       f"{ET_data_extraction.MEDIAN}{DataParser.REAL_PUPIL}Norm": "Median Normalized Pupil Size"}
 
     dependent_vars_minmaxskip = {f"{CENTER_DIST_DEGS}": {DataParser.FIRST_WINDOW: [0, 8, 1],
-                                                         DataParser.SECOND_WINDOW: [0, 17, 1],  # TODO: SA125, w/o it 8
+                                                         DataParser.SECOND_WINDOW: [0, 17, 1],  # TODO: CA125, w/o it 8
                                                          DataParser.THIRD_WINDOW: [0, 11, 1]},
                                  f"MaxAmp": {DataParser.FIRST_WINDOW: [0, 25, 5],
                                              DataParser.SECOND_WINDOW: [0, 25, 5],
@@ -2347,7 +2347,7 @@ def plot_second_model(subs_dict, save_path, phase_name):
                                                                   DataParser.SECOND_WINDOW: [0, 1.5, 0.1],
                                                                   DataParser.THIRD_WINDOW: [0, 1.5, 0.1]},
                                  f"{ET_data_extraction.MEDIAN}{CENTER_DIST_DEGS}": {DataParser.FIRST_WINDOW: [0, 8, 1],
-                                                                                    DataParser.SECOND_WINDOW: [0, 17, 1],  # TODO: SA125, w/o it 8
+                                                                                    DataParser.SECOND_WINDOW: [0, 17, 1],  # TODO: CA125, w/o it 8
                                                                                     DataParser.THIRD_WINDOW: [0, 11, 1]},
                                  f"{ET_data_extraction.MEDIAN}{DataParser.REAL_PUPIL}Norm": {DataParser.FIRST_WINDOW: [0, 1.5, 0.1],
                                                                                              DataParser.SECOND_WINDOW: [0, 1.5, 0.1],

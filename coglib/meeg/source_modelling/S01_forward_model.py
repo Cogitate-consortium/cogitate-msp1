@@ -27,8 +27,8 @@ import mne
 parser=argparse.ArgumentParser()
 parser.add_argument('--sub',
                     type=str,
-                    default='SA124',
-                    help='site_id + subject_id (e.g. "SA101")')
+                    default='CA124',
+                    help='site_id + subject_id (e.g. "CA101")')
 parser.add_argument('--visit',
                     type=str,
                     default='V1',
@@ -77,12 +77,12 @@ if not op.exists(fpath_fw):
 def make_source_space(space):
     '''
     Compute source space
-    
+
     Surface-based source space is computed using:
     > mne.setup_source_space()
     Volumetric source space is computed using:
     > mne.setup_volume_source_space()
-    
+
     '''
     if space == 'surface':
         # Get surface-based source space
@@ -95,7 +95,7 @@ def make_source_space(space):
         fname_src = '%s-surface%s_src.fif' % (subject, spacing)
     elif space == 'volume':
         # Get volumetric source space (BEM required)
-        surface = op.join(subjects_dir, subject, 
+        surface = op.join(subjects_dir, subject,
                           'bem', 'inner_skull.surf')
         src = mne.setup_volume_source_space(subject,
                                             subjects_dir=subjects_dir,
@@ -109,17 +109,17 @@ def make_source_space(space):
                             src,
                             overwrite=True)
     # Visualize source space and BEM
-    mne.viz.plot_bem(subject=subject, 
+    mne.viz.plot_bem(subject=subject,
                      subjects_dir=subjects_dir,
-                     brain_surfaces='white', 
-                     src=src, 
+                     brain_surfaces='white',
+                     src=src,
                      orientation='coronal')
     # # Visualize sources in 3d space
     # if space == 'surface':  #TODO: doesn't work with volume space
-    #     fig = mne.viz.plot_alignment(subject=subject, 
+    #     fig = mne.viz.plot_alignment(subject=subject,
     #                                   subjects_dir=subjects_dir,
     #                                   trans=trans,
-    #                                   surfaces='white', 
+    #                                   surfaces='white',
     #                                   coord_frame='head',
     #                                   src=src)
     #     mne.viz.set_3d_view(fig, azimuth=173.78, elevation=101.75,
@@ -131,24 +131,24 @@ def make_source_space(space):
 def make_forward_model(src, task):
     '''
     Forward Model
-    
+
     '''
-    
+
     # Set path to raw FIF
     fname_raw = op.join(opt.bids_root, subject, "ses-"+visit, "meg", subject+"_ses-"+visit+"_task-"+task+"_run-01_meg.fif")
 
-    
+
     # Set transformation matrix and bem pathes
     trans = op.join(fname_coreg, subject+"_ses-"+visit+"_trans.fif")
     bem = op.join(subjects_dir, subject, subject+"_ses-V1_bem-sol.fif") #BEM is shared between sessions
-    
+
     # Calculate forward solution for MEG channels
-    fwd = mne.make_forward_solution(fname_raw, 
-                                    trans=trans, 
-                                    src=src, 
+    fwd = mne.make_forward_solution(fname_raw,
+                                    trans=trans,
+                                    src=src,
                                     bem=bem,
-                                    meg=True, eeg=False, 
-                                    mindist=5., 
+                                    meg=True, eeg=False,
+                                    mindist=5.,
                                     verbose=True)
     # Save forward model
     fname_fwd = op.join(fpath_fw, subject+"_ses-"+visit+"_task-"+task+"_%s_fwd.fif" % space)

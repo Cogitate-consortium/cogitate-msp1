@@ -43,7 +43,7 @@ output_dir = os.path.join('/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids
 
 
 def prepare_nibetaseries_data(nibetaseries_filename, tsv_filename, condition, stimulus_category, number_of_runs):
-    # Extracts nibetaseries trial enibetaseries_filename = {list: 32} ['/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/nibetaseries/sub-SD193/ses-V1/func/sub-SD193_ses-V1_task-Dur_run-1_space-MNI152NLin2009cAsym_desc-face_betaseries.nii.gz', '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivative… Viewstimates needed for decoding
+    # Extracts nibetaseries trial enibetaseries_filename = {list: 32} ['/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivatives/nibetaseries/sub-CD193/ses-V1/func/sub-CD193_ses-V1_task-Dur_run-1_space-MNI152NLin2009cAsym_desc-face_betaseries.nii.gz', '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids/derivative… Viewstimates needed for decoding
 
     from nilearn.image import index_img
     import nibabel as nb
