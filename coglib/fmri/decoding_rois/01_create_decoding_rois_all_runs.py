@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun 21 11:02:20 2022
+Creates regions of interes (ROIs) for several decoding analyses.
+Decoding ROIs are produced for each anatomical region of interest (step 7).
+Requires several contrasts of parameter estimates produced in step 9.
 
 @author: Yamil Vidal
-
+Email: hvidaldossantos@gmail.com
+Created on Tue Jun 21 11:02:20 2022
 """
 import os, sys
 import numpy as np
@@ -223,14 +226,6 @@ def save_d_roi(sub_id,d_roi,f_name):
 
 # %% run
 subjects = get_subject_list(bids_dir, subject_list_type)
-
-remove_subjects = ['sub-SD122','sub-SD196']
-for r in remove_subjects:
-    subjects = subjects[subjects != r]
-
-print('Removed subjects:',remove_subjects)
-print('Total subjects:',len(subjects))
-
 
 for n_voxels in roi_sizes:
     #for sub_id in ['sub-SC136']:

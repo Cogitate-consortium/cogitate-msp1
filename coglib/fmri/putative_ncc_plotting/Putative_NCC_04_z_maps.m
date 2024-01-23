@@ -1,3 +1,11 @@
+%{
+Plots individual z maps used in the putative NCC analysis (step 12). Requires Slice Display (https://github.com/bramzandbelt/slice_display)
+
+Author: Yamil Vidal
+Email: hvidaldossantos@gmail.com
+ 
+%}
+
 clear
 close all
 

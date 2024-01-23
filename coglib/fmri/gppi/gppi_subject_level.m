@@ -3,6 +3,7 @@
 % The size of the seeds included in the analysis has to be specified for the code to run 
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-22-2022
 
 % Select seed

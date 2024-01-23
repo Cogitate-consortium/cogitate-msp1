@@ -18,7 +18,7 @@ Tested on python v3.7.4, pandas v0.25.2, numpy v1.17.2
 
 Created 23.10.2020
 
-@author: David Richter (d.richter@donders.ru.nl)
+@author: David Richter (david.richter.work@gmail.com)
 @tag: prereg_v4.2
 """
 

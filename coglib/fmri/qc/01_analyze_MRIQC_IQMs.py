@@ -46,29 +46,30 @@ import pandas as pd
 
 #%% Paths and Parameters
 
-# BIDS path
-
-bids_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids'
-participants_dir = '/hpc/users/urszula.gorska/codes/fMRI'
+# root project path
+root_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
 # threshold to mark subjects as rejected if they exceed X SD above group mean
 SdThreshold = 2
 
 ###############################################################################
 
+# bids path
+bids_dir = root_dir + '/bids'
+
 # mri qc sub dir
 mriQcSubdir = '/derivatives/mriqc'
 # sub dir pattern with sub and ses key-value pairs
 dataDirPattern = bids_dir + mriQcSubdir + os.sep + '%(sub)s' + os.sep + '%(ses)s' + os.sep + 'func' + os.sep 
 
-# session labels (values for ses key-value pair)
-sesLabels = ['ses-V1','ses-V2']
+# session labels
+sesLabels = ['ses-V1']
 
-subject_list_type = 'optimization_exp1'
+participants_dir = bids_dir
+subject_list_type = 'demo'
 
 # load helper functions / code dir
-code_dir_with_helperfunctions = '/hpc/users/urszula.gorska/codes/fMRI'
-# code_dir_with_helperfunctions = bids_dir + '/code'
+code_dir_with_helperfunctions = bids_dir + '/coglib/fmri'
 sys.path.append(code_dir_with_helperfunctions)
 from helper_functions_MRI import get_subject_list
 
@@ -95,7 +96,7 @@ def saveIQMs(df, ses=None):
     df: data frame with IQMs to be written as csv file
     ses: session label 
     """
-    outputDir = '/hpc/users/urszula.gorska/codes/fMRI'
+    outputDir = bids_dir + mriQcSubdir
     # outputDir = bids_dir + mriQcSubdir
     if ses is None:
         fname = outputDir + os.sep + 'IQM-perRun_' + subject_list_type + '.csv'

@@ -4,7 +4,7 @@
 Takes C (pNCCs) conjunction maps and excludes voxels that are included either
 in an A (task goals) conjunction or a B (task relevance) conjunction.
 
-@author:Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author:Yamil Vidal (hvidaldossantos@gmail.com)
 
 """
 
@@ -77,13 +77,6 @@ if __name__ == '__main__':
     #subject_list_type = 'debug'
     subjects = get_subject_list(bids_dir, subject_list_type)
     
-    remove_subjects = ['sub-SD122','sub-SD196']
-    for r in remove_subjects:
-        subjects = subjects[subjects != r]
-    
-    print('Removed subjects:',remove_subjects)
-    print('Total subjects:',len(subjects))
-
     for sub_id in subjects:
         
         brain_mask = brain_mask_pattern%{'sub_id':sub_id}

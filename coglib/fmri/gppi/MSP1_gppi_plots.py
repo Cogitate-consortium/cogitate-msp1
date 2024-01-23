@@ -1,4 +1,6 @@
 # Plots gppi group-level corrected and uncorrected stats maps on a brain surfaces
+# Author: Aya Khalaf
+# Email: aya.khalaf@yale.edu
 
 from plotters import plot_brain
 import os

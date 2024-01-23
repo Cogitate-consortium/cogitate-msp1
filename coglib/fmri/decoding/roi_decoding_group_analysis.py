@@ -2,6 +2,7 @@
 # 2 - Performs correction for multiple comparisons of the p-values obtained in #1 across ROIs using FDR method
 """
 Author: Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 09-13-2021
 Date modified: 02-20-2023
 """

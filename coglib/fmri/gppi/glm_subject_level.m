@@ -1,6 +1,7 @@
 % Runs first-level GLM analysis using SPM12 toolbox
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-21-2022
 
 

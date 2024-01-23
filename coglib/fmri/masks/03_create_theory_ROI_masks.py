@@ -5,6 +5,7 @@ Combines several masks into theory specific ROIs. PFC for GNW and Posterior for 
 Created on Fri Jul  8 17:19:11 2022
 
 @author: Yamil Vidal
+Email: hvidaldossantos@gmail.com
 @tag: prereg_v4.2
 """
 

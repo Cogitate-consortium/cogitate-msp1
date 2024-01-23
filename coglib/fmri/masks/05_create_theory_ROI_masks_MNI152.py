@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Combines several masks into theory specific ROIs. PFC for GNW and Posterior for IIT
-Created on Fri Jul  8 17:19:11 2022
+Combines several masks into theory specific ROIs.
 
 @author: Yamil Vidal
-
+Email: hvidaldossantos@gmail.com
+Created on Fri Jul  8 17:19:11 2022
 """
 
 import sys

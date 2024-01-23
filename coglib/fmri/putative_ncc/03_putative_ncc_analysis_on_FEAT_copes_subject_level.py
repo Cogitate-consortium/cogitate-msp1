@@ -20,7 +20,7 @@ The conjunction maps, intermediate equivalence maps and additional conjunction
 
 Created on Fri Jun 18 17:18:01 2021
 
-@author: David Richter (d.richter@donders.ru.nl); Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author: David Richter (david.richter.work@gmail.com), Yamil Vidal (hvidaldossantos@gmail.com)
 @tag: prereg_v4.2
 """
 
@@ -585,13 +585,6 @@ if __name__ == '__main__':
 
     subjects = get_subject_list(bids_dir, subject_list_type)
     
-    remove_subjects = ['sub-SD122','sub-SD196']
-    for r in remove_subjects:
-        subjects = subjects[subjects != r]
-    
-    print('Removed subjects:',remove_subjects)
-    print('Total subjects:',len(subjects))
-
     for sub_id in subjects:
         
         brain_mask = brain_mask_pattern%{'sub_id':sub_id}

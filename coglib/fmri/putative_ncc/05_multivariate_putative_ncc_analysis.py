@@ -8,7 +8,7 @@ for target conditions due to the low number of trials.
 
 Created on Wed Jan 02 2023
 
-@author: Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author: Yamil Vidal (hvidaldossantos@gmail.com)
 
 """
 

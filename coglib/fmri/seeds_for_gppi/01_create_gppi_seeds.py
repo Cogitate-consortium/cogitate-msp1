@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun 21 11:02:20 2022
+Creates seeds for the GPPI analysis (step 16).
+Decoding ROIs are produced for each anatomical region of interest (step 7).
+Requires several contrasts of parameter estimates produced in step 9.
 
 @author: Yamil Vidal
+Email: hvidaldossantos@gmail.com
 
+Created on Tue Jun 21 11:02:20 2022
 """
 import os, sys
 import numpy as np
@@ -154,14 +158,6 @@ def save_seed(sub_id,d_roi,f_name):
 
 # %% run
 subjects = get_subject_list(bids_dir, subject_list_type)
-
-remove_subjects = ['sub-SD122','sub-SD196']
-for r in remove_subjects:
-    subjects = subjects[subjects != r]
-
-print('Removed subjects:',remove_subjects)
-print('Total subjects:',len(subjects))
-
 
 cope = '23' # RelIrrelFacesvsObject
 rel = 'rel_irrel'

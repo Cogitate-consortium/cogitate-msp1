@@ -3,7 +3,7 @@
 """
 Combines putative NCC subject level results across optimization and replication phases for plotting purposes.
 
-@author:Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author:Yamil Vidal (hvidaldossantos@gmail.com)
 
 """
 
@@ -89,14 +89,6 @@ if __name__ == '__main__':
     subjects2 = get_subject_list(bids_dir, subject_list_type_2)
     
     subjects = np.concatenate((subjects1,subjects2))
-    
-    remove_subjects = ['sub-SD122','sub-SD196']
-    for r in remove_subjects:
-        subjects = subjects[subjects != r]
-    
-    print('Removed subjects:',remove_subjects)
-    print('Total subjects:',len(subjects))
-
     
     for conjunction_name in conjunction_names:
         

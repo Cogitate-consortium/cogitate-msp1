@@ -2,6 +2,7 @@
 % The 4D nifti files to be converted are the pre-processed nifti files produced by fmriprep
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-18-2022
 
 % SPM12 path

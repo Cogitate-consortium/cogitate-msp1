@@ -19,7 +19,7 @@ Tested on python v3.7.4, pandas v0.25.2, numpy v1.17.2
 
 Created 23.10.2020
 
-@author: David Richter (d.richter@donders.ru.nl)
+@author: David Richter (david.richter.work@gmail.com)
 @tag: prereg_v4.2
 """
 
@@ -27,8 +27,10 @@ Created 23.10.2020
 import pandas as pd 
 import numpy as np
 import sys
-
 pd.options.mode.chained_assignment = None  # default='warn'
+
+# root project path
+root_dir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed'
 
 
 ##### Parameters #####
@@ -53,14 +55,14 @@ TR = 1.5
 nDummyVols = 3
 
 # Which subject list to use (set to 'all' to process all availabel participants; 'phase2_2.3' to process only those of phase 2 2/3 (list from DMT)))
-subject_list_type = 'phase2_V1'
+subject_list_type = 'demo'
 #subject_list_type = 'debug'
 
 
 ##### Paths #####
 
 # bid dir & code dir
-bidsDir = '/mnt/beegfs/XNAT/COGITATE/fMRI/phase_2/processed/bids'  
+bidsDir = root_dir + '/bids'  
 codeDir = bidsDir + '/code' 
 
 # inputs: events.tsv file

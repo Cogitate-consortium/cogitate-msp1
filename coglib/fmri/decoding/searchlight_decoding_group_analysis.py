@@ -2,6 +2,7 @@
 # Runs cluster-based permutation testing on the searchlight accuracy maps against the chance level
 """
 Author: Aya Khalaf
+Email: aya.khalaf@yale.edu
 Date created: 10-10-2022
 Date modified: 03-10-2022
 """

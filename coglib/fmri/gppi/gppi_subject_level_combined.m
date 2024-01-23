@@ -3,6 +3,7 @@
 % The code runs gppi analysis using FFA and LOC seeds 
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-22-2022
 
 % Select seed

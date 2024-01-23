@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun 21 11:02:20 2022
+Produces .csv files containing results from the putative NCC analysis (step 12).
 
 @author: yamil.vidal
+Email: hvidaldossantos@gmail.com
+Created on Tue Jun 21 11:02:20 2022
 """
 import sys, os
 import numpy as np

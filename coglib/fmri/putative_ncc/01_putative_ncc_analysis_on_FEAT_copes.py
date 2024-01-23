@@ -20,7 +20,7 @@ The conjunction maps, intermediate equivalence maps and additional conjunction
 
 Created on Fri Jun 18 17:18:01 2021
 
-@author: David Richter (d.richter@donders.ru.nl), Yamil Vidal (yamil.vidal@donders.ru.nl)
+@author: David Richter (david.richter.work@gmail.com), Yamil Vidal (hvidaldossantos@gmail.com)
 
 """
 
@@ -595,13 +595,6 @@ if __name__ == '__main__':
     # create group maps for all bayesian tests
     # get subjects
     subjects = get_subject_list(bids_dir,subject_list_type)
-    
-    remove_subjects = ['sub-SD122','sub-SD196']
-    for r in remove_subjects:
-        subjects = subjects[subjects != r]
-    
-    print('Removed subjects:',remove_subjects)
-    print('Total subjects:',len(subjects))
     
     # # loop over copes of interest for which an bayesian test should be performed
     for cope_for_bayesian_test in copes_of_interest_for_bayesian_test:

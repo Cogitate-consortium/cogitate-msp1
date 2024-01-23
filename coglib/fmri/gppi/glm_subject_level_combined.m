@@ -1,6 +1,7 @@
 % Runs first-level GLM analysis on the relevant and irrelevant conditions combined using SPM12 toolbox 
 
 %Author: Aya Khalaf
+%Email: aya.khalaf@yale.edu
 %Date created: 04-21-2022
 
 
