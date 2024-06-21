@@ -22,6 +22,14 @@ In order to recreate the exact environment (reproducibility purposes) in which t
 To run the analysis described below on the sample data, make sure to change the bids root path in /meeg/config/config.py:
 *$ROOT/sample_data/bids*
 
+# Sample data and demo
+
+Sample data, used to run a demo of the analysis pipeline, can be found [here](https://keeper.mpdl.mpg.de/d/a7b65a9ccc2745d58268/)
+
+MEG data from four subjects (two per data collection site) are provided. We provide bids converted data as well as preprocessed data (in `./derivatives/preprocessing/` and `./derivatives/fs/`).
+
+In order to run the demo, edit the scripts so that the bids paths point to the downloaded data.
+
 ### Running preprocessing:
 In the command line, enter:
 ```
