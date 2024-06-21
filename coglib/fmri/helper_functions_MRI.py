@@ -34,7 +34,7 @@ def get_subject_list(bids_dir,list_type='all'):
     elif list_type == 'debug':
         fname_suffix = 'debug_participants.tsv'
     elif list_type == 'demo':
-        fname_suffix = 'participants_demo.tsv'
+        fname_suffix = 'participants_fMRI_QC_included_demo_sesV1.tsv'
     else:
         raise ValueError('Invalid subject list type specified. No subject list returned')
     subject_list = bids_dir + os.sep + fname_suffix
