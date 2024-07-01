@@ -18,7 +18,7 @@ export PYTHONPATH=$PYTHONPATH:REPO_ROOT/cogitate-msp1/ieeg
 
 ## Running on sample data:
 For the analysis described below, as single config file is specified for illustration purpose. You can use any of the config files 
-found within a directory. Make sure to adjust the bids root to match the following first:
+found within a directory. The sample data can be downloaded from [here](https://keeper.mpdl.mpg.de/d/9fc130730f0d4ea3b296/). Make sure to adjust the bids root to match the following first:
 *$ROOT/sample_data/bids*
 
 ### Running preprocessing:
