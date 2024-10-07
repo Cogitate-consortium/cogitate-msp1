@@ -8,7 +8,7 @@ Paper Title: "An adversarial collaboration to critically evaluate theories of co
 | --- | --- |
 | Website | ![Cogitate](https://img.shields.io/badge/cogitate-website-cornflowerblue) |
 | Twitter | [![Twitter Follow](https://img.shields.io/twitter/follow/arccogitate?style=social)](https://twitter.com/arccogitate) |
-| Preregistration | ![Link to preregistration documents](https://osf.io/3t7ax/) |
+| Preregistration | ![Link to preregistration documents](https://osf.io/mbcfy) |
 | Publication DOI | [Link to bioRxiv](https://www.biorxiv.org/content/10.1101/2023.06.23.546249v1) |
 | Dataset | Will be made available in the future. |
 
