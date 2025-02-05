@@ -252,6 +252,25 @@ def connectivity_ga(sub_list, visit_id):
                 cluster_p_values_all.append(cluster_p_values)
                 p_values_all.append(cluster_p_values)
                 
+                # Compute BF on the regions of interest
+                Xfac_gnw_data = Xfac[:, np.isin(freqs, np.arange(60, 91)), :][:, :, np.isin(times, np.arange(300, 501))]
+                Xfac_gnw_data = np.mean(Xfac_gnw_data, axis=(1,2))
+                
+                Xobj_gnw_data = Xobj[:, np.isin(freqs, np.arange(60, 91)), :][:, :, np.isin(times, np.arange(300, 501))]
+                Xobj_gnw_data = np.mean(Xobj_gnw_data, axis=(1,2))
+                
+                Xfac_iit_data = Xfac[:, np.isin(freqs, np.arange(60, 91)), :][:, :, np.isin(times, np.arange(100, 1001))]
+                Xfac_iit_data = np.mean(Xfac_iit_data, axis=(1,2))
+                
+                Xobj_iit_data = Xobj[:, np.isin(freqs, np.arange(60, 91)), :][:, :, np.isin(times, np.arange(100, 1001))]
+                Xobj_iit_data = np.mean(Xobj_iit_data, axis=(1,2))
+                
+                # Compute BF
+                bf_gnw = bayes_ttest(Xfac_gnw_data, y=Xobj_gnw_data, paired=True)
+                print(f"GNW Bayesian T-test: {bf_gnw}")
+                bf_iit = bayes_ttest(Xfac_iit_data, y=Xobj_iit_data, paired=True)
+                print(f"IIT Bayesian T-test: {bf_iit}")
+                
             # Select the clusters that are statistically significant at p < 0.05
             good_clusters_all = []
             for clusters, cluster_p_values in zip(clusters_all, cluster_p_values_all):
