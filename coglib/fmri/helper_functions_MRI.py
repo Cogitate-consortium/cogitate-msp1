@@ -40,7 +40,7 @@ def get_subject_list(bids_dir,list_type='all'):
     subject_list = bids_dir + os.sep + fname_suffix
     subj_df = pd.read_csv(subject_list, sep="\t")
     # subjects = subj_df['participant_id'].values
-    subjects = 'sub-'+subj_df['participant_id'].values
+    subjects = subj_df['participant_id'].values
     print('Number of Subjects:', subjects.size)
     return subjects
 	
