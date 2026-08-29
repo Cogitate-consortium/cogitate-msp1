@@ -53,13 +53,9 @@ As the shared data is already converted to bids, steps 0 to 3 are not needed. Th
 1. Conversion of MRI DICOM data to BIDS; BIDSCOINER
 2. Creation of events.tsv files; PYTHON CODE
 3. BIDS validation; BIDSVALIDATOR
-
-
-Start here to test the code with the demo dataset, or to perform a full replication, including preprocessing.
-
-5. MRI data quality checks; MRIQC
-6. Data rejection; PYTHON CODE
-7. MRI preprocessing & visual data/preprocessing quality checks; FMRIPREP
+4. MRI data quality checks; MRIQC
+5. Data rejection; PYTHON CODE
+6. MRI preprocessing & visual data/preprocessing quality checks; FMRIPREP
 
 ## Analysis
 
