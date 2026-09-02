@@ -18,6 +18,7 @@ dependencies:
   - mayavi
   - mne=0.24.0
   - mne-bids
+  - netcdf4
   - networkx
   - nibabel
   - nilearn
@@ -46,15 +47,16 @@ dependencies:
   - tabulate
   - yaml
   - pip:
-    - autoreject
+    - autoreject==0.2.2
     - h5io
     - matplotlib
     - memory-profiler
-    - mne-connectivity
+    - mne-connectivity==0.2
     - mne-rsa
     - multidict
     - neuropythy
     - nipype
     - pydeface
     - ptitprince
-    - fpdf
+    - fpdf2
+    - frites==0.4.3
